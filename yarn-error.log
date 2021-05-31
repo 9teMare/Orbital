@@ -1,0 +1,56 @@
+Arguments: 
+  C:\Program Files\nodejs\node.exe C:\Users\wangz\AppData\Roaming\npm\node_modules\yarn\bin\yarn.js install
+
+PATH: 
+  C:\Program Files (x86)\Razer Chroma SDK\bin;C:\Program Files\Razer Chroma SDK\bin;C:\Program Files (x86)\Common Files\Intel\Shared Libraries\redist\intel64\compiler;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Windows\system32\config\systemprofile\AppData\Local\Microsoft\WindowsApps;C:\Android;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\nodejs\;C:\Program Files\Git\cmd;C:\Users\wangz\AppData\Local\Microsoft\WindowsApps;C:\Users\wangz\AppData\Local\Programs\Python\Python37\python.exe;C:\Program Files\Bandizip\;C:\Users\wangz\AppData\Local\atom\bin;D:\Microsoft VS Code\bin;C:\Users\wangz\AppData\Roaming\npm;C:\Program Files\heroku\bin
+
+Yarn version: 
+  1.22.10
+
+Node version: 
+  14.17.0
+
+Platform: 
+  win32 x64
+
+Trace: 
+  Error: https://github.com/expo/react-native/archive/sdk-41.0.0.tar.gz: ESOCKETTIMEDOUT
+      at ClientRequest.<anonymous> (C:\Users\wangz\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:141289:19)
+      at Object.onceWrapper (events.js:482:28)
+      at ClientRequest.emit (events.js:376:20)
+      at TLSSocket.emitRequestTimeout (_http_client.js:790:9)
+      at Object.onceWrapper (events.js:482:28)
+      at TLSSocket.emit (events.js:388:22)
+      at TLSSocket.Socket._onTimeout (net.js:483:8)
+      at listOnTimeout (internal/timers.js:555:17)
+      at processTimers (internal/timers.js:498:7)
+
+npm manifest: 
+  {
+    "main": "node_modules/expo/AppEntry.js",
+    "scripts": {
+      "start": "expo start",
+      "android": "expo start --android",
+      "ios": "expo start --ios",
+      "web": "expo start --web",
+      "eject": "expo eject"
+    },
+    "dependencies": {
+      "expo": "~41.0.1",
+      "expo-status-bar": "~1.0.4",
+      "react": "16.13.1",
+      "react-dom": "16.13.1",
+      "react-native": "https://github.com/expo/react-native/archive/sdk-41.0.0.tar.gz",
+      "react-native-web": "~0.13.12"
+    },
+    "devDependencies": {
+      "@babel/core": "^7.9.0"
+    },
+    "private": true
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile
