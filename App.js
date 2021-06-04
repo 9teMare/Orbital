@@ -36,6 +36,8 @@ import RegisterScreen from './component/auth/Register'
 import MainScreen from './component/Main'
 import LoginScreen from './component/auth/Login'
 
+import AnalysisScreen from './component/Analysis'
+
 const Stack = createStackNavigator();
 
 export class App extends Component {
@@ -89,6 +91,7 @@ export class App extends Component {
         <NavigationContainer> 
           <Stack.Navigator initialRouteName="Main">
             <Stack.Screen name="Main" component={MainScreen} options={{ headerShown: false}}/>
+            <Stack.Screen name="Analysis" component={AnalysisScreen}/>
           </Stack.Navigator>
         </NavigationContainer>
 

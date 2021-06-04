@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import {StyleSheet, View, Text, Button, Switch} from 'react-native'
+import {StyleSheet, View, Text, Button} from 'react-native'
 import {connect} from 'react-redux'
 import firebase from 'firebase'
 
@@ -11,9 +11,6 @@ function MyPage(props) {
         firebase.auth().signOut()
     }
 
-    const [isDarkTheme, setIsDarkTheme] = useState(false);
-    const toggleSwitch = () => setIsDarkTheme(previousState => !previousState);
-
     return (
         <View style={styles.container}>
             <View style={styles.containerInfo}>
@@ -23,13 +20,6 @@ function MyPage(props) {
             <Button
                 title="Logout"
                 onPress={() => onLogout()}
-            />
-            <Switch
-                trackColor={{ false: "#767577", true: "#81b0ff" }}
-                thumbColor={isDarkTheme ? "#f5dd4b" : "#f4f3f4"}
-                ios_backgroundColor="#3e3e3e"
-                onValueChange={toggleSwitch}
-                value={isDarkTheme}
             />
         </View>
     )
