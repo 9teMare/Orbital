@@ -37,6 +37,7 @@ import MainScreen from './component/Main'
 import LoginScreen from './component/auth/Login'
 
 import AnalysisScreen from './component/Analysis'
+import ChampSelectScreen from './component/ChampSelect'
 
 const Stack = createStackNavigator();
 
@@ -92,6 +93,7 @@ export class App extends Component {
           <Stack.Navigator initialRouteName="Main">
             <Stack.Screen name="Main" component={MainScreen} options={{ headerShown: false}}/>
             <Stack.Screen name="Analysis" component={AnalysisScreen}/>
+            <Stack.Screen name="ChampSelect" component={ChampSelectScreen}/>
           </Stack.Navigator>
         </NavigationContainer>
 

@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { useState } from 'react'
 import { StyleSheet, View, Text, Button} from 'react-native'
 
 const styles = StyleSheet.create({
@@ -22,9 +22,15 @@ export default function Composition({navigation}) {
         <View >
             <Text style={styles.titleText}> Team Composition Analysis </Text>
             <Text style={styles.blueText}> Blue Team </Text>
-            <Text> Tap to select </Text>
+
+            <Text onPress={() => navigation.navigate("ChampSelect")}> 
+                Tap to select 
+            </Text>
             <Text style={styles.redText}> Red Team </Text>
-            <Text> Tap to select </Text>
+
+            <Text onPress={() => navigation.navigate("ChampSelect")}> 
+                Tap to select 
+            </Text>
 
             <Button
                 title="Start analysis"
