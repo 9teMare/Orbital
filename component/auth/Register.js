@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, Button, TextInput} from 'react-native'
+import { View, TouchableOpacity, TextInput, Text, StyleSheet} from 'react-native'
 
 import firebase from 'firebase'
 
@@ -35,28 +35,49 @@ export class Register extends Component {
 
     render() {
         return (
-            <View>
+            <View style ={{marginTop: 120}}>
+
+
                 <TextInput
+                    style={styles.input}
                     placeholder="name"
                     onChangeText={(name) => this.setState({ name })}
                 />
+
+
                 <TextInput
+                    style={styles.input}
                     placeholder="email"
                     onChangeText={(email) => this.setState({ email })}
                 />
+
                 <TextInput
+                    style={styles.input}
                     placeholder="password"
                     secureTextEntry={true}
                     onChangeText={(password) => this.setState({ password })}
                 />
 
-                <Button
+                <TouchableOpacity
                     onPress={ () => this.onSignUp()}
-                    title="Sign Up"
-                />
+                    style = {{width: 340, height: 50, alignItems:'center', backgroundColor: "black", alignSelf:'center',
+                    marginTop: 20}}>
+                        <Text style={{color: "white", marginTop: 15}}>SIGN UP</Text>
+
+                </TouchableOpacity>
             </View>
         )
     }
 }
+
+const styles = StyleSheet.create({
+    input: {
+        height: 40,
+        margin: 12,
+        borderBottomWidth: 1,
+        width: '80%', 
+        alignSelf: 'center'
+    }
+})
 
 export default Register
