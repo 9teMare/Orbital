@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import {StyleSheet, View, Text, Button, Image, TouchableOpacity, TextInput} from 'react-native'
+import {Picker} from '@react-native-picker/picker'
 import {connect} from 'react-redux'
 import firebase from 'firebase'
 
@@ -11,9 +12,12 @@ function MyPage(props) {
     const onLogout = () => {
         firebase.auth().signOut()
     }
+    
+    const [selectedRegion, setSelectedRegion] = useState('na1');
+    const [Id, setId] = useState('');
 
-    const fetchApiCall = () => {
-        fetch("https://na1.api.riotgames.com/lol/summoner/v4/summoners/by-name/Doublelift?api_key=RGAPI-a47cf3c8-1834-402c-a790-dd9e065b2eae", {
+    const fetchApiCall = (Id) => {
+        fetch("https://" + selectedRegion + ".api.riotgames.com/lol/summoner/v4/summoners/by-name/" + Id + "?api_key=RGAPI-32511ccd-3e2c-4020-93ce-4f048f9012eb", {
           "method": "GET",
           "headers": {
             "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36 Edg/91.0.864.41",
@@ -79,6 +83,34 @@ function MyPage(props) {
 
             </TouchableOpacity>
 
+            <View>
+                <Picker
+                    selectedValue={selectedRegion}
+                    onValueChange={(itemValue, itemIndex) =>
+                        setSelectedRegion(itemValue)
+                    }>
+                    <Picker.Item label="NA" value="na1" />
+                    <Picker.Item label="EU North" value="eun1" />
+                    <Picker.Item label="EU West" value="euw1" />
+                    <Picker.Item label="KR" value="kr" />
+                    <Picker.Item label="JP" value="jp1" />
+                    <Picker.Item label="BR" value="br1" />
+                </Picker>
+
+                <Text style={{fontWeight: 'bold'}}>
+                    Link to your LOL ID
+                </Text>
+                <TextInput placeholder="Your LOL ID" onChangeText={(value) => {
+                    setId(value)
+                }}/>
+
+                <TouchableOpacity 
+                    onClick={fetchApiCall(Id)} 
+                    style = {{width: 180, height: 30, alignItems:'center', backgroundColor: "black", alignSelf:'center',}}>
+                    <Text style={{color: "white", marginTop: 5}}>Get user information</Text>
+                </TouchableOpacity>
+            </View>
+
 
             <View style={styles.container}>
                 <View style={styles.containerInfo}>
@@ -89,7 +121,6 @@ function MyPage(props) {
                     title="Logout"
                     onPress={() => onLogout()}
                 />
-                
             </View>
         </View>
     )
