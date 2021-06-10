@@ -1,10 +1,5 @@
-<<<<<<< Updated upstream
-import React from 'react'
-import {StyleSheet, View, Text, Button, Image, TouchableOpacity} from 'react-native'
-=======
 import React, { useState } from 'react'
 import {StyleSheet, View, Text, Button, Image, TouchableOpacity, TextInput} from 'react-native'
->>>>>>> Stashed changes
 import {connect} from 'react-redux'
 import firebase from 'firebase'
 
@@ -17,8 +12,6 @@ function MyPage(props) {
         firebase.auth().signOut()
     }
 
-<<<<<<< Updated upstream
-=======
     const fetchApiCall = () => {
         fetch("https://na1.api.riotgames.com/lol/summoner/v4/summoners/by-name/Doublelift?api_key=RGAPI-a47cf3c8-1834-402c-a790-dd9e065b2eae", {
           "method": "GET",
@@ -58,7 +51,6 @@ function MyPage(props) {
     //       })
     //   }
 
->>>>>>> Stashed changes
     return (
         <View>
 
@@ -88,16 +80,6 @@ function MyPage(props) {
             </TouchableOpacity>
 
 
-<<<<<<< Updated upstream
-
-
-        <View style={styles.container}>
-            <Button
-                title="Logout"
-                onPress={() => onLogout()}
-            />
-        </View>
-=======
             <View style={styles.container}>
                 <View style={styles.containerInfo}>
                     <Text> {currentUser.name} </Text>
@@ -107,15 +89,8 @@ function MyPage(props) {
                     title="Logout"
                     onPress={() => onLogout()}
                 />
-                <Switch
-                    trackColor={{ false: "#767577", true: "#81b0ff" }}
-                    thumbColor={isDarkTheme ? "#f5dd4b" : "#f4f3f4"}
-                    ios_backgroundColor="#3e3e3e"
-                    onValueChange={toggleSwitch}
-                    value={isDarkTheme}
-                />
+                
             </View>
->>>>>>> Stashed changes
         </View>
     )
 }
