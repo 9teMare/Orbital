@@ -29,6 +29,7 @@ export class Login extends Component {
     render() {
         return (
             <View>
+<<<<<<< Updated upstream
 
                 <Text 
                     style ={{fontSize: 30, fontWeight: 'bold', marginLeft: 10, marginTop: 80, alignSelf: 'center'}}>
@@ -36,6 +37,9 @@ export class Login extends Component {
                 </Text>
 
             <View style={{marginTop: '20%'}}>
+=======
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
                 <TextInput
                     style={styles.input}
                     placeholder="email"
@@ -50,12 +54,46 @@ export class Login extends Component {
 
                 <TouchableOpacity
                     onPress={ () => this.onSignUp()}
+<<<<<<< Updated upstream
                     style = {{width: 340, height: 50, alignItems:'center', backgroundColor: "black", alignSelf:'center',
                     marginTop: 20}}>
                         <Text style={{color: "white", marginTop: 15}}> SIGN IN </Text>
 
                 </TouchableOpacity>
             </View>
+=======
+                    title="Sign In"
+                />
+=======
+
+                <Text 
+                    style ={{fontSize: 30, fontWeight: 'bold', marginLeft: 10, marginTop: 80, alignSelf: 'center'}}>
+                    GREETING, SUMMONERS!
+                </Text>
+
+                <View style={{marginTop: '20%'}}>
+                    <TextInput
+                        style={styles.input}
+                        placeholder="email"
+                        onChangeText={(email) => this.setState({ email })}
+                    />
+                    <TextInput
+                        style = {styles.input}
+                        placeholder="password"
+                        secureTextEntry={true}
+                        onChangeText={(password) => this.setState({ password })}
+                    />
+
+                    <TouchableOpacity
+                        onPress={ () => this.onSignUp()}
+                        style = {{width: 340, height: 50, alignItems:'center', backgroundColor: "black", alignSelf:'center',
+                        marginTop: 20}}>
+                            <Text style={{color: "white", marginTop: 15}}> SIGN IN </Text>
+
+                    </TouchableOpacity>
+                </View>
+>>>>>>> Stashed changes
+>>>>>>> Stashed changes
             </View>
         )
     }
