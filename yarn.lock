@@ -4451,6 +4451,11 @@
   "resolved" "https://registry.npm.taobao.org/lodash.debounce/download/lodash.debounce-4.0.8.tgz"
   "version" "4.0.8"
 
+"lodash.filter@^4.6.0":
+  "integrity" "sha1-ZosdSYFgOuHMWm+nYBQ+SAtMSs4="
+  "resolved" "https://registry.npmjs.org/lodash.filter/-/lodash.filter-4.6.0.tgz"
+  "version" "4.6.0"
+
 "lodash.frompairs@^4.0.1":
   "integrity" "sha1-vE5SB/onV8E25XNhTpZkUGsrG9I="
   "resolved" "https://registry.npm.taobao.org/lodash.frompairs/download/lodash.frompairs-4.0.1.tgz"
@@ -5561,6 +5566,13 @@
   "integrity" "sha1-5pHUqOnHiTZWVVOas3J2Kw77VPA="
   "resolved" "https://registry.nlark.com/react-is/download/react-is-17.0.2.tgz?cache=0&sync_timestamp=1621874048709&other_urls=https%3A%2F%2Fregistry.nlark.com%2Freact-is%2Fdownload%2Freact-is-17.0.2.tgz"
   "version" "17.0.2"
+
+"react-native-dropdown-picker@^5.1.21":
+  "integrity" "sha512-PmRyQD0JkhNdA2eZuc3I7C1+WX6XLq+erI/hCvzYM1E+oGflI59mBBSBq2o0IDzzdTYeLQecj4yEEIHQRHloTw=="
+  "resolved" "https://registry.npmjs.org/react-native-dropdown-picker/-/react-native-dropdown-picker-5.1.21.tgz"
+  "version" "5.1.21"
+  dependencies:
+    "react-native-gesture-handler" "*"
 
 "react-native-gesture-handler@*", "react-native-gesture-handler@^1.10.3":
   "integrity" "sha1-lCu/KWO79J+nlZNgDunXtdqzz8A="
