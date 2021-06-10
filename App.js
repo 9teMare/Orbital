@@ -35,6 +35,10 @@ import LandingScreen from './component/auth/Landing'
 import RegisterScreen from './component/auth/Register'
 import MainScreen from './component/Main'
 import LoginScreen from './component/auth/Login'
+import SettingScreen from './component/main/Settings'
+
+import AnalysisScreen from './component/Analysis'
+import ChampSelectScreen from './component/ChampSelect'
 
 const Stack = createStackNavigator();
 
@@ -89,6 +93,9 @@ export class App extends Component {
         <NavigationContainer> 
           <Stack.Navigator initialRouteName="Main">
             <Stack.Screen name="Main" component={MainScreen} options={{ headerShown: false}}/>
+            <Stack.Screen name="Analysis" component={AnalysisScreen}/>
+            <Stack.Screen name="ChampSelect" component={ChampSelectScreen}/>
+            <Stack.Screen name="Settings" component={SettingScreen}/>
           </Stack.Navigator>
         </NavigationContainer>
 
