@@ -17,14 +17,14 @@ function MyPage(props) {
     const [Id, setId] = useState('');
 
     const fetchApiCall = (Id) => {
-        fetch("https://" + selectedRegion + ".api.riotgames.com/lol/summoner/v4/summoners/by-name/" + Id + "?api_key=RGAPI-32511ccd-3e2c-4020-93ce-4f048f9012eb", {
+        fetch("https://" + selectedRegion + ".api.riotgames.com/lol/summoner/v4/summoners/by-name/" + Id + "?api_key=RGAPI-d1869eab-4f8e-42ad-a4fc-46d00a7202de", {
           "method": "GET",
           "headers": {
             "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36 Edg/91.0.864.41",
             "Accept-Language": "zh-CN,zh;q=0.9,en;q=0.8,en-GB;q=0.7,en-US;q=0.6,ja;q=0.5,zh-TW;q=0.4",
             "Accept-Charset": "application/x-www-form-urlencoded; charset=UTF-8",
             "Origin": "https://developer.riotgames.com"
-          }
+          } 
         })
           .then(response => response.json())
           .then(response => {
