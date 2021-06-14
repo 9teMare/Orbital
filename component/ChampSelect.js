@@ -1,86 +1,123 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { StyleSheet, View, Text, Image, FlatList, TouchableOpacity, TouchableHighlight, TextInput } from 'react-native'
 import filter from 'lodash.filter';
 
 
 
-
-
-const Item = ({ item, onPress, weight, color}) => (
-    <TouchableOpacity onPress={onPress}>
-        <Image 
-            source={require('../pictures/champions/' + item + '.png')}
-            style= {[styles.image, color]}
-        />
-        <Text style={[styles.title, weight]}>
-            {item}
-        </Text>
-    </TouchableOpacity>    
-)
-
-
-function ChampSelect() {
-
-    const ChampInfo = require('../champion.json')
-    const champName = Object.keys(ChampInfo.data)
-    const [selectedChamp, setSelectedChamp] = useState(null);
-
-    const emptySlot = {url: require('../pictures/others/EmptyGrayRec.png')}
-
-    const [top, setTop] = useState(emptySlot)
-    const [jungle, setJungle] = useState(emptySlot)
-    const [mid, setMid] = useState(emptySlot)
-    const [ADC, setADC] = useState(emptySlot)
-    const [support, setSupport] = useState(emptySlot)
+function ChampSelect({navigation, route}) {
 
     const [query, setQuery] = useState('');
-    const [fullData, setFullData] = useState(champName);
-    const [data, setData] = useState(champName) 
+    const [fullData, setFullData] = useState([]);
+    const [data, setData] = useState([])
+
+    const TOP = 0, JUNGLE = 1, MID = 2, ADC = 3, SUPPORT = 4
+
+    useEffect(() => {
+        fetch('http://ddragon.leagueoflegends.com/cdn/11.12.1/data/en_US/champion.json')
+        .then((response) => response.json())
+        .then((response) => {
+            for (var k in response.data) {
+                champName.push(k)
+            }
+            setFullData(champName)
+            setData(champName)
+        })
+        .catch((error) => console.error(error))
+        //return data
+    }, [selectedChamp])
+
+    const champName = []
+
+    const [selectedChamp, setSelectedChamp] = useState(null);
+    const emptySlot = {url: require('../pictures/others/EmptyGrayRec.png')}
+
+    const {blue, red, isBlue} = route.params
+    const arrUsed = isBlue ?blue :red
+    const [team, setTeam] = useState(arrUsed)
+        
+    const [top, setTop] = arrUsed[TOP] === null
+        ?useState(emptySlot) :useState({url: 'http://ddragon.leagueoflegends.com/cdn/11.12.1/img/champion/'+arrUsed[TOP]+'.png'})
+    const [jungle, setJungle] = arrUsed[JUNGLE] === null
+        ?useState(emptySlot) :useState({url: 'http://ddragon.leagueoflegends.com/cdn/11.12.1/img/champion/'+arrUsed[JUNGLE]+'.png'})
+    const [mid, setMid] = arrUsed[MID] === null
+        ?useState(emptySlot) :useState({url: 'http://ddragon.leagueoflegends.com/cdn/11.12.1/img/champion/'+arrUsed[MID]+'.png'})
+    const [adc, setAdc] = arrUsed[ADC] === null
+        ?useState(emptySlot) :useState({url: 'http://ddragon.leagueoflegends.com/cdn/11.12.1/img/champion/'+arrUsed[ADC]+'.png'})
+    const [support, setSupport] = arrUsed[SUPPORT] === null
+        ?useState(emptySlot) :useState({url: 'http://ddragon.leagueoflegends.com/cdn/11.12.1/img/champion/'+arrUsed[SUPPORT]+'.png'})
+
+
     
+
+    const Item = ({ item, onPress, weight, color}) => (
+        <TouchableOpacity onPress={onPress}>
+            <Image 
+                source={{uri: 'http://ddragon.leagueoflegends.com/cdn/11.12.1/img/champion/' + item + '.png'}}
+                style= {[styles.image, color]}
+            />
+            <Text style={[styles.title, weight]}>
+                {item}
+            </Text>
+        </TouchableOpacity>    
+    )
 
 
     const renderItem = ({ item }) => {
         const fontWeight = item === selectedChamp ? 'bold' :'normal';
         const borderColor = item === selectedChamp ? '#6BDB5A' :'black'
-        
+
         return (
             <Item 
                 item={item}
                 onPress={() => setSelectedChamp(item)}
                 weight={{ fontWeight }}
                 color = {{borderColor}}
-
             />
         )
     }
 
     const changeTop = () => {
         if (selectedChamp !== null) {
-            setTop({url: require('../pictures/champions/' + selectedChamp + '.png')})
+            let temp = team
+            team[TOP] = selectedChamp
+            setTeam(temp)
+            setTop({url: 'http://ddragon.leagueoflegends.com/cdn/11.12.1/img/champion/'+selectedChamp+'.png'})
         }
     }
     
     const changeJG = () => {
         if (selectedChamp !== null) {
-            setJungle({url: require('../pictures/champions/' + selectedChamp + '.png')})
+            let temp = team
+            team[JUNGLE] = selectedChamp
+            setTeam(temp)
+            setJungle({url: 'http://ddragon.leagueoflegends.com/cdn/11.12.1/img/champion/'+selectedChamp+'.png'})
         }
     }
     
     const changeMid = () => {
         if (selectedChamp !== null) {
-            setMid({url: require('../pictures/champions/' + selectedChamp + '.png')})
+            let temp = team
+            team[MID] = selectedChamp
+            setTeam(temp)
+            setMid({url: 'http://ddragon.leagueoflegends.com/cdn/11.12.1/img/champion/'+selectedChamp+'.png'})
         }
     }
     
     const changeADC = () => {
         if (selectedChamp !== null) {
-            setADC({url: require('../pictures/champions/' + selectedChamp + '.png')})
+            let temp = team
+            team[ADC] = selectedChamp
+            setTeam(temp)
+            setAdc({url: 'http://ddragon.leagueoflegends.com/cdn/11.12.1/img/champion/'+selectedChamp+'.png'})
         }
     }
     
     const changeSupport = () => {
         if (selectedChamp !== null) {
-            setSupport({url: require('../pictures/champions/' + selectedChamp + '.png')})
+            let temp = team
+            team[SUPPORT] = selectedChamp
+            setTeam(temp)
+            setSupport({url: 'http://ddragon.leagueoflegends.com/cdn/11.12.1/img/champion/'+selectedChamp+'.png'})
         }
     }
 
@@ -108,7 +145,6 @@ function ChampSelect() {
     }  
 
     const handleSearch = text => {
-        const formattedQuery = text.toLowerCase();
         const filteredData = filter(fullData, champ => {
           return contains(champ, text);
         });
@@ -116,16 +152,14 @@ function ChampSelect() {
         setQuery(text);
       };
     
-      const contains = (champs, query) => {
+    const contains = (champs, query) => {
         if (champs.includes(query)) {
           return true;
         }
         return false;
       };
-
-
-
-    return (
+    
+    return ( 
         <View style={{flexDirection: 'row'}}>
 
             <View style={{justifyContent:'space-evenly', width: 60, marginLeft: 32, height: 500, marginTop: 40}} >
@@ -134,54 +168,62 @@ function ChampSelect() {
                     <Text style={styles.position}> Top </Text>
 
                     <TouchableHighlight
-                        style={{height:60, width:60}}
+                        style={{height:50, width:50}}
                         onPress={changeTop}
                     >
-                        <Image source={top.url} style={{width:50, height:50}}/>
+                        <Image source={{uri: top.url}} style={{width:50, height:50}}/>
                     </TouchableHighlight>
                 </View>
 
                 <View>
                     <Text style={styles.position}> Jungle </Text>
                     <TouchableHighlight
-                        style={{height:60, width:60}}
+                        style={{height:50, width:50}}
                         onPress={changeJG}
                     >
-                        <Image source={jungle.url} style={{width:50, height:50}}/>
+                        <Image source={{uri: jungle.url}} style={{width:50, height:50}}/>
                     </TouchableHighlight>
                 </View>
 
                 <View>
                     <Text style={styles.position}> Mid </Text>
                     <TouchableHighlight
-                        style={{height:60, width:60}}
+                        style={{height:50, width:50}}
                         onPress={changeMid}
                     >
-                        <Image source={mid.url} style={{width:50, height:50}}/>
+                        <Image source={{uri: mid.url}} style={{width:50, height:50}}/>
                     </TouchableHighlight>
                 </View>
 
                 <View>
                     <Text style={styles.position}> ADC </Text>
                     <TouchableHighlight
-                        style={{height:60, width:60}}
+                        style={{height:50, width:50}}
                         onPress={changeADC}
                     >
-                        <Image source={ADC.url} style={{width:50, height:50}}/>
+                        <Image source={{uri: adc.url}} style={{width:50, height:50}}/>
                     </TouchableHighlight>
                 </View>
 
                 <View>
                     <Text style={styles.position}> Support </Text>
                     <TouchableHighlight
-                        style={{height:60, width:60}}
+                        style={{height:50, width:50}}
                         onPress={changeSupport}
                     >
-                        <Image source={support.url} style={{width:50, height:50}}/>
+                        <Image source={{uri:support.url}} style={{width:50, height:50}}/>
                     </TouchableHighlight>
                 </View>
 
-                <TouchableOpacity style={styles.doneButton}>
+                <TouchableOpacity 
+                    style={styles.doneButton}
+                    onPress={() => {
+                        navigation.navigate({
+                            name: 'Composition',
+                            params: isBlue ?{blueTeam: team, redTeam: red} :{blueTeam: blue, redTeam: team},
+                            merge: true,
+                        });
+                    }}>
                     <Text style={{fontWeight: 500, marginTop: 8}}>Done</Text>
                 </TouchableOpacity>
 
@@ -190,7 +232,7 @@ function ChampSelect() {
         
             <View style={{marginLeft: 48, marginTop: 40}}>
                 <FlatList
-                ListHeaderComponent={renderHeader}
+                ListHeaderComponent={renderHeader} //search function
                 numColumns={3}
                 horizontal={false}
                 data={data}
@@ -225,4 +267,3 @@ const styles = StyleSheet.create({
 })
 
 export default ChampSelect
-
