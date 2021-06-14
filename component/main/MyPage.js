@@ -117,6 +117,9 @@ function MyPage(props) {
                     <Text> {currentUser.name} </Text>
                     <Text> {currentUser.email} </Text>
                 </View>
+            </View>
+
+            <View style={{marginTop:40}}>
                 <Button
                     title="Logout"
                     onPress={() => onLogout()}
