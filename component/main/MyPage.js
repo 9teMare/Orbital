@@ -3,10 +3,11 @@ import {StyleSheet, View, Text, Button, Image, TouchableOpacity, TextInput} from
 import {Picker} from '@react-native-picker/picker'
 import {connect} from 'react-redux'
 import firebase from 'firebase'
+import axios from 'axios'
 
 function MyPage(props) {
     const { currentUser } = props;
-    console.log({currentUser})
+    //console.log({currentUser})
     const {navigate} = props.navigation
 
     const onLogout = () => {
@@ -15,9 +16,12 @@ function MyPage(props) {
     
     const [selectedRegion, setSelectedRegion] = useState('na1');
     const [Id, setId] = useState('');
+    const [summonerName, setSummonerName] = useState('');
+    const [summonerLvl, setSummonerLvl] = useState('');
+    const [profileIcon, setProfileIcon] = useState({url: '../../pictures/others/EmptyGrayRec.png'});
 
     const fetchApiCall = (Id) => {
-        fetch("https://" + selectedRegion + ".api.riotgames.com/lol/summoner/v4/summoners/by-name/" + Id + "?api_key=RGAPI-d1869eab-4f8e-42ad-a4fc-46d00a7202de", {
+        fetch("https://" + selectedRegion + ".api.riotgames.com/lol/summoner/v4/summoners/by-name/" + Id + "?api_key=RGAPI-4b9e2112-875a-4aa7-b9e4-bec5678b22bc", {
           "method": "GET",
           "headers": {
             "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36 Edg/91.0.864.41",
@@ -28,27 +32,28 @@ function MyPage(props) {
         })
           .then(response => response.json())
           .then(response => {
-            console.log(response.name)
-            console.log(response.summonerLevel)
-            console.log(response.profileIconId)
+            setSummonerName(response.name)
+            setSummonerLvl(response.summonerLevel)
+            setProfileIcon(response.profileIconId)
           })
           .catch(err => {
             console.log(err);
           });
       }
 
-    //   const axiosApiCall = () => {
+    //   const axiosApiCall = (Id) => {
     //     axios({
-    //       "method": "POST",
-    //       "url": "https://na1.api.riotgames.com/lol/summoner/v4/summoners/by-name/9teMare",
+    //       "method": "GET",
+    //       "url": "https://na1.api.riotgames.com/lol/summoner/v4/summoners/by-name/" + Id,
     //       "headers": {
     //         "Accept-Language": "zh-CN,zh;q=0.9,en;q=0.8,en-GB;q=0.7,en-US;q=0.6,ja;q=0.5,zh-TW;q=0.4",
-    //         "X-Riot-Token": "RGAPI-a47cf3c8-1834-402c-a790-dd9e065b2eae"
+    //         "X-Riot-Token": "RGAPI-4b9e2112-875a-4aa7-b9e4-bec5678b22bc"
     //       }
     //     })
     //       .then((response) => {
-    //         console.log(response.data.content);
-    //         console.log(response.data.originator.name)
+    //         setSummonerName(response.name)
+    //         setSummonerLvl(response.summonerLevel)
+    //         setProfileIcon(response.profileIconId)
     //       })
     //       .catch((error) => {
     //         console.log(error)
@@ -61,7 +66,8 @@ function MyPage(props) {
             <View style = {{flexDirection: 'row', flexWrap:'wrap'}}>
 
                 <Image
-                    source = {require('../../pictures/others/EmptyGrayRec.png')}
+                    //source = {require('../../pictures/others/EmptyGrayRec.png')}
+                    source = {{uri: 'http://ddragon.leagueoflegends.com/cdn/11.12.1/img/profileicon/' + profileIcon + '.png'}}
                     style = {{width: 100, height:100, borderRadius: 100, marginVertical: 30, marginHorizontal: 20}}
                 />
                 <View style ={{marginVertical: 55}}>
@@ -109,6 +115,8 @@ function MyPage(props) {
                     style = {{width: 180, height: 30, alignItems:'center', backgroundColor: "black", alignSelf:'center',}}>
                     <Text style={{color: "white", marginTop: 5}}>Get user information</Text>
                 </TouchableOpacity>
+                <Text>Summoner Name: {summonerName}</Text>
+                <Text>Summoner Level: {summonerLvl}</Text>
             </View>
 
 
