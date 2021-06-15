@@ -5,24 +5,33 @@ import { TouchableOpacity } from 'react-native-gesture-handler'
 export default function Landing({navigation}) {
     return (
         <View style={{marginVertical: 200}}>
-            
-            <Image 
-            source = {require('../../pictures/others/legendarily.png')}
-            style = {{width: 400, height: 100, alignSelf: 'center'}}
-            />
 
+            <Text style={{fontFamily:'manticore', fontSize: 50, alignSelf:'center'}}>
+                LEGENDARILY
+            </Text>
+
+            <View style ={{marginTop:30}}>
                 <TouchableOpacity
                     onPress={() => navigation.navigate("Register")}
-                    style = {{width: 380, height: 50, alignItems:'center', backgroundColor: "black", alignSelf:'center'}}>
+                    style = {{width: 380, height: 50, alignItems:'center', backgroundColor: "black", alignSelf:'center',}}>
                     <Text style={{color: "white", marginTop: 15}}>REGISTER</Text>
                 </TouchableOpacity>
 
+            </View>
+
+            <View style={{marginTop: 40}}>
                 <TouchableOpacity
+                    style = {{width: 380, height: 50, alignItems:'center', backgroundColor: "black", alignSelf:'center',}}
                     onPress={() => navigation.navigate("Login")}
-                    style = {{width: 380, height: 50, alignItems:'center', backgroundColor: "black", alignSelf:'center',
-                        marginTop: 20}}>
+                >
                     <Text style={{color: "white", marginTop: 15}}>LOGIN</Text>
                 </TouchableOpacity>
+
+            </View>
+
+                
+
+                
 
         </View>
     )

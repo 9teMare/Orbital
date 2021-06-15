@@ -36,7 +36,8 @@ export class Main extends Component {
                         tabBarIcon: ({ color }) => (
                             <MaterialCommunityIcons name="align-vertical-center" color={color} size={26}/>
                         )
-                    }}  />
+                    }}
+                    initialParams={{blueTeam: [null, null, null, null, null], redTeam: [null, null, null, null, null]}}  />
                 <Tab.Screen name="Favorites" component={FavoritesScreen} 
                     options={{
                         tabBarLabel: 'Favorites',

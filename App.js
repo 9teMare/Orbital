@@ -92,7 +92,9 @@ export class App extends Component {
       <Provider store = {store}>
         <NavigationContainer> 
           <Stack.Navigator initialRouteName="Main">
-            <Stack.Screen name="Main" component={MainScreen} options={{ headerShown: false}}/>
+            <Stack.Screen name="Main" component={MainScreen} options={{ headerShown: false}} 
+              //initialParams={{REDTEAM: [null, null, null, null, null], BLUETEAM: [null, null, null, null, null]}}
+              />
             <Stack.Screen name="Analysis" component={AnalysisScreen}/>
             <Stack.Screen name="ChampSelect" component={ChampSelectScreen}/>
             <Stack.Screen name="Settings" component={SettingScreen}/>
