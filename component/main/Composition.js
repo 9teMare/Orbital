@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { StyleSheet, View, Text, TouchableOpacity, Image, FlatList} from 'react-native'
-
+import {Header} from 'react-native-elements'
 
 export default function Composition({navigation, route}) {
 
@@ -10,11 +10,14 @@ export default function Composition({navigation, route}) {
 
     return (
         <View >
+            <Header 
+                placement='left'
+                centerComponent={{text: 'Team Composition Analysis'}}/>
             <Text style={styles.titleText}> Team Composition Analysis </Text>
             <Text style={styles.blueText}> Blue Team </Text>
 
             <Text 
-                style ={{marginLeft: 24, marginTop: 8, fontSize: 10, fontWeight: 500}}
+                style ={{marginLeft: 24, marginTop: 8, fontSize: 10, fontWeight:500}}
                 onPress={() => navigation.navigate("ChampSelect", {blue: blueTeam, red: redTeam, isBlue: true})}> 
                 Tap here to select 
             </Text>

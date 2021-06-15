@@ -23,7 +23,6 @@ function ChampSelect({navigation, route}) {
             setData(champName)
         })
         .catch((error) => console.error(error))
-        //return data
     }, [selectedChamp])
 
     const champName = []

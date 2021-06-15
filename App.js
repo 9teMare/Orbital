@@ -40,6 +40,13 @@ import SettingScreen from './component/main/Settings'
 import AnalysisScreen from './component/Analysis'
 import ChampSelectScreen from './component/ChampSelect'
 
+import championScreen from './component/main/meta/Champion'
+import itemScreen from './component/main/meta/Item'
+import mechanismScreen from './component/main/meta/Mechanism'
+import runeScreen from './component/main/meta/Runes'
+import skinScreen from './component/main/meta/Skin'
+import systemScreen from './component/main/meta/System'
+
 const Stack = createStackNavigator();
 
 export class App extends Component {
@@ -98,6 +105,12 @@ export class App extends Component {
             <Stack.Screen name="Analysis" component={AnalysisScreen}/>
             <Stack.Screen name="ChampSelect" component={ChampSelectScreen}/>
             <Stack.Screen name="Settings" component={SettingScreen}/>
+            <Stack.Screen name="Champion" component={championScreen}/>
+            <Stack.Screen name="Skin" component={skinScreen}/>
+            <Stack.Screen name="Item" component={itemScreen}/>
+            <Stack.Screen name="Rune" component={runeScreen}/>
+            <Stack.Screen name="Mechanism" component={mechanismScreen}/>
+            <Stack.Screen name="System" component={systemScreen}/>
           </Stack.Navigator>
         </NavigationContainer>
 
