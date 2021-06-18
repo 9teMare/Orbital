@@ -119,13 +119,13 @@ function MyPage(props) {
                 <Text>Summoner Level: {summonerLvl}</Text>
             </View>
 
-
+{/* 
             <View style={styles.container}>
                 <View style={styles.containerInfo}>
                     <Text> {currentUser.name} </Text>
                     <Text> {currentUser.email} </Text>
                 </View>
-            </View>
+            </View> */}
 
             <View style={{marginTop:40}}>
                 <Button
