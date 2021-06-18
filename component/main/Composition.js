@@ -17,7 +17,7 @@ export default function Composition({navigation, route}) {
             <Text style={styles.blueText}> Blue Team </Text>
 
             <Text 
-                style ={{marginLeft: 24, marginTop: 8, fontSize: 10, fontWeight:500}}
+                style ={{marginLeft: 24, marginTop: 8, fontSize: 10, fontWeight:'500'}}
                 onPress={() => navigation.navigate("ChampSelect", {blue: blueTeam, red: redTeam, isBlue: true})}> 
                 Tap here to select 
             </Text>
@@ -65,7 +65,7 @@ export default function Composition({navigation, route}) {
                 <Text style={styles.redText}> Red Team </Text>
 
             <Text 
-                style ={{marginLeft: 24, marginTop: 8, fontSize: 10, fontWeight: 500}}
+                style ={{marginLeft: 24, marginTop: 8, fontSize: 10, fontWeight: '500'}}
                 onPress={() => navigation.navigate("ChampSelect", {blue: blueTeam, red: redTeam, isBlue: false})}> 
                 Tap here to select 
             </Text>
@@ -119,7 +119,7 @@ const styles = StyleSheet.create({
         fontSize: 20,
         marginTop: 50,
         marginLeft: 22, 
-        fontWeight: "bold",
+        fontWeight: 'bold',
         color: '#55BA46',
     },
     blueText: {
