@@ -28,22 +28,22 @@ function ChampSelect({navigation, route}) {
     const champName = []
 
     const [selectedChamp, setSelectedChamp] = useState(null);
-    const emptySlot = {url: require('../pictures/others/EmptyGrayRec.png')}
+    const emptySlot = require('../pictures/others/EmptyGrayRec.png')
 
     const {blue, red, isBlue} = route.params
     const arrUsed = isBlue ?blue :red
     const [team, setTeam] = useState(arrUsed)
         
     const [top, setTop] = arrUsed[TOP] === null
-        ?useState(emptySlot) :useState({url: 'http://ddragon.leagueoflegends.com/cdn/11.12.1/img/champion/'+arrUsed[TOP]+'.png'})
+        ?useState(emptySlot) :useState({uri: 'http://ddragon.leagueoflegends.com/cdn/11.12.1/img/champion/'+arrUsed[TOP]+'.png'})
     const [jungle, setJungle] = arrUsed[JUNGLE] === null
-        ?useState(emptySlot) :useState({url: 'http://ddragon.leagueoflegends.com/cdn/11.12.1/img/champion/'+arrUsed[JUNGLE]+'.png'})
+        ?useState(emptySlot) :useState({uri: 'http://ddragon.leagueoflegends.com/cdn/11.12.1/img/champion/'+arrUsed[JUNGLE]+'.png'})
     const [mid, setMid] = arrUsed[MID] === null
-        ?useState(emptySlot) :useState({url: 'http://ddragon.leagueoflegends.com/cdn/11.12.1/img/champion/'+arrUsed[MID]+'.png'})
+        ?useState(emptySlot) :useState({uri: 'http://ddragon.leagueoflegends.com/cdn/11.12.1/img/champion/'+arrUsed[MID]+'.png'})
     const [adc, setAdc] = arrUsed[ADC] === null
-        ?useState(emptySlot) :useState({url: 'http://ddragon.leagueoflegends.com/cdn/11.12.1/img/champion/'+arrUsed[ADC]+'.png'})
+        ?useState(emptySlot) :useState({uri: 'http://ddragon.leagueoflegends.com/cdn/11.12.1/img/champion/'+arrUsed[ADC]+'.png'})
     const [support, setSupport] = arrUsed[SUPPORT] === null
-        ?useState(emptySlot) :useState({url: 'http://ddragon.leagueoflegends.com/cdn/11.12.1/img/champion/'+arrUsed[SUPPORT]+'.png'})
+        ?useState(emptySlot) :useState({uri: 'http://ddragon.leagueoflegends.com/cdn/11.12.1/img/champion/'+arrUsed[SUPPORT]+'.png'})
 
 
     
@@ -80,7 +80,7 @@ function ChampSelect({navigation, route}) {
             let temp = team
             team[TOP] = selectedChamp
             setTeam(temp)
-            setTop({url: 'http://ddragon.leagueoflegends.com/cdn/11.12.1/img/champion/'+selectedChamp+'.png'})
+            setTop({uri: 'http://ddragon.leagueoflegends.com/cdn/11.12.1/img/champion/'+selectedChamp+'.png'})
         }
     }
     
@@ -89,7 +89,7 @@ function ChampSelect({navigation, route}) {
             let temp = team
             team[JUNGLE] = selectedChamp
             setTeam(temp)
-            setJungle({url: 'http://ddragon.leagueoflegends.com/cdn/11.12.1/img/champion/'+selectedChamp+'.png'})
+            setJungle({uri: 'http://ddragon.leagueoflegends.com/cdn/11.12.1/img/champion/'+selectedChamp+'.png'})
         }
     }
     
@@ -98,7 +98,7 @@ function ChampSelect({navigation, route}) {
             let temp = team
             team[MID] = selectedChamp
             setTeam(temp)
-            setMid({url: 'http://ddragon.leagueoflegends.com/cdn/11.12.1/img/champion/'+selectedChamp+'.png'})
+            setMid({uri: 'http://ddragon.leagueoflegends.com/cdn/11.12.1/img/champion/'+selectedChamp+'.png'})
         }
     }
     
@@ -107,7 +107,7 @@ function ChampSelect({navigation, route}) {
             let temp = team
             team[ADC] = selectedChamp
             setTeam(temp)
-            setAdc({url: 'http://ddragon.leagueoflegends.com/cdn/11.12.1/img/champion/'+selectedChamp+'.png'})
+            setAdc({uri: 'http://ddragon.leagueoflegends.com/cdn/11.12.1/img/champion/'+selectedChamp+'.png'})
         }
     }
     
@@ -116,7 +116,7 @@ function ChampSelect({navigation, route}) {
             let temp = team
             team[SUPPORT] = selectedChamp
             setTeam(temp)
-            setSupport({url: 'http://ddragon.leagueoflegends.com/cdn/11.12.1/img/champion/'+selectedChamp+'.png'})
+            setSupport({uri: 'http://ddragon.leagueoflegends.com/cdn/11.12.1/img/champion/'+selectedChamp+'.png'})
         }
     }
 
@@ -170,7 +170,7 @@ function ChampSelect({navigation, route}) {
                         style={{height:50, width:50}}
                         onPress={changeTop}
                     >
-                        <Image source={{uri: top.url}} style={{width:50, height:50}}/>
+                        <Image source={top} style={{width:50, height:50}}/>
                     </TouchableHighlight>
                 </View>
 
@@ -180,7 +180,7 @@ function ChampSelect({navigation, route}) {
                         style={{height:50, width:50}}
                         onPress={changeJG}
                     >
-                        <Image source={{uri: jungle.url}} style={{width:50, height:50}}/>
+                        <Image source={jungle} style={{width:50, height:50}}/>
                     </TouchableHighlight>
                 </View>
 
@@ -190,7 +190,7 @@ function ChampSelect({navigation, route}) {
                         style={{height:50, width:50}}
                         onPress={changeMid}
                     >
-                        <Image source={{uri: mid.url}} style={{width:50, height:50}}/>
+                        <Image source={mid} style={{width:50, height:50}}/>
                     </TouchableHighlight>
                 </View>
 
@@ -200,7 +200,7 @@ function ChampSelect({navigation, route}) {
                         style={{height:50, width:50}}
                         onPress={changeADC}
                     >
-                        <Image source={{uri: adc.url}} style={{width:50, height:50}}/>
+                        <Image source={adc} style={{width:50, height:50}}/>
                     </TouchableHighlight>
                 </View>
 
@@ -210,7 +210,7 @@ function ChampSelect({navigation, route}) {
                         style={{height:50, width:50}}
                         onPress={changeSupport}
                     >
-                        <Image source={{uri:support.url}} style={{width:50, height:50}}/>
+                        <Image source={support} style={{width:50, height:50}}/>
                     </TouchableHighlight>
                 </View>
 
@@ -223,7 +223,7 @@ function ChampSelect({navigation, route}) {
                             merge: true,
                         });
                     }}>
-                    <Text style={{fontWeight: 500, marginTop: 8}}>Done</Text>
+                    <Text style={{fontWeight: "500", marginTop: 8}}>Done</Text>
                 </TouchableOpacity>
 
             </View>

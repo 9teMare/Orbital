@@ -1,12 +1,45 @@
 import React, { useState } from 'react'
-import { StyleSheet, View, Text, TouchableOpacity, Image, FlatList} from 'react-native'
+import { StyleSheet, View, Text, TouchableOpacity, Image, Alert} from 'react-native'
 import {Header} from 'react-native-elements'
 
+
+
+
 export default function Composition({navigation, route}) {
+
 
     const TOP = 0, JUNGLE = 1, MID = 2, ADC = 3, SUPPORT = 4
     const blueTeam = route.params?.blueTeam
     const redTeam = route.params?.redTeam
+
+    function analysisNavigate() {
+        var i;
+        for (i=0; i<5; i++) {
+            if (blueTeam[i] === null || redTeam[i] === null) {
+                return Alert.alert(
+                    'Incomplete team',
+                    'Please complete both teams before you proceed',
+                    [{
+                        text: "OK", 
+                        style:'cancel'
+                    }])
+            }
+        }
+        var allChamps = new Array
+        allChamps = blueTeam.concat(redTeam)
+        const s = new Set(allChamps)
+        if (allChamps.length !== s.size) {
+            return Alert.alert(
+                'Repeated champions',
+                'Please make sure there are no repeated champions before you proceed',
+                [{
+                    text: "OK",
+                    style:'cancel'
+                }]
+            )
+        }
+        return navigation.navigate("Analysis")
+    }
 
     return (
         <View >
@@ -106,7 +139,7 @@ export default function Composition({navigation, route}) {
 
             <TouchableOpacity 
                 style={styles.button}
-                onPress={() => navigation.navigate("Analysis")}>
+                onPress={() => analysisNavigate()}>
                 <Text style={{fontWeight:'500', fontSize:18, color:'#55BA46', marginTop: 14}}>START ANALYSIS</Text>
             </TouchableOpacity>
 
@@ -139,7 +172,7 @@ const styles = StyleSheet.create({
     button:{
         width:237, 
         height:50, 
-        marginTop:141, 
+        marginTop:40, 
         backgroundColor: 'white', 
         alignItems: 'center', 
         alignSelf: 'center',
