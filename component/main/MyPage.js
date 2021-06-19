@@ -7,7 +7,6 @@ import axios from 'axios'
 
 function MyPage(props) {
     const { currentUser } = props;
-    //console.log({currentUser})
     const {navigate} = props.navigation
 
     const onLogout = () => {
@@ -19,9 +18,13 @@ function MyPage(props) {
     const [summonerName, setSummonerName] = useState('');
     const [summonerLvl, setSummonerLvl] = useState('');
     const [profileIcon, setProfileIcon] = useState({url: '../../pictures/others/EmptyGrayRec.png'});
+    const url = "https://" + selectedRegion + ".api.riotgames.com/lol/summoner/v4/summoners/by-name/" + Id + "?api_key=RGAPI-6ce8616e-6939-4a94-bb0d-c78f2d682df1"
 
-    const fetchApiCall = (Id) => {
-        fetch("https://" + selectedRegion + ".api.riotgames.com/lol/summoner/v4/summoners/by-name/" + Id + "?api_key=RGAPI-2ef46e03-1b99-4ae8-8f96-6018fda3ec6f", {
+    const [count, setCount] = useState(0);
+    const onPress = () => setCount(prevCount => prevCount + 1);
+
+    const fetchApiCall = () => {
+        fetch(url, {
           "method": "GET",
           "headers": {
             "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36 Edg/91.0.864.41",
@@ -106,12 +109,16 @@ function MyPage(props) {
                 <Text style={{fontWeight: 'bold'}}>
                     Link to your LOL ID
                 </Text>
-                <TextInput placeholder="Your LOL ID" onChangeText={(value) => {
-                    setId(value)
-                }}/>
-
-                <TouchableOpacity 
-                    onClick={fetchApiCall(Id)} 
+                <TextInput 
+                    placeholder="Your LOL ID" 
+                    onChangeText={(value) => {
+                        setId(value)
+                    }}
+                />
+                <TouchableOpacity
+                    onPress = {
+                         () => fetchApiCall()
+                    } 
                     style = {{width: 180, height: 30, alignItems:'center', backgroundColor: "black", alignSelf:'center',}}>
                     <Text style={{color: "white", marginTop: 5}}>Get user information</Text>
                 </TouchableOpacity>
