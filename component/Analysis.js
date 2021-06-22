@@ -1,8 +1,6 @@
 import React from 'react'
-import { View, useWindowDimensions } from 'react-native';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { TabView, SceneMap, TabBar } from 'react-native-tab-view';
-import  MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
+import { View, useWindowDimensions, Image } from 'react-native';
+import { createMaterialBottomTabNavigator} from '@react-navigation/material-bottom-tabs'
 
 import laneScreen from './analysis/lane'
 import statsScreen from './analysis/stats'
@@ -10,61 +8,53 @@ import dragonScreen from './analysis/dragon'
 import overallScreen from './analysis/overall'
 import adviceScreen from './analysis/advice'
 
-const Tab = createBottomTabNavigator();
+const Tab = createMaterialBottomTabNavigator();
 
-const renderScene = SceneMap ({
-    lane: laneScreen,
-    stats: statsScreen,
-    dragon: dragonScreen,
-    overall: overallScreen,
-    advice: adviceScreen
-});
 
-const getTabBarIcon = (props) => {
-    const {route} = props
-      if (route.key === 'lane') {
-       return <MaterialCommunityIcons name="align-vertical-center" color="#2d5c27" size={26}/>
-      } else if (route.key === 'stats') {
-       return <MaterialCommunityIcons name="box-shadow" color="#2d5c27" size={26}/>
-      } else if (route.key === 'dragon') {
-          return <MaterialCommunityIcons name="align-vertical-center" color="#2d5c27" size={26}/>
-      } else if (route.key === 'overall') {
-          return <MaterialCommunityIcons name="box-shadow" color="#2d5c27" size={26}/>
-      } else {
-          return <MaterialCommunityIcons name="align-vertical-center" color="#2d5c27" size={26}/>
-      }
-}
+export default function Analysis({route}) {
+    const {blue, red} = route.params
 
-export default function Analysis() {
-    const layout = useWindowDimensions();
-    const [index, setIndex] = React.useState(0);
-    const [routes] = React.useState([
-        { key: 'lane', title: 'Lane' },
-        { key: 'stats', title: 'Stats'},
-        { key: 'dragon', title: 'Dragon'},
-        { key: 'overall', title: 'Overall'},
-        { key: 'advice', title: 'Advice'}
-      ]);
-
-    const renderTabBar = props => (
-        <TabBar
-          {...props}
-          indicatorStyle={{ backgroundColor: '#232323' }}
-          style={{ backgroundColor: '#232323' }}
-          renderIcon={
-            props => getTabBarIcon(props)
-          }
-        />
-      );  
 
     return (
-        <TabView
-          tabBarPosition = 'bottom'
-          navigationState={{ index, routes }}
-          renderScene={renderScene}
-          onIndexChange={setIndex}
-          initialLayout={{ width: layout.width }}
-          renderTabBar={renderTabBar}
-        />
+
+        <Tab.Navigator 
+          activeColor="#6BDB5A" inactiveColor="#2d5c27" barStyle={{ backgroundColor: '#232323' }}
+          labeled={false}>
+          <Tab.Screen name='Lane' component={laneScreen} initialParams={{blue: blue, red: red}}
+            options={{
+              tabBarIcon: ({color}) => (
+                <Image source={require('../pictures/others/meta-laneIcon.png')}
+                  style={{tintColor:color, height:40, width:33.33}}/>
+              )
+            }}/>
+          <Tab.Screen name='stats' component={statsScreen} initialParams={{blue: blue, red: red}}
+            options={{
+              tabBarIcon: ({color}) => (
+                <Image source={require('../pictures/others/meta-statsIcon.png')}
+                  style={{tintColor:color, height:40, width:33.33}}/>
+              )
+            }}/>
+          <Tab.Screen name='dragon' component={dragonScreen} initialParams={{blue: blue, red: red}}
+            options={{
+              tabBarIcon: ({color}) => (
+                <Image source={require('../pictures/others/meta-dragonIcon.png')}
+                  style={{tintColor:color, height:40, width:33.33}}/>
+              )
+            }}/>
+          <Tab.Screen name='overall' component={overallScreen} initialParams={{blue: blue, red: red}}
+            options={{
+              tabBarIcon: ({color}) => (
+                <Image source={require('../pictures/others/meta-overallIcon.png')}
+                  style={{tintColor:color, height:40, width:33.33}}/>
+              )
+            }}/>
+          <Tab.Screen name='advice' component={adviceScreen} initialParams={{blue: blue, red: red}}
+            options={{
+              tabBarIcon: ({color}) => (
+                <Image source={require('../pictures/others/meta-adviceIcon.png')}
+                  style={{tintColor:color, height:40, width:33.33}}/>
+              )
+            }}/>
+        </Tab.Navigator>
     );
 }
