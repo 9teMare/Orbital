@@ -38,7 +38,7 @@ export default function Composition({navigation, route}) {
                 }]
             )
         }
-        return navigation.navigate("Analysis")
+        return navigation.navigate("Analysis", {blue: blueTeam, red: redTeam})
     }
 
     return (
@@ -139,7 +139,7 @@ export default function Composition({navigation, route}) {
 
             <TouchableOpacity 
                 style={styles.button}
-                onPress={() => analysisNavigate()}>
+                onPress={() => navigation.navigate("Analysis", {blue: blueTeam, red: redTeam})}>
                 <Text style={{fontWeight:'500', fontSize:18, color:'#55BA46', marginTop: 14}}>START ANALYSIS</Text>
             </TouchableOpacity>
 
