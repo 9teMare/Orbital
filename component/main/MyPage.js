@@ -18,8 +18,8 @@ function MyPage(props) {
     const [summonerName, setSummonerName] = useState('');
     const [summonerLvl, setSummonerLvl] = useState('');
     const [profileIcon, setProfileIcon] = useState({url: '../../pictures/others/EmptyGrayRec.png'});
-    const url = "https://" + selectedRegion + ".api.riotgames.com/lol/summoner/v4/summoners/by-name/" + Id + "?api_key=RGAPI-6ce8616e-6939-4a94-bb0d-c78f2d682df1"
-
+    const url = "https://" + selectedRegion + ".api.riotgames.com/lol/summoner/v4/summoners/by-name/" + Id + "?api_key=RGAPI-64b28423-27c9-4dae-b409-0259712eee1f"
+    
     const [count, setCount] = useState(0);
     const onPress = () => setCount(prevCount => prevCount + 1);
 

@@ -1,11 +1,29 @@
-import React from 'react'
+import React, {useState} from 'react'
 import {Text, View, TouchableOpacity, StyleSheet, Image} from 'react-native'
 
 export default function MetaOverall({navigation}) {
+    const latestMetaNAUrl = 'https://ddragon.leagueoflegends.com/realms/na.json';
+    const [meta, setMeta] = useState('');
+
+    const getMeta = () => {
+        fetch(latestMetaNAUrl, {
+            "method": "GET"
+        })
+        .then(response => response.json())
+        .then(response => {
+            setMeta(response.dd)
+        })
+        .catch(err => {
+            console.log(err)
+        })
+    }
+    
     return (
         <View>
             <Text style={{fontSize:18, fontWeight:'500', color:'#55BA46', marginLeft: 15, marginTop:10}}> 
-                Current Meta: Patch 11.10 </Text>
+                {getMeta()}
+                Current Meta: Patch {meta} 
+            </Text>
 
             {/* 1st Row */}
             <View style={{flexDirection: 'row', justifyContent:'space-evenly', marginTop: 20}}>
