@@ -47,6 +47,9 @@ import runeScreen from './component/main/meta/Runes'
 import skinScreen from './component/main/meta/Skin'
 import systemScreen from './component/main/meta/System'
 
+import championDetailScreen from './component/main/wiki/ChampionDetail'
+import itemDetailScreen from './component/main/wiki/ItemDetail'
+
 const Stack = createStackNavigator();
 
 export class App extends Component {
@@ -111,6 +114,8 @@ export class App extends Component {
             <Stack.Screen name="Rune" component={runeScreen}/>
             <Stack.Screen name="Mechanism" component={mechanismScreen}/>
             <Stack.Screen name="System" component={systemScreen}/>
+            <Stack.Screen name="ChampionDetail" component={championDetailScreen}/>
+            <Stack.Screen name="ItemDetail" component={itemDetailScreen}/>
           </Stack.Navigator>
         </NavigationContainer>
 

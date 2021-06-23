@@ -13,7 +13,7 @@ export default function Meta() {
       return (
         <Tab.Navigator 
             tabBarOptions={{indicatorStyle: {backgroundColor: '#55BA46'},
-                tabStyle:{minHeight:70}
+                tabStyle:{Height:70}
                 }}
             >
             <Tab.Screen name="Meta" component={metaMainScreen} />
