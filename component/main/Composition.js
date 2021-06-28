@@ -139,7 +139,7 @@ export default function Composition({navigation, route}) {
 
             <TouchableOpacity 
                 style={styles.button}
-                onPress={() => navigation.navigate("Analysis", {blue: blueTeam, red: redTeam})}>
+                onPress={() => analysisNavigate()}>
                 <Text style={{fontWeight:'500', fontSize:18, color:'#55BA46', marginTop: 14}}>START ANALYSIS</Text>
             </TouchableOpacity>
 
