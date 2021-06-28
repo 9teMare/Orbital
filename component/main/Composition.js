@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { StyleSheet, View, Text, TouchableOpacity, Image, Alert} from 'react-native'
+import { StyleSheet, View, Text, TouchableOpacity, Image, Alert, StatusBar} from 'react-native'
 import {Header} from 'react-native-elements'
 
 
@@ -43,6 +43,7 @@ export default function Composition({navigation, route}) {
 
     return (
         <View >
+            <StatusBar/>
             <Header 
                 placement='left'
                 centerComponent={{text: 'Team Composition Analysis'}}/>

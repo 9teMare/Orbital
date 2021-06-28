@@ -84,11 +84,11 @@ export default function ItemWiki({navigation}) {
   };
 
   return (
-      <View style={{flexDirection: 1}}>
+      <View style={{flexDirection: 'row'}}>
         <View style={{justifyContent:'center', alignItems: 'center'}}>
           <FlatList
           //why height????
-            style={{height: screen.height - 110}}
+            //style={{height: screen.height - 110}}
             ListHeaderComponent={renderHeader}
             numColumns={4}
             horizontal={false}

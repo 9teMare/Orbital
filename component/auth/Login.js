@@ -12,10 +12,10 @@ export class Login extends Component {
             password: '',
         }
 
-        this.onSignUp = this.onSignUp.bind(this)
+        this.onSignIn = this.onSignIn.bind(this)
     }
 
-    onSignUp() {
+    onSignIn() {
         const { email, password } = this.state;
         firebase.auth().signInWithEmailAndPassword(email, password)
         .then((result) => {
@@ -48,7 +48,7 @@ export class Login extends Component {
                     />
 
                     <TouchableOpacity
-                        onPress={ () => this.onSignUp()}
+                        onPress={ () => this.onSignIn()}
                         style = {{width: 340, height: 50, alignItems:'center', backgroundColor: "black", alignSelf:'center',
                         marginTop: 20}}>
                             <Text style={{color: "white", marginTop: 15}}> SIGN IN </Text>

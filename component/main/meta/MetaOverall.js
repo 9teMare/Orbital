@@ -1,14 +1,12 @@
 import React, {useState} from 'react'
-import {Text, View, TouchableOpacity, StyleSheet, Image} from 'react-native'
+import {Text, View, TouchableOpacity, StyleSheet, Image } from 'react-native'
 
 export default function MetaOverall({navigation}) {
     const latestMetaNAUrl = 'https://ddragon.leagueoflegends.com/realms/na.json';
     const [meta, setMeta] = useState('');
 
     const getMeta = () => {
-        fetch(latestMetaNAUrl, {
-            "method": "GET"
-        })
+        fetch(latestMetaNAUrl)
         .then(response => response.json())
         .then(response => {
             setMeta(response.dd)
@@ -107,6 +105,11 @@ export default function MetaOverall({navigation}) {
 
         </View>
     )
+    // return (
+    //     <View>
+    //         <Text>test</Text>
+    //     </View>
+    // )
 }
 
 const styles = StyleSheet.create({

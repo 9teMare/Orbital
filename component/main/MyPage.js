@@ -1,9 +1,8 @@
-  import React, { useState } from 'react'
-import {StyleSheet, View, Text, Button, Image, TouchableOpacity, TextInput} from 'react-native'
+import React, { useState } from 'react'
+import {StyleSheet, View, Text, Button, Image, TouchableOpacity, TextInput, Alert, StatusBar } from 'react-native'
 import {Picker} from '@react-native-picker/picker'
 import {connect} from 'react-redux'
 import firebase from 'firebase'
-import axios from 'axios'
 
 function MyPage(props) {
     const { currentUser } = props;
@@ -18,10 +17,22 @@ function MyPage(props) {
     const [summonerName, setSummonerName] = useState('');
     const [summonerLvl, setSummonerLvl] = useState('');
     const [profileIcon, setProfileIcon] = useState({url: '../../pictures/others/EmptyGrayRec.png'});
-    const url = "https://" + selectedRegion + ".api.riotgames.com/lol/summoner/v4/summoners/by-name/" + Id + "?api_key=RGAPI-a013801a-3a8f-4700-8ec6-0ecf58f2e6c7"
-    
-    const [count, setCount] = useState(0);
-    const onPress = () => setCount(prevCount => prevCount + 1);
+    const [apiKey, setApiKey] = useState('')
+   
+    const getApiKey = async () => {
+        const jsonServer = "https://orbital-riot-api.herokuapp.com/apiKey"
+        await fetch(jsonServer, {
+            "method": "GET"
+        })
+        .then(response => response.json())
+        .then(response => {
+            setApiKey(response.key)
+        })
+    }
+
+    getApiKey();
+
+    const url = `https://${selectedRegion}.api.riotgames.com/lol/summoner/v4/summoners/by-name/${Id}?api_key=${apiKey}`
 
     const fetchApiCall = () => {
         fetch(url, {
@@ -33,7 +44,12 @@ function MyPage(props) {
             "Origin": "https://developer.riotgames.com"
           } 
         })
-          .then(response => response.json())
+          .then(response => {
+              if (!response.ok) { 
+                return invalidUsernameAlert()
+              }
+              return response.json()    
+          })
           .then(response => {
             setSummonerName(response.name)
             setSummonerLvl(response.summonerLevel)
@@ -44,30 +60,25 @@ function MyPage(props) {
           });
       }
 
-    //   const axiosApiCall = (Id) => {
-    //     axios({
-    //       "method": "GET",
-    //       "url": "https://na1.api.riotgames.com/lol/summoner/v4/summoners/by-name/" + Id,
-    //       "headers": {
-    //         "Accept-Language": "zh-CN,zh;q=0.9,en;q=0.8,en-GB;q=0.7,en-US;q=0.6,ja;q=0.5,zh-TW;q=0.4",
-    //         "X-Riot-Token": "RGAPI-4b9e2112-875a-4aa7-b9e4-bec5678b22bc"
-    //       }
-    //     })
-    //       .then((response) => {
-    //         setSummonerName(response.name)
-    //         setSummonerLvl(response.summonerLevel)
-    //         setProfileIcon(response.profileIconId)
-    //       })
-    //       .catch((error) => {
-    //         console.log(error)
-    //       })
-    //   }
+      const invalidUsernameAlert = () => {
+        Alert.alert(
+            "Username not found",
+            "Please try again",
+            [
+              {
+                text: "Cancel",
+                onPress: () => console.log("Cancel Pressed"),
+                style: "cancel"
+              },
+              { text: "OK", onPress: () => console.log("OK Pressed") }
+            ]
+          );
+      }
 
     return (
         <View>
-
+            <StatusBar/>
             <View style = {{flexDirection: 'row', flexWrap:'wrap'}}>
-
                 <Image
                     //source = {require('../../pictures/others/EmptyGrayRec.png')}
                     source = {{uri: 'http://ddragon.leagueoflegends.com/cdn/11.12.1/img/profileicon/' + profileIcon + '.png'}}
@@ -84,6 +95,13 @@ function MyPage(props) {
 
             </View>
 
+            <View
+                style={{
+                    borderBottomColor: '#A0A0A0',
+                    borderBottomWidth: 2,
+                }}
+            />
+
             <TouchableOpacity
                 onPress = {() => navigate("Settings")}
                 style ={{height: 50}}
@@ -91,10 +109,16 @@ function MyPage(props) {
                 <Text style ={{marginLeft: 20, marginTop: 15, fontWeight: 'bold'}}> Settings </Text>
 
             </TouchableOpacity>
-
+            <View
+                style={{
+                    borderBottomColor: '#A0A0A0',
+                    borderBottomWidth: 2,
+                }}
+            />
             <View>
                 <Picker
                     selectedValue={selectedRegion}
+                    style={{ height: 50, width: 150 }}
                     onValueChange={(itemValue, itemIndex) =>
                         setSelectedRegion(itemValue)
                     }>
@@ -126,19 +150,12 @@ function MyPage(props) {
                 <Text>Summoner Level: {summonerLvl}</Text>
             </View>
 
-{/* 
-            <View style={styles.container}>
-                <View style={styles.containerInfo}>
-                    <Text> {currentUser.name} </Text>
-                    <Text> {currentUser.email} </Text>
-                </View>
-            </View> */}
-
             <View style={{marginTop:40}}>
-                <Button
-                    title="Logout"
-                    onPress={() => onLogout()}
-                />
+                <TouchableOpacity
+                    style = {{width: 180, height: 30, alignItems:'center', backgroundColor: "black", alignSelf:'center',}}
+                    onPress={() => onLogout()}>
+                    <Text style={{color: "white", marginTop: 5}}>Log out</Text>
+                </TouchableOpacity>
             </View>
         </View>
     )

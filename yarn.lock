@@ -943,7 +943,7 @@
 
 "@babel/runtime@^7.0.0":
   version "7.14.6"
-  resolved "https://registry.nlark.com/@babel/runtime/download/@babel/runtime-7.14.6.tgz?cache=0&sync_timestamp=1623708023742&other_urls=https%3A%2F%2Fregistry.nlark.com%2F%40babel%2Fruntime%2Fdownload%2F%40babel%2Fruntime-7.14.6.tgz#535203bc0892efc7dec60bdc27b2ecf6e409062d"
+  resolved "https://registry.nlark.com/@babel/runtime/download/@babel/runtime-7.14.6.tgz#535203bc0892efc7dec60bdc27b2ecf6e409062d"
   integrity sha1-U1IDvAiS78fexgvcJ7Ls9uQJBi0=
   dependencies:
     regenerator-runtime "^0.13.4"
@@ -1029,10 +1029,33 @@
     xcode "^3.0.1"
     xml2js "^0.4.23"
 
+"@expo/config-plugins@3.0.2":
+  version "3.0.2"
+  resolved "https://registry.nlark.com/@expo/config-plugins/download/@expo/config-plugins-3.0.2.tgz#3c9fb54164b48330494cd0172d21121686bddbc4"
+  integrity sha1-PJ+1QWS0gzBJTNAXLSESFoa928Q=
+  dependencies:
+    "@expo/config-types" "^41.0.0"
+    "@expo/json-file" "8.2.30"
+    "@expo/plist" "0.0.13"
+    debug "^4.3.1"
+    find-up "~5.0.0"
+    fs-extra "9.0.0"
+    getenv "^1.0.0"
+    glob "7.1.6"
+    resolve-from "^5.0.0"
+    slash "^3.0.0"
+    xcode "^3.0.1"
+    xml2js "^0.4.23"
+
 "@expo/config-types@^40.0.0-beta.2":
   version "40.0.0-beta.2"
   resolved "https://registry.npm.taobao.org/@expo/config-types/download/@expo/config-types-40.0.0-beta.2.tgz"
   integrity sha1-T+pO9WVNAiGLArCzdyUpqc5bBHE=
+
+"@expo/config-types@^41.0.0":
+  version "41.0.0"
+  resolved "https://registry.nlark.com/@expo/config-types/download/@expo/config-types-41.0.0.tgz#ffe1444c6c26e0e3a8f7149b4afe486e357536d1"
+  integrity sha1-/+FETGwm4OOo9xSbSv5IbjV1NtE=
 
 "@expo/config@3.3.42", "@expo/config@^3.3.35":
   version "3.3.42"
@@ -1045,6 +1068,26 @@
     "@babel/preset-typescript" "~7.12.13"
     "@expo/config-plugins" "1.0.32"
     "@expo/config-types" "^40.0.0-beta.2"
+    "@expo/json-file" "8.2.30"
+    fs-extra "9.0.0"
+    getenv "^1.0.0"
+    glob "7.1.6"
+    require-from-string "^2.0.2"
+    resolve-from "^5.0.0"
+    semver "7.3.2"
+    slugify "^1.3.4"
+
+"@expo/config@5.0.2":
+  version "5.0.2"
+  resolved "https://registry.nlark.com/@expo/config/download/@expo/config-5.0.2.tgz#0674bf2a54e14b2e9078dcbd174b3caf0dd0254f"
+  integrity sha1-BnS/KlThSy6QeNy9F0s8rw3QJU8=
+  dependencies:
+    "@babel/core" "7.9.0"
+    "@babel/plugin-proposal-class-properties" "~7.12.13"
+    "@babel/preset-env" "~7.12.13"
+    "@babel/preset-typescript" "~7.12.13"
+    "@expo/config-plugins" "3.0.2"
+    "@expo/config-types" "^41.0.0"
     "@expo/json-file" "8.2.30"
     fs-extra "9.0.0"
     getenv "^1.0.0"
@@ -1094,6 +1137,16 @@
     fs-extra "9.0.0"
     json5 "^1.0.1"
     write-file-atomic "^2.3.0"
+
+"@expo/metro-config@^0.1.59":
+  version "0.1.77"
+  resolved "https://registry.nlark.com/@expo/metro-config/download/@expo/metro-config-0.1.77.tgz#efeffb1c40c9249c04385e2c68812e9c6a68a39c"
+  integrity sha1-7+/7HEDJJJwEOF4saIEunGpoo5w=
+  dependencies:
+    "@expo/config" "5.0.2"
+    chalk "^4.1.0"
+    getenv "^1.0.0"
+    metro-react-native-babel-transformer "^0.59.0"
 
 "@expo/metro-config@^0.1.63":
   version "0.1.68"
@@ -2967,7 +3020,7 @@ cross-fetch@^3.0.4:
 
 cross-spawn@^5.1.0:
   version "5.1.0"
-  resolved "https://registry.npm.taobao.org/cross-spawn/download/cross-spawn-5.1.0.tgz?cache=0&sync_timestamp=1606748073153&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fcross-spawn%2Fdownload%2Fcross-spawn-5.1.0.tgz#e8bd0efee58fcff6f8f94510a0a554bbfa235449"
+  resolved "https://registry.nlark.com/cross-spawn/download/cross-spawn-5.1.0.tgz#e8bd0efee58fcff6f8f94510a0a554bbfa235449"
   integrity sha1-6L0O/uWPz/b4+UUQoKVUu/ojVEk=
   dependencies:
     lru-cache "^4.0.1"
@@ -3038,7 +3091,7 @@ debug@2.6.9, debug@^2.2.0, debug@^2.3.3:
   dependencies:
     ms "2.0.0"
 
-debug@^4.1.0, debug@^4.1.1:
+debug@^4.1.0, debug@^4.1.1, debug@^4.3.1:
   version "4.3.1"
   resolved "https://registry.npm.taobao.org/debug/download/debug-4.3.1.tgz?cache=0&sync_timestamp=1607566580543&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fdebug%2Fdownload%2Fdebug-4.3.1.tgz"
   integrity sha1-8NIpxQXgxtjEmsVT0bE9wYP2su4=
@@ -3158,6 +3211,11 @@ domutils@^1.7.0:
   dependencies:
     dom-serializer "0"
     domelementtype "1"
+
+dotenv@^10.0.0:
+  version "10.0.0"
+  resolved "https://registry.nlark.com/dotenv/download/dotenv-10.0.0.tgz#3d4227b8fb95f81096cdd2b66653fb2c7085ba81"
+  integrity sha1-PUInuPuV+BCWzdK2ZlP7LHCFuoE=
 
 ee-first@1.1.1:
   version "1.1.1"
@@ -3369,6 +3427,23 @@ expo-status-bar@~1.0.4:
   version "1.0.4"
   resolved "https://registry.npmjs.org/expo-status-bar/-/expo-status-bar-1.0.4.tgz"
   integrity sha512-s7nc496D/Zn1NGiMJ5wu6HyIdXxbgGtmZZtbHm7rpbcmLdf28GmMSNHDx7M0t00BMhky7VAurTCUo+BJs8ugsw==
+
+expo-structured-headers@~1.0.1:
+  version "1.0.1"
+  resolved "https://registry.nlark.com/expo-structured-headers/download/expo-structured-headers-1.0.1.tgz#2f3117fc9480e01aa6705493d3213060c2dcf683"
+  integrity sha1-LzEX/JSA4BqmcFST0yEwYMLc9oM=
+
+expo-updates@~0.5.4:
+  version "0.5.5"
+  resolved "https://registry.nlark.com/expo-updates/download/expo-updates-0.5.5.tgz#97118ce3fcc8cc77ce74ec8b7c91ac4c29dc770c"
+  integrity sha1-lxGM4/zIzHfOdOyLfJGsTCncdww=
+  dependencies:
+    "@expo/config-plugins" "^1.0.18"
+    "@expo/metro-config" "^0.1.59"
+    expo-structured-headers "~1.0.1"
+    fbemitter "^2.1.1"
+    resolve-from "^5.0.0"
+    uuid "^3.4.0"
 
 expo@^41.0.1:
   version "41.0.1"
@@ -3880,7 +3955,7 @@ hyphenate-style-name@^1.0.2, hyphenate-style-name@^1.0.3:
 
 iconv-lite@^0.4.17:
   version "0.4.24"
-  resolved "https://registry.nlark.com/iconv-lite/download/iconv-lite-0.4.24.tgz?cache=0&sync_timestamp=1621826342262&other_urls=https%3A%2F%2Fregistry.nlark.com%2Ficonv-lite%2Fdownload%2Ficonv-lite-0.4.24.tgz#2022b4b25fbddc21d2f524974a474aafe733908b"
+  resolved "https://registry.nlark.com/iconv-lite/download/iconv-lite-0.4.24.tgz#2022b4b25fbddc21d2f524974a474aafe733908b"
   integrity sha1-ICK0sl+93CHS9SSXSkdKr+czkIs=
   dependencies:
     safer-buffer ">= 2.1.2 < 3"
@@ -4145,7 +4220,7 @@ isomorphic-fetch@^2.1.1:
 
 jest-get-type@^24.9.0:
   version "24.9.0"
-  resolved "https://registry.nlark.com/jest-get-type/download/jest-get-type-24.9.0.tgz?cache=0&sync_timestamp=1621937309906&other_urls=https%3A%2F%2Fregistry.nlark.com%2Fjest-get-type%2Fdownload%2Fjest-get-type-24.9.0.tgz#1684a0c8a50f2e4901b6644ae861f579eed2ef0e"
+  resolved "https://registry.nlark.com/jest-get-type/download/jest-get-type-24.9.0.tgz#1684a0c8a50f2e4901b6644ae861f579eed2ef0e"
   integrity sha1-FoSgyKUPLkkBtmRK6GH1ee7S7w4=
 
 jest-haste-map@^24.9.0:
@@ -5623,7 +5698,7 @@ react-native-web@~0.13.12:
 
 react-native@0.63.0:
   version "0.63.0"
-  resolved "https://registry.nlark.com/react-native/download/react-native-0.63.0.tgz?cache=0&sync_timestamp=1623803560298&other_urls=https%3A%2F%2Fregistry.nlark.com%2Freact-native%2Fdownload%2Freact-native-0.63.0.tgz#1444aa04c34b65ca1dce589db166bd112e982b96"
+  resolved "https://registry.nlark.com/react-native/download/react-native-0.63.0.tgz?cache=0&sync_timestamp=1624753566371&other_urls=https%3A%2F%2Fregistry.nlark.com%2Freact-native%2Fdownload%2Freact-native-0.63.0.tgz#1444aa04c34b65ca1dce589db166bd112e982b96"
   integrity sha1-FESqBMNLZcodzlidsWa9ES6YK5Y=
   dependencies:
     "@babel/runtime" "^7.0.0"
@@ -6247,7 +6322,7 @@ string_decoder@~1.1.1:
 
 strip-ansi@^4.0.0:
   version "4.0.0"
-  resolved "https://registry.nlark.com/strip-ansi/download/strip-ansi-4.0.0.tgz?cache=0&other_urls=https%3A%2F%2Fregistry.nlark.com%2Fstrip-ansi%2Fdownload%2Fstrip-ansi-4.0.0.tgz#a8479022eb1ac368a871389b635262c505ee368f"
+  resolved "https://registry.nlark.com/strip-ansi/download/strip-ansi-4.0.0.tgz#a8479022eb1ac368a871389b635262c505ee368f"
   integrity sha1-qEeQIusaw2iocTibY1JixQXuNo8=
   dependencies:
     ansi-regex "^3.0.0"
@@ -6354,7 +6429,7 @@ tinycolor2@^1.4.1:
 
 tmp@^0.0.33:
   version "0.0.33"
-  resolved "https://registry.nlark.com/tmp/download/tmp-0.0.33.tgz?cache=0&sync_timestamp=1618847042301&other_urls=https%3A%2F%2Fregistry.nlark.com%2Ftmp%2Fdownload%2Ftmp-0.0.33.tgz#6d34335889768d21b2bcda0aa277ced3b1bfadf9"
+  resolved "https://registry.nlark.com/tmp/download/tmp-0.0.33.tgz#6d34335889768d21b2bcda0aa277ced3b1bfadf9"
   integrity sha1-bTQzWIl2jSGyvNoKonfO07G/rfk=
   dependencies:
     os-tmpdir "~1.0.2"
@@ -6776,13 +6851,13 @@ y18n@^5.0.5:
 
 yallist@^2.1.2:
   version "2.1.2"
-  resolved "https://registry.npm.taobao.org/yallist/download/yallist-2.1.2.tgz#1c11f9218f076089a47dd512f93c6699a6a81d52"
+  resolved "https://registry.nlark.com/yallist/download/yallist-2.1.2.tgz#1c11f9218f076089a47dd512f93c6699a6a81d52"
   integrity sha1-HBH5IY8HYImkfdUS+TxmmaaoHVI=
 
 yargs-parser@^15.0.1:
-  version "15.0.1"
-  resolved "https://registry.nlark.com/yargs-parser/download/yargs-parser-15.0.1.tgz#54786af40b820dcb2fb8025b11b4d659d76323b3"
-  integrity sha1-VHhq9AuCDcsvuAJbEbTWWddjI7M=
+  version "15.0.3"
+  resolved "https://registry.nlark.com/yargs-parser/download/yargs-parser-15.0.3.tgz?cache=0&sync_timestamp=1624233514145&other_urls=https%3A%2F%2Fregistry.nlark.com%2Fyargs-parser%2Fdownload%2Fyargs-parser-15.0.3.tgz#316e263d5febe8b38eef61ac092b33dfcc9b1115"
+  integrity sha1-MW4mPV/r6LOO72GsCSsz38ybERU=
   dependencies:
     camelcase "^5.0.0"
     decamelize "^1.2.0"
@@ -6802,7 +6877,7 @@ yargs-parser@^20.2.2:
 
 yargs@^14.2.0:
   version "14.2.3"
-  resolved "https://registry.nlark.com/yargs/download/yargs-14.2.3.tgz?cache=0&sync_timestamp=1620086644940&other_urls=https%3A%2F%2Fregistry.nlark.com%2Fyargs%2Fdownload%2Fyargs-14.2.3.tgz#1a1c3edced1afb2a2fea33604bc6d1d8d688a414"
+  resolved "https://registry.nlark.com/yargs/download/yargs-14.2.3.tgz?cache=0&other_urls=https%3A%2F%2Fregistry.nlark.com%2Fyargs%2Fdownload%2Fyargs-14.2.3.tgz#1a1c3edced1afb2a2fea33604bc6d1d8d688a414"
   integrity sha1-Ghw+3O0a+yov6jNgS8bR2NaIpBQ=
   dependencies:
     cliui "^5.0.0"
