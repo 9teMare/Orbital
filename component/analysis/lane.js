@@ -4,9 +4,6 @@ import { View, Text, Image, StyleSheet } from 'react-native'
 export default function lane({route}) {
     const TOP = 0, JUNGLE = 1, MID = 2, ADC = 3, SUPPORT = 4
     const {blue, red} = route.params
-    
-    
-    
 
     return (
         <View style={{flexDirection:'column', minHeight:404}}>
