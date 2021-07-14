@@ -63,7 +63,7 @@ function MyPage(props) {
       const invalidUsernameAlert = () => {
         Alert.alert(
             "Username not found",
-            "Please try again",
+            "Please try again"
             [
               {
                 text: "Cancel",

@@ -159,9 +159,9 @@ function ChampSelect({navigation, route}) {
       };
     
     return ( 
-        <View style={{flexDirection: 'row'}}>
+        <View style={{flexDirection: 'row', justifyContent:"space-evenly"}}>
 
-            <View style={{justifyContent:'space-evenly', width: 60, marginLeft: 32, height: 500, marginTop: 40}} >
+            <View style={{justifyContent:'space-evenly', width: 60, height: 500, marginTop: 40}} >
 
                 <View>
                     <Text style={styles.position}> Top </Text>
@@ -229,7 +229,7 @@ function ChampSelect({navigation, route}) {
             </View>
 
         
-            <View style={{marginLeft: 48, marginTop: 40}}>
+            <View style={{marginTop: 40}}>
                 <FlatList
                 ListHeaderComponent={renderHeader} //search function
                 numColumns={3}
