@@ -1,0 +1,2680 @@
+{
+    "apiKey": 
+        {
+            "key" : "RGAPI-e9ac0388-10a0-4b6c-9d50-daee8ea9bcd3",
+            "expiry": "Tue, Jul 13th, 2021 @ 11:15am (PT)"
+        }
+    ,
+    "champOtherInfo": 
+    {
+        "Aatrox":{
+            "CC":{
+                "CCtypes":["knockUp", "pull"],
+                "CCskills":["AatroxQ", "AatroxW"],
+                "CCskillKeys":["Q", "W"],
+                "CCtimeFrame":[0.25, 0.25],
+                "CCrange":[625, 765],
+                "targetableNumber":[3, 1]
+            },
+            "trueDamage":{
+                "highestTotal":0
+            },
+            "waveClearRating":2,
+            "dragonRushRating": 2
+        },
+        "Ahri":{
+            "CC":{
+                "CCtypes":["charm"],
+                "CCskills":["AhriSeduce"],
+                "CCskillKeys":["E"],
+                "CCtimeFrame":[2],
+                "CCrange":[1000],
+                "targetableNumber":[1]
+            },
+            "trueDamage":{
+                "highestTotal":140,
+                "castablityToNonChampion": true,
+                "trueDamageSkills":["AhriOrbofDeception"],
+                "trueDamageSkillKey": ["Q"]
+            },
+            "waveClearRating":2,
+            "dragonRushRating": 2
+        }, 
+        "Akali":{
+            "CC":{
+                "CCtypes":[],
+                "CCskills":[],
+                "CCskillKeys":[],
+                "CCtimeFrame":[],
+                "CCrange":[],
+                "targetableNumber":[]
+            },
+            "trueDamage":{
+                "highestTotal":0,
+                "trueDamageSkills":[],
+                "trueDamageSkillKey": []
+            },
+            "waveClearRating":3,
+            "dragonRushRating": 1
+        }, 
+        "Akshan":{ 
+            "CC":{
+                "CCtypes":[],
+                "CCskills":[],
+                "CCskillKeys":[],
+                "CCtimeFrame":[],
+                "CCrange":[],
+                "targetableNumber":[]
+            },
+            "trueDamage":{
+                "highestTotal":0,
+                "trueDamageSkills":[],
+                "trueDamageSkillKey": []
+            },
+            "waveClearRating":2,
+            "dragonRushRating": 2
+        }, 
+        "Alistar":{
+            "CC":{
+                "CCtypes":["knockUp", "knockBack", "stun"],
+                "CCskills":["Pulverize", "Headbutt", "AlistarE"],
+                "CCskillKeys":["Q", "W", "E"],
+                "CCtimeFrame":[1, 0.5, 1],
+                "CCrange":[750, 650, 125],
+                "targetableNumber":[5, 1, 1]
+            },
+            "trueDamage":{
+                "highestTotal":0,
+                "trueDamageSkills":[],
+                "trueDamageSkillKey": []
+            },
+            "waveClearRating":0,
+            "dragonRushRating": 0
+        }, 
+        "Amumu":{
+            "CC":{
+                "CCtypes":["stun", "stun"],
+                "CCskills":["BandageToss", "CurseoftheSadMummy"],
+                "CCskillKeys":["Q", "R"],
+                "CCtimeFrame":[1, 2],
+                "CCrange":[1100, 1100],
+                "targetableNumber":[1, 5]
+            },
+            "trueDamage":{
+                "highestTotal": 35,
+                "castablityToNonChampion": true,
+                "trueDamageSkills":["Amumu_Passive"],
+                "trueDamageSkillKey":["P"]
+            },
+            "waveClearRating":2,
+            "dragonRushRating": 3
+        },
+        "Anivia":{
+            "CC":{
+                "CCtypes":["stun", "landScapeControl_Anivia", "slow"],
+                "CCskills":["FlashFrost", "Crystallize", "GlacialStorm"],
+                "CCskillKeys":["Q", "W", "R"],
+                "CCtimeFrame":[1.5, 5, 3],
+                "CCrange":[1100, 1000, 800],
+                "targetableNumber":[2, 3, 5]
+            },
+            "trueDamage":{
+                "highestTotal":0,
+                "trueDamageSkills":[],
+                "trueDamageSkillKey":[]
+            },
+            "waveClearRating":3,
+            "dragonRushRating": 3
+        },
+        "Annie":{
+            "CC":{
+                "CCtypes":["stun"],
+                "CCskills":["Annie_Passive"],
+                "CCskillKeys":["P"],
+                "CCtimeFrame":[1.75],
+                "CCrange":[600],
+                "targetableNumber":[5]
+            },
+            "trueDamage":{
+                "highestTotal":0,
+                "trueDamageSkills":[],
+                "trueDamageSkillKey":[]
+            },
+            "waveClearRating":2,
+            "dragonRushRating": 1
+        },
+        "Aphelios":{
+            "CC":{
+                "CCtypes":["root"],
+                "CCskills":["ApheliosQ_ClientTooltipWrapper"],
+                "CCskillKeys":["Q"],
+                "CCtimeFrame":[1],
+                "CCrange":[550],
+                "targetableNumber":[5]
+            },
+            "trueDamage":{
+                "highestTotal":0,
+                "trueDamageSkills":[],
+                "trueDamageSkillKey":[]
+            },
+            "waveClearRating":2,
+            "dragonRushRating": 3
+        },
+        "Ashe":{
+            "CC":{
+                "CCtypes":["slow", "stun"],
+                "CCskills":["Volley", "EnchantedCrystalArrow"],
+                "CCskillKeys":["W", "R"],
+                "CCtimeFrame":[1, 3.5],
+                "CCrange":[1200, "global"],
+                "targetableNumber":[5, 1]
+            },
+            "trueDamage":{
+                "highestTotal":0,
+                "trueDamageSkills":[],
+                "trueDamageSkillKey":[]
+            },
+            "waveClearRating":2,
+            "dragonRushRating": 3
+        },
+        "AurelionSol":{
+            "CC":{
+                "CCtypes":["stun","knockBack"],
+                "CCskills":["AurelionSolQ", "AurelionSolR"],
+                "CCskillKeys":["Q", "R"],
+                "CCtimeFrame":[3, 0.25],
+                "CCrange":[1300, 1500],
+                "targetableNumber":[2, 3]
+            },
+            "trueDamage":{
+                "highestTotal":0,
+                "trueDamageSkills":[],
+                "trueDamageSkillKey":[]
+            },
+            "waveClearRating":3,
+            "dragonRushRating": 2
+        },
+        "Azir":{
+            "CC":{
+                "CCtypes":["slow", "knockBack"],
+                "CCskills":["AzirQWrapper", "AzirR"],
+                "CCskillKeys":["Q", "R"],
+                "CCtimeFrame":[1, 1],
+                "CCrange":[740, 400],
+                "targetableNumber":[2, 5]
+            },
+            "trueDamage":{
+                "highestTotal":0,
+                "trueDamageSkills":[],
+                "trueDamageSkillKey":[]
+            },
+            "waveClearRating":2,
+            "dragonRushRating": 3
+        },
+        "Bard":{
+            "CC":{
+                "CCtypes":["stun","stasis"],
+                "CCskills":["BardQ", "BardR"],
+                "CCskillKeys":["Q", "R"],
+                "CCtimeFrame":[1.8, 2.5],
+                "CCrange":[850, 3750],
+                "targetableNumber":[2,5]
+            },
+            "trueDamage":{
+                "highestTotal":0,
+                "trueDamageSkills":[],
+                "trueDamageSkillKey":[]
+            },
+            "waveClearRating":1,
+            "dragonRushRating": 1
+        },
+        "Blitzcrank":{
+            "CC":{
+                "CCtypes":["pull", "knockUp","silence"],
+                "CCskills":["RocketGrab", "PowerFist", "StaticField"],
+                "CCskillKeys":["Q", "E", "R"],
+                "CCtimeFrame":[0.25, 1, 0.5],
+                "CCrange":[1020, 125, 1200],
+                "targetableNumber":[1,1,5]
+            },
+            "trueDamage":{
+                "highestTotal":0,
+                "trueDamageSkills":[],
+                "trueDamageSkillKey":[]
+            },
+            "waveClearRating":0,
+            "dragonRushRating": 0
+        },
+        "Brand":{
+            "CC":{
+                "CCtypes":["stun", "slow"],
+                "CCskills":["BrandQ", "BrandR"],
+                "CCskillKeys":["Q", "R"],
+                "CCtimeFrame":[1.5, 0.5],
+                "CCrange":[1040, 1350],
+                "targetableNumber":[1, 5]
+            },
+            "trueDamage":{
+                "highestTotal":0,
+                "trueDamageSkills":[],
+                "trueDamageSkillKey":[]
+            },
+            "waveClearRating":3,
+            "dragonRushRating": 2
+        },
+        "Braum":{
+            "CC":{
+                "CCtypes":["stun", "slow","knockUp"],
+                "CCskills":["Braum_Passive","BraumQ", "BraumRWrapper"],
+                "CCskillKeys":[ "P", "Q", "R"],
+                "CCtimeFrame":[1.75, 2, 2],
+                "CCrange":[125, 990, 1200],
+                "targetableNumber":[1, 1, 5]
+            },
+            "trueDamage":{
+                "highestTotal":0,
+                "trueDamageSkills":[],
+                "trueDamageSkillKey":[]
+            },
+            "waveClearRating":0,
+            "dragonRushRating": 0
+        },
+        "Caitlyn":{
+            "CC":{
+                "CCtypes":["root", "slow"],
+                "CCskills":["CaitlynYordleTrap", "CaitlynEntrapment"],
+                "CCskillKeys":["W", "E"],
+                "CCtimeFrame":[1.5, 1],
+                "CCrange":[800, 740],
+                "targetableNumber":[1, 1]
+            },
+            "trueDamage":{
+                "highestTotal":0,
+                "trueDamageSkills":[],
+                "trueDamageSkillKey":[]
+            },
+            "waveClearRating":2,
+            "dragonRushRating": 3
+        },
+        "Camille":{
+            "CC":{
+                "CCtypes":["slow","stun", "landScapeControl_Camille"],
+                "CCskills":["CamilleW", "CamilleE", "CamilleR"],
+                "CCskillKeys":["W", "E", "R"],
+                "CCtimeFrame":[2, 0.75, 4],
+                "CCrange":[650, 800, 900],
+                "targetableNumber":[2, 1, 1]
+            },
+            "trueDamage":{
+                "highestTotal":255,
+                "castablityToNonChampion": true,
+                "trueDamageSkills":["CamilleQ"],
+                "CCskillKeys":["Q"]
+            },
+            "waveClearRating":2,
+            "dragonRushRating": 3
+        },
+        "Cassiopeia":{
+            "CC":{
+                "CCtypes":["ground", "stun"],
+                "CCskills":["CassiopeiaW", "CassiopeiaR"],
+                "CCskillKeys":["W", "R"], 
+                "CCtimeFrame":[5, 2],
+                "CCrange":[860, 825],
+                "targetableNumber":[5, 5]
+            },
+            "trueDamage":{
+                "highestTotal":0,
+                "trueDamageSkills":[],
+                "trueDamageSkillKey":[]
+            },
+            "waveClearRating":2,
+            "dragonRushRating": 3
+        },
+        "Chogath":{
+            "CC":{
+                "CCtypes":["knockUp", "silence", "slow"],
+                "CCskills":["Rupture", "FeralScream", "VorpalSpikes"],
+                "CCskillKeys":["Q", "W", "E"],
+                "CCtimeFrame":[1, 2, 1.5],
+                "CCrange":[1150, 650, 800],
+                "targetableNumber":[3, 4, 5]
+            },
+            "trueDamage":{
+                "highestTotal":1000,
+                "castablityToNonChampion": true,
+                "trueDamageSkills":["Feast"],
+                "trueDamageSkillKey":["R"]
+            },
+            "waveClearRating":3,
+            "dragonRushRating": 3
+        },
+        "Corki":{
+            "CC":{
+                "CCtypes":["knockAside"],
+                "CCskills":["CarpetBomb"],
+                "CCskillKeys":["W"],
+                "CCtimeFrame":[0.25],
+                "CCrange":[1800],
+                "targetableNumber":[5]
+            },
+            "trueDamage":{
+                "highestTotal":0,
+                "trueDamageSkills":[],
+                "trueDamageSkillKey":[]
+            },
+            "waveClearRating":2,
+            "dragonRushRating": 3
+        },
+        "Darius":{
+            "CC":{
+                "CCtypes":["slow", "pull"],
+                "CCskills":["DariusNoxianTacticsONH", "DariusAxeGrabCone"],
+                "CCskillKeys":["W", "E"],
+                "CCtimeFrame":[1, 0.25],
+                "CCrange":[175, 535],
+                "targetableNumber":[1, 5]
+            },
+            "trueDamage":{
+                "highestTotal":300,
+                "castablityToNonChampion": false,
+                "trueDamageSkills":["DariusExecute"],
+                "trueDamageSkillKey":["R"]
+            },
+            "waveClearRating":3,
+            "dragonRushRating": 2
+        },
+        "Diana":{
+            "CC":{
+                "CCtypes":["pull"],
+                "CCskills":["DianaR"],
+                "CCskillKeys":["R"],
+                "CCtimeFrame":[0.25],
+                "CCrange":[950],
+                "targetableNumber":[5]
+            },
+            "trueDamage":{
+                "highestTotal":0,
+                "trueDamageSkills":[],
+                "trueDamageSkillKey":[]
+            },
+            "waveClearRating":3,
+            "dragonRushRating": 2
+        },
+        "DrMundo":{
+            "CC":{
+                "CCtypes":["slow"],
+                "CCskills":["DrMundoQ"],
+                "CCskillKeys":["Q"],
+                "CCtimeFrame":[2],
+                "CCrange":[990],
+                "targetableNumber":[1]
+            },
+            "trueDamage":{
+                "highestTotal":0,
+                "trueDamageSkills":[],
+                "trueDamageSkillKey":[]
+            },
+            "waveClearRating":2,
+            "dragonRushRating": 1
+        },
+        "Draven":{
+            "CC":{
+                "CCtypes":["knockAside"],
+                "CCskills":["DravenDoubleShot"],
+                "CCskillKeys":["E"],
+                "CCtimeFrame":[0.25],
+                "CCrange":[1100],
+                "targetableNumber":[3]
+            },
+            "trueDamage":{
+                "highestTotal":0,
+                "trueDamageSkills":[],
+                "trueDamageSkillKey":[]
+            },
+            "waveClearRating":2,
+            "dragonRushRating": 3
+        },
+        "Ekko":{
+            "CC":{
+                "CCtypes":["slow", "stun"],
+                "CCskills":["EkkoQ", "EkkoW"],
+                "CCskillKeys":["Q", "W"],
+                "CCtimeFrame":[0.5, 2.25],
+                "CCrange":[1100, 1975],
+                "targetableNumber":[4, 3]
+            },
+            "trueDamage":{
+                "highestTotal":0,
+                "trueDamageSkills":[],
+                "trueDamageSkillKey":[]
+            },
+            "waveClearRating":3,
+            "dragonRushRating": 2
+        },
+        "Elise":{
+            "CC":{
+                "CCtypes":["stun"],
+                "CCskills":["EliseHumanE"],
+                "CCskillKeys":["E"],
+                "CCtimeFrame":[2],
+                "CCrange":[1100],
+                "targetableNumber":[1]
+            },
+            "trueDamage":{
+                "highestTotal":0,
+                "trueDamageSkills":[],
+                "trueDamageSkillKey":[]
+            },
+            "waveClearRating":1,
+            "dragonRushRating": 2
+        },
+        "Evelynn":{
+            "CC":{
+                "CCtypes":["charm"],
+                "CCskills":["EvelynnW"],
+                "CCskillKeys":["W"], 
+                "CCtimeFrame":[2],
+                "CCrange":[1600],
+                "targetableNumber":[1]
+            },
+            "trueDamage":{
+                "highestTotal":0,
+                "trueDamageSkills":[],
+                "trueDamageSkillKey":[]
+            },
+            "waveClearRating":1,
+            "dragonRushRating": 2
+        },
+        "Ezreal":{
+            "CC":{
+                "CCtypes":[],
+                "CCskills":[],
+                "CCskillKeys":[], 
+                "CCtimeFrame":[],
+                "CCrange":[],
+                "targetableNumber":[]
+            },
+            "trueDamage":{
+                "highestTotal":0,
+                "trueDamageSkills":[],
+                "trueDamageSkillKey":[]
+            },
+            "waveClearRating":2,
+            "dragonRushRating": 3
+        },
+        "Fiddlesticks":{
+            "CC":{
+                "CCtypes":["flee", "flee", "silence"],
+                "CCskills":[ "FiddleSticks_Passive","FiddleSticksQ", "FiddleSticksE"],
+                "CCskillKeys":["P", "Q", "E"],
+                "CCtimeFrame":[2, 2, 1.25],
+                "CCrange":["global", 575, 850],
+                "targetableNumber":[5, 1, 5]
+            },
+            "trueDamage":{
+                "highestTotal":0,
+                "trueDamageSkills":[],
+                "trueDamageSkillKey":[]
+            },
+            "waveClearRating":3,
+            "dragonRushRating": 2
+        },
+        "Fiora":{
+            "CC":{
+                "CCtypes":["stun", "slow"],
+                "CCskills":["FioraW", "FioraE"],
+                "CCskillKeys":["W", "E"], 
+                "CCtimeFrame":[2, 1],
+                "CCrange":[900, 150],
+                "targetableNumber":[1, 1]
+            },
+            "trueDamage":{
+                "highestTotal":62.5,
+                "castablityToNonChampion": false,
+                "trueDamageSkills":["Fiora_P"],
+                "trueDamageSkillKey":["P"]
+            },
+            "waveClearRating":2,
+            "dragonRushRating": 2
+        },
+        "Fizz":{
+            "CC":{
+                "CCtypes":["slow", "knockBack"],
+                "CCskills":["FizzE", "FizzR"],
+                "CCskillKeys":["E", "R"], 
+                "CCtimeFrame":[2, 2],
+                "CCrange":[730, 1300],
+                "targetableNumber":[3, 3]
+            },
+            "trueDamage":{
+                "highestTotal":0,
+                "trueDamageSkills":[],
+                "trueDamageSkillKey":[]
+            },
+            "waveClearRating":3,
+            "dragonRushRating": 1
+        },
+        "Galio":{
+            "CC":{
+                "CCtypes":["taunt", "knockUp", "knockUp"],
+                "CCskills":["GalioW", "GalioE", "GalioR"],
+                "CCskillKeys":["W", "E", "R"], 
+                "CCtimeFrame":[2, 0.75, 0.75],
+                "CCrange":[700, 650, 6150],
+                "targetableNumber":[5, 1, 5]
+            },
+            "trueDamage":{
+                "highestTotal":0,
+                "trueDamageSkills":[],
+                "trueDamageSkillKey":[]
+            },
+            "waveClearRating":3,
+            "dragonRushRating": 1
+        },
+        "Gangplank":{
+            "CC":{
+                "CCtypes":["slow", "slow"],
+                "CCskills":["GangplankE", "GangplankR"],
+                "CCskillKeys":["E", "R"],
+                "CCtimeFrame":[2, 3],
+                "CCrange":[1000, "global"],
+                "targetableNumber":[3, 5]
+            },
+            "trueDamage":{
+                "highestTotal":82.5,
+                "castablityToNonChampion": true,
+                "trueDamageSkills":["Gangplank_Passive", "GangplankR"],
+                "trueDamageSkillKey":["P", "R"]
+            },
+            "waveClearRating":3,
+            "dragonRushRating": 2
+        },
+        "Garen":{
+            "CC":{
+                "CCtypes":["silence"],
+                "CCskills":["GarenQ"],
+                "CCskillKeys":["Q"], 
+                "CCtimeFrame":[1.5],
+                "CCrange":[175],
+                "targetableNumber":[1]
+            },
+            "trueDamage":{
+                "highestTotal":400,
+                "castablityToNonChampion": false,
+                "trueDamageSkills":["GarenR"],
+                "trueDamageSkillKey":["R"]
+            },
+            "waveClearRating":2,
+            "dragonRushRating": 2
+        },
+        "Gnar":{
+            "CC":{
+                "CCtypes":["stun", "knockBack"],
+                "CCskills":["GnarW", "GnarR"],
+                "CCskillKeys":["W", "R"], 
+                "CCtimeFrame":[1.25, 1.75],
+                "CCrange":[550, 475],
+                "targetableNumber":[2, 5]
+            },
+            "trueDamage":{
+                "highestTotal":0,
+                "trueDamageSkills":[],
+                "trueDamageSkillKey":[]
+            },
+            "waveClearRating":1,
+            "dragonRushRating": 2
+        },
+        "Gragas":{
+            "CC":{
+                "CCtypes":["slow", "knockUp", "knockBack"],
+                "CCskills":["GragasQ", "GragasE", "GalioR"],
+                "CCskillKeys":["Q", "E", "R"], 
+                "CCtimeFrame":[2, 1, 0.5],
+                "CCrange":[1100, 780, 1400],
+                "targetableNumber":[3, 3, 5]
+            },
+            "trueDamage":{
+                "highestTotal":0,
+                "trueDamageSkills":[],
+                "trueDamageSkillKey":[]
+            },
+            "waveClearRating":3,
+            "dragonRushRating": 2
+        },
+        "Graves":{
+            "CC":{
+                "CCtypes":["slow"],
+                "CCskills":["GravesSmokeGrenade"],
+                "CCskillKeys":["W"], 
+                "CCtimeFrame":[0.5],
+                "CCrange":[1200],
+                "targetableNumber":[3]
+            },
+            "trueDamage":{
+                "highestTotal":0,
+                "trueDamageSkills":[],
+                "trueDamageSkillKey":[]
+            },
+            "waveClearRating":3,
+            "dragonRushRating": 3
+        },
+        "Gwen":{
+            "CC":{
+                "CCtypes":["slow"],
+                "CCskills":["GwenR"],
+                "CCskillKeys":["R"], 
+                "CCtimeFrame":[1.5],
+                "CCrange":[1350],
+                "targetableNumber":[5]
+            },
+            "trueDamage":{
+                "highestTotal": 210,
+                "castablityToNonChampion": true,
+                "trueDamageSkills":["GwenQ"],
+                "trueDamageSkillKey":["Q"]
+            },
+            "waveClearRating":2,
+            "dragonRushRating": 3
+        },
+        "Hecarim":{
+            "CC":{
+                "CCtypes":["knockBack", "flee"],
+                "CCskills":["HecarimRamp", "HecarimUlt"],
+                "CCskillKeys":["E", "R"], 
+                "CCtimeFrame":[0.25, 2],
+                "CCrange":[600, 1000],
+                "targetableNumber":[1, 5]
+            },
+            "trueDamage":{
+                "highestTotal":0,
+                "trueDamageSkills":[],
+                "trueDamageSkillKey":[]
+            },
+            "waveClearRating":2,
+            "dragonRushRating": 2
+        },
+        "Heimerdinger":{
+            "CC":{
+                "CCtypes":["stun", "stun"],
+                "CCskills":["HeimerdingerE", "HeimerdingerR"],
+                "CCskillKeys":["E", "R"],
+                "CCtimeFrame":[1.5, 3],
+                "CCrange":[1220, 1220],
+                "targetableNumber":[3, 5]
+            },
+            "trueDamage":{
+                "highestTotal":0,
+                "trueDamageSkills":[],
+                "trueDamageSkillKey":[]
+            },
+            "waveClearRating":3,
+            "dragonRushRating": 3
+        },
+        "Illaoi":{
+            "CC":{
+                "CCtypes":["slow"],
+                "CCskills":["IllaoiE"],
+                "CCskillKeys":["E"],
+                "CCtimeFrame":[1.5],
+                "CCrange":[1500],
+                "targetableNumber":[1]
+            },
+            "trueDamage":{
+                "highestTotal":0,
+                "trueDamageSkills":[],
+                "trueDamageSkillKey":[]
+            },
+            "waveClearRating":2,
+            "dragonRushRating": 1
+        },
+        "Irelia":{
+            "CC":{
+                "CCtypes":["stun", "slow"],
+                "CCskills":["IreliaE", "IreliaR"],
+                "CCskillKeys":["E", "R"], 
+                "CCtimeFrame":[0.75, 1.5],
+                "CCrange":[1110, 1000],
+                "targetableNumber":[3, 5]
+            },
+            "trueDamage":{
+                "highestTotal":0,
+                "trueDamageSkills":[],
+                "trueDamageSkillKey":[]
+            },
+            "waveClearRating":3,
+            "dragonRushRating": 2
+        },
+        "Ivern":{
+            "CC":{
+                "CCtypes":["root", "slow", "knockUp"],
+                "CCskills":["IvernQ", "IvernE", "IvernR"],
+                "CCskillKeys":["Q", "E", "R"], 
+                "CCtimeFrame":[2, 2, 1],
+                "CCrange":[1100, 1250, 1150],
+                "targetableNumber":[1, 3, 2]
+            },
+            "trueDamage":{
+                "highestTotal":0,
+                "trueDamageSkills":[],
+                "trueDamageSkillKey":[]
+            },
+            "waveClearRating":0,
+            "dragonRushRating": 1
+        },
+        "Janna":{
+            "CC":{
+                "CCtypes":["knockUp", "slow", "knockBack"],
+                "CCskills":["HowlingGale", "SowTheWind", "Janna_Tailwind"],
+                "CCskillKeys":["Q", "W", "R"], 
+                "CCtimeFrame":[1.25, 2, 0.5],
+                "CCrange":[1750, 550, 1400],
+                "targetableNumber":[4, 1, 5]
+            },
+            "trueDamage":{
+                "highestTotal":0,
+                "trueDamageSkills":[],
+                "trueDamageSkillKey":[]
+            },
+            "waveClearRating":0,
+            "dragonRushRating": 0
+        },
+        "JarvanIV":{
+            "CC":{
+                "CCtypes":["knockUp", "slow", "landScapeControl_JarvanIV"],
+                "CCskills":["JarvanIVDragonStrike", "JarvanIVGoldenAegis","JarvanIVCataclysm"],
+                "CCskillKeys":["Q", "W", "R"], 
+                "CCtimeFrame":[0.75, 2, 3.5],
+                "CCrange":[850, 1200, 1000],
+                "targetableNumber":[3, 3, 5]
+            },
+            "trueDamage":{
+                "highestTotal":0,
+                "trueDamageSkills":[],
+                "trueDamageSkillKey":[]
+            },
+            "waveClearRating":1,
+            "dragonRushRating": 2
+        },
+        "Jax":{
+            "CC":{
+                "CCtypes":["stun"],
+                "CCskills":["JaxCounterStrike"],
+                "CCskillKeys":["E"], 
+                "CCtimeFrame":[1],
+                "CCrange":[600],
+                "targetableNumber":[3]
+            },
+            "trueDamage":{
+                "highestTotal":0,
+                "trueDamageSkills":[],
+                "trueDamageSkillKey":[]
+            },
+            "waveClearRating":2,
+            "dragonRushRating": 3
+        },
+        "Jayce":{
+            "CC":{
+                "CCtypes":["slow", "knockBack"],
+                "CCskills":["JayceToTheSkies", "JayceThunderingBlow"],
+                "CCskillKeys":["Q", "E"],
+                "CCtimeFrame":[2, 0.25],
+                "CCrange":[900, 240],
+                "targetableNumber":[3, 1]
+            },
+            "trueDamage":{
+                "highestTotal":0,
+                "trueDamageSkills":[],
+                "trueDamageSkillKey":[]
+            },
+            "waveClearRating":3,
+            "dragonRushRating": 2
+        },
+        "Jhin":{
+            "CC":{
+                "CCtypes":["root", "slow", "slow"],
+                "CCskills":["JhinW", "JhinE", "JhinR"],
+                "CCskillKeys":["W", "E", "R"], 
+                "CCtimeFrame":[2, 2, 0.5],
+                "CCrange":[2520, 1010, 3500],
+                "targetableNumber":[1, 2, 4]
+            },
+            "trueDamage":{
+                "highestTotal":0,
+                "trueDamageSkills":[],
+                "trueDamageSkillKey":[]
+            },
+            "waveClearRating":3,
+            "dragonRushRating": 2
+        },
+        "Jinx":{
+            "CC":{
+                "CCtypes":["slow", "root"],
+                "CCskills":["JinxW", "JinxE"],
+                "CCskillKeys":["W", "E"], 
+                "CCtimeFrame":[2, 1.5],
+                "CCrange":[1440, 1015],
+                "targetableNumber":[1, 3]
+            },
+            "trueDamage":{
+                "highestTotal":0,
+                "trueDamageSkills":[],
+                "trueDamageSkillKey":[]
+            },
+            "waveClearRating":3,
+            "dragonRushRating": 3
+        },
+        "Kaisa":{
+            "CC":{
+                "CCtypes":[],
+                "CCskills":[],
+                "CCskillKeys":[],
+                "CCtimeFrame":[],
+                "CCrange":[],
+                "targetableNumber":[]
+            },
+            "trueDamage":{
+                "highestTotal":0,
+                "trueDamageSkills":[],
+                "trueDamageSkillKey":[]
+            },
+            "waveClearRating":3,
+            "dragonRushRating": 3
+        },
+        "Kalista":{
+            "CC":{
+                "CCtypes":["slow", "knockUp"],
+                "CCskills":["KalistaExpungeWrapper", "KalistaRx"],
+                "CCskillKeys":["E", "R"],
+                "CCtimeFrame":[2, 2],
+                "CCrange":[1100, 2300],
+                "targetableNumber":[3, 5]
+            },
+            "trueDamage":{
+                "highestTotal":0,
+                "trueDamageSkills":[],
+                "trueDamageSkillKey":[]
+            },
+            "waveClearRating":3,
+            "dragonRushRating": 3
+        },
+        "Karma":{
+            "CC":{
+                "CCtypes":["slow", "root"],
+                "CCskills":["KarmaQ", "KarmaSpiritBind"],
+                "CCskillKeys":["Q", "W"],
+                "CCtimeFrame":[1.5, 3.25],
+                "CCrange":[1170, 675],
+                "targetableNumber":[4, 1]
+            },
+            "trueDamage":{
+                "highestTotal":0,
+                "trueDamageSkills":[],
+                "trueDamageSkillKey":[]
+            },
+            "waveClearRating":2,
+            "dragonRushRating": 1
+        },
+        "Karthus":{
+            "CC":{
+                "CCtypes":["slow"],
+                "CCskills":["KarthusWallOfPain"],
+                "CCskillKeys":["W"],
+                "CCtimeFrame":[4],
+                "CCrange":[1000],
+                "targetableNumber":[5]
+            },
+            "trueDamage":{
+                "highestTotal":0,
+                "trueDamageSkills":[],
+                "trueDamageSkillKey":[]
+            },
+            "waveClearRating":3,
+            "dragonRushRating": 3
+        },
+        "Kassadin":{
+            "CC":{
+                "CCtypes":["slow"],
+                "CCskills":["ForcePulse"],
+                "CCskillKeys":["E"],
+                "CCtimeFrame":[1],
+                "CCrange":[600],
+                "targetableNumber":[4]
+            },
+            "trueDamage":{
+                "highestTotal":0,
+                "trueDamageSkills":[],
+                "trueDamageSkillKey":[]
+            },
+            "waveClearRating":2,
+            "dragonRushRating": 1
+        },
+        "Katarina":{
+            "CC":{
+                "CCtypes":[],
+                "CCskills":[],
+                "CCskillKeys":[],
+                "CCtimeFrame":[],
+                "CCrange":[],
+                "targetableNumber":[]
+            },
+            "trueDamage":{
+                "highestTotal":0,
+                "trueDamageSkills":[],
+                "trueDamageSkillKey":[]
+            },
+            "waveClearRating":2,
+            "dragonRushRating": 1
+        },
+        "Kayle":{
+            "CC":{
+                "CCtypes":["slow"],
+                "CCskills":["KayleQ"],
+                "CCskillKeys":["Q"],
+                "CCtimeFrame":[2],
+                "CCrange":[900],
+                "targetableNumber":[2]
+            },
+            "trueDamage":{
+                "highestTotal":0,
+                "trueDamageSkills":[],
+                "trueDamageSkillKey":[]
+            },
+            "waveClearRating":2,
+            "dragonRushRating": 3
+        },
+        "Kayn":{
+            "CC":{
+                "CCtypes":["knockUp"],
+                "CCskills":["KaynW"],
+                "CCskillKeys":["W"],
+                "CCtimeFrame":[1],
+                "CCrange":[900],
+                "targetableNumber":[3]
+            },
+            "trueDamage":{
+                "highestTotal":0,
+                "trueDamageSkills":[],
+                "trueDamageSkillKey":[]
+            },
+            "waveClearRating":3,
+            "dragonRushRating": 2
+        },
+        "Kennen":{
+            "CC":{
+                "CCtypes":["stun"],
+                "CCskills":["Kennen_Passive"],
+                "CCskillKeys":["P"],
+                "CCtimeFrame":[1.25],
+                "CCrange":[1100],
+                "targetableNumber":[5]
+            },
+            "trueDamage":{
+                "highestTotal":0,
+                "trueDamageSkills":[],
+                "trueDamageSkillKey":[]
+            },
+            "waveClearRating":2,
+            "dragonRushRating": 1
+        },
+        "Khazix":{
+            "CC":{
+                "CCtypes":["slow", "slow"],
+                "CCskills":["Khazix_P", "KhazixW"],
+                "CCskillKeys":["P", "W"],
+                "CCtimeFrame":[2, 2],
+                "CCrange":[125, 1300],
+                "targetableNumber":[1, 3]
+            },
+            "trueDamage":{
+                "highestTotal":0,
+                "trueDamageSkills":[],
+                "trueDamageSkillKey":[]
+            },
+            "waveClearRating":1,
+            "dragonRushRating": 2
+        },
+        "Kindred":{
+            "CC":{
+                "CCtypes":["slow"],
+                "CCskills":["KindredEWrapper"],
+                "CCskillKeys":["E"],
+                "CCtimeFrame":[1],
+                "CCrange":[750],
+                "targetableNumber":[1]
+            },
+            "trueDamage":{
+                "highestTotal":0,
+                "trueDamageSkills":[],
+                "trueDamageSkillKey":[]
+            },
+            "waveClearRating":2,
+            "dragonRushRating": 3
+        },
+        "Kled":{
+            "CC":{
+                "CCtypes":["pull", "knockBack"],
+                "CCskills":["KledQ", "KledR"],
+                "CCskillKeys":["Q", "R"],
+                "CCtimeFrame":[0.25, 0.25],
+                "CCrange":[800, 4500],
+                "targetableNumber":[1, 1]
+            },
+            "trueDamage":{
+                "highestTotal":0,
+                "trueDamageSkills":[],
+                "trueDamageSkillKey":[]
+            },
+            "waveClearRating":1,
+            "dragonRushRating": 2
+        },
+        "KogMaw":{
+            "CC":{
+                "CCtypes":["slow"],
+                "CCskills":["KogMawVoidOoze"],
+                "CCskillKeys":["E"],
+                "CCtimeFrame":[0.25],
+                "CCrange":[1360],
+                "targetableNumber":[3]
+            },
+            "trueDamage":{
+                "highestTotal":550,
+                "castablityToNonChampion": true,
+                "trueDamageSkills":["KogMaw_IcathianSurprise"],
+                "trueDamageSkillKey":["P"]
+            },
+            "waveClearRating":2,
+            "dragonRushRating": 3
+        },
+        "Leblanc":{
+            "CC":{
+                "CCtypes":["root"],
+                "CCskills":["LeblancE"],
+                "CCskillKeys":["E"],
+                "CCtimeFrame":[1.5],
+                "CCrange":[950],
+                "targetableNumber":[1]
+            },
+            "trueDamage":{
+                "highestTotal":0,
+                "trueDamageSkills":[],
+                "trueDamageSkillKey":[]
+            },
+            "waveClearRating":2,
+            "dragonRushRating": 1
+        },
+        "LeeSin":{
+            "CC":{
+                "CCtypes":["slow", "knockBack"],
+                "CCskills":["BlindMonkEOne", "BlindMonkRKick"],
+                "CCskillKeys":["E", "R"],
+                "CCtimeFrame":[4, 1],
+                "CCrange":[900, 1175],
+                "targetableNumber":[3, 3]
+            },
+            "trueDamage":{
+                "highestTotal":0,
+                "trueDamageSkills":[],
+                "trueDamageSkillKey":[]
+            },
+            "waveClearRating":2,
+            "dragonRushRating": 2
+        },
+        "Leona":{
+            "CC":{
+                "CCtypes":["stun", "root", "stun"],
+                "CCskills":["LeonaShieldOfDaybreak", "LeonaZenithBlade", "LeonaSolarFlare"],
+                "CCskillKeys":["Q", "E", "R"],
+                "CCtimeFrame":[1, 0.5, 1.5],
+                "CCrange":[125, 900, 2000],
+                "targetableNumber":[1, 1, 3]
+            },
+            "trueDamage":{
+                "highestTotal":0,
+                "trueDamageSkills":[],
+                "trueDamageSkillKey":[]
+            },
+            "waveClearRating":0,
+            "dragonRushRating": 0
+        },
+        "Lillia":{
+            "CC":{
+                "CCtypes":["slow", "sleep"],
+                "CCskills":["LilliaE", "LilliaR"],
+                "CCskillKeys":["E", "R"],
+                "CCtimeFrame":[3, 2.5],
+                "CCrange":[850, "global"],
+                "targetableNumber":[3, 4]
+            },
+            "trueDamage":{
+                "highestTotal":95, 
+                "castablityToNonChampion": true,
+                "trueDamageSkills":["LilliaQ"],
+                "trueDamageSkillKey":["Q"]
+            },
+            "waveClearRating":3,
+            "dragonRushRating": 2
+        },
+        "Lissandra":{
+            "CC":{
+                "CCtypes":["slow", "root", "stun"],
+                "CCskills":["LissandraQ", "LissandraW", "LissandraR"],
+                "CCskillKeys":["Q", "W", "R"],
+                "CCtimeFrame":[1.5, 1.5, 1.5],
+                "CCrange":[875, 900, 550],
+                "targetableNumber":[1, 3, 1]
+            },
+            "trueDamage":{
+                "highestTotal":0,
+                "trueDamageSkills":[],
+                "trueDamageSkillKey":[]
+            },
+            "waveClearRating":3,
+            "dragonRushRating": 2
+        },
+        "Lucian":{
+            "CC":{
+                "CCtypes":[],
+                "CCskills":[],
+                "CCskillKeys":[],
+                "CCtimeFrame":[],
+                "CCrange":[],
+                "targetableNumber":[]
+            },
+            "trueDamage":{
+                "highestTotal":0,
+                "trueDamageSkills":[],
+                "trueDamageSkillKey":[]
+            },
+            "waveClearRating":3,
+            "dragonRushRating": 3
+        },
+        "Lulu":{
+            "CC":{
+                "CCtypes":["slow", "polymorph", "knockUp"],
+                "CCskills":["LuluQ", "LuluW", "LuluR"],
+                "CCskillKeys":["Q", "W", "R"],
+                "CCtimeFrame":[2, 2.25, 0.75],
+                "CCrange":[1850, 650, 1050],
+                "targetableNumber":[2, 1, 3]
+            },
+            "trueDamage":{
+                "highestTotal":0,
+                "trueDamageSkills":[],
+                "trueDamageSkillKey":[]
+            },
+            "waveClearRating":2,
+            "dragonRushRating": 1
+        },
+        "Lux":{
+            "CC":{
+                "CCtypes":["root", "slow"],
+                "CCskills":["LuxLightBinding", "LuxLightStrikeKugel"],
+                "CCskillKeys":["Q", "E"],
+                "CCtimeFrame":[2, 1],
+                "CCrange":[1240, 1700],
+                "targetableNumber":[2, 2]
+            },
+            "trueDamage":{
+                "highestTotal":0,
+                "trueDamageSkills":[],
+                "trueDamageSkillKey":[]
+            },
+            "waveClearRating":2,
+            "dragonRushRating": 1
+        },
+        "Malphite":{
+            "CC":{
+                "CCtypes":["slow", "knockUp"],
+                "CCskills":["SeismicShard", "UFSlash"],
+                "CCskillKeys":["Q", "R"],
+                "CCtimeFrame":[3,1.5],
+                "CCrange":[625, 1325],
+                "targetableNumber":[1, 5]
+            },
+            "trueDamage":{
+                "highestTotal":0,
+                "trueDamageSkills":[],
+                "trueDamageSkillKey":[]
+            },
+            "waveClearRating":2,
+            "dragonRushRating": 1
+        },
+        "Malzahar":{
+            "CC":{
+                "CCtypes":["silence", "suppression"],
+                "CCskills":["MalzaharQ", "MalzaharR"],
+                "CCskillKeys":["Q", "R"],
+                "CCtimeFrame":[2, 2.5],
+                "CCrange":[900, 700],
+                "targetableNumber":[3,1]
+            },
+            "trueDamage":{
+                "highestTotal":0,
+                "trueDamageSkills":[],
+                "trueDamageSkillKey":[]
+            },
+            "waveClearRating":3,
+            "dragonRushRating": 3
+        },
+        "Maokai":{
+            "CC":{
+                "CCtypes":["knockBack", "root", "slow","root"],
+                "CCskills":["MaokaiQ", "MaokaiW", "MaokaiE", "MaokaiR"],
+                "CCskillKeys":["Q", "W", "E", "R"],
+                "CCtimeFrame":[0.25,1.4, 2, 2.6],
+                "CCrange":[900, 525, 1575, 3000],
+                "targetableNumber":[2, 1, 2, 4]
+            },
+            "trueDamage":{
+                "highestTotal":0,
+                "trueDamageSkills":[],
+                "trueDamageSkillKey":[]
+            },
+            "waveClearRating":2,
+            "dragonRushRating": 1
+        },
+        "MasterYi":{
+            "CC":{
+                "CCtypes":[],
+                "CCskills":[],
+                "CCskillKeys":[],
+                "CCtimeFrame":[],
+                "CCrange":[],
+                "targetableNumber":[]
+            },
+            "trueDamage":{
+                "highestTotal":70,
+                "castablityToNonChampion": true,
+                "trueDamageSkills":["WujuStyle"],
+                "trueDamageSkillKey":["Q"]
+            },
+            "waveClearRating":2,
+            "dragonRushRating": 3
+        },
+        "MissFortune":{
+            "CC":{
+                "CCtypes":["slow"],
+                "CCskills":["MissFortuneScattershot"],
+                "CCskillKeys":["E"],
+                "CCtimeFrame":[2],
+                "CCrange":[1200],
+                "targetableNumber":[3]
+            },
+            "trueDamage":{
+                "highestTotal":0,
+                "trueDamageSkills":[],
+                "trueDamageSkillKey":[]
+            },
+            "waveClearRating":2,
+            "dragonRushRating": 3
+        },
+        "Mordekaiser":{
+            "CC":{
+                "CCtypes":["pull", "landScapeControl_Mordekaiser"],
+                "CCskills":["MordekaiserE", "MordekaiserR"],
+                "CCskillKeys":["E", "R"],
+                "CCtimeFrame":[0.25, 7],
+                "CCrange":[900, 650],
+                "targetableNumber":[2, 1]
+            },
+            "trueDamage":{
+                "highestTotal":0,
+                "trueDamageSkills":[],
+                "trueDamageSkillKey":[]
+            },
+            "waveClearRating":2,
+            "dragonRushRating": 2
+        },
+        "Morgana":{
+            "CC":{
+                "CCtypes":["root", "stun"],
+                "CCskills":["MorganaQ", "MorganaR"],
+                "CCskillKeys":["Q", "R"],
+                "CCtimeFrame":[3, 1.5],
+                "CCrange":[1300, 625],
+                "targetableNumber":[1, 5]
+            },
+            "trueDamage":{
+                "highestTotal":0,
+                "trueDamageSkills":[],
+                "trueDamageSkillKey":[]
+            },
+            "waveClearRating":3,
+            "dragonRushRating": 3
+        },
+        "Nami":{
+            "CC":{
+                "CCtypes":["knockUp", "slow", "knockUp"],
+                "CCskills":["NamiQ", "NamiE", "NamiR"],
+                "CCskillKeys":["Q", "E", "R"],
+                "CCtimeFrame":[1.5, 1, 0.5],
+                "CCrange":[1035, 1350, 2750],
+                "targetableNumber":[2, 2, 5]
+            },
+            "trueDamage":{
+                "highestTotal":0,
+                "trueDamageSkills":[],
+                "trueDamageSkillKey":[]
+            },
+            "waveClearRating":1,
+            "dragonRushRating": 0
+        },
+        "Nasus":{
+            "CC":{
+                "CCtypes":["slow"],
+                "CCskills":["NasusW"],
+                "CCskillKeys":["W"],
+                "CCtimeFrame":[5],
+                "CCrange":[700],
+                "targetableNumber":[1]
+            },
+            "trueDamage":{
+                "highestTotal":0,
+                "trueDamageSkills":[],
+                "trueDamageSkillKey":[]
+            },
+            "waveClearRating":2,
+            "dragonRushRating": 2
+        },
+        "Nautilus":{
+            "CC":{
+                "CCtypes":["root","pull", "slow", "knockUp"],
+                "CCskills":["Nautilus_StaggeringBlow","NautilusAnchorDrag", "NautilusSplashZone", "NautilusGrandLine"],
+                "CCskillKeys":["P", "Q", "E", "R"],
+                "CCtimeFrame":[1.5, 0.25, 1.5, 1],
+                "CCrange":[175, 1122, 1180, 1125],
+                "targetableNumber":[1, 1, 2, 4]
+            },
+            "trueDamage":{
+                "highestTotal":0,
+                "trueDamageSkills":[],
+                "trueDamageSkillKey":[]
+            },
+            "waveClearRating":0,
+            "dragonRushRating": 0
+        },
+        "Neeko":{
+            "CC":{
+                "CCtypes":["root", "stun"],
+                "CCskills":["NeekoE", "NeekoR"],
+                "CCskillKeys":["E", "R"],
+                "CCtimeFrame":[1.5, 1.25],
+                "CCrange":[1000, 1200],
+                "targetableNumber":[3, 5]
+            },
+            "trueDamage":{
+                "highestTotal":0,
+                "trueDamageSkills":[],
+                "trueDamageSkillKey":[]
+            },
+            "waveClearRating":3,
+            "dragonRushRating": 2
+        },
+        "Nidalee":{
+            "CC":{
+                "CCtypes":[],
+                "CCskills":[],
+                "CCskillKeys":[],
+                "CCtimeFrame":[],
+                "CCrange":[],
+                "targetableNumber":[]
+            },
+            "trueDamage":{
+                "highestTotal":0,
+                "trueDamageSkills":[],
+                "trueDamageSkillKey":[]
+            },
+            "waveClearRating":1,
+            "dragonRushRating": 2
+        },
+        "Nocturne":{
+            "CC":{
+                "CCtypes":["flee"],
+                "CCskills":["NocturneUnspeakableHorror"],
+                "CCskillKeys":["E"],
+                "CCtimeFrame":[2.25],
+                "CCrange":[425],
+                "targetableNumber":[1]
+            },
+            "trueDamage":{
+                "highestTotal":0,
+                "trueDamageSkills":[],
+                "trueDamageSkillKey":[]
+            },
+            "waveClearRating":3,
+            "dragonRushRating": 3
+        },
+        "NunuWillump":{
+            "CC":{
+                "CCtypes":["knockUp", "root","slow"],
+                "CCskills":["NunuW", "NunuE", "NunuR"],
+                "CCskillKeys":["W", "E", "R"],
+                "CCtimeFrame":[0.75, 1.5, 3],
+                "CCrange":[1750, 690, 1300],
+                "targetableNumber":[2, 1, 4]
+            },
+            "trueDamage":{
+                "highestTotal":980,
+                "castablityToNonChampion": true,
+                "trueDamageSkills":["NunuQ"],
+                "trueDamageSkillKey":["Q"]
+            },
+            "waveClearRating":1,
+            "dragonRushRating": 3
+        },
+        "Olaf":{
+            "CC":{
+                "CCtypes":["slow"],
+                "CCskills":["OlafAxeThrowCast"],
+                "CCskillKeys":["Q"],
+                "CCtimeFrame":[2.5],
+                "CCrange":[1000],
+                "targetableNumber":[2]
+            },
+            "trueDamage":{
+                "highestTotal":250,
+                "castablityToNonChampion": true,
+                "trueDamageSkills":["OlafRecklessStrike"],
+                "trueDamageSkillKey":["E"]
+            },
+            "waveClearRating":2,
+            "dragonRushRating": 3
+        },
+        "Orianna":{
+            "CC":{
+                "CCtypes":["slow", "knockUp"],
+                "CCskills":["OrianaDissonanceCommand", "OrianaDetonateCommand"],
+                "CCskillKeys":["W", "R"],
+                "CCtimeFrame":[2, 0.75],
+                "CCrange":[1050, 1240],
+                "targetableNumber":[3, 5]
+            },
+            "trueDamage":{
+                "highestTotal":0,
+                "trueDamageSkills":[],
+                "trueDamageSkillKey":[]
+            },
+            "waveClearRating":3,
+            "dragonRushRating": 2
+        },
+        "Ornn":{
+            "CC":{
+                "CCtypes":["knockBack","slow","knockUp","knockUp"],
+                "CCskills":["OrnnP","OrnnQ", "OrnnE", "OrnnR"],
+                "CCskillKeys":["P", "Q", "E", "R"],
+                "CCtimeFrame":[0.25, 2, 1.25, 1],
+                "CCrange":[175, 900, 800, 2550],
+                "targetableNumber":[2, 2, 3, 5]
+            },
+            "trueDamage":{
+                "highestTotal":0,
+                "trueDamageSkills":[],
+                "trueDamageSkillKey":[]
+            },
+            "waveClearRating":3,
+            "dragonRushRating": 2
+        },
+        "Pantheon":{
+            "CC":{
+                "CCtypes":["stun", "slow"],
+                "CCskills":["PantheonW", "PantheonR"],
+                "CCskillKeys":["W", "R"],
+                "CCtimeFrame":[1,2],
+                "CCrange":[600, 1475],
+                "targetableNumber":[1, 4]
+            },
+            "trueDamage":{
+                "highestTotal":0,
+                "trueDamageSkills":[],
+                "trueDamageSkillKey":[]
+            },
+            "waveClearRating":2,
+            "dragonRushRating": 1
+        },
+        "Poppy":{
+            "CC":{
+                "CCtypes":["slow", "ground", "stun", "knockBack"],
+                "CCskills":["PoppyQ", "PoppyW", "PoppyE", "PoppyR"],
+                "CCskillKeys":["Q", "W", "E", "R"],
+                "CCtimeFrame":[1, 2, 2, 2],
+                "CCrange":[460, 800, 475, 725],
+                "targetableNumber":[2, 3, 1, 3]
+            },
+            "trueDamage":{
+                "highestTotal":0,
+                "trueDamageSkills":[],
+                "trueDamageSkillKey":[]
+            },
+            "waveClearRating":1,
+            "dragonRushRating": 1
+        },
+        "Pyke":{
+            "CC":{
+                "CCtypes":["pull", "stun"],
+                "CCskills":["PykeQ", "PykeE"],
+                "CCskillKeys":["Q", "E"],
+                "CCtimeFrame":[0.25, 1.25],
+                "CCrange":[1100, 660],
+                "targetableNumber":[1, 3]
+            },
+            "trueDamage":{
+                "highestTotal":0,
+                "trueDamageSkills":[],
+                "trueDamageSkillKey":[]
+            },
+            "waveClearRating":1,
+            "dragonRushRating": 0
+        },
+        "Qiyana":{
+            "CC":{
+                "CCtypes":["root", "knockBack", "stun"],
+                "CCskills":["QiyanaQ", "QiyanaR"],
+                "CCskillKeys":["Q", "R"],
+                "CCtimeFrame":[0.5, 0.25, 1],
+                "CCrange":[650, 875, 11000],
+                "targetableNumber":[1, 3, 4]
+            },
+            "trueDamage":{
+                "highestTotal":0,
+                "trueDamageSkills":[],
+                "trueDamageSkillKey":[]
+            },
+            "waveClearRating":2,
+            "dragonRushRating": 1
+        },
+        "Quinn":{
+            "CC":{
+                "CCtypes":["knockBack"],
+                "CCskills":["QuinnE"],
+                "CCskillKeys":["E"],
+                "CCtimeFrame":[0.25],
+                "CCrange":[600],
+                "targetableNumber":[1]
+            },
+            "trueDamage":{
+                "highestTotal":0,
+                "trueDamageSkills":[],
+                "trueDamageSkillKey":[]
+            },
+            "waveClearRating":2,
+            "dragonRushRating": 3
+        },
+        "Rakan":{
+            "CC":{
+                "CCtypes":["knockUp", "charm"],
+                "CCskills":["RakanW", "RakanR"],
+                "CCskillKeys":["W", "R"],
+                "CCtimeFrame":[1, 1.5],
+                "CCrange":[850, 2345],
+                "targetableNumber":[3, 5]
+            },
+            "trueDamage":{
+                "highestTotal":0,
+                "trueDamageSkills":[],
+                "trueDamageSkillKey":[]
+            },
+            "waveClearRating":1,
+            "dragonRushRating": 0
+        },
+        "Rammus":{
+            "CC":{
+                "CCtypes":["knockBack", "taunt", "knockUp"],
+                "CCskills":["PowerBall", "PuncturingTaunt", "Tremors2"],
+                "CCskillKeys":["Q", "E", "R"],
+                "CCtimeFrame":[0.25, 2, 0.75],
+                "CCrange":[325,325, 800],
+                "targetableNumber":[1, 1, 5]
+            },
+            "trueDamage":{
+                "highestTotal":0,
+                "trueDamageSkills":[],
+                "trueDamageSkillKey":[]
+            },
+            "waveClearRating":1,
+            "dragonRushRating": 2
+        },
+        "RekSai":{
+            "CC":{
+                "CCtypes":["knockUp"],
+                "CCskills":["RekSaiW"],
+                "CCskillKeys":["W"],
+                "CCtimeFrame":[1],
+                "CCrange":[500],
+                "targetableNumber":[1]
+            },
+            "trueDamage":{
+                "highestTotal":180,
+                "castablityToNonChampion": true,
+                "trueDamageSkills":["RekSaiE"],
+                "trueDamageSkillKey":["E"]
+            },
+            "waveClearRating":1,
+            "dragonRushRating": 2
+        },
+        "Rell":{
+            "CC":{
+                "CCtypes":["knockUp", "stun", "pull"],
+                "CCskills":["RellW_Dismount", "RellE", "RellR"],
+                "CCskillKeys":["W", "E", "R"],
+                "CCtimeFrame":[1, 0.5, 0.25],
+                "CCrange":[700, 1750, 900],
+                "targetableNumber":[2, 2, 5]
+            },
+            "trueDamage":{
+                "highestTotal":0,
+                "trueDamageSkills":[],
+                "trueDamageSkillKey":[]
+            },
+            "waveClearRating":1,
+            "dragonRushRating": 0
+        },
+        "Renekton":{
+            "CC":{
+                "CCtypes":["stun"],
+                "CCskills":["RenektonPreExecute"],
+                "CCskillKeys":["W"],
+                "CCtimeFrame":[0.75],
+                "CCrange":[125],
+                "targetableNumber":[1]
+            },
+            "trueDamage":{
+                "highestTotal":0,
+                "trueDamageSkills":[],
+                "trueDamageSkillKey":[]
+            },
+            "waveClearRating":3,
+            "dragonRushRating": 2
+        },
+        "Rengar":{
+            "CC":{
+                "CCtypes":["root"],
+                "CCskills":["RengarE"],
+                "CCskillKeys":["E"],
+                "CCtimeFrame":[1.75],
+                "CCrange":[1000],
+                "targetableNumber":[1]
+            },
+            "trueDamage":{
+                "highestTotal":0,
+                "trueDamageSkills":[],
+                "trueDamageSkillKey":[]
+            },
+            "waveClearRating":1,
+            "dragonRushRating": 2
+        },
+        "Riven":{
+            "CC":{
+                "CCtypes":["knockUp","stun"],
+                "CCskills":["RivenTriCleave","RivenMartyr"],
+                "CCskillKeys":["Q", "W"],
+                "CCtimeFrame":[0.75, 0.75],
+                "CCrange":[600, 600],
+                "targetableNumber":[3,2]
+            },
+            "trueDamage":{
+                "highestTotal":0,
+                "trueDamageSkills":[],
+                "trueDamageSkillKey":[]
+            },
+            "waveClearRating":2,
+            "dragonRushRating": 2
+        },
+        "Rumble":{
+            "CC":{
+                "CCtypes":["slow", "slow"],
+                "CCskills":["RumbleGrenade", "RumbleCarpetBomb"],
+                "CCskillKeys":["E", "R"],
+                "CCtimeFrame":[2, 2],
+                "CCrange":[890,2660],
+                "targetableNumber":[1, 4]
+            },
+            "trueDamage":{
+                "highestTotal":0,
+                "trueDamageSkills":[],
+                "trueDamageSkillKey":[]
+            },
+            "waveClearRating":3,
+            "dragonRushRating": 2
+        },
+        "Ryze":{
+            "CC":{
+                "CCtypes":["root"],
+                "CCskills":["RyzeW"],
+                "CCskillKeys":["W"],
+                "CCtimeFrame":[1.5],
+                "CCrange":[550],
+                "targetableNumber":[1]
+            },
+            "trueDamage":{
+                "highestTotal":0,
+                "trueDamageSkills":[],
+                "trueDamageSkillKey":[]
+            },
+            "waveClearRating":3,
+            "dragonRushRating": 3
+        },
+        "Samira":{
+            "CC":{
+                "CCtypes":["knockUp"],
+                "CCskills":["SamiraP.Samira"],
+                "CCskillKeys":["P"],
+                "CCtimeFrame":[0.5],
+                "CCrange":[960],
+                "targetableNumber":[1]
+            },
+            "trueDamage":{
+                "highestTotal":0,
+                "trueDamageSkills":[],
+                "trueDamageSkillKey":[]
+            },
+            "waveClearRating":2,
+            "dragonRushRating": 3
+        },
+        "Sejuani":{
+            "CC":{
+                "CCtypes":["knockUp", "slow", "stun", "stun"],
+                "CCskills":["SejuaniQ", "SejuaniW", "SejuaniE", "SejuaniR"],
+                "CCskillKeys":["Q", "W", "E", "R"],
+                "CCtimeFrame":[1, 0.25, 1, 1.5],
+                "CCrange":[650, 600, 600, 1300],
+                "targetableNumber":[1, 1, 1, 1]
+            },
+            "trueDamage":{
+                "highestTotal":0,
+                "trueDamageSkills":[],
+                "trueDamageSkillKey":[]
+            },
+            "waveClearRating":1,
+            "dragonRushRating": 1
+        },
+        "Senna":{
+            "CC":{
+                "CCtypes":["root"],
+                "CCskills":["SennaW"],
+                "CCskillKeys":["W"],
+                "CCtimeFrame":[2.25],
+                "CCrange":[1300],
+                "targetableNumber":[2]
+            },
+            "trueDamage":{
+                "highestTotal":0,
+                "trueDamageSkills":[],
+                "trueDamageSkillKey":[]
+            },
+            "waveClearRating":2,
+            "dragonRushRating": 2
+        },
+        "Seraphine":{
+            "CC":{
+                "CCtypes":["root", "charm"],
+                "CCskills":["SeraphineE", "SeraphineR"],
+                "CCskillKeys":["E", "R"],
+                "CCtimeFrame":[1, 1.75],
+                "CCrange":[1300, 1200],
+                "targetableNumber":[4, 4]
+            },
+            "trueDamage":{
+                "highestTotal":100,
+                "trueDamageSkills":[],
+                "trueDamageSkillKey":[]
+            },
+            "waveClearRating":2,
+            "dragonRushRating": 1
+        },
+        "Sett":{
+            "CC":{
+                "CCtypes":["stun", "suppression"],
+                "CCskills":["SettE", "SettR"],
+                "CCskillKeys":["E", "R"],
+                "CCtimeFrame":[1, 1.5],
+                "CCrange":[490, 400],
+                "targetableNumber":[2, 1]
+            },
+            "trueDamage":{
+                "highestTotal":160,
+                "castablityToNonChampion": true,
+                "trueDamageSkills":["SettW"],
+                "trueDamageSkillKey":["W"]
+            },
+            "waveClearRating":2,
+            "dragonRushRating": 2
+        },
+        "Shaco":{
+            "CC":{
+                "CCtypes":["flee", "slow", "flee"],
+                "CCskills":["JackInTheBox", "TwoShivPoison", "HallucinateFull"],
+                "CCskillKeys":["W", "E", "R"],
+                "CCtimeFrame":[2, 2, 2],
+                "CCrange":[425, 625, 425],
+                "targetableNumber":[2, 1, 3]
+            },
+            "trueDamage":{
+                "highestTotal":0,
+                "trueDamageSkills":[],
+                "trueDamageSkillKey":[]
+            },
+            "waveClearRating":1,
+            "dragonRushRating": 2
+        },
+        "Shen":{
+            "CC":{
+                "CCtypes":["slow", "taunt"],
+                "CCskills":["ShenQ", "ShenE"],
+                "CCskillKeys":["Q", "E"],
+                "CCtimeFrame":[2, 1.5],
+                "CCrange":["global", 600],
+                "targetableNumber":[1, 2]
+            },
+            "trueDamage":{
+                "highestTotal":0,
+                "trueDamageSkills":[],
+                "trueDamageSkillKey":[]
+            },
+            "waveClearRating":1,
+            "dragonRushRating": 1
+        },
+        "Shyvana":{
+            "CC":{
+                "CCtypes":["knockBack"],
+                "CCskills":["ShyvanaTransformCast"],
+                "CCskillKeys":["R"],
+                "CCtimeFrame":[1],
+                "CCrange":[850],
+                "targetableNumber":[2]
+            },
+            "trueDamage":{
+                "highestTotal":0,
+                "trueDamageSkills":[],
+                "trueDamageSkillKey":[]
+            },
+            "waveClearRating":2,
+            "dragonRushRating": 2
+        },
+        "Singed":{
+            "CC":{
+                "CCtypes":["ground", "root"],
+                "CCskills":["MegaAdhesive", "Fling"],
+                "CCskillKeys":["W", "E"],
+                "CCtimeFrame":[3, 2],
+                "CCrange":[1175, 125],
+                "targetableNumber":[3, 1]
+            },
+            "trueDamage":{
+                "highestTotal":0,
+                "trueDamageSkills":[],
+                "trueDamageSkillKey":[]
+            },
+            "waveClearRating":3,
+            "dragonRushRating": 2
+        },
+        "Sion":{
+            "CC":{
+                "CCtypes":["knockUp", "stun", "slow", "knockUp", "stun"],
+                "CCskills":["SionQ", "SionE", "SionR"],
+                "CCskillKeys":["Q", "E", "R"],
+                "CCtimeFrame":[1, 2.25, 2.5, 1.75, 1.75],
+                "CCrange":[850, 1, 800, 7900, 1],
+                "targetableNumber":[3, 3, 1, 2, 2]
+            },
+            "trueDamage":{
+                "highestTotal":0,
+                "trueDamageSkills":[],
+                "trueDamageSkillKey":[]
+            },
+            "waveClearRating":3,
+            "dragonRushRating": 1
+        },
+        "Sivir":{
+            "CC":{
+                "CCtypes":[],
+                "CCskills":[],
+                "CCskillKeys":[]
+            },
+            "trueDamage":{
+                "highestTotal":0,
+                "trueDamageSkills":[],
+                "trueDamageSkillKey":[]
+            },
+            "waveClearRating":3,
+            "dragonRushRating": 3
+        },
+        "Skarner":{
+            "CC":{
+                "CCtypes":["stun", "suppression"],
+                "CCskills":["SkarnerFracture", "SkarnerImpale"],
+                "CCskillKeys":["E", "R"],
+                "CCtimeFrame":[1.25, 1.75],
+                "CCrange":[1000, 350],
+                "targetableNumber":[2, 1]
+            },
+            "trueDamage":{
+                "highestTotal":0,
+                "trueDamageSkills":[],
+                "trueDamageSkillKey":[]
+            },
+            "waveClearRating":1,
+            "dragonRushRating": 1
+        },
+        "Sona":{
+            "CC":{
+                "CCtypes":["stun"],
+                "CCskills":["SonaR"],
+                "CCskillKeys":["R"],
+                "CCtimeFrame":[1.5],
+                "CCrange":[900],
+                "targetableNumber":[3]
+            },
+            "trueDamage":{
+                "highestTotal":0,
+                "trueDamageSkills":[],
+                "trueDamageSkillKey":[]
+            },
+            "waveClearRating":1,
+            "dragonRushRating": 0
+        },
+        "Soraka":{
+            "CC":{
+                "CCtypes":["slow", "root"],
+                "CCskills":["SorakaQ", "SorakaE"],
+                "CCskillKeys":["Q", "E"],
+                "CCtimeFrame":[1.5, 1.5],
+                "CCrange":[1035, 1175],
+                "targetableNumber":[3, 3]
+            },
+            "trueDamage":{
+                "highestTotal":0,
+                "trueDamageSkills":[],
+                "trueDamageSkillKey":[]
+            },
+            "waveClearRating":1,
+            "dragonRushRating": 0
+        },
+        "Swain":{
+            "CC":{
+                "CCtypes":["pull", "slow", "root"],
+                "CCskills":["Swain_P", "SwainW", "SwainE"],
+                "CCskillKeys":["P", "W", "E"],
+                "CCtimeFrame":[0.25, 2.5, 1.5],
+                "CCrange":[1125, 7825, 950],
+                "targetableNumber":[1, 2, 1]
+            },
+            "trueDamage":{
+                "highestTotal":0,
+                "trueDamageSkills":[],
+                "trueDamageSkillKey":[]
+            },
+            "waveClearRating":3,
+            "dragonRushRating": 2
+        },
+        "Sylas":{
+            "CC":{
+                "CCtypes":["slow", "knockUp", "selectableCC_Sylas"],
+                "CCskills":["SylasQ", "SylasE", "SylasR"],
+                "CCskillKeys":["Q", "E", "R"],
+                "CCtimeFrame":[1.5, 1, 1.5],
+                "CCrange":[975, 1200, 3000],
+                "targetableNumber":[2, 1, 3]
+            },
+            "trueDamage":{
+                "highestTotal":0,
+                "trueDamageSkills":[],
+                "trueDamageSkillKey":[]
+            },
+            "waveClearRating":2,
+            "dragonRushRating": 2
+        },
+        "Syndra":{
+            "CC":{
+                "CCtypes":["slow", "knockBack", "stun"],
+                "CCskills":["SyndraW", "SyndraE"],
+                "CCskillKeys":["W", "E"],
+                "CCtimeFrame":[1.5, 1.5],
+                "CCrange":[1175, 1300800],
+                "targetableNumber":[2, 3]
+            },
+            "trueDamage":{
+                "highestTotal":46,
+                "castablityToNonChampion": true,
+                "trueDamageSkills":["SyndraW"],
+                "trueDamageSkillKey":["W"]
+            },
+            "waveClearRating":3,
+            "dragonRushRating": 2
+        },
+        "TahmKench":{
+            "CC":{
+                "CCtypes":["stun", "knockUp"],
+                "CCskills":["TahmKenchQ", "TahmKenchW"],
+                "CCskillKeys":["Q", "W"],
+                "CCtimeFrame":[1.5, 1],
+                "CCrange":[900, 1475],
+                "targetableNumber":[1, 2]
+            },
+            "trueDamage":{
+                "highestTotal":0,
+                "trueDamageSkills":[],
+                "trueDamageSkillKey":[]
+            },
+            "waveClearRating":1,
+            "dragonRushRating": 1
+        },
+        "Taliyah":{
+            "CC":{
+                "CCtypes":["knockBack", "slow", "landScapeControl_Taliyah"],
+                "CCskills":["TaliyahWVC", "TaliyahE", "TaliyahR"],
+                "CCskillKeys":["W", "E", "R"],
+                "CCtimeFrame":[1, 4, 5],
+                "CCrange":[900, 1600, 6000],
+                "targetableNumber":[3, 3, 5]
+            },
+            "trueDamage":{
+                "highestTotal":0,
+                "trueDamageSkills":[],
+                "trueDamageSkillKey":[]
+            },
+            "waveClearRating":1,
+            "dragonRushRating": 2
+        },
+        "Talon":{
+            "CC":{
+                "CCtypes":["slow"],
+                "CCskills":["TalonW"],
+                "CCskillKeys":["W"],
+                "CCtimeFrame":[1],
+                "CCrange":[900],
+                "targetableNumber":[2]
+            },
+            "trueDamage":{
+                "highestTotal":0,
+                "trueDamageSkills":[],
+                "trueDamageSkillKey":[]
+            },
+            "waveClearRating":2,
+            "dragonRushRating": 1
+        },
+        "Taric":{
+            "CC":{
+                "CCtypes":["stun"],
+                "CCskills":["TaricE"],
+                "CCskillKeys":["E"],
+                "CCtimeFrame":[1.25],
+                "CCrange":[575],
+                "targetableNumber":[2]
+            },
+            "trueDamage":{
+                "highestTotal":0,
+                "trueDamageSkills":[],
+                "trueDamageSkillKey":[]
+            },
+            "waveClearRating":1,
+            "dragonRushRating": 0
+        },
+        "Teemo":{
+            "CC":{
+                "CCtypes":["blind", "slow"],
+                "CCskills":["BlindingDart", "TeemoRCast"],
+                "CCskillKeys":["Q", "R"],
+                "CCtimeFrame":[2.5, 4],
+                "CCrange":[680, 1350],
+                "targetableNumber":[1, 3]
+            },
+            "trueDamage":{
+                "highestTotal":0,
+                "trueDamageSkills":[],
+                "trueDamageSkillKey":[]
+            },
+            "waveClearRating":2,
+            "dragonRushRating": 3
+        },
+        "Thresh":{
+            "CC":{
+                "CCtypes":["pull", "knockBack", "slow"],
+                "CCskills":["ThreshQ", "ThreshE", "ThreshR"],
+                "CCskillKeys":["Q", "E", "R"],
+                "CCtimeFrame":[1.5, 4, 2],
+                "CCrange":[1040, 670, 760.5],
+                "targetableNumber":[1, 2, 5]
+            },
+            "trueDamage":{
+                "highestTotal":0,
+                "trueDamageSkills":[],
+                "trueDamageSkillKey":[]
+            },
+            "waveClearRating":1,
+            "dragonRushRating": 0
+        },
+        "Tristana":{
+            "CC":{
+                "CCtypes":["knockBack"],
+                "CCskills":["TristanaR"],
+                "CCskillKeys":["R"],
+                "CCtimeFrame":[0.75],
+                "CCrange":[661],
+                "targetableNumber":[1]
+            },
+            "trueDamage":{
+                "highestTotal":0,
+                "trueDamageSkills":[],
+                "trueDamageSkillKey":[]
+            },
+            "waveClearRating":3,
+            "dragonRushRating": 3
+        },
+        "Trundle":{
+            "CC":{
+                "CCtypes":["slow", "landScapeControl_Trundle", "knockBack", "slow"],
+                "CCskills":["TrundleTrollSmash", "TrundleCircle"],
+                "CCskillKeys":["Q", "E"],
+                "CCtimeFrame":[0.1, 6, 6, 6],
+                "CCrange":[175, 1187.5, 1,1],
+                "targetableNumber":[1, 2, 2, 2]
+            },
+            "trueDamage":{
+                "highestTotal":0,
+                "trueDamageSkills":[],
+                "trueDamageSkillKey":[]
+            },
+            "waveClearRating":1,
+            "dragonRushRating": 2
+        },
+        "Tryndamere":{
+            "CC":{
+                "CCtypes":["slow"],
+                "CCskills":["TryndamereW"],
+                "CCskillKeys":["W"],
+                "CCtimeFrame":[4],
+                "CCrange":[850],
+                "targetableNumber":[2]
+            },
+            "trueDamage":{
+                "highestTotal":0,
+                "trueDamageSkills":[],
+                "trueDamageSkillKey":[]
+            },
+            "waveClearRating":1,
+            "dragonRushRating": 3
+        },
+        "TwistedFate":{
+            "CC":{
+                "CCtypes":["stun"],
+                "CCskills":["PickACard"],
+                "CCskillKeys":["W"],
+                "CCtimeFrame":[2],
+                "CCrange":[525],
+                "targetableNumber":[1]
+            },
+            "trueDamage":{
+                "highestTotal":0,
+                "trueDamageSkills":[],
+                "trueDamageSkillKey":[]
+            },
+            "waveClearRating":3,
+            "dragonRushRating": 1
+        },
+        "Twitch":{
+            "CC":{
+                "CCtypes":["slow"],
+                "CCskills":["TwitchVenomCask"],
+                "CCskillKeys":["W"],
+                "CCtimeFrame":[3],
+                "CCrange":[950],
+                "targetableNumber":[3]
+            },
+            "trueDamage":{
+                "highestTotal":30,
+                "castablityToNonChampion": true,
+                "trueDamageSkills":["Twitch_Passive"],
+                "trueDamageSkillKey":["P"]
+            },
+            "waveClearRating":2,
+            "dragonRushRating": 3
+        },
+        "Udyr":{
+            "CC":{
+                "CCtypes":["stun"],
+                "CCskills":["UdyrBearStance"],
+                "CCskillKeys":["E"],
+                "CCtimeFrame":[1],
+                "CCrange":[125],
+                "targetableNumber":[1]
+            },
+            "trueDamage":{
+                "highestTotal":0,
+                "trueDamageSkills":[],
+                "trueDamageSkillKey":[]
+            },
+            "waveClearRating":2,
+            "dragonRushRating": 2
+        },
+        "Urgot":{
+            "CC":{
+                "CCtypes":["slow", "knockBack", "stun", "suppression", "flee", "slow"],
+                "CCskills":["UrgotQ", "UrgotE", "UrgotR"],
+                "CCskillKeys":["Q", "E", "R"],
+                "CCtimeFrame":[1.25, 1.75, 3],
+                "CCrange":[1010, 450, 2800],
+                "targetableNumber":[2, 1, 3]
+            },
+            "trueDamage":{
+                "highestTotal":0,
+                "trueDamageSkills":[],
+                "trueDamageSkillKey":[]
+            },
+            "waveClearRating":2,
+            "dragonRushRating": 2
+        },
+        "Varus":{
+            "CC":{
+                "CCtypes":["slow", "root"],
+                "CCskills":["VarusE", "VarusR"],
+                "CCskillKeys":["E", "R"],
+                "CCtimeFrame":[4, 2],
+                "CCrange":[1225, 2020],
+                "targetableNumber":[3, 4]
+            },
+            "trueDamage":{
+                "highestTotal":0,
+                "trueDamageSkills":[],
+                "trueDamageSkillKey":[]
+            },
+            "waveClearRating":3,
+            "dragonRushRating": 3
+        },
+        "Vayne":{
+            "CC":{
+                "CCtypes":["stun"],
+                "CCskills":["VayneCondemn"],
+                "CCskillKeys":["E"],
+                "CCtimeFrame":[1.5],
+                "CCrange":[550],
+                "targetableNumber":[1]
+            },
+            "trueDamage":{
+                "highestTotal":110,
+                "castablityToNonChampion":true,
+                "trueDamageSkills":["VayneSilveredBolts"],
+                "trueDamageSkillKey":["W"]
+            },
+            "waveClearRating":1,
+            "dragonRushRating": 3
+        },
+        "Veigar":{
+            "CC":{
+                "CCtypes":["stun"],
+                "CCskills":["VeigarEventHorizon"],
+                "CCskillKeys":["E"],
+                "CCtimeFrame":[2.5],
+                "CCrange":[1125],
+                "targetableNumber":[3]
+            },
+            "trueDamage":{
+                "highestTotal":0,
+                "trueDamageSkills":[],
+                "trueDamageSkillKey":[]
+            },
+            "waveClearRating":3,
+            "dragonRushRating": 2
+        },
+        "Velkoz":{
+            "CC":{
+                "CCtypes":["slow", "knockUp", "slow"],
+                "CCskills":["VelkozQ", "VelkozE", "VelkozR"],
+                "CCskillKeys":["Q", "E", "R"],
+                "CCtimeFrame":[2.6, 0.75, 1],
+                "CCrange":[1100, 1025, 1555],
+                "targetableNumber":[2, 2, 4]
+            },
+            "trueDamage":{
+                "highestTotal": 969,
+                "castablityToNonChampion":true,
+                "trueDamageSkills":["VelKoz_Passive", "VelkozR"],
+                "trueDamageSkillKey":["P", "R"]
+    
+            },
+            "waveClearRating":3,
+            "dragonRushRating": 2
+        },
+        "Vi":{
+            "CC":{
+                "CCtypes":["knockBack", "knockUp"],
+                "CCskills":["ViQ", "ViR"],
+                "CCskillKeys":["Q", "R"],
+                "CCtimeFrame":[1.25, 1.25],
+                "CCrange":[715, 800],
+                "targetableNumber":[2, 1]
+            },
+            "trueDamage":{
+                "highestTotal":0,
+                "trueDamageSkills":[],
+                "trueDamageSkillKey":[]
+            },
+            "waveClearRating":2,
+            "dragonRushRating": 2
+        },
+        "Viego":{
+            "CC":{
+                "CCtypes":["selectableCC_Viego","stun", "knockBack"],
+                "CCskills":["Viego_Passive.RuinedKing","ViegoW", "ViegoR"],
+                "CCskillKeys":["P", "W", "R"],
+                "CCtimeFrame":[2, 1.25, 0.5],
+                "CCrange":[1125, 900, 800],
+                "targetableNumber":[3, 1, 2]
+            },
+            "trueDamage":{
+                "highestTotal":0,
+                "trueDamageSkills":[],
+                "trueDamageSkillKey":[]
+            },
+            "waveClearRating":1,
+            "dragonRushRating": 2
+        },
+        "Viktor":{
+            "CC":{
+                "CCtypes":["stun"],
+                "CCskills":["ViktorGravitonField"],
+                "CCskillKeys":["W"],
+                "CCtimeFrame":[1.5],
+                "CCrange":[800],
+                "targetableNumber":[2]
+            },
+            "trueDamage":{
+                "highestTotal":0,
+                "trueDamageSkills":[],
+                "trueDamageSkillKey":[]
+            },
+            "waveClearRating":3,
+            "dragonRushRating": 2
+        },
+        "Vladimir":{
+            "CC":{
+                "CCtypes":["slow", "slow"],
+                "CCskills":["VladimirSanguinePool", "VladimirE"],
+                "CCskillKeys":["W", "E"],
+                "CCtimeFrame":[1, 0.5],
+                "CCrange":[350, 600],
+                "targetableNumber":[5, 5]
+            },
+            "trueDamage":{
+                "highestTotal":0,
+                "trueDamageSkills":[],
+                "trueDamageSkillKey":[]
+            },
+            "waveClearRating":2,
+            "dragonRushRating": 1
+        },
+        "Volibear":{
+            "CC":{
+                "CCtypes":["stun", "slow", "slow"],
+                "CCskills":["VolibearQ", "VolibearE", "VolibearR"],
+                "CCskillKeys":["Q", "E", "R"],
+                "CCtimeFrame":[1, 2, 1],
+                "CCrange":[150, 1525, 1200],
+                "targetableNumber":[1, 2, 3]
+            },
+            "trueDamage":{
+                "highestTotal":0,
+                "trueDamageSkills":[],
+                "trueDamageSkillKey":[]
+            },
+            "waveClearRating":2,
+            "dragonRushRating": 2
+        },
+        "Warwick":{
+            "CC":{
+                "CCtypes":["flee", "suppression"],
+                "CCskills":["WarwickE", "WarwickR"],
+                "CCskillKeys":["E", "R"],
+                "CCtimeFrame":[1, 1.5],
+                "CCrange":[375, 1300],
+                "targetableNumber":[2, 1]
+            },
+            "trueDamage":{
+                "highestTotal":0,
+                "trueDamageSkills":[],
+                "trueDamageSkillKey":[]
+            },
+            "waveClearRating":1,
+            "dragonRushRating": 2
+        },
+        "Wukong":{
+            "CC":{
+                "CCtypes":["knockUp"],
+                "CCskills":["MonkeyKingSpinToWin"],
+                "CCskillKeys":["R"],
+                "CCtimeFrame":[0.6],
+                "CCrange":[650],
+                "targetableNumber":[5]
+            },
+            "trueDamage":{
+                "highestTotal":0,
+                "trueDamageSkills":[],
+                "trueDamageSkillKey":[]
+            },
+            "waveClearRating":2,
+            "dragonRushRating": 2
+        },
+        "Xayah":{
+            "CC":{
+                "CCtypes":["root"],
+                "CCskills":["XayahE"],
+                "CCskillKeys":["E"],
+                "CCtimeFrame":[1.25],
+                "CCrange":[1100],
+                "targetableNumber":[3]
+            },
+            "trueDamage":{
+                "highestTotal":0,
+                "trueDamageSkills":[],
+                "trueDamageSkillKey":[]
+            },
+            "waveClearRating":2,
+            "dragonRushRating": 3
+        },
+        "Xerath":{
+            "CC":{
+                "CCtypes":["slow", "stun"],
+                "CCskills":["XerathArcaneBarrage2", "XerathMageSpear"],
+                "CCskillKeys":["W", "E"],
+                "CCtimeFrame":[2.5, 2],
+                "CCrange":[1450, 1125],
+                "targetableNumber":[3, 1]
+            },
+            "trueDamage":{
+                "highestTotal":0,
+                "trueDamageSkills":[],
+                "trueDamageSkillKey":[]
+            },
+            "waveClearRating":3,
+            "dragonRushRating": 2
+        },
+        "XinZhao":{
+            "CC":{
+                "CCtypes":["knockUp", "slow", "slow", "knockBack"],
+                "CCskills":["XinZhaoQ", "XinZhaoW", "XinZhaoE", "XinZhaoR"],
+                "CCskillKeys":["Q", "W", "E", "R"],
+                "CCtimeFrame":[0.75, 1.5, 0.5, 0.75],
+                "CCrange":[175, 1065, 700, 500],
+                "targetableNumber":[1, 1, 1, 4]
+            },
+            "trueDamage":{
+                "highestTotal":0,
+                "trueDamageSkills":[],
+                "trueDamageSkillKey":[]
+            },
+            "waveClearRating":1,
+            "dragonRushRating": 3
+        },
+        "Yasuo":{
+            "CC":{
+                "CCtypes":["knockUp", "knockUp"],
+                "CCskills":["YasuoQ1Wrapper", "YasuoR"],
+                "CCskillKeys":["Q", "R"] ,
+                "CCtimeFrame":[0.9, 1],
+                "CCrange":[1150, 1800],
+                "targetableNumber":[2, 3]
+            },
+            "trueDamage":{
+                "highestTotal":0,
+                "trueDamageSkills":[],
+                "trueDamageSkillKey":[]
+            },
+            "waveClearRating":2,
+            "dragonRushRating": 3
+        },
+        "Yone":{
+            "CC":{
+                "CCtypes":["knockUp", "knockUp"],
+                "CCskills":["YoneQ", "YoneR"],
+                "CCskillKeys":["Q", "R"],
+                "CCtimeFrame":[0.75, 1.75],
+                "CCrange":[1050, 1000],
+                "targetableNumber":[2, 4]
+            },
+            "trueDamage":{
+                "highestTotal":0,
+                "trueDamageSkills":[],
+                "trueDamageSkillKey":[]
+            },
+            "waveClearRating":2,
+            "dragonRushRating": 3
+        },
+        "Yorick":{
+            "CC":{
+                "CCtypes":["landScapeControl_Yorick", "slow"],
+                "CCskills":["YorickW", "YorickE"],
+                "CCskillKeys":["W", "E"],
+                "CCtimeFrame":[4, 2],
+                "CCrange":[825, 700],
+                "targetableNumber":[2, 1]
+            },
+            "trueDamage":{
+                "highestTotal":0,
+                "trueDamageSkills":[],
+                "trueDamageSkillKey":[]
+            },
+            "waveClearRating":2,
+            "dragonRushRating": 2
+        },
+        "Yuumi":{
+            "CC":{
+                "CCtypes":["slow", "root"],
+                "CCskills":["YuumiQ", "YuumiR"],
+                "CCskillKeys":["Q", "R"],
+                "CCtimeFrame":[1, 1.75],
+                "CCrange":[1150, 1100],
+                "targetableNumber":[1, 4]
+            },
+            "trueDamage":{
+                "highestTotal":0,
+                "trueDamageSkills":[],
+                "trueDamageSkillKey":[]
+            },
+            "waveClearRating":0,
+            "dragonRushRating": 0
+        },
+        "Zac":{
+            "CC":{
+                "CCtypes":["knockUp", "knockUp", "knockBack"],
+                "CCskills":["ZacQ", "ZacE", "ZacR"],
+                "CCskillKeys":["Q", "E", "R"],
+                "CCtimeFrame":[0.75, 1, 1],
+                "CCrange":[951, 2050, 300],
+                "targetableNumber":[2, 3, 5]
+            },
+            "trueDamage":{
+                "highestTotal":0,
+                "trueDamageSkills":[],
+                "trueDamageSkillKey":[]
+            },
+            "waveClearRating":1,
+            "dragonRushRating": 1
+        },
+        "Zed":{
+            "CC":{
+                "CCtypes":["slow"],
+                "CCskills":["ZedE"],
+                "CCskillKeys":["E"],
+                "CCtimeFrame":[1.5],
+                "CCrange":[740],
+                "targetableNumber":[2]
+            },
+            "trueDamage":{
+                "highestTotal":0,
+                "trueDamageSkills":[],
+                "trueDamageSkillKey":[]
+            },
+            "waveClearRating":2,
+            "dragonRushRating": 1
+        },
+        "Ziggs":{
+            "CC":{
+                "CCtypes":["knockBack", "slow"],
+                "CCskills":["ZiggsW", "ZiggsE"],
+                "CCskillKeys":["W", "E"],
+                "CCtimeFrame":[0.5, 1.5],
+                "CCrange":[1325, 1225],
+                "targetableNumber":[2, 4]
+            },
+            "trueDamage":{
+                "highestTotal":0,
+                "trueDamageSkills":[],
+                "trueDamageSkillKey":[]
+            },
+            "waveClearRating":3,
+            "dragonRushRating": 3
+        },
+        "Zilean":{
+            "CC":{
+                "CCtypes":["stun", "slow"],
+                "CCskills":["ZileanQ", "TimeWarp"],
+                "CCskillKeys":["Q", "E"],
+                "CCtimeFrame":[1.5, 2.5],
+                "CCrange":[1250, 550],
+                "targetableNumber":[3, 1]
+            },
+            "trueDamage":{
+                "highestTotal":0,
+                "trueDamageSkills":[],
+                "trueDamageSkillKey":[]
+            },
+            "waveClearRating":2,
+            "dragonRushRating": 1
+        },
+        "Zoe":{
+            "CC":{
+                "CCtypes":["sleep"],
+                "CCskills":["ZoeE"],
+                "CCskillKeys":["E"],
+                "CCtimeFrame":[2.25],
+                "CCrange":[1050],
+                "targetableNumber":[1]
+            },
+            "trueDamage":{
+                "highestTotal":220,
+                "castablityToNonChampion": true,
+                "trueDamageSkills":["ZoeE"],
+                "trueDamageSkillKey":[]
+            },
+            "waveClearRating":2,
+            "dragonRushRating": 1
+        },
+        "Zyra":{
+            "CC":{
+                "CCtypes":["root", "knockUp"],
+                "CCskills":["ZyraE", "ZyraR"],
+                "CCskillKeys":["E", "R"],
+                "CCtimeFrame":[2, 1],
+                "CCrange":[1100, 1200],
+                "targetableNumber":[2, 5]
+            },
+            "trueDamage":{
+                "highestTotal":0,
+                "trueDamageSkills":[],
+                "trueDamageSkillKey":[]
+            },
+            "waveClearRating":3,
+            "dragonRushRating": 2
+        } 
+    }
+}

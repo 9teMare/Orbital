@@ -1,6 +1,6 @@
 
 import React, {useEffect, useState} from 'react'
-import { View, Text, Button, Image, StyleSheet, FlatList} from 'react-native'
+import { View, Text, Image, StyleSheet, FlatList, Alert} from 'react-native'
 
 const TOP = 0, JUNGLE = 1, MID = 2, ADC = 3, SUPPORT = 4
 const ASSASSIN = 0, FIGHTER = 1, MAGE = 2, MARKSMAN = 3, TANK = 5 //SUPPORT = 4
@@ -261,6 +261,42 @@ export default function lane({route}) {
             <Item title={item.item.title}
                 arr={item.item.arr}/>
         ) 
+    }
+
+    const getMessageTitle = (role) => {
+        if (role === "ASSASSINATION") {
+            return "No assassins!"
+        }
+        if (role === "FIGHTER") {
+            return "No fighters!"
+        }
+        if (role === "AP DAMAGE") {
+            return "No mages!"
+        } 
+        if (role === "AD DAMAGE") {
+            return "No marksman!"
+        } 
+        if (role === "HEAL/PROTECTION") {
+            return "Lack of protection/healing!"
+        }
+    }
+
+    const getMessage = (role) => {
+        if (role === "ASSASSINATION") {
+            return "The team does not have assassin. This usu"
+        }
+        if (role === "FIGHTER") {
+            return "No fighters!"
+        }
+        if (role === "AP DAMAGE") {
+            return "No mages!"
+        } 
+        if (role === "AD DAMAGE") {
+            return "No marksman!"
+        } 
+        if (role === "HEAL/PROTECTION") {
+            return "Lack of protection/healing!"
+        }
     }
    
     return (
