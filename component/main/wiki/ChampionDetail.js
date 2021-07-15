@@ -1,10 +1,21 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import {View, Text, Image, StyleSheet, ImageBackground, ListRenderItem } from 'react-native'
 import { Tabs } from 'react-native-collapsible-tab-view'
 
 export default function ChampionDetail({ route, navigation}) {
     const champName = route.params;
     const champSplashUrl = 'http://ddragon.leagueoflegends.com/cdn/img/champion/splash/' + champName + '_0.jpg'
+
+    const [lore, setLore] = useState('')
+
+    useEffect(() => {
+        fetch('http://ddragon.leagueoflegends.com/cdn/11.14.1/data/en_US/champion/'+ champName + '.json')
+        .then((response) => response.json())
+        .then((response) => {
+            setLore(response["data"][champName]["lore"])
+        })
+        .catch((error) => console.error(error))
+      }, [])
 
     const Header = () => {
       return <View style={styles.container}>
@@ -28,6 +39,9 @@ export default function ChampionDetail({ route, navigation}) {
         >
             <Tabs.Tab name="Lore">
                 <Tabs.ScrollView>
+                    <View>
+                        <Text style={styles.lore}>{lore}</Text>
+                    </View>
                     <View style={[styles.box, styles.boxA]} />
                     <View style={[styles.box, styles.boxB]} />
                 </Tabs.ScrollView>
@@ -70,6 +84,10 @@ const styles = StyleSheet.create({
         left: 20,
         top: 20
         //backgroundColor: "#000000c0"
+    },
+    lore: {
+        fontSize: 20,
+        lineHeight: 30
     },
     box: {
         height: 250,
