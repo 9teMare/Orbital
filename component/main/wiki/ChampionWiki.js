@@ -10,7 +10,7 @@ export default function ChampionWiki({navigation}) {
   const [data, setData] = useState([])
 
   useEffect(() => {
-    fetch('http://ddragon.leagueoflegends.com/cdn/11.12.1/data/en_US/champion.json')
+    fetch('http://ddragon.leagueoflegends.com/cdn/11.14.1/data/en_US/champion.json')
     .then((response) => response.json())
     .then((response) => {
         for (var k in response.data) {
@@ -25,9 +25,9 @@ export default function ChampionWiki({navigation}) {
   const champName = []
 
   const Item = ({ item, onPress, weight, color}) => (
-    <TouchableOpacity onPress={() => navigation.navigate("ChampionDetail")}>
+    <TouchableOpacity onPress={() => navigation.navigate("Champion Detail", item)}>
         <Image 
-            source={{uri: 'http://ddragon.leagueoflegends.com/cdn/11.12.1/img/champion/' + item + '.png'}}
+            source={{uri: 'http://ddragon.leagueoflegends.com/cdn/11.14.1/img/champion/' + item + '.png'}}
             style= {[styles.image, color]}
         />
         <Text style={[styles.title, weight]}>
@@ -87,8 +87,6 @@ export default function ChampionWiki({navigation}) {
       <View style={{flexDirection: 'row'}}>
         <View style={{justifyContent:'center', alignItems: 'center'}}>
           <FlatList
-          //why height????
-            //style={{height: screen.height - 110}}
             ListHeaderComponent={renderHeader}
             numColumns={4}
             horizontal={false}

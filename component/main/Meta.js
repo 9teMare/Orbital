@@ -13,9 +13,10 @@ import metaMainScreen from './meta/MetaOverall'
 export default function Meta() {  
       return (
         <>          
+            <StatusBar/>
             <Tab.Navigator 
                 tabBarOptions={{indicatorStyle: {backgroundColor: '#55BA46'},
-                tabStyle:{Height:70}
+                tabStyle:{height: 50, width: 105}, labelStyle: { fontSize: 12.9 }
             }}>
             <Tab.Screen name="Meta" component={metaMainScreen} />
             <Tab.Screen name="Esports" component={esportScreen} />

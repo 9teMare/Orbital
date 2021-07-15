@@ -114,8 +114,8 @@ export class App extends Component {
             <Stack.Screen name="Rune" component={runeScreen}/>
             <Stack.Screen name="Mechanism" component={mechanismScreen}/>
             <Stack.Screen name="System" component={systemScreen}/>
-            <Stack.Screen name="ChampionDetail" component={championDetailScreen}/>
-            <Stack.Screen name="ItemDetail" component={itemDetailScreen}/>
+            <Stack.Screen name="Champion Detail" component={championDetailScreen}/>
+            <Stack.Screen name="Item Detail" component={itemDetailScreen}/>
           </Stack.Navigator>
         </NavigationContainer>
 

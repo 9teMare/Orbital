@@ -25,7 +25,7 @@ export default function ItemWiki({navigation}) {
   const itemName = []
 
   const Item = ({ item, onPress, weight, color}) => (
-    <TouchableOpacity onPress={() => navigation.navigate("ItemDetail")}>
+    <TouchableOpacity onPress={() => navigation.navigate("Item Detail")}>
         <Image 
             source={{uri: 'http://ddragon.leagueoflegends.com/cdn/11.12.1/img/item/' + item + '.png'}}
             style= {[styles.image, color]}
