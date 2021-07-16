@@ -4,6 +4,7 @@ import {View, Text, Image, StyleSheet, ImageBackground, Dimensions } from 'react
 import { Tabs } from 'react-native-collapsible-tab-view'
 
 export default function ChampionDetail({ route, navigation}) {
+
     const champName = route.params;
     const champSplashUrl = `http://ddragon.leagueoflegends.com/cdn/img/champion/splash/${champName}_0.jpg`
 
@@ -16,15 +17,11 @@ export default function ChampionDetail({ route, navigation}) {
     }
 
     const [lore, setLore] = useState('')
-    const [passive, setPassive] = useState('')
+    const [title, setTitle] = useState('')
     const [passiveId, setPassiveId] = useState('')
-    const [q, setQ] = useState('')
     const [qId, setQId] = useState('')
-    const [w, setW] = useState('')
     const [wId, setWId] = useState('')
-    const [e, setE] = useState('')
     const [eId, setEId] = useState('')
-    const [r, setR] = useState('')
     const [rId, setRId] = useState('')
 
     const [resourceType, setResourceType] = useState('q')
@@ -64,16 +61,12 @@ export default function ChampionDetail({ route, navigation}) {
         fetch('http://ddragon.leagueoflegends.com/cdn/11.14.1/data/en_US/champion/'+ champName + '.json')
         .then((response) => response.json())
         .then((response) => {
+            setTitle(response["data"][champName]["title"])
             setLore(response["data"][champName]["lore"])
-
             setPassiveId(response["data"][champName]["passive"]["image"]["full"])
-
             setQId(response["data"][champName]["spells"][0]["image"]["full"])
-
             setWId(response["data"][champName]["spells"][1]["image"]["full"])
-
             setEId(response["data"][champName]["spells"][2]["image"]["full"])
-
             setRId(response["data"][champName]["spells"][3]["image"]["full"])
         })
         .catch((error) => console.error(error))
@@ -83,6 +76,7 @@ export default function ChampionDetail({ route, navigation}) {
       return <View style={styles.container}>
                 <ImageBackground source={{uri: champSplashUrl}} style={styles.splash}>
                     <Text style={styles.splashText}>{champName}</Text>
+                    <Text style={styles.splashTitleText}>{title}</Text>
                 </ImageBackground>
             </View>
     }
@@ -172,7 +166,15 @@ const styles = StyleSheet.create({
         textAlign: "left",
         left: 20,
         top: 20,
-        //backgroundColor: "#000000c0"
+        backgroundColor: "#000000c0",
+        maxHeight: 50,
+        maxWidth: 500  ,
+    },
+    splashTitleText: {
+        color: "white",
+        fontSize: 21,
+        width: width/3,
+        top: 80,
     },
     lore: {
         fontSize: 18,

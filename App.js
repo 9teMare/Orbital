@@ -78,6 +78,7 @@ export class App extends Component {
 
   render() {
     const { loggedIn, loaded } = this.state;
+
     if (!loaded) {
       return (
         <View style={{ flex: 1, justifyContent: 'center'}}>
