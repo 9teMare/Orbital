@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import {StyleSheet, View, Text, Button, Image, TouchableOpacity, TextInput, Alert, StatusBar } from 'react-native'
+import {StyleSheet, View, Text, Button, Image, TouchableOpacity, TextInput, Alert, StatusBar, Dimensions } from 'react-native'
 import {Picker} from '@react-native-picker/picker'
 import {connect} from 'react-redux'
 import firebase from 'firebase'
@@ -98,7 +98,7 @@ function MyPage(props) {
                 </View>
 
                 <Ionicons 
-                    style={{position: 'absolute', top:20, right:20}}
+                    style={{position: 'absolute', top: height*1/20, right:width*1/20}}
                     name="md-settings" 
                     size={32} 
                     color="black" 
@@ -153,6 +153,8 @@ function MyPage(props) {
     )
 }
 
+const {width, height} = Dimensions.get("window")
+
 const styles = StyleSheet.create({
     container: {
         flex: 1,
@@ -162,7 +164,7 @@ const styles = StyleSheet.create({
         margin: 20 
     },
     infoContainer: {
-        height: 350, width: 350, backgroundColor: 'white', justifyContent:'center', shadowRadius:5, shadowOffset:{width:-6, height:6}, shadowOpacity:0.2,
+        height: height/3, maxWidth: width, backgroundColor: 'white', justifyContent:'center', shadowRadius:10, shadowOffset:{width:-6, height:6}, shadowOpacity:0.2,
         marginLeft: 30 , marginRight:30
     }
 })

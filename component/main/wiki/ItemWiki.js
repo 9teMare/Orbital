@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import {Text, View, FlatList, TouchableOpacity, Image, Button, TextInput, StyleSheet} from 'react-native'
+import {Text, View, FlatList, TouchableOpacity, Image, Button, TextInput, StyleSheet, Dimensions} from 'react-native'
 import {Header, ListItem, List} from 'react-native-elements'
 import filter from 'lodash.filter';
 
@@ -52,7 +52,10 @@ export default function ItemWiki({navigation}) {
           backgroundColor: '#fff',
           padding: 10,
           marginVertical: 10,
-          borderRadius: 20
+          width: width * 0.75,
+          borderRadius: 10,
+          flexDirection: 'row',
+          alignSelf:'center'
         }}
       >
         <TextInput
@@ -62,7 +65,7 @@ export default function ItemWiki({navigation}) {
           value={query}
           onChangeText={queryText => handleSearch(queryText)}
           placeholder="Search"
-          style={{ backgroundColor: '#fff', paddingHorizontal: 20 }}
+          style={{ backgroundColor: '#fff', paddingHorizontal: 20, maxWidth: width }}
         />
       </View>
     );
@@ -85,10 +88,8 @@ export default function ItemWiki({navigation}) {
 
   return (
       <View style={{flexDirection: 'row'}}>
-        <View style={{justifyContent:'center', alignItems: 'center'}}>
+        <View style={{justifyContent: 'space-between', alignItems: 'center', width: width}}>
           <FlatList
-          //why height????
-            //style={{height: screen.height - 110}}
             ListHeaderComponent={renderHeader}
             numColumns={4}
             horizontal={false}
@@ -102,12 +103,14 @@ export default function ItemWiki({navigation}) {
   )
 }
 
+const {width, height} = Dimensions.get("window")
+
 const styles = StyleSheet.create({
   image: {
-      width:60, height:60, marginTop:20, marginLeft:20,borderWidth:2
+      width:60, height:60, marginTop:15, marginBottom:5, marginLeft:10, marginRight:10, borderWidth:2, justifyContent:'space-between'
   },
   title: {
-      fontSize:12, alignItems: 'center', marginLeft: 20
+      fontSize:10, alignSelf: 'center', marginBottom: 5, marginLeft: 10, marginRight:10, fontWeight: 'bold'
   },
   imageSelected: {
       width:60, height:60, marginTop:20, marginLeft:20, borderRadius:3, borderColor:'green'

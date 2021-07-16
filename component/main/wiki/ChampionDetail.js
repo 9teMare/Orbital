@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import {View, Text, Image, StyleSheet, ImageBackground, ListRenderItem } from 'react-native'
+import {View, Text, Image, StyleSheet, ImageBackground, Dimensions } from 'react-native'
 import { Tabs } from 'react-native-collapsible-tab-view'
 
 export default function ChampionDetail({ route, navigation}) {
@@ -65,15 +65,17 @@ export default function ChampionDetail({ route, navigation}) {
     )
 }
 
+const {width, height} = Dimensions.get("window")
+
 const styles = StyleSheet.create({
     container: {
         flex: 1
     },
     splash: {
-        height: 300,
-        width: 500,
+        height: height/3,
+        maxWidth: width,
         //justifyContent: "center",
-        flex:1
+        flexDirection: 'row',
     },
     splashText: {
         color: "white",
@@ -82,7 +84,7 @@ const styles = StyleSheet.create({
         fontWeight: "bold",
         textAlign: "left",
         left: 20,
-        top: 20
+        top: 20,
         //backgroundColor: "#000000c0"
     },
     lore: {
