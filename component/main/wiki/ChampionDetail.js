@@ -27,7 +27,7 @@ export default function ChampionDetail({ route, navigation}) {
     const [r, setR] = useState('')
     const [rId, setRId] = useState('')
 
-    const [resourceType, setResourceType] = useState('Q')
+    const [resourceType, setResourceType] = useState('q')
     const [skill, setSkill] = useState('')
 
     const skillIndex = (skill) => {
