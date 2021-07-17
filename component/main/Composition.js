@@ -7,7 +7,6 @@ import {Header} from 'react-native-elements'
 
 export default function Composition({navigation, route}) {
 
-
     const TOP = 0, JUNGLE = 1, MID = 2, ADC = 3, SUPPORT = 4
     const blueTeam = route.params?.blueTeam
     const redTeam = route.params?.redTeam

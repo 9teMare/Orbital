@@ -1805,6 +1805,15 @@
   "resolved" "https://registry.nlark.com/@protobufjs/utf8/download/@protobufjs/utf8-1.1.0.tgz"
   "version" "1.1.0"
 
+"@react-native-community/art@*":
+  "integrity" "sha512-a+ZcRGl/BzLa89yi33Mbn5SHavsEXqKUMdbfLf3U8MDLElndPqUetoJyGkv63+BcPO49UMWiQRP1YUz6/zfJ+A=="
+  "resolved" "https://registry.npmjs.org/@react-native-community/art/-/art-1.2.0.tgz"
+  "version" "1.2.0"
+  dependencies:
+    "art" "^0.10.3"
+    "invariant" "^2.2.4"
+    "prop-types" "^15.7.2"
+
 "@react-native-community/cli-debugger-ui@^4.13.1":
   "integrity" "sha1-B95tTauA7EkjHeHx+/ZYtK05syw="
   "resolved" "https://registry.nlark.com/@react-native-community/cli-debugger-ui/download/@react-native-community/cli-debugger-ui-4.13.1.tgz?cache=0&sync_timestamp=1623144457152&other_urls=https%3A%2F%2Fregistry.nlark.com%2F%40react-native-community%2Fcli-debugger-ui%2Fdownload%2F%40react-native-community%2Fcli-debugger-ui-4.13.1.tgz"
@@ -2305,6 +2314,11 @@
   "integrity" "sha1-qJS3XUvE9s1nnvMkSp/Y9Gri1Cg="
   "resolved" "https://registry.nlark.com/array-unique/download/array-unique-0.3.2.tgz"
   "version" "0.3.2"
+
+"art@^0.10.3":
+  "integrity" "sha512-HXwbdofRTiJT6qZX/FnchtldzJjS3vkLJxQilc3Xj+ma2MXjY4UAyQ0ls1XZYVnDvVIBiFZbC6QsvtW86TD6tQ=="
+  "resolved" "https://registry.npmjs.org/art/-/art-0.10.3.tgz"
+  "version" "0.10.3"
 
 "asap@~2.0.3", "asap@~2.0.6":
   "integrity" "sha1-5QNHYR1+aQlDIIu9r+vLwvuGbUY="
@@ -5365,6 +5379,11 @@
   "resolved" "https://registry.nlark.com/path-parse/download/path-parse-1.0.6.tgz"
   "version" "1.0.6"
 
+"paths-js@^0.4.10":
+  "integrity" "sha512-3mqcLomDBXOo7Fo+UlaenG6f71bk1ZezPQy2JCmYHy2W2k5VKpP+Jbin9H0bjXynelTbglCqdFhSEkeIkKTYUA=="
+  "resolved" "https://registry.npmjs.org/paths-js/-/paths-js-0.4.11.tgz"
+  "version" "0.4.11"
+
 "phin@^2.9.1":
   "integrity" "sha1-+basEKA1Y2+2XfxXaqqhe4dDElw="
   "resolved" "https://registry.npm.taobao.org/phin/download/phin-2.9.3.tgz"
@@ -5442,6 +5461,11 @@
   "integrity" "sha1-553SshV2f9nARWHAEjbflgvOf7s="
   "resolved" "https://registry.npm.taobao.org/pngjs/download/pngjs-5.0.0.tgz"
   "version" "5.0.0"
+
+"point-in-polygon@^1.0.1":
+  "integrity" "sha512-3ojrFwjnnw8Q9242TzgXuTD+eKiutbzyslcq1ydfu82Db2y+Ogbmyrkpv0Hgj31qwT3lbS9+QAAO/pIQM35XRw=="
+  "resolved" "https://registry.npmjs.org/point-in-polygon/-/point-in-polygon-1.1.0.tgz"
+  "version" "1.1.0"
 
 "posix-character-classes@^0.1.0":
   "integrity" "sha1-AerA/jta9xoqbAL+q7jB/vfgDqs="
@@ -5631,6 +5655,20 @@
   "resolved" "https://registry.npmjs.org/react-minimal-pie-chart/-/react-minimal-pie-chart-8.2.0.tgz"
   "version" "8.2.0"
 
+"react-native-chart-kit@^6.11.0":
+  "integrity" "sha512-mRSfW+mcyVSi0UZKFucru5h5TPB6UcWrMi/DphICRpPJWlvIVAv/6VYGFA57NFDLoRVufFjbsRRrms+TOq61jw=="
+  "resolved" "https://registry.npmjs.org/react-native-chart-kit/-/react-native-chart-kit-6.11.0.tgz"
+  "version" "6.11.0"
+  dependencies:
+    "lodash" "^4.17.13"
+    "paths-js" "^0.4.10"
+    "point-in-polygon" "^1.0.1"
+
+"react-native-collapsible@^1.6.0":
+  "integrity" "sha512-beZjdgbT9Y/Pg591Xy5XkKG20HffJiVad4n9bfcUF/f783A+tvOVXnqvbS58Lkaym93mi4jcDPMuW9Vc1t6rqg=="
+  "resolved" "https://registry.npmjs.org/react-native-collapsible/-/react-native-collapsible-1.6.0.tgz"
+  "version" "1.6.0"
+
 "react-native-elements@^3.4.2":
   "integrity" "sha512-m0eAWOn7JuR1wNTNY0WHuaqst4LI/gFE4N5Bbyfsc4DiryWsMST7aAg5w/Gos4IexWIzhLKCIkPxthND1m/8Xg=="
   "resolved" "https://registry.npmjs.org/react-native-elements/-/react-native-elements-3.4.2.tgz"
@@ -5675,6 +5713,11 @@
   "resolved" "https://registry.npmjs.org/react-native-pie-chart/-/react-native-pie-chart-1.0.13.tgz"
   "version" "1.0.13"
 
+"react-native-pie@^1.1.2":
+  "integrity" "sha512-aShbks0NA4QzXftKpdQd/lNfkvj23yS2pF1A61Y+bKhFMnky0xubN1m4edcDNVWC0a2l40rM9C3JwJOIchv3kQ=="
+  "resolved" "https://registry.npmjs.org/react-native-pie/-/react-native-pie-1.1.2.tgz"
+  "version" "1.1.2"
+
 "react-native-ratings@8.0.4":
   "integrity" "sha512-Xczu5lskIIRD6BEdz9A0jDRpEck/SFxRqiglkXi0u67yAtI1/pcJC76P4MukCbT8K4BPVl+42w83YqXBoBRl7A=="
   "resolved" "https://registry.npmjs.org/react-native-ratings/-/react-native-ratings-8.0.4.tgz"
@@ -5707,7 +5750,7 @@
   "resolved" "https://registry.npmjs.org/react-native-size-matters/-/react-native-size-matters-0.3.1.tgz"
   "version" "0.3.1"
 
-"react-native-svg@12.1.0":
+"react-native-svg@> 6.4.1", "react-native-svg@12.1.0":
   "integrity" "sha512-1g9qBRci7man8QsHoXn6tP3DhCDiypGgc6+AOWq+Sy+PmP6yiyf8VmvKuoqrPam/tf5x+ZaBT2KI0gl7bptZ7w=="
   "resolved" "https://registry.npmjs.org/react-native-svg/-/react-native-svg-12.1.0.tgz"
   "version" "12.1.0"
@@ -5749,9 +5792,10 @@
     "prop-types" "^15.6.0"
     "react-timer-mixin" "^0.13.4"
 
-"react-native@https://github.com/expo/react-native/archive/sdk-39.0.4.tar.gz":
+"react-native@*", "react-native@>= 0.50.0", "react-native@https://github.com/expo/react-native/archive/sdk-39.0.4.tar.gz":
   "integrity" "sha512-SHhcKW3LF+6Lx8zEbFNeWEuLKcSLv3seeKhEctdfl8Ey19HWdCzQMlDDKhFELBeyLFjrzhpvl4jVTM4h/Sw+YQ=="
   "resolved" "https://github.com/expo/react-native/archive/sdk-39.0.4.tar.gz"
+  "version" "0.63.2"
   dependencies:
     "@babel/runtime" "^7.0.0"
     "@react-native-community/cli" "^4.7.0"
@@ -5808,7 +5852,7 @@
   "resolved" "https://registry.npm.taobao.org/react-timer-mixin/download/react-timer-mixin-0.13.4.tgz"
   "version" "0.13.4"
 
-"react@^16.8.0 || ^17.0.0", "react@16.13.1":
+"react@*", "react@^16.8.0 || ^17.0.0", "react@> 16.7.0", "react@16.13.1":
   "integrity" "sha1-LoGIIvGpdDEiwGPWQQ2FweOv5I4="
   "resolved" "https://registry.nlark.com/react/download/react-16.13.1.tgz"
   "version" "16.13.1"

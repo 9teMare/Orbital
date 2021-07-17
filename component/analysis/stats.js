@@ -7,10 +7,12 @@ const ASSASSIN = 0, FIGHTER = 1, MAGE = 2, MARKSMAN = 3, TANK = 5 //SUPPORT = 4
 const BLUE = 0, RED = 1
 
 
-export default function lane({route}) {
+export default function stats({route, navigation}) {
     const {blue, red} = route.params
     const [isLoading, setLoader] = useState(true)
     const [tag, setTag] = useState([])  
+    const roleBlueMissing = []
+    const roleRedMissing = []
 
     const pickHighest = (arr) => {
         var temp = [];
@@ -109,6 +111,15 @@ export default function lane({route}) {
             scaling_AP = [blue_APhighest, red_APhighest]
             attackRange = [blue_RANGE, red_RANGE]
 
+            for (var i = 0; i < tag.length; i++) {
+                if (tag[i].arr[0].length === 0) {
+                    roleBlueMissing.push(tag[i].title)
+                }
+                if (tag[i].arr[1].length === 0) {
+                    roleRedMissing.push(tag[i].title)
+                }
+            }
+
             setTag([{title: "ASSASSINATION", arr: assassin},
             {title: "FIGHTER", arr: fighter},
             {title: "AP DAMAGE", arr: damage_AP},
@@ -118,14 +129,22 @@ export default function lane({route}) {
             {title: "AD SCALING", arr: scaling_AD},
             {title: "AP SCALING", arr: scaling_AP},
             {title: "ATTACK RANGE", arr: attackRange}])
+
+            //navigation.setParams({blue: blue, red: red, roleMissing_blue: roleBlueMissing, roleMissing_red: roleRedMissing})
             setLoader(false)
 
     }   
+
+    
     
     useEffect(() => {
         fetching()
        }, []);
 
+
+    
+
+    //setParams({roleMissing_blue: roleBlueMissing, roleMissing_red: roleRedMissing})
 
     const champPic = (arr) => {
         if (arr.length === 0) {
