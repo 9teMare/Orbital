@@ -13,14 +13,18 @@ function ChampSelect({navigation, route}) {
     const TOP = 0, JUNGLE = 1, MID = 2, ADC = 3, SUPPORT = 4
 
     useEffect(() => {
+        let isMounted = true
         fetch('http://ddragon.leagueoflegends.com/cdn/11.12.1/data/en_US/champion.json')
         .then((response) => response.json())
         .then((response) => {
-            for (var k in response.data) {
-                champName.push(k)
+            if (isMounted) {
+                for (var k in response.data) {
+                    champName.push(k)
+                }
+                setFullData(champName)
+                setData(champName)
             }
-            setFullData(champName)
-            setData(champName)
+            return () => { isMounted = false }
         })
         .catch((error) => console.error(error))
     }, [selectedChamp])

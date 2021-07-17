@@ -10,14 +10,18 @@ export default function ChampionWiki({navigation}) {
   const [data, setData] = useState([])
 
   useEffect(() => {
+    let isMounted = true
     fetch('http://ddragon.leagueoflegends.com/cdn/11.14.1/data/en_US/champion.json')
     .then((response) => response.json())
     .then((response) => {
-        for (var k in response.data) {
+        if (isMounted) {
+          for (var k in response.data) {
             champName.push(k)
+          }
+          setFullData(champName)
+          setData(champName)
         }
-        setFullData(champName)
-        setData(champName)
+        return () => { isMounted = false }
     })
     .catch((error) => console.error(error))
   }, [selectedChamp])

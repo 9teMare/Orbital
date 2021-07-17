@@ -10,14 +10,18 @@ export default function ItemWiki({navigation}) {
   const [data, setData] = useState([])
 
   useEffect(() => {
+    let isMounted = true
     fetch('http://ddragon.leagueoflegends.com/cdn/11.12.1/data/en_US/item.json')
     .then((response) => response.json())
     .then((response) => {
-        for (var k in response.data) {
+        if (isMounted) {
+          for (var k in response.data) {
             itemName.push(k)
+          }
+          setFullData(itemName)
+          setData(itemName)
         }
-        setFullData(itemName)
-        setData(itemName)
+        return () => { isMounted = false }
     })
     .catch((error) => console.error(error))
   }, [selecteditem])

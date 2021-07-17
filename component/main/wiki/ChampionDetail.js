@@ -42,17 +42,21 @@ export default function ChampionDetail({ route, navigation}) {
     }
 
     useEffect(() => {
+        let isMounted = true
         fetch(`http://ddragon.leagueoflegends.com/cdn/11.14.1/data/en_US/champion/${champName}.json`)
         .then((response) => response.json())
         .then((response) => {
             //setQ(response["data"][champName]["spells"][0]["name"])
-            if (resourceType === "p") {
-                setSkill(response["data"][champName][skillIndex(resourceType)]["name"])
-
-            } else {
-                setSkill(response["data"][champName]["spells"][skillIndex(resourceType)]["name"])
-
+            if (isMounted) {
+                if (resourceType === "p") {
+                    setSkill(response["data"][champName][skillIndex(resourceType)]["name"])
+    
+                } else {
+                    setSkill(response["data"][champName]["spells"][skillIndex(resourceType)]["name"])
+    
+                }
             }
+            return () => { isMounted = false }    
         })
         .catch((error) => console.error(error))
     }), [resourceType]
@@ -76,7 +80,7 @@ export default function ChampionDetail({ route, navigation}) {
       return <View style={styles.container}>
                 <ImageBackground source={{uri: champSplashUrl}} style={styles.splash}>
                     <Text style={styles.splashText}>{champName}</Text>
-                    <Text style={styles.splashTitleText}>{title}</Text>
+                    <Text style={styles.splashTitleText}> - {title}</Text>
                 </ImageBackground>
             </View>
     }
@@ -164,17 +168,21 @@ const styles = StyleSheet.create({
         lineHeight: 50,
         fontWeight: "bold",
         textAlign: "left",
-        left: 20,
-        top: 20,
-        backgroundColor: "#000000c0",
-        maxHeight: 50,
-        maxWidth: 500  ,
+        left: width/20,
+        top: 170,
+        //backgroundColor: "#000000c0",
+        //maxHeight: 50,
+        maxWidth: 500,
     },
     splashTitleText: {
         color: "white",
         fontSize: 21,
-        width: width/3,
-        top: 80,
+        top: height/30 + 190,
+        position: 'absolute',
+        left: 20,
+        lineHeight: 29,
+        maxHeight: 29,
+        //backgroundColor: "#000000c0",
     },
     lore: {
         fontSize: 18,
