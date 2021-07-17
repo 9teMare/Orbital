@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { View, Text, StatusBar } from 'react-native'
+import { View, Text, StatusBar, StyleSheet } from 'react-native'
 
 export default function Favorites() {
 

@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react'
-import { TouchableOpacity } from 'react-native';
-import {View, Text, Image, StyleSheet, ImageBackground, Dimensions } from 'react-native'
+import {View, Text, Image, StyleSheet, ImageBackground, Dimensions, TouchableOpacity, ScrollView } from 'react-native'
 import { Tabs } from 'react-native-collapsible-tab-view'
 
 export default function ChampionDetail({ route, navigation}) {
 
     const champName = route.params;
-    const champSplashUrl = `http://ddragon.leagueoflegends.com/cdn/img/champion/splash/${champName}_0.jpg`
+    const champSplashUrl = (index) => {
+        return {uri: `http://ddragon.leagueoflegends.com/cdn/img/champion/splash/${champName}_${index}.jpg`}
+    }
 
     const skillIconUrl = (id) => {
         return {uri: `http://ddragon.leagueoflegends.com/cdn/11.14.1/img/spell/${id}`}
@@ -24,8 +25,17 @@ export default function ChampionDetail({ route, navigation}) {
     const [eId, setEId] = useState('')
     const [rId, setRId] = useState('')
 
+    const [skillTooltip, setSkillTooltip] = useState('')
+
     const [resourceType, setResourceType] = useState('q')
     const [skill, setSkill] = useState('')
+
+    const skinIdArray = []
+    const skinNumArray = []
+    const skinNameArray = []
+    const [skinId, setSkinId] = useState([])
+    const [skinNum, setSkinNum] = useState([])
+    const [skinName, setSkinName] = useState([])
 
     const skillIndex = (skill) => {
         if (skill === 'q') {
@@ -46,14 +56,13 @@ export default function ChampionDetail({ route, navigation}) {
         fetch(`http://ddragon.leagueoflegends.com/cdn/11.14.1/data/en_US/champion/${champName}.json`)
         .then((response) => response.json())
         .then((response) => {
-            //setQ(response["data"][champName]["spells"][0]["name"])
             if (isMounted) {
                 if (resourceType === "p") {
                     setSkill(response["data"][champName][skillIndex(resourceType)]["name"])
-    
+                    setSkillTooltip(response["data"][champName][skillIndex(resourceType)]["description"])
                 } else {
                     setSkill(response["data"][champName]["spells"][skillIndex(resourceType)]["name"])
-    
+                    setSkillTooltip(response["data"][champName]["spells"][skillIndex(resourceType)]["tooltip"])
                 }
             }
             return () => { isMounted = false }    
@@ -72,27 +81,36 @@ export default function ChampionDetail({ route, navigation}) {
             setWId(response["data"][champName]["spells"][1]["image"]["full"])
             setEId(response["data"][champName]["spells"][2]["image"]["full"])
             setRId(response["data"][champName]["spells"][3]["image"]["full"])
+
+            for (var i = 1; i < response["data"][champName]["skins"].length; i ++) {
+                skinIdArray.push(i - 1)
+                skinNumArray.push(response["data"][champName]["skins"][i]["num"])
+                skinNameArray.push(response["data"][champName]["skins"][i]["name"])
+            }
+            setSkinId(skinIdArray)
+            setSkinNum(skinNumArray)
+            setSkinName(skinNameArray)
         })
         .catch((error) => console.error(error))
       }, [])
 
     const Header = () => {
       return <View style={styles.container}>
-                <ImageBackground source={{uri: champSplashUrl}} style={styles.splash}>
+                <ImageBackground source={champSplashUrl(0)} style={styles.splash}>
                     <Text style={styles.splashText}>{champName}</Text>
                     <Text style={styles.splashTitleText}> - {title}</Text>
                 </ImageBackground>
             </View>
     }
 
+    const displaySkins = skinId.map(index => (
+        <View>
+            <Image source={champSplashUrl(skinNum[index])} style={styles.skins}/>
+            <Text style={styles.skinName}>{skinName[index]}</Text>
+        </View>
+    ))
+
     return (
-    //     <View>      
-    //         <View style={styles.container}>
-    //             <ImageBackground source={{uri: champSplashUrl}} style={styles.splash}>
-    //                 <Text style={styles.splashText}>{champName}</Text>
-    //             </ImageBackground>
-    //         </View>
-    //    </View>
         <Tabs.Container 
             renderHeader={Header}
             headerHeight={250}
@@ -134,6 +152,7 @@ export default function ChampionDetail({ route, navigation}) {
                         </TouchableOpacity>
                     </View>
                     <Text style={styles.skill}>{skill}</Text>
+                    <Text style={styles.skillTooltip}>{skillTooltip}</Text>
                     <View style={[styles.box, styles.boxA]} />
                     <View style={[styles.box, styles.boxB]} />
                 </Tabs.ScrollView>
@@ -141,8 +160,9 @@ export default function ChampionDetail({ route, navigation}) {
 
             <Tabs.Tab name="Skins">
                 <Tabs.ScrollView>
-                    <View style={[styles.box, styles.boxA]} />
-                    <View style={[styles.box, styles.boxB]} />
+                    <ScrollView>
+                        {displaySkins}
+                    </ScrollView>
                 </Tabs.ScrollView>
             </Tabs.Tab>
 
@@ -204,6 +224,9 @@ const styles = StyleSheet.create({
       skill: {
         fontSize: 25
       },
+      skillTooltip: {
+        fontSize: 19
+      },
       skillIcon: {
         width:64, 
         height:64,
@@ -213,5 +236,19 @@ const styles = StyleSheet.create({
         //  height:53, 
          justifyContent:'space-between',
          flexDirection: 'row'
+      },
+      skins: {
+        marginTop: 20,
+        alignSelf: 'center',
+        height: height/3,
+        width: width - 30,
+        borderWidth: 3, 
+        borderColor: '#000000c0'
+      },
+      skinName: {
+        alignSelf: 'center',
+        fontSize: 21,
+        marginTop: 5,
+        marginBottom: 10
       }
 })
