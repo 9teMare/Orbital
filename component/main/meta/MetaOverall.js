@@ -114,9 +114,11 @@ export default function MetaOverall({navigation}) {
 
 const styles = StyleSheet.create({
     button: {
-        height: 105, width: 105, backgroundColor: 'white', justifyContent:'center', shadowRadius:5, shadowOffset:{width:-6, height:6}, shadowOpacity:0.2
+        height: 105, width: 105, backgroundColor: 'white', justifyContent:'center', 
+        shadowRadius:5, shadowOffset:{width:-6, height:6}, shadowOpacity:0.2, shadowColor: '#000000',
+        elevation: 5
     },
     buttonTitle: {
-        fontSize: 18, fontWeight:'500', color: '#55BA46', alignSelf:'center', marginTop:5
+        fontSize: 18, fontWeight:'500', color: '#55BA46', alignSelf:'center', marginTop:5, elevation: 5
     }
 })
