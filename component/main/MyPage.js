@@ -1,8 +1,10 @@
 import React, { useState } from 'react'
-import {StyleSheet, View, Text, Button, Image, TouchableOpacity, TextInput, Alert, StatusBar } from 'react-native'
+import {StyleSheet, View, Text, Button, Image, TouchableOpacity, TextInput, Alert, StatusBar, Dimensions } from 'react-native'
 import {Picker} from '@react-native-picker/picker'
 import {connect} from 'react-redux'
 import firebase from 'firebase'
+import { Ionicons } from '@expo/vector-icons';
+import { block } from 'react-native-reanimated'
 
 function MyPage(props) {
     const { currentUser } = props;
@@ -16,7 +18,7 @@ function MyPage(props) {
     const [Id, setId] = useState('');
     const [summonerName, setSummonerName] = useState('');
     const [summonerLvl, setSummonerLvl] = useState('');
-    const [profileIcon, setProfileIcon] = useState({url: '../../pictures/others/EmptyGrayRec.png'});
+    const [profileIcon, setProfileIcon] = useState({uri: '../../pictures/others/EmptyGrayRec.png'});
     const [apiKey, setApiKey] = useState('')
    
     const getApiKey = async () => {
@@ -63,7 +65,7 @@ function MyPage(props) {
       const invalidUsernameAlert = () => {
         Alert.alert(
             "Username not found",
-            "Please try again",
+            "Please try again"
             [
               {
                 text: "Cancel",
@@ -75,13 +77,15 @@ function MyPage(props) {
           );
       }
 
+    // const avatarAddress = 'http://ddragon.leagueoflegends.com/cdn/11.12.1/img/profileicon/' + profileIcon + '.png'
+
     return (
         <View>
             <StatusBar/>
             <View style = {{flexDirection: 'row', flexWrap:'wrap'}}>
                 <Image
                     //source = {require('../../pictures/others/EmptyGrayRec.png')}
-                    source = {{uri: 'http://ddragon.leagueoflegends.com/cdn/11.12.1/img/profileicon/' + profileIcon + '.png'}}
+                    source = {{uri: 'http://ddragon.leagueoflegends.com/cdn/11.14.1/img/profileicon/' + profileIcon + '.png'}}
                     style = {{width: 100, height:100, borderRadius: 100, marginVertical: 30, marginHorizontal: 20}}
                 />
                 <View style ={{marginVertical: 55}}>
@@ -93,29 +97,17 @@ function MyPage(props) {
                     </Text>
                 </View>
 
+                <Ionicons 
+                    style={{position: 'absolute', top: height*1/20, right:width*1/20}}
+                    name="md-settings" 
+                    size={32} 
+                    color="black" 
+                    onPress = {() => navigate("Settings")}
+                />
+
             </View>
 
-            <View
-                style={{
-                    borderBottomColor: '#A0A0A0',
-                    borderBottomWidth: 2,
-                }}
-            />
-
-            <TouchableOpacity
-                onPress = {() => navigate("Settings")}
-                style ={{height: 50}}
-            >
-                <Text style ={{marginLeft: 20, marginTop: 15, fontWeight: 'bold'}}> Settings </Text>
-
-            </TouchableOpacity>
-            <View
-                style={{
-                    borderBottomColor: '#A0A0A0',
-                    borderBottomWidth: 2,
-                }}
-            />
-            <View>
+            <View style={styles.infoContainer}>
                 <Picker
                     selectedValue={selectedRegion}
                     style={{ height: 50, width: 150 }}
@@ -161,6 +153,8 @@ function MyPage(props) {
     )
 }
 
+const {width, height} = Dimensions.get("window")
+
 const styles = StyleSheet.create({
     container: {
         flex: 1,
@@ -168,6 +162,10 @@ const styles = StyleSheet.create({
     },
     containerInfo: {
         margin: 20 
+    },
+    infoContainer: {
+        height: height/3, maxWidth: width, backgroundColor: 'white', justifyContent:'center', shadowRadius:10, shadowOffset:{width:-6, height:6}, shadowOpacity:0.2,
+        marginLeft: 30 , marginRight:30
     }
 })
 

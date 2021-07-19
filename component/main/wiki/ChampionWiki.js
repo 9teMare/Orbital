@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import {Text, View, FlatList, TouchableOpacity, Image, Button, TextInput, StyleSheet} from 'react-native'
+import {Text, View, FlatList, TouchableOpacity, Image, Button, TextInput, StyleSheet, Dimensions} from 'react-native'
 import {Header, ListItem, List} from 'react-native-elements'
 import filter from 'lodash.filter';
 
@@ -10,14 +10,18 @@ export default function ChampionWiki({navigation}) {
   const [data, setData] = useState([])
 
   useEffect(() => {
-    fetch('http://ddragon.leagueoflegends.com/cdn/11.12.1/data/en_US/champion.json')
+    let isMounted = true
+    fetch('http://ddragon.leagueoflegends.com/cdn/11.14.1/data/en_US/champion.json')
     .then((response) => response.json())
     .then((response) => {
-        for (var k in response.data) {
+        if (isMounted) {
+          for (var k in response.data) {
             champName.push(k)
+          }
+          setFullData(champName)
+          setData(champName)
         }
-        setFullData(champName)
-        setData(champName)
+        return () => { isMounted = false }
     })
     .catch((error) => console.error(error))
   }, [selectedChamp])
@@ -25,9 +29,9 @@ export default function ChampionWiki({navigation}) {
   const champName = []
 
   const Item = ({ item, onPress, weight, color}) => (
-    <TouchableOpacity onPress={() => navigation.navigate("ChampionDetail")}>
+    <TouchableOpacity onPress={() => navigation.navigate("Champion Detail", item)}>
         <Image 
-            source={{uri: 'http://ddragon.leagueoflegends.com/cdn/11.12.1/img/champion/' + item + '.png'}}
+            source={{uri: 'http://ddragon.leagueoflegends.com/cdn/11.14.1/img/champion/' + item + '.png'}}
             style= {[styles.image, color]}
         />
         <Text style={[styles.title, weight]}>
@@ -52,7 +56,10 @@ export default function ChampionWiki({navigation}) {
           backgroundColor: '#fff',
           padding: 10,
           marginVertical: 10,
-          borderRadius: 20
+          width: width * 0.75,
+          borderRadius: 10,
+          flexDirection: 'row',
+          alignSelf:'center'
         }}
       >
         <TextInput
@@ -62,7 +69,7 @@ export default function ChampionWiki({navigation}) {
           value={query}
           onChangeText={queryText => handleSearch(queryText)}
           placeholder="Search"
-          style={{ backgroundColor: '#fff', paddingHorizontal: 20 }}
+          style={{ backgroundColor: '#fff', paddingHorizontal: 20, maxWidth: width }}
         />
       </View>
     );
@@ -85,10 +92,8 @@ export default function ChampionWiki({navigation}) {
 
   return (
       <View style={{flexDirection: 'row'}}>
-        <View style={{justifyContent:'center', alignItems: 'center'}}>
+        <View style={{justifyContent: 'space-between', alignItems: 'center', width: width}}>
           <FlatList
-          //why height????
-            //style={{height: screen.height - 110}}
             ListHeaderComponent={renderHeader}
             numColumns={4}
             horizontal={false}
@@ -96,18 +101,21 @@ export default function ChampionWiki({navigation}) {
             extraData={selectedChamp}
             renderItem={renderItem}
             keyExtractor={item => item}
+            style={styles.flatlist}
           />
         </View>
       </View>
   )
 }
 
+const {width, height} = Dimensions.get("window")
+
 const styles = StyleSheet.create({
   image: {
-      width:60, height:60, marginTop:20, marginLeft:20, borderWidth:2, justifyContent:'center'
+      width:60, height:60, marginTop:15, marginBottom:5, marginLeft:10, marginRight:10, borderWidth:2, justifyContent:'space-between'
   },
   title: {
-      fontSize:12, alignItems: 'center', marginLeft: 20
+      fontSize:10, alignSelf: 'center', marginBottom: 5, marginLeft: 10, marginRight:10, fontWeight: 'bold'
   },
   imageSelected: {
       width:60, height:60, marginTop:20, marginLeft:20, borderRadius:3, borderColor:'green'
@@ -118,5 +126,4 @@ const styles = StyleSheet.create({
   doneButton: {
       height: 31, width: 63, backgroundColor: 'white', borderRadius: 5, alignItems: 'center', marginTop:35
   }
-
 })

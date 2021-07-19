@@ -1,8 +1,6 @@
 import React, {useEffect, useState} from 'react'
 import { View, Text, TouchableOpacity, StyleSheet, Image, FlatList } from 'react-native'
-//import { PieChart } from 'react-minimal-pie-chart'
-// import {PieChart} from 'react-native-chart-kit'
-// import { ScreenWidth } from 'react-native-elements/dist/helpers'
+import Collapsible from 'react-native-collapsible';
 
 export default function lane({route}) {
     const {blue, red} = route.params
@@ -143,8 +141,6 @@ export default function lane({route}) {
         setTeamFightPer(parseFloat(teamFightRatio))
 
 
-
-
         setDragonFightPoints([{title:'blue', value: parseFloat(blue_dragonFightPoints), color:"#55B1CE"},
                               {title:'red', value: parseFloat(red_dragonFightPoints), color:"#DC5047"}])
         setDragonFightPer(parseFloat(dragonFightRatio))
@@ -242,35 +238,28 @@ export default function lane({route}) {
 
                 <View style ={{marginTop:10}}>
 
-                    <View style={{height:30, marginLeft:20, marginRight:20, backgroundColor:'red', flexDirection:'row'}}> 
-                        <View style={{width:{teamFightPer}, backgroundColor:"blue"}}> 
-                            <Text style={{color:"white"}}> {teamFightPer}%</Text>
-                            
-                        </View>
-                        <Text style={{}}> {100-teamFightPer}% </Text>
+                    <View style={{height:30, marginLeft:20, marginRight:20, backgroundColor:"#DC5047", flexDirection:'row'}}> 
+                        <View style={{width:parseFloat(teamFightPer)+"%", backgroundColor:"#55B1CE"}}/> 
                     </View>
-
-                    {/* <View style={{position:'absolute', alignContent:'center', marginTop: 20, flexDirection:"row"}}>
-                        <View>
-                        <Text style={{color:"blue"}}>{teamFightPer}%</Text>
-                        <Text style={{color:"red"}}>{100-teamFightPer}%</Text>
-                        </View>
-                    </View> */}
+                    <View style={{flexDirection:"row", justifyContent:"space-between", marginLeft:20, marginRight:20, marginTop:5}}>
+                        <Text> {(parseFloat(teamFightPer)).toFixed(2)}%</Text>
+                        <Text> {(100-parseFloat(teamFightPer)).toFixed(2)}% </Text>
+                    </View>
                 </View>
-
-            </View>
+            </View> 
 
             <View style={{backgroundColor:"white", marginTop: 5}}>
-                <Text style={styles.category}> Dragon Fights</Text> 
-                {/* <PieChart 
-                    data = {dragonFightPoints}
-                    style = {{height:"100px"}}
-                    lineWidth={30}
-                /> */}
-                    <View>
-                        <Text style={{color:"blue"}}>{dragonFightPer}%</Text>
-                        <Text style={{color:"red"}}>{100-dragonFightPer}%</Text>
+                <Text style={styles.category}>Dragon Fights</Text> 
+                <View style ={{marginTop:10}}>
+
+                    <View style={{height:30, marginLeft:20, marginRight:20, backgroundColor:"#DC5047", flexDirection:'row'}}> 
+                        <View style={{width:parseFloat(dragonFightPer)+"%", backgroundColor:"#55B1CE"}}/> 
                     </View>
+                    <View style={{flexDirection:"row", justifyContent:"space-between", marginLeft:20, marginRight:20, marginTop:5}}>
+                        <Text> {(parseFloat(dragonFightPer)).toFixed(2)}%</Text>
+                        <Text> {(100-parseFloat(dragonFightPer)).toFixed(2)}% </Text>
+                    </View>
+                </View>
             </View>
 
         </View>

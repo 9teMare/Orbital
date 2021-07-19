@@ -1,11 +1,12 @@
-import React from 'react'
-import { View, Text, StatusBar } from 'react-native'
+import React, { useState } from 'react'
+import { View, Text, StatusBar, StyleSheet } from 'react-native'
 
 export default function Favorites() {
+
     return (
         <View>
             <StatusBar/>
-            <Text> Favorites </Text>
+            <Text> Favourite </Text>
         </View>
     )
 }

@@ -7,17 +7,16 @@ const Tab = createMaterialTopTabNavigator();
 import adviceBlueScreen from './advice-blue'
 import adviceRedScreen from './advice-red'
 
-export default function advice({route, navigation}) {
-    const {blue, red, roleMissing_blue, roleMissing_red} = route.params
-    console.log(blue, red, roleMissing_blue)
+export default function advice({route}) {
+    const {blue, red} = route.params
     return (
         <>          
             <Tab.Navigator 
                 tabBarOptions={{indicatorStyle: {backgroundColor: '#55BA46'},
                 tabStyle:{Height:70}
             }}>
-            <Tab.Screen name="Blue" component={adviceBlueScreen} />
-            <Tab.Screen name="Red" component={adviceRedScreen} />
+            <Tab.Screen name="Blue" component={adviceBlueScreen} initialParams={{blue: blue, red: red}}/>
+            <Tab.Screen name="Red" component={adviceRedScreen} initialParams={{blue: blue, red: red}}/>
         </Tab.Navigator>
           </>
     )

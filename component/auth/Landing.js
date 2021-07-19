@@ -1,12 +1,21 @@
 import React from 'react'
 import { Image, Text, View, Button } from 'react-native'
 import { TouchableOpacity } from 'react-native-gesture-handler'
+import { useFonts } from 'expo-font';
 
 export default function Landing({navigation}) {
+    const [loaded] = useFonts({
+        Manticore: require('../../assets/font/Manticore.otf')
+    });
+
+    if (!loaded) {
+        return null;
+    }
+
     return (
         <View style={{marginVertical: 200}}>
 
-            <Text style={{fontFamily:'manticore', fontSize: 50, alignSelf:'center'}}>
+            <Text style={{fontFamily:'Manticore', fontSize: 50, alignSelf:'center'}}>
                 LEGENDARILY
             </Text>
 

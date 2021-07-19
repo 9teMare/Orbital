@@ -7,12 +7,10 @@ const ASSASSIN = 0, FIGHTER = 1, MAGE = 2, MARKSMAN = 3, TANK = 5 //SUPPORT = 4
 const BLUE = 0, RED = 1
 
 
-export default function stats({route, navigation}) {
+export default function stats({route}) {
     const {blue, red} = route.params
     const [isLoading, setLoader] = useState(true)
     const [tag, setTag] = useState([])  
-    const roleBlueMissing = []
-    const roleRedMissing = []
 
     const pickHighest = (arr) => {
         var temp = [];
@@ -111,15 +109,6 @@ export default function stats({route, navigation}) {
             scaling_AP = [blue_APhighest, red_APhighest]
             attackRange = [blue_RANGE, red_RANGE]
 
-            for (var i = 0; i < tag.length; i++) {
-                if (tag[i].arr[0].length === 0) {
-                    roleBlueMissing.push(tag[i].title)
-                }
-                if (tag[i].arr[1].length === 0) {
-                    roleRedMissing.push(tag[i].title)
-                }
-            }
-
             setTag([{title: "ASSASSINATION", arr: assassin},
             {title: "FIGHTER", arr: fighter},
             {title: "AP DAMAGE", arr: damage_AP},
@@ -130,7 +119,6 @@ export default function stats({route, navigation}) {
             {title: "AP SCALING", arr: scaling_AP},
             {title: "ATTACK RANGE", arr: attackRange}])
 
-            //navigation.setParams({blue: blue, red: red, roleMissing_blue: roleBlueMissing, roleMissing_red: roleRedMissing})
             setLoader(false)
 
     }   
@@ -142,48 +130,48 @@ export default function stats({route, navigation}) {
        }, []);
 
 
-    
-
-    //setParams({roleMissing_blue: roleBlueMissing, roleMissing_red: roleRedMissing})
-
     const champPic = (arr) => {
         if (arr.length === 0) {
             return (
                 <Image 
                     source = {require('../../pictures/others/warning_sign.png')}
-                    style = {{height: 55, width: 54, alignSelf:"center"}}
+                    style = {{height: 55, width: 54, alignSelf:"center", marginTop:15}}
                     />
             )
         }
         if (arr.length === 1) {
             return (
+                <View style={{marginTop:15}}>
                 <Image 
                     source = {{uri: 'http://ddragon.leagueoflegends.com/cdn/11.12.1/img/champion/' + arr[0] + '.png'}}
                     style = {styles.IconBig}
                 />
+                </View>
             )
         }
         if (arr.length === 2) {
             return (
-                <View style={{flexDirection:"row", justifyContent:'space-evenly'}}>
+                <View style={{flexDirection:"row", justifyContent:'space-evenly', marginTop:23}}>
                     <Image 
                         source = {{uri: 'http://ddragon.leagueoflegends.com/cdn/11.12.1/img/champion/' + arr[0] + '.png'}}
-                        style = {styles.IconBig}
+                        style = {{height: 40, width: 40, borderRadius: 40}}
                     />
                     <Image 
                         source = {{uri: 'http://ddragon.leagueoflegends.com/cdn/11.12.1/img/champion/' + arr[1] + '.png'}}
-                        style = {styles.IconBig}
+                        style = {{height: 40, width: 40, borderRadius: 40}}
                     />
                 </View>
             )
         }
         if (arr.length === 3) {
             return (
-                <View>
+                <View style={{marginTop:10}}>
+                    <View style={{alignItems:"center"}}>
                     <Image 
                         source = {{uri: 'http://ddragon.leagueoflegends.com/cdn/11.12.1/img/champion/' + arr[0] + '.png'}}
                         style = {styles.IconMid}
                     />
+                    </View>
 
                     <View style={{justifyContent:"space-evenly", flexDirection: "row"}}>
                         <Image 
@@ -281,53 +269,17 @@ export default function stats({route, navigation}) {
                 arr={item.item.arr}/>
         ) 
     }
-
-    const getMessageTitle = (role) => {
-        if (role === "ASSASSINATION") {
-            return "No assassins!"
-        }
-        if (role === "FIGHTER") {
-            return "No fighters!"
-        }
-        if (role === "AP DAMAGE") {
-            return "No mages!"
-        } 
-        if (role === "AD DAMAGE") {
-            return "No marksman!"
-        } 
-        if (role === "HEAL/PROTECTION") {
-            return "Lack of protection/healing!"
-        }
-    }
-
-    const getMessage = (role) => {
-        if (role === "ASSASSINATION") {
-            return "The team does not have assassin. This usu"
-        }
-        if (role === "FIGHTER") {
-            return "No fighters!"
-        }
-        if (role === "AP DAMAGE") {
-            return "No mages!"
-        } 
-        if (role === "AD DAMAGE") {
-            return "No marksman!"
-        } 
-        if (role === "HEAL/PROTECTION") {
-            return "Lack of protection/healing!"
-        }
-    }
    
     return (
-       <View>
-           <Text styles={{fontSize: 18, fontWeight:'500', marginLeft:24, marginTop:10}}> Win rate by categories </Text>
+        <View>
+       <View style={{backgroundColor:"white", marginTop: 5}}>
+           <Text style={{fontSize: 18, fontWeight:'500', marginLeft:10, marginTop:10}}> Win rate by categories </Text>
+
             <View
-                style={{flexDirection:"row", justifyContent:"space-between", marginLeft:15, marginRight:15, marginTop: 10}}>
+                style={{flexDirection:"row", justifyContent:"space-between", marginLeft:15, marginRight:15, marginTop: 10, marginBottom:15}}>
                     <Text style={styles.blueText}> Key Champion(s)</Text>
                     <Text style={styles.redText}> Key Champion(s)</Text>
             </View>
-    
-
             <View> 
                 { isLoading
                     ? <Text> Loading... </Text>
@@ -337,7 +289,13 @@ export default function stats({route, navigation}) {
                     keyExtractor={item => item.title}/>
                 }
             </View>
-            
+       </View>
+        
+       <View style={{backgroundColor:"white", marginTop: 5}}>
+           <Text style={{fontSize: 18, fontWeight:'500', marginLeft:10, marginTop:10}}>Crowd Controls</Text>
+           
+       </View>
+
 
        </View>
     )

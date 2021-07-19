@@ -1,11 +1,17 @@
 import React, { useState } from 'react'
 import { StyleSheet, View, Text, TouchableOpacity, Image, Alert, StatusBar} from 'react-native'
 import {Header} from 'react-native-elements'
-
-
-
+import { useFonts } from 'expo-font';
 
 export default function Composition({navigation, route}) {
+
+    const [loaded] = useFonts({
+        Manticore: require('../../assets/font/Manticore.otf')
+    });
+
+    if (!loaded) {
+        return null;
+    }
 
     const TOP = 0, JUNGLE = 1, MID = 2, ADC = 3, SUPPORT = 4
     const blueTeam = route.params?.blueTeam
@@ -43,9 +49,6 @@ export default function Composition({navigation, route}) {
     return (
         <View >
             <StatusBar/>
-            <Header 
-                placement='left'
-                centerComponent={{text: 'Team Composition Analysis'}}/>
             <Text style={styles.titleText}> Team Composition Analysis </Text>
             <Text style={styles.blueText}> Blue Team </Text>
 
@@ -89,7 +92,7 @@ export default function Composition({navigation, route}) {
             </View>
 
             <View>
-                <Text style={{fontFamily:'manticore', color: '#55BA46', fontSize: 70, alignSelf: 'center'}}>
+                <Text style={{fontFamily:'Manticore', color: '#55BA46', fontSize: 70, alignSelf: 'center'}}>
                     VS
                 </Text>
             </View>
