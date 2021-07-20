@@ -109,7 +109,7 @@ export default function ChampionDetail({ route, navigation}) {
     }
 
     const displaySkins = skinId.map(index => (
-        <View key={index}>
+        <View key={index} style={styles.skinWrap}>
             <Image source={champSplashUrl(skinNum[index])} style={styles.skins}/>
             <Text style={styles.skinName}>{skinName[index]}</Text>
         </View>
@@ -278,5 +278,9 @@ const styles = StyleSheet.create({
         fontSize: 21,
         marginTop: 5,
         marginBottom: 10
+      },
+      skinWrap: {
+        backgroundColor:"white", 
+        marginTop: 10
       }
 })

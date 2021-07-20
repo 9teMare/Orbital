@@ -110,11 +110,11 @@ function MyPage(props) {
             <View style={styles.infoContainer}>
                 <Picker
                     selectedValue={selectedRegion}
-                    style={{ height: 40, width: 90, marginLeft: 10 }}
+                    style={{ height: 40, width: 120, marginLeft: 10, alignItems: 'center' }}
                     onValueChange={(itemValue, itemIndex) =>
                         setSelectedRegion(itemValue)
                     }>
-                    <Picker.Item label="NA" value="na1" />
+                    <Picker.Item label="NA" value="na1"/>
                     <Picker.Item label="EU North" value="eun1" />
                     <Picker.Item label="EU West" value="euw1" />
                     <Picker.Item label="KR" value="kr" />

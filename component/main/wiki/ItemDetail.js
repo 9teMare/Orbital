@@ -87,12 +87,13 @@ export default function ItemDetail({ route, navigation}) {
                     {/* {displayFrom} */}
                 </View>
             </View>
-            <View style={styles.descriptionView}>
+            <View style={styles.descriptionView} pointerEvents="none">
                 <Text style={styles.descriptionTitle}>Description</Text>
                 <WebView
                     originWhitelist={['*']}
                     source={{ html: styledDescription }}
                     style={{flex: 1}}
+                    scrollEnabled={false}
                 />
             </View>
         </View>
