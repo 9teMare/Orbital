@@ -85,7 +85,7 @@ function MyPage(props) {
             <View style = {{flexDirection: 'row', flexWrap:'wrap'}}>
                 <Image
                     //source = {require('../../pictures/others/EmptyGrayRec.png')}
-                    source = {{uri: 'http://ddragon.leagueoflegends.com/cdn/11.14.1/img/profileicon/' + profileIcon + '.png'}}
+                    source = {{uri: 'http://ddragon.leagueoflegends.com/cdn/11.15.1/img/profileicon/' + profileIcon + '.png'}}
                     style = {{width: 100, height:100, borderRadius: 100, marginVertical: 30, marginHorizontal: 20}}
                 />
                 <View style ={{marginVertical: 55}}>
@@ -110,11 +110,11 @@ function MyPage(props) {
             <View style={styles.infoContainer}>
                 <Picker
                     selectedValue={selectedRegion}
-                    style={{ height: 40, width: 90, marginLeft: 10 }}
+                    style={{ height: 40, width: 120, marginLeft: 10, alignItems: 'center' }}
                     onValueChange={(itemValue, itemIndex) =>
                         setSelectedRegion(itemValue)
                     }>
-                    <Picker.Item label="NA" value="na1" />
+                    <Picker.Item label="NA" value="na1"/>
                     <Picker.Item label="EU North" value="eun1" />
                     <Picker.Item label="EU West" value="euw1" />
                     <Picker.Item label="KR" value="kr" />
