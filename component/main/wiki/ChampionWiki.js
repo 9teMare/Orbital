@@ -10,9 +10,27 @@ export default function ChampionWiki({navigation}) {
   const [fullData, setFullData] = useState([]);
   const [data, setData] = useState([])
 
+  const latestMetaNAUrl = 'https://ddragon.leagueoflegends.com/api/versions.json';
+    const [meta, setMeta] = useState();
+
+    useEffect(() => {
+        fetch(latestMetaNAUrl,{
+            "method": "GET"
+          })
+        .then(response => response.json())
+        .then(response => {
+            setMeta(response[0])
+        })
+        .catch(err => {
+            console.log(err)
+        })
+    }), []
+
   useEffect(() => {
     let isMounted = true
-    fetch('http://ddragon.leagueoflegends.com/cdn/11.14.1/data/en_US/champion.json')
+    fetch(`http://ddragon.leagueoflegends.com/cdn/11.15.1/data/en_US/champion.json`, {
+      "method": "GET"
+    })
     .then((response) => response.json())
     .then((response) => {
         if (isMounted) {
@@ -32,7 +50,7 @@ export default function ChampionWiki({navigation}) {
   const Item = ({ item, onPress, weight, color}) => (
     <TouchableOpacity onPress={() => navigation.navigate("Champion Detail", item)}>
         <Image 
-            source={{uri: 'http://ddragon.leagueoflegends.com/cdn/11.14.1/img/champion/' + item + '.png'}}
+            source={{uri: `http://ddragon.leagueoflegends.com/cdn/${meta}/img/champion/${item}.png`}}
             style= {[styles.image, color]}
         />
         <Text style={[styles.title, weight]}>

@@ -9,17 +9,33 @@ export default function ChampionDetail({ route, navigation}) {
         Manticore: require('../../../assets/font/Manticore.otf')
     });
 
+    const latestMetaNAUrl = 'https://ddragon.leagueoflegends.com/api/versions.json';
+    const [meta, setMeta] = useState('');
+
+    useEffect(() => {
+        fetch(latestMetaNAUrl,{
+            "method": "GET"
+          })
+        .then(response => response.json())
+        .then(response => {
+            setMeta(response[0])
+        })
+        .catch(err => {
+            console.log(err)
+        })
+    }), []
+
     const champName = route.params;
     const champSplashUrl = (index) => {
         return {uri: `http://ddragon.leagueoflegends.com/cdn/img/champion/splash/${champName}_${index}.jpg`}
     }
 
     const skillIconUrl = (id) => {
-        return {uri: `http://ddragon.leagueoflegends.com/cdn/11.14.1/img/spell/${id}`}
+        return {uri: `http://ddragon.leagueoflegends.com/cdn/11.15.1/img/spell/${id}`}
     }
 
     const passiveIcon = (id) => {
-        return {uri: `http://ddragon.leagueoflegends.com/cdn/11.14.1/img/passive/${id}`}
+        return {uri: `http://ddragon.leagueoflegends.com/cdn/11.15.1/img/passive/${id}`}
     }
 
     const [lore, setLore] = useState('')
@@ -58,7 +74,9 @@ export default function ChampionDetail({ route, navigation}) {
 
     useEffect(() => {
         let isMounted = true
-        fetch(`http://ddragon.leagueoflegends.com/cdn/11.14.1/data/en_US/champion/${champName}.json`)
+        fetch(`http://ddragon.leagueoflegends.com/cdn/11.15.1/data/en_US/champion/${champName}.json`, {
+            "method": "GET"
+          })
         .then((response) => response.json())
         .then((response) => {
             if (isMounted) {
@@ -76,7 +94,9 @@ export default function ChampionDetail({ route, navigation}) {
     }), [resourceType]
 
     useEffect(() => {
-        fetch('http://ddragon.leagueoflegends.com/cdn/11.14.1/data/en_US/champion/'+ champName + '.json')
+        fetch(`http://ddragon.leagueoflegends.com/cdn/11.15.1/data/en_US/champion/${champName}.json`, {
+            "method": "GET"
+          })
         .then((response) => response.json())
         .then((response) => {
             setTitle(response["data"][champName]["title"])
@@ -127,43 +147,47 @@ export default function ChampionDetail({ route, navigation}) {
             <Tabs.Tab name="Lore">
                 <Tabs.ScrollView>
                     <View>
-                        <Text style={styles.lore}>{lore}</Text>
+                        <View style={styles.loreWrap}>
+                            <Text style={styles.lore}>{lore}</Text>
+                        </View>
                     </View>
                 </Tabs.ScrollView>
             </Tabs.Tab>
 
             <Tabs.Tab name="Skills">
                 <Tabs.ScrollView>
-                    <View style={styles.icon}>
-                        <TouchableOpacity onPress={() => {setResourceType('p')}}>
-                            <Image source={passiveIcon(passiveId)} style={styles.skillIcon}/>
-                            <Text style={styles.skillLetter}>Passive</Text>
-                         </TouchableOpacity>
+                    <View style={styles.iconBackground}>
+                        <View style={styles.icon}>
+                            <TouchableOpacity onPress={() => {setResourceType('p')}}>
+                                <Image source={passiveIcon(passiveId)} style={styles.skillIcon}/>
+                                <Text style={styles.skillLetter}>Passive</Text>
+                            </TouchableOpacity>
 
-                         <TouchableOpacity onPress={() => {setResourceType('q')}}>
-                            <Image source={skillIconUrl(qId)} style={styles.skillIcon}/>
-                            <Text style={styles.skillLetter}>Q</Text>
-                        </TouchableOpacity>
+                            <TouchableOpacity onPress={() => {setResourceType('q')}}>
+                                <Image source={skillIconUrl(qId)} style={styles.skillIcon}/>
+                                <Text style={styles.skillLetter}>Q</Text>
+                            </TouchableOpacity>
 
-                        <TouchableOpacity onPress={() => {setResourceType('w')}}>
-                             <Image source={skillIconUrl(wId)} style={styles.skillIcon}/>
-                            <Text style={styles.skillLetter}>W</Text>
-                        </TouchableOpacity>
+                            <TouchableOpacity onPress={() => {setResourceType('w')}}>
+                                <Image source={skillIconUrl(wId)} style={styles.skillIcon}/>
+                                <Text style={styles.skillLetter}>W</Text>
+                            </TouchableOpacity>
 
-                         <TouchableOpacity onPress={() => {setResourceType('e')}}>
-                            <Image source={skillIconUrl(eId)} style={styles.skillIcon}/>
-                            <Text style={styles.skillLetter}>E</Text>
-                        </TouchableOpacity>
-                            
-                        <TouchableOpacity onPress={() => {setResourceType('r')}}>
-                             <Image source={skillIconUrl(rId)} style={styles.skillIcon}/>
-                            <Text style={styles.skillLetter}>R</Text>
-                        </TouchableOpacity>
+                            <TouchableOpacity onPress={() => {setResourceType('e')}}>
+                                <Image source={skillIconUrl(eId)} style={styles.skillIcon}/>
+                                <Text style={styles.skillLetter}>E</Text>
+                            </TouchableOpacity>
+                                
+                            <TouchableOpacity onPress={() => {setResourceType('r')}}>
+                                <Image source={skillIconUrl(rId)} style={styles.skillIcon}/>
+                                <Text style={styles.skillLetter}>R</Text>
+                            </TouchableOpacity>
+                        </View>
                     </View>
-                    <Text style={styles.skill}>{skill}</Text>
-                    <Text style={styles.skillTooltip}>{skillTooltip}</Text>
-                    <View style={[styles.box, styles.boxA]} />
-                    <View style={[styles.box, styles.boxB]} />
+                    <View style={styles.skillWrap}>
+                        <Text style={styles.skill}>{skill}</Text>
+                        <Text style={styles.skillTooltip}>{skillTooltip}</Text>
+                    </View>
                 </Tabs.ScrollView>
             </Tabs.Tab>
 
@@ -220,30 +244,27 @@ const styles = StyleSheet.create({
         lineHeight: 30,
         marginLeft: 10,
         marginRight: 10,
-        marginTop: 10
+        marginTop: 10,
+        marginBottom: 10,
     },
-    box: {
-        height: 250,
-        width: '100%',
-      },
-      boxA: {
+    loreWrap: {
         backgroundColor: 'white',
-      },
-      boxB: {
-        backgroundColor: '#D8D8D8',
-      },
+        elevation: 3
+    },
       skill: {
         fontSize: 25,
         marginLeft: 10,
         marginRight: 10,
-        marginTop: 10
+        marginTop: 10,
+        fontWeight: 'bold'
       },
       skillTooltip: {
         fontSize: 19,
         lineHeight: 30,
         marginLeft: 10,
         marginRight: 10,
-        marginTop: 10
+        marginTop: 10,
+        marginBottom: 20
       },
       skillIcon: {
         width:64, 
@@ -256,6 +277,11 @@ const styles = StyleSheet.create({
         fontSize: 15,
         fontWeight: 'bold'
       },
+      skillWrap: {
+        backgroundColor: 'white',
+        elevation: 3,
+        minHeight: height/3
+      },
       icon: {
         //  width:53, 
         //  height:53, 
@@ -264,6 +290,12 @@ const styles = StyleSheet.create({
          marginTop: 10,
          justifyContent:'space-between',
          flexDirection: 'row',
+         
+      },
+      iconBackground: {
+        backgroundColor: 'white',
+        elevation: 4,
+        height: 100
       },
       skins: {
         marginTop: 20,
@@ -271,7 +303,7 @@ const styles = StyleSheet.create({
         height: height/3,
         width: width - 30,
         borderWidth: 3, 
-        borderColor: '#000000c0'
+        borderColor: '#000000c0',
       },
       skinName: {
         alignSelf: 'center',
@@ -281,6 +313,7 @@ const styles = StyleSheet.create({
       },
       skinWrap: {
         backgroundColor:"white", 
-        marginTop: 10
+        marginTop: 10,
+        elevation: 3
       }
 })

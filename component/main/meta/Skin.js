@@ -11,7 +11,9 @@ export default function Skin() {
     
     useEffect(() => {
         let isMounted = true
-        fetch(patchNote)
+        fetch(patchNote, {
+            "method": "GET"
+        })
         .then((response) => response.json())
         .then((response) => {
             if (isMounted) {
@@ -35,9 +37,11 @@ export default function Skin() {
 
     const displaySkins = skinIdArr.map(index => (
         <View key={index}>
-            <Image source={{uri: `http://ddragon.leagueoflegends.com/cdn/img/champion/splash/${skin[index]}.jpg`}} 
-                   style={styles.skins}/>
-            <Text style={styles.skinName}>{skinName[index]}</Text>
+            <View style={styles.skinWrap}>
+                <Image source={{uri: `http://ddragon.leagueoflegends.com/cdn/img/champion/splash/${skin[index]}.jpg`}} 
+                    style={styles.skins}/>
+                <Text style={styles.skinName}>{skinName[index]}</Text>
+            </View>
         </View>
     ))
 
@@ -64,6 +68,11 @@ const styles = StyleSheet.create({
         fontSize: 21,
         marginTop: 5,
         marginBottom: 10
+      },
+      skinWrap: {
+        backgroundColor:"white", 
+        marginTop: 10,
+        elevation: 3
       }
 })
 

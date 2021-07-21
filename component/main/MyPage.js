@@ -85,7 +85,7 @@ function MyPage(props) {
             <View style = {{flexDirection: 'row', flexWrap:'wrap'}}>
                 <Image
                     //source = {require('../../pictures/others/EmptyGrayRec.png')}
-                    source = {{uri: 'http://ddragon.leagueoflegends.com/cdn/11.14.1/img/profileicon/' + profileIcon + '.png'}}
+                    source = {{uri: 'http://ddragon.leagueoflegends.com/cdn/11.15.1/img/profileicon/' + profileIcon + '.png'}}
                     style = {{width: 100, height:100, borderRadius: 100, marginVertical: 30, marginHorizontal: 20}}
                 />
                 <View style ={{marginVertical: 55}}>
