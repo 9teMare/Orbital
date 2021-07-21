@@ -2151,6 +2151,11 @@
     "mime-types" "~2.1.24"
     "negotiator" "0.6.2"
 
+"all@^0.0.0":
+  "integrity" "sha1-+yqnXUdZ1A457LsRj6vwzBH/VU8="
+  "resolved" "https://registry.npmjs.org/all/-/all-0.0.0.tgz"
+  "version" "0.0.0"
+
 "anser@^1.4.9":
   "integrity" "sha1-vvo+3fKCaEvQO2Pc2jknrvjC41s="
   "resolved" "https://registry.npm.taobao.org/anser/download/anser-1.4.10.tgz"
@@ -3318,6 +3323,11 @@
   "resolved" "https://registry.npm.taobao.org/escape-string-regexp/download/escape-string-regexp-4.0.0.tgz?cache=0&sync_timestamp=1618677243201&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fescape-string-regexp%2Fdownload%2Fescape-string-regexp-4.0.0.tgz"
   "version" "4.0.0"
 
+"escape-string-regexp@2.0.0":
+  "integrity" "sha512-UpzcLCXolUWcNu5HtVMHYdXJjArjsF9C0aNnquZYY4uW/Vu0miy5YoWvbV345HauVvcAUnpRuhMMcqTcGOY2+w=="
+  "resolved" "https://registry.npmjs.org/escape-string-regexp/-/escape-string-regexp-2.0.0.tgz"
+  "version" "2.0.0"
+
 "esprima@^4.0.0":
   "integrity" "sha1-E7BM2z5sXRnfkatph6hpVhmwqnE="
   "resolved" "https://registry.nlark.com/esprima/download/esprima-4.0.1.tgz"
@@ -4023,7 +4033,7 @@
     "strip-ansi" "^4.0.0"
     "through" "^2.3.6"
 
-"invariant@^2.2.2", "invariant@^2.2.4":
+"invariant@^2.2.2", "invariant@^2.2.4", "invariant@2.2.4":
   "integrity" "sha1-YQ88ksk1nOHbYW5TgAjSP/NRWOY="
   "resolved" "https://registry.nlark.com/invariant/download/invariant-2.2.4.tgz"
   "version" "2.2.4"
@@ -5650,6 +5660,11 @@
   "resolved" "https://registry.npmjs.org/react-minimal-pie-chart/-/react-minimal-pie-chart-8.2.0.tgz"
   "version" "8.2.0"
 
+"react-native-clear-app-cache@^1.0.4":
+  "integrity" "sha512-vjQY/dRwoVGup2jVFOySKHCi/wtyPuuh33CmJwqPw7Bzy10wJN/0N7O0H57+yR35tJqQjdlh6itnGFEB1RJI+g=="
+  "resolved" "https://registry.npmjs.org/react-native-clear-app-cache/-/react-native-clear-app-cache-1.0.4.tgz"
+  "version" "1.0.4"
+
 "react-native-collapsible-tab-view@^4.2.0":
   "integrity" "sha512-G9qpCyaF6q9RKeNJm8plVq4oUowwPZXDj/2vUBcSnEsbfUvCniZcVZ5r/57JFIM5RVmU89pj31SAiYEkh/8Fqw=="
   "resolved" "https://registry.npmjs.org/react-native-collapsible-tab-view/-/react-native-collapsible-tab-view-4.2.0.tgz"
@@ -5795,7 +5810,15 @@
     "prop-types" "^15.6.0"
     "react-timer-mixin" "^0.13.4"
 
-"react-native@*", "react-native@>=0.57", "react-native@0.63":
+"react-native-webview@^11.2.3":
+  "integrity" "sha512-r/K+Lf/O5aij72gRndMX2qsyQ/WLtDPiO75SS57y6JjqSKxedGASVL9Jwl1TM7fCXqUq8dgiwik/LuBHbJXAEg=="
+  "resolved" "https://registry.npmjs.org/react-native-webview/-/react-native-webview-11.2.3.tgz"
+  "version" "11.2.3"
+  dependencies:
+    "escape-string-regexp" "2.0.0"
+    "invariant" "2.2.4"
+
+"react-native@*", "react-native@>=0.57", "react-native@>=0.60 <0.64", "react-native@0.63":
   "integrity" "sha512-SHhcKW3LF+6Lx8zEbFNeWEuLKcSLv3seeKhEctdfl8Ey19HWdCzQMlDDKhFELBeyLFjrzhpvl4jVTM4h/Sw+YQ=="
   "resolved" "https://github.com/expo/react-native/archive/sdk-39.0.4.tar.gz"
   "version" "0.63.2"

@@ -50,6 +50,8 @@ import systemScreen from './component/main/meta/System'
 import championDetailScreen from './component/main/wiki/ChampionDetail'
 import itemDetailScreen from './component/main/wiki/ItemDetail'
 
+import FeedbackScreen from './component/main/Feedback'
+
 const Stack = createStackNavigator();
 
 export class App extends Component {
@@ -81,8 +83,8 @@ export class App extends Component {
 
     if (!loaded) {
       return (
-        <View style={{ flex: 1, justifyContent: 'center'}}>
-          <Text>Loading...</Text>
+        <View style={{ flex: 1, justifyContent: 'center', alignSelf: 'center'}}>
+          <Text style={{fontSize: 50, fontWeight: 'bold'}}>Loading...</Text>
         </View>
       )
     }
@@ -117,6 +119,7 @@ export class App extends Component {
             <Stack.Screen name="System" component={systemScreen}/>
             <Stack.Screen name="Champion Detail" component={championDetailScreen}/>
             <Stack.Screen name="Item Detail" component={itemDetailScreen}/>
+            <Stack.Screen name="Feedback" component={FeedbackScreen}/>
           </Stack.Navigator>
         </NavigationContainer>
 

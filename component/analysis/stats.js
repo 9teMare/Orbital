@@ -1,6 +1,6 @@
 
 import React, {useEffect, useState} from 'react'
-import { View, Text, Image, StyleSheet, FlatList, Alert} from 'react-native'
+import { View, Text, Image, StyleSheet, FlatList, ScrollView} from 'react-native'
 
 const TOP = 0, JUNGLE = 1, MID = 2, ADC = 3, SUPPORT = 4
 const ASSASSIN = 0, FIGHTER = 1, MAGE = 2, MARKSMAN = 3, TANK = 5 //SUPPORT = 4
@@ -10,7 +10,22 @@ const BLUE = 0, RED = 1
 export default function stats({route}) {
     const {blue, red} = route.params
     const [isLoading, setLoader] = useState(true)
-    const [tag, setTag] = useState([])  
+    const [tag, setTag] = useState([])
+
+    const [CC_names_blue, setCC_names_blue] = useState([])
+    const [CC_details_blue, setCC_details_blue] = useState([])
+
+    const [CC_names_red, setCC_names_red] = useState([])
+    const [CC_details_red, setCC_details_red] = useState([])
+
+
+    const CCpriorityPoints = {"knockAside":0.9, "knockBack":1.1, "knockUp":1, "pull":1.2,
+    "blind":0.1, "charm":0.8, "flee":0.7, "taunt":0.8, "ground":0.3,
+      "knockDown":0.2, "root":0.7, "silence":0.6, "polymorph":0.65,
+      "sleep":0.75, "stun": 0.8, "suppression":1, "slow":0.2, "stasis":0.5,
+  "landScapeControl_JarvanIV":0.7, "landScapeControl_Camille":0.8, "landScapeControl_Yorick":0.6,
+  "landScapeControl_Taliyah":0.2, "landScapeControl_Anivia":0.4, "landScapeControl_Trundle":0.7,
+  "landScapeControl_Mordekaiser": 0.7, "selectableCC_Sylas": 0.5, "selectableCC_Viego":0.6}  
 
     const pickHighest = (arr) => {
         var temp = [];
@@ -32,16 +47,43 @@ export default function stats({route}) {
         return temp
     }
 
+    const CC_getTop2 = (arr) => {
+        var temp = [] //inside are indexes, not points!
+        for (var i=0; i<arr.length; i++) {
+            if (temp.length === 0 || temp.length === 1) { //temp is not full
+                temp.push(i)
+            } else {
+                if (arr[i] >= arr[temp[0]] && arr[i] >= arr[temp[1]]) { //greater than both
+                    arr[temp[0]] >= arr[temp[1]]
+                        ? temp[1] = i
+                        : temp[0] = i
+                } else if (arr[i] >= arr[temp[0]]) { //only greater than temp[0]
+                        temp[0] = i
+                } else if (arr[i] >= arr[temp[1]]) { //only greater than temp[1]
+                    temp[1] = i
+                }
+            }
+        }
+        return temp
+    }
+
     const fetching = async () => {
         var blueTag = []
         var redTag = []
         var damage_AD = [[], []], damage_AP = [[], []], assassin = [[], []], fighter = [[], []], heal_protect = [[], []], tank = [[], []] 
         var scaling_AD =[[], []], scaling_AP =[[], []], attackRange = [[],[]]
+        var blueCC_all = [], redCC_all = []
 
         const response = await fetch('http://ddragon.leagueoflegends.com/cdn/11.12.1/data/en_US/champion.json')
         const responded = await response.json()
         const data = responded.data
 
+        const champOtherInfo = "https://orbital-riot-api.herokuapp.com/champOtherInfo"
+        const fetchChampOtherInfo = await fetch (champOtherInfo, {
+            "method" : "GET"
+        })
+        const champOtherInfo_responded = await fetchChampOtherInfo.json()
+    
         const catagorize = (champ, s, sideInt) => { //0 = blue, 1 = red
             if (s === "Support") {
                 heal_protect[sideInt].push(champ)
@@ -84,32 +126,90 @@ export default function stats({route}) {
             blue_range.push(data[blueName]["stats"]["attackrange"])
             red_range.push(data[blueName]["stats"]["attackrange"])
 
+            //get CC points
+            const blueCC = champOtherInfo_responded[blueName]["CC"]
+            const redCC = champOtherInfo_responded[redName]["CC"]
+            const blueCCcount = blueCC["CCtypes"].length
+            const redCCcount = redCC["CCtypes"].length
+
+            var CCpoint_blue = 0 //individual CC points
+            var CCpoint_red = 0
+        
+            for (var b=0; b<blueCCcount; b++) {
+                var CCpoint_blue = CCpoint_blue +(CCpriorityPoints[blueCC["CCtypes"][b]]
+                        * blueCC["CCtimeFrame"][b] 
+                    * blueCC["CCrange"][b]
+                    * blueCC["targetableNumber"][b])
+            }
+            blueCC_all.push(CCpoint_blue)
+
+            for (var r=0; r<redCCcount; r++) {
+                CCpoint_red += (CCpriorityPoints[redCC["CCtypes"][r]]
+                    * redCC["CCtimeFrame"][r] 
+                    * redCC["CCrange"][r]
+                    * redCC["targetableNumber"][r])
+            }
+            redCC_all.push(CCpoint_red) 
         }
 
         var j; 
-            for (j=0; j<5; j++) {
-                var k; 
-                for (k=0; k<blueTag[j].length; k++) {
-                    catagorize(blue[j], blueTag[j][k], BLUE)
-                }
+        for (j=0; j<5; j++) {
+            var k; 
+            for (k=0; k<blueTag[j].length; k++) {
+                catagorize(blue[j], blueTag[j][k], BLUE)
+            }
             var l;
-                for (l=0; l<redTag[j].length; l++) {
-                    catagorize(red[j], redTag[j][l], RED)
-                }
+            for (l=0; l<redTag[j].length; l++) {
+                catagorize(red[j], redTag[j][l], RED)
+            }
+        }
+
+        var blue_top2 = CC_getTop2(blueCC_all)
+        var red_top2 = CC_getTop2(redCC_all)
+        var blue_top2_details = []
+        var red_top2_details = []
+        var blue_top2_names = []
+        var red_top2_names = []
+
+        for (var j=0; j<2; j++) {
+            var blue_skillsDetail = []
+            for (var k=0; k<champOtherInfo_responded[blue[blue_top2[j]]]["CC"]["CCskillKeys"].length; k++) {
+                blue_skillsDetail.push({key: champOtherInfo_responded[blue[blue_top2[j]]]["CC"]["CCskillKeys"][k],
+                                        skill: champOtherInfo_responded[blue[blue_top2[j]]]["CC"]["CCskills"][k]})
             }
 
-            const blue_ADhighest = pickHighest(blue_adScaling).map((index) => blue[index])
-            const red_ADhighest = pickHighest(red_adScaling).map((index) => red[index])
-            const blue_APhighest = pickHighest(blue_apScaling).map((index) => blue[index])
-            const red_APhighest = pickHighest(red_apScaling).map((index) => red[index])
-            const blue_RANGE = pickHighest(blue_range).map((index) => blue[index])
-            const red_RANGE = pickHighest(red_range).map((index) => red[index])
+            blue_top2_details.push({skillDetail: blue_skillsDetail,
+                                    types: champOtherInfo_responded[blue[blue_top2[j]]]["CC"]["CCtypes"]})
             
-            scaling_AD = [blue_ADhighest, red_ADhighest]
-            scaling_AP = [blue_APhighest, red_APhighest]
-            attackRange = [blue_RANGE, red_RANGE]
+            var red_skillsDetail = []
+            for (var l=0; l<champOtherInfo_responded[red[red_top2[j]]]["CC"]["CCskillKeys"].length; l++) {
+                red_skillsDetail.push({key: champOtherInfo_responded[red[red_top2[j]]]["CC"]["CCskillKeys"][l],
+                                        skill: champOtherInfo_responded[red[red_top2[j]]]["CC"]["CCskills"][l]})
+            }
+            red_top2_details.push({skillDetail: red_skillsDetail,
+                                    types: champOtherInfo_responded[red[red_top2[j]]]["CC"]["CCtypes"]})
 
-            setTag([{title: "ASSASSINATION", arr: assassin},
+            blue_top2_names.push(blue[blue_top2[j]])
+            red_top2_names.push(red[red_top2[j]])
+        }
+
+        const blue_ADhighest = pickHighest(blue_adScaling).map((index) => blue[index])
+        const red_ADhighest = pickHighest(red_adScaling).map((index) => red[index])
+        const blue_APhighest = pickHighest(blue_apScaling).map((index) => blue[index])
+        const red_APhighest = pickHighest(red_apScaling).map((index) => red[index])
+        const blue_RANGE = pickHighest(blue_range).map((index) => blue[index])
+        const red_RANGE = pickHighest(red_range).map((index) => red[index])
+            
+        scaling_AD = [blue_ADhighest, red_ADhighest]
+        scaling_AP = [blue_APhighest, red_APhighest]
+        attackRange = [blue_RANGE, red_RANGE]
+
+        setCC_names_blue(blue_top2_names)
+        setCC_names_red(red_top2_names)
+        setCC_details_blue(blue_top2_details)
+        setCC_details_red(red_top2_details)
+
+        setTag([{title: "ASSASSINATION", arr: assassin},
             {title: "FIGHTER", arr: fighter},
             {title: "AP DAMAGE", arr: damage_AP},
             {title: "AD DAMAGE", arr: damage_AD},
@@ -119,11 +219,10 @@ export default function stats({route}) {
             {title: "AP SCALING", arr: scaling_AP},
             {title: "ATTACK RANGE", arr: attackRange}])
 
-            setLoader(false)
+        setLoader(false)
 
     }   
 
-    
     
     useEffect(() => {
         fetching()
@@ -269,35 +368,135 @@ export default function stats({route}) {
                 arr={item.item.arr}/>
         ) 
     }
+
+    const arrToStr = (arr) => {
+        var str = ""
+        for (var i=0; i<arr.length; i++) {
+            if (i === arr.length - 1) {
+                str = str + arr[i]
+            } else {
+                str = str + arr[i] + ", "
+            }
+        }
+        return str
+    }
+
+    const Item_CC = ({skill, keyIndex}) => {
+        return (
+            <View style={{alignItems:"center", marginLeft:4, marginRight:4}}> 
+               <Image 
+                    source = {{uri: "http://ddragon.leagueoflegends.com/cdn/11.14.1/img/spell/" + skill +".png"}}
+                    style ={{height:40, width:40}}
+               /> 
+               <Text>{keyIndex}</Text>
+            </View>
+
+        )
+    }
+
+    const renderItem_CC = (item) => {
+        return(
+            <Item_CC skill={item.item.skill}
+                    keyIndex={item.item.key}
+            />
+        )
+    }
+
+    if (isLoading) {
+        return (
+            <Text> Loading...</Text>
+        )
+    }
    
     return (
-        <View>
-       <View style={{backgroundColor:"white", marginTop: 5}}>
-           <Text style={{fontSize: 18, fontWeight:'500', marginLeft:10, marginTop:10}}> Win rate by categories </Text>
+        <ScrollView>
+            <View style={{backgroundColor:"white", marginTop: 5}}>
+                <Text style={{fontSize: 18, fontWeight:'500', marginLeft:10, marginTop:10}}> Win rate by categories </Text>
 
-            <View
+                <View
                 style={{flexDirection:"row", justifyContent:"space-between", marginLeft:15, marginRight:15, marginTop: 10, marginBottom:15}}>
                     <Text style={styles.blueText}> Key Champion(s)</Text>
                     <Text style={styles.redText}> Key Champion(s)</Text>
-            </View>
-            <View> 
+                </View>
+                <View> 
                 { isLoading
                     ? <Text> Loading... </Text>
                     : <FlatList
                     data={tag}
                     renderItem={renderItem}
-                    keyExtractor={item => item.title}/>
+                    keyExtractor={item => item.title}
+                    />
                 }
+                </View>
             </View>
-       </View>
         
-       <View style={{backgroundColor:"white", marginTop: 5}}>
-           <Text style={{fontSize: 18, fontWeight:'500', marginLeft:10, marginTop:10}}>Crowd Controls</Text>
-           
-       </View>
+            <View style={{backgroundColor:"white", marginTop: 5}}>
+                <Text style={{fontSize: 18, fontWeight:'500', marginLeft:10, marginTop:10}}>Crowd Controls</Text>
+                <View style={{marginLeft:20, marginRight:20, marginTop:10}}>
+                <View style={{flexDirection:"row", justifyContent:"space-between"}}>
+                    <Image
+                        source = {{uri: 'http://ddragon.leagueoflegends.com/cdn/11.12.1/img/champion/' + CC_names_blue[0] + '.png'}}
+                        style = {styles.blueIcon}
+                    />
+                        {/* <Text>CCs: {arrToStr(CC_details_blue[0].types)}</Text> */}
+                        <View style={{alignSelf:"center"}}>
+                        <FlatList
+                            data={CC_details_blue[0]["skillDetail"]}
+                            renderItem={renderItem_CC}
+                            keyExtractor={item => item.index}
+                            horizontal={true}
+                        />
+                        </View>
+                </View>
 
+                <View style={{flexDirection:"row", justifyContent:"space-between"}}>
+                    <Image
+                        source = {{uri: 'http://ddragon.leagueoflegends.com/cdn/11.12.1/img/champion/' + CC_names_blue[1] + '.png'}}
+                        style = {styles.blueIcon}
+                    />
+                    <View style={{alignSelf:"center"}}>
+                        <FlatList
+                            data={CC_details_blue[1]["skillDetail"]}
+                            renderItem={renderItem_CC}
+                            keyExtractor={item => item.index}
+                            horizontal={true}
+                        />
+                    </View>
+                </View>
 
-       </View>
+                <View style={{flexDirection:"row", justifyContent:"space-between"}}>
+                    <Image
+                        source = {{uri: 'http://ddragon.leagueoflegends.com/cdn/11.12.1/img/champion/' + CC_names_red[0] + '.png'}}
+                        style = {styles.redIcon}
+                    />
+                    <View style={{alignSelf:"center"}}>
+                        <FlatList
+                            data={CC_details_red[0]["skillDetail"]}
+                            renderItem={renderItem_CC}
+                            keyExtractor={item => item.index}
+                            horizontal={true}
+                        />
+                    </View>
+                </View>
+
+                <View style={{flexDirection:"row", justifyContent:"space-between"}}>
+                    <Image
+                        source = {{uri: 'http://ddragon.leagueoflegends.com/cdn/11.12.1/img/champion/' + CC_names_red[1] + '.png'}}
+                        style = {styles.redIcon}
+                    />
+                    <View style={{alignSelf:"center"}}>
+                        <FlatList
+                            data={CC_details_red[1]["skillDetail"]}
+                            renderItem={renderItem_CC}
+                            keyExtractor={item => item.index}
+                            horizontal={true}
+                        />
+                    </View>
+                </View>
+
+                </View>
+            </View>
+       </ScrollView>
     )
 }
 
@@ -330,6 +529,12 @@ const styles = StyleSheet.create({
     },
     champPicContainer: {
         maxWidth:110,  maxHeight:72, alignContent: "center"
-    }
+    },
+    blueIcon: {
+        height: 50, width: 50, borderRadius: 50, borderColor: "#55B1CE", borderWidth: 2
+    },
+    redIcon: {
+        height: 50, width: 50, borderRadius: 50, borderColor: "#DC5047", borderWidth: 2
+    },
 
 })

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import {Text, View, FlatList, TouchableOpacity, Image, Button, TextInput, StyleSheet, Dimensions} from 'react-native'
 import {Header, ListItem, List} from 'react-native-elements'
 import filter from 'lodash.filter';
+import { ScrollView } from 'react-native';
 
 export default function ChampionWiki({navigation}) {
   const [query, setQuery] = useState('');
@@ -63,24 +64,25 @@ export default function ChampionWiki({navigation}) {
         }}
       >
         <TextInput
-          autoCapitalize="words"
+          keyboardShouldPersistTaps={'always'}
+          autoCapitalize='words'
           autoCorrect={false}
           clearButtonMode="always"
           value={query}
           onChangeText={queryText => handleSearch(queryText)}
           placeholder="Search"
-          style={{ backgroundColor: '#fff', paddingHorizontal: 20, maxWidth: width }}
+          style={{ backgroundColor: '#fff', paddingHorizontal: 10, maxWidth: width }}
         />
-      </View>
+      </View>    
     );
   }
 
   const handleSearch = text => {
-  const filteredData = filter(fullData, champ => {
-    return contains(champ, text);
-  });
-  setData(filteredData);
-  setQuery(text);
+    const filteredData = filter(fullData, champ => {
+      return contains(champ, text);
+    });
+    setData(filteredData);
+    setQuery(text);
 };
 
   const contains = (champs, query) => {

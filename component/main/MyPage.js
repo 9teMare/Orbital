@@ -98,7 +98,7 @@ function MyPage(props) {
                 </View>
 
                 <Ionicons 
-                    style={{position: 'absolute', top: height*1/20, right:width*1/20}}
+                    style={{position: 'absolute', marginTop: width/30, right: width/30}}
                     name="md-settings" 
                     size={32} 
                     color="black" 
@@ -110,7 +110,7 @@ function MyPage(props) {
             <View style={styles.infoContainer}>
                 <Picker
                     selectedValue={selectedRegion}
-                    style={{ height: 50, width: 150 }}
+                    style={{ height: 40, width: 90, marginLeft: 10 }}
                     onValueChange={(itemValue, itemIndex) =>
                         setSelectedRegion(itemValue)
                     }>
@@ -122,7 +122,7 @@ function MyPage(props) {
                     <Picker.Item label="BR" value="br1" />
                 </Picker>
 
-                <Text style={{fontWeight: 'bold'}}>
+                <Text style={{fontWeight: 'bold', marginLeft: 20}}>
                     Link to your LOL ID
                 </Text>
                 <TextInput 
@@ -130,21 +130,22 @@ function MyPage(props) {
                     onChangeText={(value) => {
                         setId(value)
                     }}
+                    style={{marginRight: 20, marginLeft: 20, marginTop: 10, borderColor: 'black', borderWidth:2, padding: 5}}
                 />
                 <TouchableOpacity
                     onPress = {
                          () => fetchApiCall()
                     } 
-                    style = {{width: 180, height: 30, alignItems:'center', backgroundColor: "black", alignSelf:'center',}}>
+                    style = {{width: 180, height: 30, alignItems:'center', backgroundColor: "black", alignSelf:'center', elevation: 3, marginTop: 10}}>
                     <Text style={{color: "white", marginTop: 5}}>Get user information</Text>
                 </TouchableOpacity>
-                <Text>Summoner Name: {summonerName}</Text>
-                <Text>Summoner Level: {summonerLvl}</Text>
+                <Text style={{ marginLeft: 20, marginTop: 10, marginBottom: 5}}>Summoner Name: {summonerName}</Text>
+                <Text style={{ marginLeft: 20, marginTop: 5, marginBottom: 20}}>Summoner Level: {summonerLvl}</Text>
             </View>
 
             <View style={{marginTop:40}}>
                 <TouchableOpacity
-                    style = {{width: 180, height: 30, alignItems:'center', backgroundColor: "black", alignSelf:'center',}}
+                    style = {{width: 180, height: 30, alignItems:'center', backgroundColor: "black", alignSelf:'center', elevation: 2}}
                     onPress={() => onLogout()}>
                     <Text style={{color: "white", marginTop: 5}}>Log out</Text>
                 </TouchableOpacity>
@@ -156,16 +157,10 @@ function MyPage(props) {
 const {width, height} = Dimensions.get("window")
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        marginVertical: 300
-    },
-    containerInfo: {
-        margin: 20 
-    },
     infoContainer: {
-        height: height/3, maxWidth: width, backgroundColor: 'white', justifyContent:'center', shadowRadius:10, shadowOffset:{width:-6, height:6}, shadowOpacity:0.2,
-        marginLeft: 30 , marginRight:30
+        maxHeight: height/3, width: width - 100, maxWidth: width - 50, backgroundColor: 'white', alignSelf:'center', 
+        shadowRadius:10, shadowOffset:{width:-6, height:6}, shadowOpacity:0.2,
+        marginLeft: 30 , marginRight:30, elevation: 3
     }
 })
 

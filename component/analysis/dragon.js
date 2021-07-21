@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react'
-import { View, Text, TouchableOpacity, StyleSheet, Image, FlatList } from 'react-native'
+import { View, Text, TouchableOpacity, StyleSheet, Image, FlatList, ScrollView } from 'react-native'
 import Collapsible from 'react-native-collapsible';
 
 export default function lane({route}) {
@@ -12,6 +12,9 @@ export default function lane({route}) {
     const [teamFightPer, setTeamFightPer] = useState(0)
     const [dragonFightPoints, setDragonFightPoints] = useState([])
     const [dragonFightPer, setDragonFightPer] = useState(0)
+    
+    const [teamfightDetail, setTeamFightDetail] = useState(true)
+    const [dragonfightDetail, setDragonFightDetail] = useState(true)
 
     const CCpriorityPoints = {"knockAside":0.9, "knockBack":1.1, "knockUp":1, "pull":1.2,
                               "blind":0.1, "charm":0.8, "flee":0.7, "taunt":0.8, "ground":0.3,
@@ -136,13 +139,13 @@ export default function lane({route}) {
         const dragonFightRatio = ((blue_dragonFightPoints / (blue_dragonFightPoints + red_dragonFightPoints))*100).toFixed(2)
 
 
-        setTeamFightPoints([{title: 'blue', value: parseFloat(blue_teamFightPoints), color:"#55B1CE"},
-                            {title:'red', value: parseFloat(red_teamFightPoints), color:"#DC5047"}])
+        setTeamFightPoints([{CC: blueCC_total, ADAP: blue_ADAP, durability: blue_durability_total},
+                            {CC: redCC_total, ADAP: red_ADAP, durability: red_durability_total}])
         setTeamFightPer(parseFloat(teamFightRatio))
 
 
-        setDragonFightPoints([{title:'blue', value: parseFloat(blue_dragonFightPoints), color:"#55B1CE"},
-                              {title:'red', value: parseFloat(red_dragonFightPoints), color:"#DC5047"}])
+        setDragonFightPoints([{mobility: blue_mobility_total, trueDamage: blue_trueDamage, dragonRush: blue_dragonRush, waveClear: blue_waveclear},
+                              {mobility: red_mobility_total, trueDamage: red_trueDamage, dragonRush: red_dragonRush, waveClear: red_waveclear}])
         setDragonFightPer(parseFloat(dragonFightRatio))
 
         setList([{key: 'ADAP', ratio: parseFloat(ADAP_ratio), per: ADAP_percentage}, 
@@ -194,6 +197,7 @@ export default function lane({route}) {
     }
 
     return (
+        <ScrollView>
         <View style={{flexDirection:'column'}}>
             <View style={{backgroundColor:"white"}}> 
                 <Text style={styles.category}> These dragons might favor... </Text>
@@ -228,16 +232,12 @@ export default function lane({route}) {
                         />
                     
                 </View>
-
-
-
             </View>
 
             <View style={{backgroundColor:"white", marginTop: 5}}>
                 <Text style={styles.category}>Teamfights</Text> 
 
                 <View style ={{marginTop:10}}>
-
                     <View style={{height:30, marginLeft:20, marginRight:20, backgroundColor:"#DC5047", flexDirection:'row'}}> 
                         <View style={{width:parseFloat(teamFightPer)+"%", backgroundColor:"#55B1CE"}}/> 
                     </View>
@@ -245,6 +245,33 @@ export default function lane({route}) {
                         <Text> {(parseFloat(teamFightPer)).toFixed(2)}%</Text>
                         <Text> {(100-parseFloat(teamFightPer)).toFixed(2)}% </Text>
                     </View>
+                    <Text 
+                        style={{alignSelf:"center", textDecorationLine:"underline", color:"green", marginTop:5}}
+                        onPress={() => setTeamFightDetail(!teamfightDetail)} >
+                            Details</Text>
+                    {teamfightDetail
+                        ? <View></View>
+                        : <View style={{alignItems:"center", marginTop:5, marginBottom:5}}>
+                            <View style={{flexDirection:"row"}}>
+                                <Text style={{fontSize:14, fontWeight:"500"}}>AD/AP damage (40%):</Text>
+                                <Text style={{fontSize:14, fontWeight:"500", color:"blue"}}>{teamFightPoints[0]["ADAP"]}</Text>
+                                <Text style={{fontSize:10, fontWeight:"500"}}> / </Text>
+                                <Text style={{fontSize:14, fontWeight:"500",color:"red"}}>{teamFightPoints[1]["ADAP"]}</Text>
+                            </View>
+                            <View style={{flexDirection:"row", marginTop:5,marginBottom:5}}>
+                            <Text style={{fontSize:14, fontWeight:"500"}}>Durability (40%):</Text>
+                                <Text style={{fontSize:14, fontWeight:"500", color:"blue"}}>{teamFightPoints[0]["durability"]}</Text>
+                                <Text style={{fontSize:10, fontWeight:"500"}}> / </Text>
+                                <Text style={{fontSize:14, fontWeight:"500",color:"red"}}>{teamFightPoints[1]["durability"]}</Text>
+                            </View>
+                            <View style={{flexDirection:"row"}}>
+                            <Text style={{fontSize:14, fontWeight:"500"}}>CC (20%):</Text>
+                                <Text style={{fontSize:14, fontWeight:"500", color:"blue"}}>{teamFightPoints[0]["CC"]}</Text>
+                                <Text style={{fontSize:10, fontWeight:"500"}}> / </Text>
+                                <Text style={{fontSize:14, fontWeight:"500",color:"red"}}>{teamFightPoints[1]["CC"]}</Text>
+                            </View>
+                        </View>
+                    }
                 </View>
             </View> 
 
@@ -259,10 +286,44 @@ export default function lane({route}) {
                         <Text> {(parseFloat(dragonFightPer)).toFixed(2)}%</Text>
                         <Text> {(100-parseFloat(dragonFightPer)).toFixed(2)}% </Text>
                     </View>
+
+                    <Text 
+                        style={{alignSelf:"center", textDecorationLine:"underline", color:"green", marginTop:5}}
+                        onPress={() => setDragonFightDetail(!dragonfightDetail)} >
+                            Details</Text>
+                    {dragonfightDetail
+                        ? <View></View>
+                        : <View style={{alignItems:"center", marginTop:5, marginBottom:5}}>
+                            <View style={{flexDirection:"row"}}>
+                                <Text style={{fontSize:14, fontWeight:"500"}}>True Damage (25%):</Text>
+                                <Text style={{fontSize:14, fontWeight:"500", color:"blue"}}>{dragonFightPoints[0]["trueDamage"]}</Text>
+                                <Text style={{fontSize:10, fontWeight:"500"}}> / </Text>
+                                <Text style={{fontSize:14, fontWeight:"500",color:"red"}}>{dragonFightPoints[1]["trueDamage"]}</Text>
+                            </View>
+                            <View style={{flexDirection:"row", marginTop:5,marginBottom:5}}>
+                            <Text style={{fontSize:14, fontWeight:"500"}}>Mobility (25%):</Text>
+                                <Text style={{fontSize:14, fontWeight:"500", color:"blue"}}>{dragonFightPoints[0]["mobility"]}</Text>
+                                <Text style={{fontSize:10, fontWeight:"500"}}> / </Text>
+                                <Text style={{fontSize:14, fontWeight:"500",color:"red"}}>{dragonFightPoints[1]["mobility"]}</Text>
+                            </View>
+                            <View style={{flexDirection:"row"}}>
+                            <Text style={{fontSize:14, fontWeight:"500"}}>Wave Clear (25%):</Text>
+                                <Text style={{fontSize:14, fontWeight:"500", color:"blue"}}>{dragonFightPoints[0]["waveClear"]}</Text>
+                                <Text style={{fontSize:10, fontWeight:"500"}}> / </Text>
+                                <Text style={{fontSize:14, fontWeight:"500",color:"red"}}>{dragonFightPoints[1]["waveClear"]}</Text>
+                            </View>
+                            <View style={{flexDirection:"row"}}>
+                            <Text style={{fontSize:14, fontWeight:"500"}}>Dragon Rush (25%):</Text>
+                                <Text style={{fontSize:14, fontWeight:"500", color:"blue"}}>{dragonFightPoints[0]["dragonRush"]}</Text>
+                                <Text style={{fontSize:10, fontWeight:"500"}}> / </Text>
+                                <Text style={{fontSize:14, fontWeight:"500",color:"red"}}>{dragonFightPoints[1]["dragonRush"]}</Text>
+                            </View>
+                        </View>
+                    }
                 </View>
             </View>
-
         </View>
+        </ScrollView>
     )
 
 }
@@ -273,5 +334,8 @@ const styles = StyleSheet.create({
     }, 
     blueBar: {
         height:180, width:30, borderWidth:5, backgroundColor:"blue"
+    },
+    detailTexts: {
+        fontSize:10, fontWeight:"500"
     }
 })

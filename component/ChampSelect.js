@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { StyleSheet, View, Text, Image, FlatList, TouchableOpacity, TouchableHighlight, TextInput } from 'react-native'
+import { StyleSheet, View, Text, Image, FlatList, TouchableOpacity, TouchableHighlight, TextInput, Dimensions } from 'react-native'
 import filter from 'lodash.filter';
 
 
@@ -161,60 +161,64 @@ function ChampSelect({navigation, route}) {
         }
         return false;
       };
+
+    const getItemLayout = (data, index) => (
+        {length: width/6, offset: width/6 * index, index}
+    )
     
     return ( 
-        <View style={{flexDirection: 'row', justifyContent:"space-evenly"}}>
+        <View style={{flexDirection: 'row', justifyContent:"space-evenly", alignSelf: 'center'}}>
 
-            <View style={{justifyContent:'space-evenly', width: 60, height: 500, marginTop: 40}} >
+            <View style={{justifyContent:'space-evenly', width: 60, height: 500, marginTop: height/10, marginRight: width/40}} >
 
                 <View>
                     <Text style={styles.position}> Top </Text>
 
                     <TouchableHighlight
-                        style={{height:50, width:50}}
+                        style={{height: width/6, width: width/6, alignSelf: 'center'}}
                         onPress={changeTop}
                     >
-                        <Image source={top} style={{width:50, height:50}}/>
+                        <Image source={top} style={{width: width/6, height: width/6}}/>
                     </TouchableHighlight>
                 </View>
 
                 <View>
                     <Text style={styles.position}> Jungle </Text>
                     <TouchableHighlight
-                        style={{height:50, width:50}}
+                        style={{height: width/6, width: width/6, alignSelf: 'center'}}
                         onPress={changeJG}
                     >
-                        <Image source={jungle} style={{width:50, height:50}}/>
+                        <Image source={jungle} style={{width: width/6, height: width/6}}/>
                     </TouchableHighlight>
                 </View>
 
                 <View>
                     <Text style={styles.position}> Mid </Text>
                     <TouchableHighlight
-                        style={{height:50, width:50}}
+                        style={{height: width/6, width: width/6, alignSelf: 'center'}}
                         onPress={changeMid}
                     >
-                        <Image source={mid} style={{width:50, height:50}}/>
+                        <Image source={mid} style={{width: width/6, height: width/6}}/>
                     </TouchableHighlight>
                 </View>
 
                 <View>
                     <Text style={styles.position}> ADC </Text>
                     <TouchableHighlight
-                        style={{height:50, width:50}}
+                        style={{height: width/6, width: width/6, alignSelf: 'center'}}
                         onPress={changeADC}
                     >
-                        <Image source={adc} style={{width:50, height:50}}/>
+                        <Image source={adc} style={{width: width/6, height: width/6}}/>
                     </TouchableHighlight>
                 </View>
 
                 <View>
                     <Text style={styles.position}> Support </Text>
                     <TouchableHighlight
-                        style={{height:50, width:50}}
+                        style={{height: width/6, width: width/6, alignSelf: 'center'}}
                         onPress={changeSupport}
                     >
-                        <Image source={support} style={{width:50, height:50}}/>
+                        <Image source={support} style={{width: width/6, height: width/6}}/>
                     </TouchableHighlight>
                 </View>
 
@@ -227,21 +231,23 @@ function ChampSelect({navigation, route}) {
                             merge: true,
                         });
                     }}>
-                    <Text style={{fontWeight: "500", marginTop: 8}}>Done</Text>
+                    <Text style={{fontWeight: "500", marginTop: 5}}>Done</Text>
                 </TouchableOpacity>
-
             </View>
 
         
-            <View style={{marginTop: 40}}>
+            <View style={{marginTop: 10}}>
                 <FlatList
-                ListHeaderComponent={renderHeader} //search function
-                numColumns={3}
-                horizontal={false}
-                data={data}
-                extraData={selectedChamp}
-                renderItem={renderItem}
-                keyExtractor={item => item}
+                    ListHeaderComponent={renderHeader} //search function
+                    numColumns={3}
+                    horizontal={false}
+                    data={data}
+                    extraData={selectedChamp}
+                    renderItem={renderItem}
+                    initialNumToRender={10}
+                    keyExtractor={item => item}
+                    maxToRenderPerBatch={10}
+                    getItemLayout={getItemLayout}
                 />
             </View>
 
@@ -250,21 +256,23 @@ function ChampSelect({navigation, route}) {
     
 }
 
+const {width, height} = Dimensions.get("window")
+
 const styles = StyleSheet.create({
     image: {
-        width:60, height:60, marginTop:20, marginLeft:20,borderWidth:2
+        width: width/6, height: width/6, marginTop:20, marginLeft:20,borderWidth:2
     },
     title: {
-        fontSize:12, alignItems: 'center', marginLeft: 20
+        fontSize:12, alignSelf: 'center', marginLeft: 20
     },
     imageSelected: {
-        width:60, height:60, marginTop:20, marginLeft:20, borderRadius:3, borderColor:'green'
+        width: width/6, height: width/6, marginTop:20, marginLeft:20, borderRadius:3, borderColor:'green'
     },
     position: {
-        fontSize:15, fontWeight:'500'
+        fontSize:15, fontWeight:'500', alignSelf: 'center', marginTop: 50, marginBottom: 3
     },
     doneButton: {
-        height: 31, width: 63, backgroundColor: 'white', borderRadius: 5, alignItems: 'center', marginTop:35
+        height: width/12, width: width/6, backgroundColor: 'white', borderRadius: 5, alignItems: 'center', marginTop: 80, elevation: 2
     }
 
 })

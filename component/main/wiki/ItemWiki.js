@@ -8,34 +8,46 @@ export default function ItemWiki({navigation}) {
   const [selecteditem, setSelecteditem] = useState(null);
   const [fullData, setFullData] = useState([]);
   const [data, setData] = useState([])
+  const itemIdArr = []
+  const itemNameArr = []
+  const [itemName, setItemName] = useState([])
+  const [fullItemName, setFullItemName] = useState([])
+
+  var idToName = new Object()
+  
+  for (var i = 0; i < data.length; i ++) {
+    idToName[data[i]] = itemName[i]
+  }
+
 
   useEffect(() => {
     let isMounted = true
-    fetch('http://ddragon.leagueoflegends.com/cdn/11.12.1/data/en_US/item.json')
+    fetch('http://ddragon.leagueoflegends.com/cdn/11.14.1/data/en_US/item.json')
     .then((response) => response.json())
     .then((response) => {
         if (isMounted) {
           for (var k in response.data) {
-            itemName.push(k)
+            itemIdArr.push(k)
+            itemNameArr.push(response["data"][k]["name"])
           }
-          setFullData(itemName)
-          setData(itemName)
+          setFullData(itemIdArr)
+          setData(itemIdArr)
+          setFullItemName(itemNameArr)
+          setItemName(itemNameArr)
         }
         return () => { isMounted = false }
     })
     .catch((error) => console.error(error))
   }, [selecteditem])
 
-  const itemName = []
-
   const Item = ({ item, onPress, weight, color}) => (
-    <TouchableOpacity onPress={() => navigation.navigate("Item Detail")}>
+    <TouchableOpacity onPress={() => navigation.navigate("Item Detail", item)}>
         <Image 
-            source={{uri: 'http://ddragon.leagueoflegends.com/cdn/11.12.1/img/item/' + item + '.png'}}
+            source={{uri: 'http://ddragon.leagueoflegends.com/cdn/11.14.1/img/item/' + item + '.png'}}
             style= {[styles.image, color]}
         />
         <Text style={[styles.title, weight]}>
-            {item}
+            {idToName[item]}
         </Text>
     </TouchableOpacity>    
 )
@@ -75,10 +87,20 @@ export default function ItemWiki({navigation}) {
     );
   }
 
+  // function getKeyByValue(object, arr, index) {
+  //   return Object.keys(object).find(key => object[key] === arr[index]);
+  // }
+
   const handleSearch = text => {
   const filteredData = filter(fullData, item => {
     return contains(item, text);
   });
+
+  // const filteredArr = []
+
+  // for (var i = 0; i < filteredData.length; i ++) {
+  //   filteredArr[i] = getKeyByValue(idToName, filteredData, i)
+  // }
   setData(filteredData);
   setQuery(text);
 };
@@ -111,10 +133,11 @@ const {width, height} = Dimensions.get("window")
 
 const styles = StyleSheet.create({
   image: {
-      width:60, height:60, marginTop:15, marginBottom:5, marginLeft:10, marginRight:10, borderWidth:2, justifyContent:'space-between'
+      width:60, height:60, marginTop:15, marginBottom:5, marginLeft:10, marginRight:10, borderWidth:2, justifyContent:'space-between', 
+      borderColor: '#000000c0', borderWidth: 4
   },
   title: {
-      fontSize:10, alignSelf: 'center', marginBottom: 5, marginLeft: 10, marginRight:10, fontWeight: 'bold'
+      fontSize:10, alignSelf: 'center', marginBottom: 5, fontWeight: 'bold', maxWidth: 65, textAlign: 'center'
   },
   imageSelected: {
       width:60, height:60, marginTop:20, marginLeft:20, borderRadius:3, borderColor:'green'
