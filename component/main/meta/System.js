@@ -28,7 +28,7 @@ export default function System() {
 
     const bugfix = systemIndexArr.map(index => (
         <View key={index} style={styles.lineView}>
-            <Text>· {system[index]}</Text>
+            <Text style={styles.line}>· {system[index]}</Text>
         </View>
     ))
 
@@ -44,12 +44,14 @@ const {width, height} = Dimensions.get("window")
 
 const styles = StyleSheet.create({
     ScrollView: {
-        backgroundColor:"white"
+        backgroundColor:"white",
     }, 
     lineView: {
         marginTop: 10,
         marginLeft: 10,
         marginRight: 10,
+        marginBottom: 10,
+        minHeight: height / 18
     },
     title: {
         marginTop: 10,
@@ -58,7 +60,7 @@ const styles = StyleSheet.create({
         fontWeight: 'bold'
     },
     line: {
-        fontSize: 10,
-        fontWeight: 'bold'
+        fontSize: 15,
+        lineHeight: 25
     }
 })

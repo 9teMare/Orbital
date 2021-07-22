@@ -51,6 +51,8 @@ import championDetailScreen from './component/main/wiki/ChampionDetail'
 import itemDetailScreen from './component/main/wiki/ItemDetail'
 
 import FeedbackScreen from './component/main/Feedback'
+import MatchHistoryScreen from './component/main/MatchHistory';
+import MatchHistoryDetailScreen from './component/main/MatchHistoryDetail';
 
 const Stack = createStackNavigator();
 
@@ -120,6 +122,9 @@ export class App extends Component {
             <Stack.Screen name="Champion Detail" component={championDetailScreen}/>
             <Stack.Screen name="Item Detail" component={itemDetailScreen}/>
             <Stack.Screen name="Feedback" component={FeedbackScreen}/>
+            <Stack.Screen name="Match History" component={MatchHistoryScreen}/>
+            <Stack.Screen name="Match History Detail" component={MatchHistoryDetailScreen}/>
+            
           </Stack.Navigator>
         </NavigationContainer>
 

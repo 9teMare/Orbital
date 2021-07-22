@@ -1,10 +1,12 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import {StyleSheet, View, Text, Button, Image, TouchableOpacity, TextInput, Alert, StatusBar, Dimensions } from 'react-native'
 import {Picker} from '@react-native-picker/picker'
 import {connect} from 'react-redux'
 import firebase from 'firebase'
 import { Ionicons } from '@expo/vector-icons';
 import { block } from 'react-native-reanimated'
+import  MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
+
 
 function MyPage(props) {
     const { currentUser } = props;
@@ -21,6 +23,8 @@ function MyPage(props) {
     const [profileIcon, setProfileIcon] = useState({uri: '../../pictures/others/EmptyGrayRec.png'});
     const [apiKey, setApiKey] = useState('')
    
+    const [accountId, setAccountId] = useState('');
+
     const getApiKey = async () => {
         const jsonServer = "https://orbital-riot-api.herokuapp.com/apiKey"
         await fetch(jsonServer, {
@@ -56,11 +60,43 @@ function MyPage(props) {
             setSummonerName(response.name)
             setSummonerLvl(response.summonerLevel)
             setProfileIcon(response.profileIconId)
+            setAccountId(response.accountId)
           })
           .catch(err => {
             console.log(err);
           });
       }
+
+    //   useEffect(() => {
+    //     let isMounted = true
+    //     fetch(url, {
+    //         "method": "GET",
+    //         "headers": {
+    //           "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36 Edg/91.0.864.41",
+    //           "Accept-Language": "zh-CN,zh;q=0.9,en;q=0.8,en-GB;q=0.7,en-US;q=0.6,ja;q=0.5,zh-TW;q=0.4",
+    //           "Accept-Charset": "application/x-www-form-urlencoded; charset=UTF-8",
+    //           "Origin": "https://developer.riotgames.com"
+    //         } 
+    //       })
+    //         .then(response => {
+    //             if (!response.ok) { 
+    //               return invalidUsernameAlert()
+    //             }
+    //             return response.json()    
+    //         })
+    //         .then(response => {
+    //             if (isMounted) {
+    //                 setSummonerName(response.name)
+    //                 setSummonerLvl(response.summonerLevel)
+    //                 setProfileIcon(response.profileIconId)
+    //                 setAccountId(response.accountId)
+    //             }
+    //             return () => { isMounted = false }    
+    //         })
+    //         .catch(err => {
+    //           console.log(err);
+    //         });
+    //   }, [] )
 
       const invalidUsernameAlert = () => {
         Alert.alert(
@@ -141,6 +177,13 @@ function MyPage(props) {
                 </TouchableOpacity>
                 <Text style={{ marginLeft: 20, marginTop: 10, marginBottom: 5}}>Summoner Name: {summonerName}</Text>
                 <Text style={{ marginLeft: 20, marginTop: 5, marginBottom: 20}}>Summoner Level: {summonerLvl}</Text>
+
+                <View >
+                    <TouchableOpacity style={styles.expandMatchHistory} onPress={() => {navigate("Match History", {selectedRegion, summonerName, accountId, apiKey})}}>
+                        <Text style={{position: 'absolute', marginTop: 10, left: 10}}>More Match History</Text>
+                        <MaterialCommunityIcons name="arrow-right" size={26} style={{position: 'absolute', marginTop: 5, right: 10}}/>
+                    </TouchableOpacity>
+                </View>
             </View>
 
             <View style={{marginTop:40}}>
@@ -158,9 +201,18 @@ const {width, height} = Dimensions.get("window")
 
 const styles = StyleSheet.create({
     infoContainer: {
-        maxHeight: height/3, width: width - 100, maxWidth: width - 50, backgroundColor: 'white', alignSelf:'center', 
+        width: width - 20, backgroundColor: 'white', alignSelf:'center', 
         shadowRadius:10, shadowOffset:{width:-6, height:6}, shadowOpacity:0.2,
-        marginLeft: 30 , marginRight:30, elevation: 3
+        marginLeft: 30 , marginRight:30, 
+        elevation: 3
+    },
+    expandMatchHistory: {
+        width: width - 20,
+        height: 40,
+        backgroundColor: 'white',
+        elevation: 10
+        // borderColor: 'black', 
+        // borderWidth: 2, 
     }
 })
 

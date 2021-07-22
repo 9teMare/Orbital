@@ -236,11 +236,11 @@ export default function lane({route}) {
                 <Text style={styles.category}>Teamfights</Text> 
 
                 <View style ={{flexDirection:'row', marginTop:10, justifyContent:'space-evenly'}}>
-                    <PieChart 
+                    {/* <PieChart 
                         data = {teamFightPoints}
                         //style = {{height: "100px"}}
                         //lineWidth = {30}
-                    />
+                    /> */}
                     <View>
                         <Text style={{color:"blue"}}>{teamFightPer}%</Text>
                         <Text style={{color:"red"}}>{100-teamFightPer}%</Text>

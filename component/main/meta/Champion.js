@@ -50,12 +50,10 @@ export default function Champion() {
                 for (var i in response["champions"]) {
                     combinedArr.push([])
 
-                    var z = 0
                     for (var j in response["champions"][i]["updates"]) {
                         combinedArr[v].push(<Text style={styles.skill} key={j}>{response["champions"][i]["updates"][j]["skill"]}</Text>)
                         // combinedArr[v].push(<Text style={styles.description} key={j}>{response["champions"][i]["updates"][j]["description"]}</Text>)
                         combinedArr[v].push(<Text style={styles.description} key={j}>{response["champions"][i]["updates"][j]["description"]}</Text>)
-                        z += 1
                     }
                     v += 1
                 }
