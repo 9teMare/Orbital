@@ -2,6 +2,29 @@
 # yarn lockfile v1
 
 
+"@ant-design/colors@^6.0.0":
+  version "6.0.0"
+  resolved "https://registry.npm.taobao.org/@ant-design/colors/download/@ant-design/colors-6.0.0.tgz#9b9366257cffcc47db42b9d0203bb592c13c0298"
+  integrity sha1-m5NmJXz/zEfbQrnQIDu1ksE8Apg=
+  dependencies:
+    "@ctrl/tinycolor" "^3.4.0"
+
+"@ant-design/icons-svg@^4.0.0":
+  version "4.1.0"
+  resolved "https://registry.npm.taobao.org/@ant-design/icons-svg/download/@ant-design/icons-svg-4.1.0.tgz#480b025f4b20ef7fe8f47d4a4846e4fee84ea06c"
+  integrity sha1-SAsCX0sg73/o9H1KSEbk/uhOoGw=
+
+"@ant-design/icons@^4.6.2":
+  version "4.6.2"
+  resolved "https://registry.npm.taobao.org/@ant-design/icons/download/@ant-design/icons-4.6.2.tgz#290f2e8cde505ab081fda63e511e82d3c48be982"
+  integrity sha1-KQ8ujN5QWrCB/aY+UR6C08SL6YI=
+  dependencies:
+    "@ant-design/colors" "^6.0.0"
+    "@ant-design/icons-svg" "^4.0.0"
+    "@babel/runtime" "^7.11.2"
+    classnames "^2.2.6"
+    rc-util "^5.9.4"
+
 "@babel/code-frame@^7.0.0", "@babel/code-frame@^7.12.13", "@babel/code-frame@^7.8.3":
   version "7.12.13"
   resolved "https://registry.nlark.com/@babel/code-frame/download/@babel/code-frame-7.12.13.tgz"
@@ -955,6 +978,13 @@
   dependencies:
     regenerator-runtime "^0.13.4"
 
+"@babel/runtime@^7.11.2", "@babel/runtime@^7.12.5":
+  version "7.14.8"
+  resolved "https://registry.nlark.com/@babel/runtime/download/@babel/runtime-7.14.8.tgz#7119a56f421018852694290b9f9148097391b446"
+  integrity sha1-cRmlb0IQGIUmlCkLn5FICXORtEY=
+  dependencies:
+    regenerator-runtime "^0.13.4"
+
 "@babel/template@^7.0.0", "@babel/template@^7.12.13", "@babel/template@^7.8.6":
   version "7.12.13"
   resolved "https://registry.nlark.com/@babel/template/download/@babel/template-7.12.13.tgz"
@@ -1001,6 +1031,11 @@
   dependencies:
     exec-sh "^0.3.2"
     minimist "^1.2.0"
+
+"@ctrl/tinycolor@^3.4.0":
+  version "3.4.0"
+  resolved "https://registry.nlark.com/@ctrl/tinycolor/download/@ctrl/tinycolor-3.4.0.tgz#c3c5ae543c897caa9c2a68630bed355be5f9990f"
+  integrity sha1-w8WuVDyJfKqcKmhjC+01W+X5mQ8=
 
 "@egjs/hammerjs@^2.0.17":
   version "2.0.17"
@@ -2708,6 +2743,11 @@ class-utils@^0.3.5:
     define-property "^0.2.5"
     isobject "^3.0.0"
     static-extend "^0.1.1"
+
+classnames@^2.2.6:
+  version "2.3.1"
+  resolved "https://registry.npm.taobao.org/classnames/download/classnames-2.3.1.tgz#dfcfa3891e306ec1dad105d0e88f4417b8535e8e"
+  integrity sha1-38+jiR4wbsHa0QXQ6I9EF7hTXo4=
 
 cli-cursor@^2.1.0:
   version "2.1.0"
@@ -5495,6 +5535,15 @@ range-parser@~1.2.1:
   resolved "https://registry.nlark.com/range-parser/download/range-parser-1.2.1.tgz"
   integrity sha1-PPNwI9GZ4cJNGlW4SADC8+ZGgDE=
 
+rc-util@^5.9.4:
+  version "5.13.2"
+  resolved "https://registry.nlark.com/rc-util/download/rc-util-5.13.2.tgz?cache=0&sync_timestamp=1625711434684&other_urls=https%3A%2F%2Fregistry.nlark.com%2Frc-util%2Fdownload%2Frc-util-5.13.2.tgz#a8a0bb77743351841ba8bed6393e03b8d2f685c8"
+  integrity sha1-qKC7d3QzUYQbqL7WOT4DuNL2hcg=
+  dependencies:
+    "@babel/runtime" "^7.12.5"
+    react-is "^16.12.0"
+    shallowequal "^1.1.0"
+
 react-devtools-core@^4.6.0:
   version "4.13.5"
   resolved "https://registry.nlark.com/react-devtools-core/download/react-devtools-core-4.13.5.tgz"
@@ -5539,6 +5588,11 @@ react-native-collapsible-tab-view@^4.2.0:
   integrity sha1-pBICvgT++AQiqOW/ssE2tBply+I=
   dependencies:
     use-deep-compare "^1.1.0"
+
+react-native-collapsible@^1.6.0:
+  version "1.6.0"
+  resolved "https://registry.nlark.com/react-native-collapsible/download/react-native-collapsible-1.6.0.tgz#ca261ffff16914f872059bb0972e3a78c4b37f9c"
+  integrity sha1-yiYf//FpFPhyBZuwly46eMSzf5w=
 
 react-native-elements@^3.4.2:
   version "3.4.2"
@@ -6061,6 +6115,11 @@ shallow-clone@^3.0.0:
   integrity sha1-jymBrZJTH1UDWwH7IwdppA4C76M=
   dependencies:
     kind-of "^6.0.2"
+
+shallowequal@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.npm.taobao.org/shallowequal/download/shallowequal-1.1.0.tgz#188d521de95b9087404fd4dcb68b13df0ae4e7f8"
+  integrity sha1-GI1SHelbkIdAT9TctosT3wrk5/g=
 
 shebang-command@^1.2.0:
   version "1.2.0"

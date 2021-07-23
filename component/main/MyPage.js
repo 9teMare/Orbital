@@ -67,37 +67,6 @@ function MyPage(props) {
           });
       }
 
-    //   useEffect(() => {
-    //     let isMounted = true
-    //     fetch(url, {
-    //         "method": "GET",
-    //         "headers": {
-    //           "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36 Edg/91.0.864.41",
-    //           "Accept-Language": "zh-CN,zh;q=0.9,en;q=0.8,en-GB;q=0.7,en-US;q=0.6,ja;q=0.5,zh-TW;q=0.4",
-    //           "Accept-Charset": "application/x-www-form-urlencoded; charset=UTF-8",
-    //           "Origin": "https://developer.riotgames.com"
-    //         } 
-    //       })
-    //         .then(response => {
-    //             if (!response.ok) { 
-    //               return invalidUsernameAlert()
-    //             }
-    //             return response.json()    
-    //         })
-    //         .then(response => {
-    //             if (isMounted) {
-    //                 setSummonerName(response.name)
-    //                 setSummonerLvl(response.summonerLevel)
-    //                 setProfileIcon(response.profileIconId)
-    //                 setAccountId(response.accountId)
-    //             }
-    //             return () => { isMounted = false }    
-    //         })
-    //         .catch(err => {
-    //           console.log(err);
-    //         });
-    //   }, [] )
-
       const invalidUsernameAlert = () => {
         Alert.alert(
             "Username not found",
@@ -112,8 +81,6 @@ function MyPage(props) {
             ]
           );
       }
-
-    // const avatarAddress = 'http://ddragon.leagueoflegends.com/cdn/11.12.1/img/profileicon/' + profileIcon + '.png'
 
     return (
         <View>
@@ -144,20 +111,21 @@ function MyPage(props) {
             </View>
 
             <View style={styles.infoContainer}>
-                <Picker
-                    selectedValue={selectedRegion}
-                    style={{ height: 40, width: 120, marginLeft: 10, alignItems: 'center' }}
-                    onValueChange={(itemValue, itemIndex) =>
-                        setSelectedRegion(itemValue)
-                    }>
-                    <Picker.Item label="NA" value="na1"/>
-                    <Picker.Item label="EU North" value="eun1" />
-                    <Picker.Item label="EU West" value="euw1" />
-                    <Picker.Item label="KR" value="kr" />
-                    <Picker.Item label="JP" value="jp1" />
-                    <Picker.Item label="BR" value="br1" />
-                </Picker>
-
+                <View style={{borderWidth: 2, borderColor: 'black', borderRadius: 4, width: 100, marginLeft: 20, marginTop: 10, marginBottom: 5}}>
+                    <Picker
+                        selectedValue={selectedRegion}
+                        style={{ height: 40, width: 100,  alignItems: 'center' }}
+                        onValueChange={(itemValue, itemIndex) =>
+                            setSelectedRegion(itemValue)
+                        }>
+                        <Picker.Item label="NA" value="na1"/>
+                        <Picker.Item label="EUN" value="eun1" />
+                        <Picker.Item label="EUW" value="euw1" />
+                        <Picker.Item label="KR" value="kr" />
+                        <Picker.Item label="JP" value="jp1" />
+                        <Picker.Item label="BR" value="br1" />
+                    </Picker>
+                </View>
                 <Text style={{fontWeight: 'bold', marginLeft: 20}}>
                     Link to your LOL ID
                 </Text>
@@ -166,7 +134,7 @@ function MyPage(props) {
                     onChangeText={(value) => {
                         setId(value)
                     }}
-                    style={{marginRight: 20, marginLeft: 20, marginTop: 10, borderColor: 'black', borderWidth:2, padding: 5}}
+                    style={{marginRight: 20, marginLeft: 20, marginTop: 10, borderRadius: 4, borderColor: 'black', borderWidth:2, padding: 5, width: 200}}
                 />
                 <TouchableOpacity
                     onPress = {

@@ -1,11 +1,10 @@
-import { parse } from 'dotenv';
 import React, { useState, useEffect }  from 'react'
 import {View, Text, TouchableOpacity, StyleSheet, Dimensions, FlatList, Image} from 'react-native'
 
 export default function MatchHistory({ route, navigation}) {
     const {selectedRegion, summonerName, accountId, apiKey} = route.params;
+    
     const historyArr = []
-
     const [history, setHistory] = useState([])
     const [historyState, setHistoryState] = useState(true)
 
@@ -15,6 +14,30 @@ export default function MatchHistory({ route, navigation}) {
     const [data, setData] = useState({})
 
     const [isLoading, setLoader] = useState(true)
+
+    const gameIdArrTemp = []
+    const [gameIdArr, setGameIdArr] = useState([])
+
+    //const [winLose, setWinLose] = useState('')
+    
+    // const getWinLose = (gameId, name) => {
+    //      fetch(`https://na1.api.riotgames.com/lol/match/v4/matches/${gameId}?api_key=${apiKey}`, {"method": "GET"})
+    //     .then(res => res.json())
+    //     .then(res => {
+    //         for (var i = 0 ; i < res["participantIdentities"].length; i ++) {
+    //             if (res["participantIdentities"][i]["player"]["summonerName"] === name) {
+    //                 var participantId = 1
+    //                 if (participantId < 6) {
+    //                     var win = "win"
+    //                     break
+    //                 }
+    //                 var win = "fail"
+    //             }
+    //         }
+    //         setWinLose(win)
+    //     })
+    //     .catch(e => console.log(e))
+    // }
 
     const getHistory = async() => {
         let isMounted = true
@@ -30,9 +53,10 @@ export default function MatchHistory({ route, navigation}) {
         if (isMounted) {
             for (var j in historyResponded["matches"]) {
                 historyArr.push(historyResponded["matches"][j])
-                historyArr[j]["winOrLose"] = "win"
+                gameIdArrTemp.push(historyResponded["matches"][j]["gameId"])
             }
             setHistory(historyArr)
+            setGameIdArr(gameIdArrTemp)
 
             const keyToChampion = new Object()
             for (var i in championResponded["data"]) {
@@ -44,23 +68,41 @@ export default function MatchHistory({ route, navigation}) {
         return () => { isMounted = false }    
     } 
 
-    // const getWinLose = async(gameId, name) => {
-    //     const response = await fetch(`https://na1.api.riotgames.com/lol/match/v4/matches/${gameId}?api_key=${apiKey}`, {"method": "GET"})
-    //     const responded = await response.json()
-    //     for (var i in responded["participantIdentities"]) {
-    //         if (responded["participantIdentities"][i]["player"]["summonerName"] === name) {
-    //             var participantId = responded["participantIdentities"][i]["participantId"]
-    //             if (parseInt(participantId, 10) < 6) {
-    //                 var win = responded["teams"][0]["win"]
-    //                 break
-    //             }
-    //             var win = responded["teams"][1]["win"]
-    //         }
-    //     }
-    //     return win
-    // }
+    const winArr = []
+    const [win, setWin] = useState([])
 
-    const Item = ({ champion, gameId }) => (
+    const getWin = async() => {
+        let isMounted = true
+        const gameUrl = (gameId) => `https://na1.api.riotgames.com/lol/match/v4/matches/${gameId}?api_key=${apiKey}`
+
+        if (isMounted) {
+            for (var i in gameIdArr) {
+                const fetchId = await fetch(gameUrl(gameIdArr[i]))
+                const fetchIdResponse = await fetchId.json()
+
+                const participant = fetchIdResponse.participants
+                const identity = fetchIdResponse.participantIdentities
+                 for (var j in identity) {
+                     if (identity[j]["player"]["summonerName"] === summonerName) {
+                         var temp = identity[j]["participantId"]
+                         if (participant[j]["participantId"] === temp) {
+                            winArr.push(participant[j]["stats"]["win"])
+                         }
+                     }
+                 }
+            }
+            setWin(winArr)
+
+            for (var k in history) {
+                historyArr[k]["win"] = "win"
+            }
+            setHistory(historyArr)
+            setLoader(false)
+        }
+        return () => { isMounted = false }    
+    }
+
+    const Item = ({ champion, gameId, win }) => (
         <View>
             <TouchableOpacity style={styles.item} onPress={() => {navigation.navigate("Match History Detail", {gameId, apiKey, data, summonerName})}}>
                 <View style={styles.iconAndName}>
@@ -69,15 +111,15 @@ export default function MatchHistory({ route, navigation}) {
                         style= {styles.icon}
                     />
                     <Text style={styles.name}>{data[champion]}</Text>
+                    <Text style={{position: 'absolute', right: 10}}>{win}</Text>
                 </View>
-
             </TouchableOpacity>
         </View>
     );
 
-    const renderItem = ({ item, gameId }) => (
+    const renderItem = ({ item }) => (
         <View>
-            <Item champion={item["champion"]} gameId={item["gameId"]} />
+            <Item champion={item["champion"]} gameId={item["gameId"]} win={item["win"]} />
         </View>
     );
 
@@ -88,7 +130,7 @@ export default function MatchHistory({ route, navigation}) {
                     <FlatList
                         data={history}
                         renderItem={renderItem}
-                        keyExtractor={item => item.gameId}
+                        keyExtractor={item => item.gameId.toString()}
                     />
                 </View>
             )
@@ -103,6 +145,7 @@ export default function MatchHistory({ route, navigation}) {
 
     useEffect(() => {
         getHistory()
+        getWin()
     }, []);   
 
     if (isLoading) {
@@ -117,8 +160,6 @@ export default function MatchHistory({ route, navigation}) {
 
     return (
         <View>
-            {/* <Text>{getWinLose(3985050032, "Doublelift")}</Text>
-            <Text>{zz}</Text> */}
             {whetherHaveMatchHistory()}
         </View>
     )
