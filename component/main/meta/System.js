@@ -1,41 +1,53 @@
 import React, { useState, useEffect} from 'react'
-import {Text, View, Dimensions, StyleSheet} from 'react-native'
+import {Text, View, Dimensions, StyleSheet, ActivityIndicator} from 'react-native'
 import { ScrollView } from 'react-native-gesture-handler'
 
 export default function System() {
     const patchNote = "https://orbital-riot-api.herokuapp.com/patchNote"
     const [system, setSystem] = useState([])
+    const [isLoading, setLoader] = useState(true)
 
-    useEffect(() => {
+    const getSystemUpdates = async() => {
         let isMounted = true
-        fetch(patchNote, {
-            "method": "GET"
-        })
-        .then(response => response.json())
-        .then(response => {
-            if (isMounted) {
-                setSystem(response["system"]["bugfix"])
-            }
-            return () => { isMounted = false }    
-        })
-        .catch((error) => console.error(error))
-    }, [])
+        const patchNoteResponse = await fetch(patchNote, {"method": "GET"})
+        const patchNoteResponded = await patchNoteResponse.json()
+        if (isMounted) {
+            setSystem(patchNoteResponded["system"]["bugfix"])
+            setLoader(false)
+        }
+        return () => { isMounted = false }    
+    }
 
     const systemIndexArr = []
     for (var i = 0; i < system.length; i ++) {
         systemIndexArr[i] = i
     }
 
-    const bugfix = systemIndexArr.map(index => (
+    const bugfix = () => systemIndexArr.map(index => (
         <View key={index} style={styles.lineView}>
             <Text style={styles.line}>· {system[index]}</Text>
         </View>
     ))
 
+    useEffect(() => {
+        getSystemUpdates()
+    }, [])
+
+    if (isLoading) {
+        return (
+            <View style={{height: width / 3, width: width / 2, backgroundColor: '#b8bab9c0', alignSelf: 'center', marginTop: height / 3, borderRadius: 10}}>
+                <ActivityIndicator size="large" color="grey" style={{alignSelf: 'center', marginTop: 20}}/>
+                <Text style={{fontSize: 20, fontWeight: 'bold', alignSelf: 'center', marginTop: 20, color: 'grey'}}> 
+                    Loading...
+                </Text>
+            </View>
+        )
+    }   
+
     return (
         <ScrollView style={styles.ScrollView}>
             <Text style={styles.title}>Bugfixes: </Text>
-            {bugfix}
+            {bugfix()}
         </ScrollView>
     )
 }

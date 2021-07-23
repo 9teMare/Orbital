@@ -1,6 +1,6 @@
 import React, { useState, useEffect} from 'react'
 import { ScrollView } from 'react-native-gesture-handler'
-import {Text, View, Image, StyleSheet, Dimensions} from 'react-native'
+import {Text, View, Image, StyleSheet, Dimensions, ActivityIndicator} from 'react-native'
 
 export default function Item() {
     const patchNote = "https://orbital-riot-api.herokuapp.com/patchNote"
@@ -11,28 +11,47 @@ export default function Item() {
     const [itemId, setItemIdArr] = useState([])
     const itemDescriptionArr = []
     const [itemDescription, setItemDescriptionArr] = useState([])
+    const [isLoading, setLoader] = useState(true)
 
-    useEffect(() => {
+    const getItemUpdates = async() => {
         let isMounted = true
-        fetch(patchNote, {
-            "method": "GET"
-        })
-        .then(response => response.json())
-        .then(response => {
-            if (isMounted) { 
-                for (var i in response["items"]) {
-                    itemNameArr.push(i)
-                    itemIdArr.push(response["items"][i]["id"])
-                    itemDescriptionArr.push(response["items"][i]["description"])
-                }
-                setItemName(itemNameArr)
-                setItemIdArr(itemIdArr)
-                setItemDescriptionArr(itemDescriptionArr)
+        const patchNoteResponse = await fetch(patchNote, {"method": "GET"})
+        const patchNoteResponded = await patchNoteResponse.json()
+        if (isMounted) { 
+            for (var i in patchNoteResponded["items"]) {
+                itemNameArr.push(i)
+                itemIdArr.push(patchNoteResponded["items"][i]["id"])
+                itemDescriptionArr.push(patchNoteResponded["items"][i]["description"])
             }
-            return () => { isMounted = false }    
-        })
-        .catch((error) => console.error(error))
-    }, [])
+            setItemName(itemNameArr)
+            setItemIdArr(itemIdArr)
+            setItemDescriptionArr(itemDescriptionArr)
+            setLoader(false)
+        }
+        return () => { isMounted = false }    
+    }
+
+    // useEffect(() => {
+    //     let isMounted = true
+    //     fetch(patchNote, {
+    //         "method": "GET"
+    //     })
+    //     .then(response => response.json())
+    //     .then(response => {
+    //         if (isMounted) { 
+    //             for (var i in response["items"]) {
+    //                 itemNameArr.push(i)
+    //                 itemIdArr.push(response["items"][i]["id"])
+    //                 itemDescriptionArr.push(response["items"][i]["description"])
+    //             }
+    //             setItemName(itemNameArr)
+    //             setItemIdArr(itemIdArr)
+    //             setItemDescriptionArr(itemDescriptionArr)
+    //         }
+    //         return () => { isMounted = false }    
+    //     })
+    //     .catch((error) => console.error(error))
+    // }, [])
 
     const itemUpdateSectionIndexArr = []
 
@@ -40,7 +59,7 @@ export default function Item() {
         itemUpdateSectionIndexArr[i] = i
     }
 
-    const itemUpdateSection = itemUpdateSectionIndexArr.map(index => (
+    const itemUpdateSection = () => itemUpdateSectionIndexArr.map(index => (
         <View key={index} style={styles.itemSection}>
             <Image
                 source={{uri: `http://ddragon.leagueoflegends.com/cdn/11.15.1/img/item/${itemId[index]}.png`}}
@@ -53,11 +72,24 @@ export default function Item() {
         </View>
     ))
 
+   useEffect(() => {
+        getItemUpdates()
+   }, [])
+
+   if (isLoading) {
+        return (
+            <View style={{height: width / 3, width: width / 2, backgroundColor: '#b8bab9c0', alignSelf: 'center', marginTop: height / 3, borderRadius: 10}}>
+                <ActivityIndicator size="large" color="grey" style={{alignSelf: 'center', marginTop: 20}}/>
+                <Text style={{fontSize: 20, fontWeight: 'bold', alignSelf: 'center', marginTop: 20, color: 'grey'}}> 
+                    Loading...
+                </Text>
+            </View>
+        )
+    }   
+
     return (
         <ScrollView>
-            <Text>
-                {itemUpdateSection}
-            </Text>
+            {itemUpdateSection()}
         </ScrollView>
     )
 }
@@ -69,9 +101,9 @@ const styles = StyleSheet.create({
         width: width,
         //alignItems: 'center',
         backgroundColor:"white", 
-        marginTop: 10,
+        marginBottom: 10,
         minHeight: height/8,
-        elevation: 3,
+        elevation: 3
     },
     image: {
         position: 'absolute',

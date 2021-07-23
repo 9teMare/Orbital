@@ -1,5 +1,5 @@
 import React, { useState, useEffect} from 'react'
-import {Text, View, StyleSheet, Image, Dimensions} from 'react-native'
+import {Text, View, StyleSheet, Image, Dimensions, ActivityIndicator} from 'react-native'
 import { ScrollView } from 'react-native-gesture-handler'
 
 export default function Skin() {
@@ -8,34 +8,31 @@ export default function Skin() {
     const skinNameArr = []
     const [skin, setSkin] = useState([])
     const [skinName, setSkinName] = useState([])
+    const [isLoading, setLoader] = useState(true)
     
-    useEffect(() => {
+    const getNewSkin = async () => {
         let isMounted = true
-        fetch(patchNote, {
-            "method": "GET"
-        })
-        .then((response) => response.json())
-        .then((response) => {
-            if (isMounted) {
-                for (var i = 0; i < response["skins"]["num"].length; i ++) {
-                    skinArr.push(response["skins"]["num"][i])
-                    skinNameArr.push(response["skins"]["name"][i])
-                }
-                setSkin(skinArr)
-                setSkinName(skinNameArr)
+        const patchNoteResponse = await fetch(patchNote, {"method": "GET"})
+        const patchNoteResponded = await patchNoteResponse.json()
+        if (isMounted) {
+            for (var i = 0; i < patchNoteResponded["skins"]["num"].length; i ++) {
+                skinArr.push(patchNoteResponded["skins"]["num"][i])
+                skinNameArr.push(patchNoteResponded["skins"]["name"][i])
             }
-            return () => { isMounted = false }    
-        })
-        .catch((error) => console.error(error))
-        }, [])
+            setSkin(skinArr)
+            setSkinName(skinNameArr)
+            setLoader(false)
+        }
+        return () => { isMounted = false }    
+    }
 
     const skinIdArr = []
 
     for (var i = 0; i < skin.length; i ++) {
         skinIdArr[i] = i
     }
-
-    const displaySkins = skinIdArr.map(index => (
+    
+    const displaySkins = () => skinIdArr.map(index => (
         <View key={index}>
             <View style={styles.skinWrap}>
                 <Image source={{uri: `http://ddragon.leagueoflegends.com/cdn/img/champion/splash/${skin[index]}.jpg`}} 
@@ -45,10 +42,27 @@ export default function Skin() {
         </View>
     ))
 
+    useEffect(() => {
+        getNewSkin()
+    }, []);
+
+    if (isLoading) {
+        return (
+            <View style={{height: width / 3, width: width / 2, backgroundColor: '#b8bab9c0', alignSelf: 'center', marginTop: height / 3, borderRadius: 10}}>
+                <ActivityIndicator size="large" color="grey" style={{alignSelf: 'center', marginTop: 20}}/>
+                <Text style={{fontSize: 20, fontWeight: 'bold', alignSelf: 'center', marginTop: 20, color: 'grey'}}> 
+                    Loading...
+                </Text>
+            </View>
+        )
+    }   
+
     return (
-        <ScrollView>
-            {displaySkins}
-        </ScrollView>  
+        <View>
+            <ScrollView>
+                {displaySkins()}
+            </ScrollView> 
+        </View>
     )
 }
 
@@ -71,7 +85,7 @@ const styles = StyleSheet.create({
       },
       skinWrap: {
         backgroundColor:"white", 
-        marginTop: 10,
+        marginBottom: 10,
         elevation: 3
       }
 })

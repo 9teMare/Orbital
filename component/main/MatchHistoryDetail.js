@@ -1,5 +1,5 @@
 import React, { useState, useEffect }  from 'react'
-import {View, Text, TouchableOpacity, StyleSheet, Dimensions, FlatList, Image} from 'react-native'
+import {View, Text, TouchableOpacity, StyleSheet, Dimensions, ActivityIndicator, Image} from 'react-native'
 import { ScrollView } from 'react-native-gesture-handler'
 import  MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
 import { Icon } from 'react-native-elements'
@@ -260,13 +260,14 @@ export default function MatchHistory({ route, navigation}) {
 
     if (isLoading) {
         return (
-            <View style={{height: width / 3, width: width / 2, backgroundColor: '#b8bab9', alignSelf: 'center', marginTop: height / 3, borderRadius: 10}}>
-                <Text style={{fontSize: 20, fontWeight: 'bold', alignSelf: 'center', marginTop: 40, color: 'grey'}}> 
+            <View style={{height: width / 3, width: width / 2, backgroundColor: '#b8bab9c0', alignSelf: 'center', marginTop: height / 3, borderRadius: 10}}>
+                <ActivityIndicator size="large" color="grey" style={{alignSelf: 'center', marginTop: 20}}/>
+                <Text style={{fontSize: 20, fontWeight: 'bold', alignSelf: 'center', marginTop: 20, color: 'grey'}}> 
                     Loading...
                 </Text>
             </View>
         )
-    }
+    } 
 
     return (
         <View>
