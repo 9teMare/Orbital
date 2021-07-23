@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react'
-import { View, Text, TouchableOpacity, StyleSheet, Image, FlatList, ActivityIndicator } from 'react-native'
+import { View, Text, TouchableOpacity, StyleSheet, Image, FlatList, Dimensions, ActivityIndicator } from 'react-native'
 import { PieChart } from 'react-minimal-pie-chart'
 
 export default function lane({route}) {
@@ -268,6 +268,8 @@ export default function lane({route}) {
     )
 
 }
+
+const {width, height} = Dimensions.get("window")
 
 const styles = StyleSheet.create({
     category: {

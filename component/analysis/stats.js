@@ -1,6 +1,6 @@
 
 import React, {useEffect, useState} from 'react'
-import { View, Text, Image, StyleSheet, FlatList, Alert} from 'react-native'
+import { View, Text, Image, StyleSheet, FlatList, Alert, Dimensions, ActivityIndicator} from 'react-native'
 
 const TOP = 0, JUNGLE = 1, MID = 2, ADC = 3, SUPPORT = 4
 const ASSASSIN = 0, FIGHTER = 1, MAGE = 2, MARKSMAN = 3, TANK = 5 //SUPPORT = 4
@@ -311,7 +311,12 @@ export default function lane({route}) {
 
             <View> 
                 { isLoading
-                    ? <Text> Loading... </Text>
+                    ?   <View style={{height: width / 3, width: width / 2, backgroundColor: '#b8bab9c0', alignSelf: 'center', marginTop: height / 3, borderRadius: 10}}>
+                            <ActivityIndicator size="large" color="grey" style={{alignSelf: 'center', marginTop: 20}}/>
+                            <Text style={{fontSize: 20, fontWeight: 'bold', alignSelf: 'center', marginTop: 20, color: 'grey'}}> 
+                                Loading...
+                            </Text>
+                        </View>
                     : <FlatList
                     data={tag}
                     renderItem={renderItem}
@@ -324,6 +329,7 @@ export default function lane({route}) {
     )
 }
 
+const {width, height} = Dimensions.get("window")
 
 const styles = StyleSheet.create({
     IconBig: {
