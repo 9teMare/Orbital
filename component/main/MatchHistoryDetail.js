@@ -6,7 +6,7 @@ import { Icon } from 'react-native-elements'
 import { MessageOutlined  } from '@ant-design/icons';
 
 export default function MatchHistory({ route, navigation}) {
-    const {gameId, apiKey, data, summonerName} = route.params
+    const {gameId, apiKey, data, summonerName , gameMode, queue} = route.params
     const gameUrl = `https://na1.api.riotgames.com/lol/match/v4/matches/${gameId}?api_key=${apiKey}`
     const [participants, setParticipants] = useState({})
     const [participantIdentities, setParticipantIdentities] = useState({})
@@ -32,6 +32,8 @@ export default function MatchHistory({ route, navigation}) {
     const redTeamWinArr = []
     const [redTeamWin, setRedTeamWin] = useState([])
 
+    const [spell, setSpell] = useState({})
+
     const getData = async () => {
         let isMounted = true
         const response = await fetch(gameUrl, {"method": "GET"})
@@ -46,6 +48,16 @@ export default function MatchHistory({ route, navigation}) {
         }
         
         setTempIndex(tempIndexArr)
+
+        const spellUrl = `http://ddragon.leagueoflegends.com/cdn/11.15.1/data/en_US/summoner.json`
+
+        const spellResponse = await fetch(spellUrl, {"method": "GET"})
+        const spellResponded = await spellResponse.json()
+        const idToSpell = new Object()
+        for (var j in spellResponded["data"]) {
+            idToSpell[spellResponded["data"][j]["key"]] = spellResponded["data"][j]["id"]
+        }
+        setSpell(idToSpell)
 
         if (isMounted) {
             setParticipants(participant)
@@ -117,10 +129,19 @@ export default function MatchHistory({ route, navigation}) {
                 <Text style={{color: 'black', fontSize: 17, fontWeight: 'bold'}}>
                     {name} 
                     <Text> </Text>
-                    <Text style={{backgroundColor: '#55BA46', color: 'white', borderRadius: 15, fontSize: 15}}> (Me) </Text>
+                    <View style={{borderRadius: 3, backgroundColor: '#55BA46'}}>
+                        <Text style={{color: 'white',  fontSize: 11}}> (Me) </Text>
+                    </View>
                 </Text> 
             </View>
         )
+    }
+
+    const infinityToOne = (num) => {
+        if (num === 0) {
+            return 1
+        }
+        return num
     }
 
     const renderItem = (itemId) => {
@@ -136,15 +157,22 @@ export default function MatchHistory({ route, navigation}) {
 
     const renderBlueTeam = () => tempIndex.map(index => (     
         <View style={styles.championBox} key={index}>
-            <TouchableOpacity activeOpacity={0.7}>
+            <TouchableOpacity activeOpacity={0.7} onPress={() => navigation.navigate("Blue Team Performance", {gameId, apiKey, data, blueTeam, index, participants, participantIdentities})}>
                 <View style={styles.iconAndName}>
                     <Image
                         source={{uri: `http://ddragon.leagueoflegends.com/cdn/11.15.1/img/champion/${data[blueTeam[index]["championId"]]}.png`}}
                         style= {styles.blueIcon}
                     />
-                    <Text style= {styles.name}>
-                        {data[blueTeam[index]["championId"]]}
-                    </Text>
+                    <View style={{position: 'absolute', top: 75, flexDirection: 'row', width: height / 10, justifyContent: 'center'}}>
+                        <Image
+                            source={{uri: `http://ddragon.leagueoflegends.com/cdn/11.15.1/img/spell/${spell[blueTeam[index]["spell1Id"]]}.png`}}
+                            style= {{width: 20, height: 20, marginRight: 2, borderWidth: 1, borderColor: 'black', borderRadius: 20}}
+                        />
+                        <Image
+                            source={{uri: `http://ddragon.leagueoflegends.com/cdn/11.15.1/img/spell/${spell[blueTeam[index]["spell2Id"]]}.png`}}
+                            style= {{width: 20, height: 20,  marginLeft: 2, borderWidth: 1, borderColor: 'black', borderRadius: 20}}
+                        />
+                    </View>
                 </View>
                 <Text style={styles.summonerName}>
                     {currentSummoner(blueTeamIdentities[index]["player"]["summonerName"])}
@@ -154,7 +182,7 @@ export default function MatchHistory({ route, navigation}) {
                     {blueTeam[index]["stats"]["kills"]}/{blueTeam[index]["stats"]["deaths"]}/{blueTeam[index]["stats"]["assists"]}
                 </Text>
                 <Text style={styles.kdaValue}>
-                    KDA: {((parseInt(blueTeam[index]["stats"]["kills"]) + parseInt(blueTeam[index]["stats"]["assists"]))/parseInt(blueTeam[index]["stats"]["deaths"])).toFixed(2)}
+                    KDA: {((parseInt(blueTeam[index]["stats"]["kills"]) + parseInt(blueTeam[index]["stats"]["assists"]))/infinityToOne(parseInt(blueTeam[index]["stats"]["deaths"]))).toFixed(2)}
                 </Text>
                 <View style={{position: 'absolute', height: 65 ,width: 125, left: width - 190, top: 30, backgroundColor: '#969696c0', borderRadius: 5}}>
                     <View style={{flexDirection: 'row', alignSelf: 'center', marginTop: 3}}>
@@ -179,15 +207,22 @@ export default function MatchHistory({ route, navigation}) {
 
     const renderRedTeam = () => tempIndex.map(index => (
         <View style={styles.championBox} key={index}>
-            <TouchableOpacity activeOpacity={0.7}>
+            <TouchableOpacity activeOpacity={0.7} onPress={() => navigation.navigate("Red Team Performance", {gameId, apiKey, data, redTeam, index, participants, participantIdentities})}>
                 <View style={styles.iconAndName}>
                     <Image
                         source={{uri: `http://ddragon.leagueoflegends.com/cdn/11.15.1/img/champion/${data[redTeam[index]["championId"]]}.png`}}
                         style= {styles.redIcon}
                     />
-                    <Text style= {styles.name}>
-                        {data[redTeam[index]["championId"]]}
-                    </Text>
+                    <View style={{position: 'absolute', top: 75, flexDirection: 'row', width: height / 10, justifyContent: 'center'}}>
+                        <Image
+                            source={{uri: `http://ddragon.leagueoflegends.com/cdn/11.15.1/img/spell/${spell[redTeam[index]["spell1Id"]]}.png`}}
+                            style= {{width: 20, height: 20, marginRight: 2, borderWidth: 1, borderColor: 'black', borderRadius: 20}}
+                        />
+                        <Image
+                            source={{uri: `http://ddragon.leagueoflegends.com/cdn/11.15.1/img/spell/${spell[redTeam[index]["spell2Id"]]}.png`}}
+                            style= {{width: 20, height: 20, marginRight: 2, borderWidth: 1, borderColor: 'black', borderRadius: 20}}
+                        />
+                    </View>
                 </View>
                 <Text style={styles.summonerName}>
                     {currentSummoner(redTeamIdentities[index]["player"]["summonerName"])}
@@ -197,7 +232,7 @@ export default function MatchHistory({ route, navigation}) {
                     {redTeam[index]["stats"]["kills"]}/{redTeam[index]["stats"]["deaths"]}/{redTeam[index]["stats"]["assists"]}
                 </Text>
                 <Text style={styles.kdaValue}>
-                    KDA: {((parseInt(redTeam[index]["stats"]["kills"]) + parseInt(redTeam[index]["stats"]["assists"]))/parseInt(redTeam[index]["stats"]["deaths"])).toFixed(2)}
+                    KDA: {((parseInt(redTeam[index]["stats"]["kills"]) + parseInt(redTeam[index]["stats"]["assists"]))/infinityToOne(parseInt(redTeam[index]["stats"]["deaths"]))).toFixed(2)}
                 </Text>
                 <View style={{position: 'absolute', height: 65 ,width: 125, left: width - 190, top: 30, backgroundColor: '#969696c0', borderRadius: 5}}>
                     <View style={{flexDirection: 'row', alignSelf: 'center', marginTop: 3}}>
@@ -242,6 +277,9 @@ export default function MatchHistory({ route, navigation}) {
                                         }}>
                     <Text style={{alignSelf: 'center', marginTop: 10, fontSize: 15, fontWeight: 'bold', color: 'white'}}>Analyse This Team Composition</Text>
                 </TouchableOpacity>
+                <View style={{height: 50, backgroundColor: 'white', elevation: 10}}>
+                    <Text style={{fontSize: 20, alignSelf: 'center', marginTop: 10}}>{gameMode[queue].replace(" games", "")}</Text>
+                </View>
                 {renderBlueHeader()}
                 {renderBlueTeam()}
                 {renderRedHeader()}
@@ -271,7 +309,7 @@ const styles = StyleSheet.create({
         height: 60,
         width: 60,
         borderRadius: 60,
-        marginTop: 10,
+        marginTop: 8,
         alignSelf: 'center',
         borderColor: '#55B1CE',
         borderWidth: 2,
@@ -280,15 +318,10 @@ const styles = StyleSheet.create({
         height: 60,
         width: 60,
         borderRadius: 60,
-        marginTop: 10,
+        marginTop: 8,
         alignSelf: 'center',
         borderColor: '#DC5047',
         borderWidth: 2
-    },
-    name: {
-        alignSelf: 'center',
-        fontSize: 15,
-        fontWeight: 'bold'
     },
     summonerName: {
         position: 'absolute',

@@ -10,8 +10,10 @@ export default function MatchHistory({ route, navigation}) {
 
     const matchHistoryUrl = `https://${selectedRegion}.api.riotgames.com/lol/match/v4/matchlists/by-account/${accountId}?api_key=${apiKey}`
     const championUrl = `http://ddragon.leagueoflegends.com/cdn/11.15.1/data/en_US/champion.json`
+    const queueTypeUrl = `https://static.developer.riotgames.com/docs/lol/queues.json`
 
     const [data, setData] = useState({})
+    const [gameMode, setGameMode] = useState({})
 
     const [isLoading, setLoader] = useState(true)
 
@@ -50,6 +52,9 @@ export default function MatchHistory({ route, navigation}) {
         const championResponse = await fetch(championUrl, {"method": "GET"})
         const championResponded = await championResponse.json()
 
+        const queueResponse = await fetch(queueTypeUrl, {"method": "GET"})
+        const queueResponded = await queueResponse.json()
+
         if (isMounted) {
             for (var j in historyResponded["matches"]) {
                 historyArr.push(historyResponded["matches"][j])
@@ -63,63 +68,69 @@ export default function MatchHistory({ route, navigation}) {
                 keyToChampion[championResponded["data"][i]["key"]] = championResponded["data"][i]["id"]
             }
             setData(keyToChampion)
+
+            const queueToGameMode = new Object()
+            for (var k in queueResponded) {
+                queueToGameMode[queueResponded[k]["queueId"]] = queueResponded[k]["description"]
+            }
+            setGameMode(queueToGameMode)
             setLoader(false)
         }
         return () => { isMounted = false }    
     } 
 
-    const winArr = []
-    const [win, setWin] = useState([])
+    // const winArr = []
+    // const [win, setWin] = useState([])
 
-    const getWin = async() => {
-        let isMounted = true
-        const gameUrl = (gameId) => `https://na1.api.riotgames.com/lol/match/v4/matches/${gameId}?api_key=${apiKey}`
+    // const getWin = async() => {
+    //     let isMounted = true
+    //     const gameUrl = (gameId) => `https://na1.api.riotgames.com/lol/match/v4/matches/${gameId}?api_key=${apiKey}`
 
-        if (isMounted) {
-            for (var i in gameIdArr) {
-                const fetchId = await fetch(gameUrl(gameIdArr[i]))
-                const fetchIdResponse = await fetchId.json()
+    //     if (isMounted) {
+    //         for (var i in gameIdArr) {
+    //             const fetchId = await fetch(gameUrl(gameIdArr[i]))
+    //             const fetchIdResponse = await fetchId.json()
 
-                const participant = fetchIdResponse.participants
-                const identity = fetchIdResponse.participantIdentities
-                 for (var j in identity) {
-                     if (identity[j]["player"]["summonerName"] === summonerName) {
-                         var temp = identity[j]["participantId"]
-                         if (participant[j]["participantId"] === temp) {
-                            winArr.push(participant[j]["stats"]["win"])
-                         }
-                     }
-                 }
-            }
-            setWin(winArr)
+    //             const participant = fetchIdResponse.participants
+    //             const identity = fetchIdResponse.participantIdentities
+    //              for (var j in identity) {
+    //                  if (identity[j]["player"]["summonerName"] === summonerName) {
+    //                      var temp = identity[j]["participantId"]
+    //                      if (participant[j]["participantId"] === temp) {
+    //                         winArr.push(participant[j]["stats"]["win"])
+    //                      }
+    //                  }
+    //              }
+    //         }
+    //         setWin(winArr)
 
-            for (var k in history) {
-                historyArr[k]["win"] = "win"
-            }
-            setHistory(historyArr)
-            setLoader(false)
-        }
-        return () => { isMounted = false }    
-    }
+    //         for (var k in history) {
+    //             historyArr[k]["win"] = "win"
+    //         }
+    //         setHistory(historyArr)
+    //         setLoader(false)
+    //     }
+    //     return () => { isMounted = false }    
+    // }
 
-    const Item = ({ champion, gameId, win }) => (
+    const Item = ({ champion, gameId, queue }) => (
         <View>
-            <TouchableOpacity style={styles.item} onPress={() => {navigation.navigate("Match History Detail", {gameId, apiKey, data, summonerName})}}>
+            <TouchableOpacity style={styles.item} onPress={() => {navigation.navigate("Match History Detail", {gameId, apiKey, data, summonerName, gameMode, queue})}}>
                 <View style={styles.iconAndName}>
                     <Image
                         source={{uri: `http://ddragon.leagueoflegends.com/cdn/11.15.1/img/champion/${data[champion]}.png`}}
                         style= {styles.icon}
                     />
                     <Text style={styles.name}>{data[champion]}</Text>
-                    <Text style={{position: 'absolute', right: 10}}>{win}</Text>
                 </View>
+                <Text style={{position: 'absolute', right: 10}}>{gameMode[queue].replace(" games", "")}</Text>
             </TouchableOpacity>
         </View>
     );
 
     const renderItem = ({ item }) => (
         <View>
-            <Item champion={item["champion"]} gameId={item["gameId"]} win={item["win"]} />
+            <Item champion={item["champion"]} gameId={item["gameId"]} queue={item["queue"]} />
         </View>
     );
 
@@ -136,16 +147,16 @@ export default function MatchHistory({ route, navigation}) {
             )
         }
         return (
-            <View>
-                <Text>No Match History Found</Text>
-                <Text>Maybe it is because you have not played any games in the past year, or you have not yet linked to LOL username</Text>
+            <View style={{marginTop: height / 4, marginLeft: 10, marginRight: 10, width: 300, alignSelf: 'center'}}>
+                <Text style={{fontSize: 15, fontWeight: 'bold', color: 'grey', lineHeight: 40, textAlign: 'center'}}>No Match History Found.</Text>
+                <Text style={{fontSize: 15, fontWeight: 'bold', color: 'grey', lineHeight: 40, textAlign: 'center'}}>Maybe it is because you have not played any games in the past year, or you have not yet linked to your LOL username.</Text>
             </View>
         )
     }
 
     useEffect(() => {
         getHistory()
-        getWin()
+        //getWin()
     }, []);   
 
     if (isLoading) {

@@ -53,6 +53,12 @@ import itemDetailScreen from './component/main/wiki/ItemDetail'
 import FeedbackScreen from './component/main/Feedback'
 import MatchHistoryScreen from './component/main/MatchHistory';
 import MatchHistoryDetailScreen from './component/main/MatchHistoryDetail';
+import BluePerformanceScreen from './component/main/BluePerformance';
+import RedPerformanceScreen from './component/main/RedPerformance';
+
+import { LogBox } from 'react-native';
+
+LogBox.ignoreLogs(['Setting a timer for a long period of time'])
 
 const Stack = createStackNavigator();
 
@@ -124,6 +130,8 @@ export class App extends Component {
             <Stack.Screen name="Feedback" component={FeedbackScreen}/>
             <Stack.Screen name="Match History" component={MatchHistoryScreen}/>
             <Stack.Screen name="Match History Detail" component={MatchHistoryDetailScreen}/>
+            <Stack.Screen name="Blue Team Performance" component={BluePerformanceScreen}/>
+            <Stack.Screen name="Red Team Performance" component={RedPerformanceScreen}/>
             
           </Stack.Navigator>
         </NavigationContainer>
