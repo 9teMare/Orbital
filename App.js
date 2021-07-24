@@ -1,7 +1,7 @@
 import { StatusBar } from 'expo-status-bar'
 import React, { Component } from 'react'
 
-import { View, Text } from 'react-native'
+import { View, Text, ActivityIndicator, Dimensions } from 'react-native'
 //import * as firebase from 'firebase'
 import firebase from 'firebase/app';
 import 'firebase/functions';
@@ -55,12 +55,15 @@ import MatchHistoryScreen from './component/main/MatchHistory';
 import MatchHistoryDetailScreen from './component/main/MatchHistoryDetail';
 import BluePerformanceScreen from './component/main/BluePerformance';
 import RedPerformanceScreen from './component/main/RedPerformance';
+import IdentifyRoles from './component/main/IdentifyRoles';
 
 import { LogBox } from 'react-native';
 
 LogBox.ignoreLogs(['Setting a timer for a long period of time'])
 
 const Stack = createStackNavigator();
+
+const {width, height} = Dimensions.get("window")
 
 export class App extends Component {
   constructor(props) {
@@ -91,21 +94,37 @@ export class App extends Component {
 
     if (!loaded) {
       return (
-        <View style={{ flex: 1, justifyContent: 'center', alignSelf: 'center'}}>
-          <Text style={{fontSize: 50, fontWeight: 'bold'}}>Loading...</Text>
+        <View style={{height: width / 3, width: width / 2, backgroundColor: '#b8bab9c0', alignSelf: 'center', marginTop: height / 3, borderRadius: 10}}>
+            <ActivityIndicator size="large" color="grey" style={{alignSelf: 'center', marginTop: 20}}/>
+            <Text style={{fontSize: 20, fontWeight: 'bold', alignSelf: 'center', marginTop: 20, color: 'grey'}}> 
+                Loading...
+            </Text>
         </View>
       )
     }
 
     if (!loggedIn) {
       return (
-        <NavigationContainer>
-          <Stack.Navigator initialRouteName="Landing">
-            <Stack.Screen name="Landing" component={LandingScreen} options={{ headerShown: false}}/>
-            <Stack.Screen name="Register" component={RegisterScreen}/>
-            <Stack.Screen name="Login" component={LoginScreen} />
-          </Stack.Navigator>
-        </NavigationContainer>
+          <NavigationContainer>
+            <View style={{ flex: 1, backgroundColor: '#232323'}}>
+              <Stack.Navigator initialRouteName="Landing">
+                <Stack.Screen name="Landing" component={LandingScreen} options={{ headerShown: false}}/>
+                <Stack.Screen name="Register" component={RegisterScreen} options={{
+                    headerStyle: {
+                      backgroundColor: '#232323',
+                    },
+                    headerTintColor: '#6BDB5A'
+                }}/>
+                <Stack.Screen name="Login" component={LoginScreen} options={{
+                    headerStyle: {
+                      backgroundColor: '#232323',
+                    },
+                    headerTintColor: '#6BDB5A'
+                }} /> 
+              </Stack.Navigator>
+            </View>
+          </NavigationContainer>
+        
       )
     }
     
@@ -132,6 +151,7 @@ export class App extends Component {
             <Stack.Screen name="Match History Detail" component={MatchHistoryDetailScreen}/>
             <Stack.Screen name="Blue Team Performance" component={BluePerformanceScreen}/>
             <Stack.Screen name="Red Team Performance" component={RedPerformanceScreen}/>
+            <Stack.Screen name="Identify Roles" component={IdentifyRoles}/>
             
           </Stack.Navigator>
         </NavigationContainer>

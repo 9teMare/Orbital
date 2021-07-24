@@ -52,94 +52,97 @@ export default function Composition({navigation, route}) {
             <Text style={styles.titleText}> Team Composition Analysis </Text>
 
             <View style={{alignSelf: 'center'}}>
-                <Text style={styles.blueText}> Blue Team </Text>
-                <Text 
-                    style ={{marginLeft: 24, marginTop: 8, fontSize: 10, fontWeight:'500'}}
-                    onPress={() => navigation.navigate("ChampSelect", {blue: blueTeam, red: redTeam, isBlue: true})}> 
-                    Tap here to select 
-                </Text>
+                <View style={{flexDirection:'row', marginTop: 30}}>
+                    <Text style={styles.blueText}> Blue Team </Text>
+                    <TouchableOpacity style={styles.tapHereBlue} onPress={() => navigation.navigate("ChampSelect", {blue: blueTeam, red: redTeam, isBlue: true})}>
+                        <Text style ={styles.tapHereBlueText}> 
+                            Tap to select 
+                        </Text>
+                    </TouchableOpacity>
+                </View>
 
-                <View style={{flexDirection:'row', width:310, justifyContent: 'space-evenly', marginLeft: 20, marginTop: 15, height: 80}}>
+                <View style={{flexDirection:'row', width:310, justifyContent: 'space-evenly', alignSelf: 'center', marginTop: 15, height: 80}}>
                     <Image
                         source = {blueTeam[TOP] === null 
                             ? require('../../pictures/others/blue_top.png')
                             : {uri: 'http://ddragon.leagueoflegends.com/cdn/11.12.1/img/champion/' + blueTeam[TOP] + '.png'}}
-                        style ={{width: 50, height: 50, marginBottom: 5, borderRadius:50}}/>
+                        style ={{width: 50, height: 50, borderRadius:50, borderColor: '#55B1CE', borderWidth:3}}/>
 
                     <Image 
                         source = {blueTeam[JUNGLE] === null 
                             ? require('../../pictures/others/blue_jungle.png')
                             : {uri: 'http://ddragon.leagueoflegends.com/cdn/11.12.1/img/champion/' + blueTeam[JUNGLE] + '.png'}}
-                        style ={{width: 50, height: 50, borderRadius:50}}/>   
+                        style ={{width: 50, height: 50, borderRadius:50, borderColor: '#55B1CE', borderWidth:3}}/>   
                         
                     <Image 
                         source = {blueTeam[MID] === null 
                             ? require('../../pictures/others/blue_mid.png')
                             : {uri: 'http://ddragon.leagueoflegends.com/cdn/11.12.1/img/champion/' + blueTeam[MID] + '.png'}}
-                        style ={{width: 50, height: 50, borderRadius:50}}/>   
+                        style ={{width: 50, height: 50, borderRadius:50, borderColor: '#55B1CE', borderWidth:3}}/>   
 
                     <Image 
                         source = {blueTeam[ADC] === null 
                             ? require('../../pictures/others/blue_ADC.png')
                             : {uri: 'http://ddragon.leagueoflegends.com/cdn/11.12.1/img/champion/' + blueTeam[ADC] + '.png'}}
-                        style ={{width: 50, height: 50, borderRadius:50}}/>    
+                        style ={{width: 50, height: 50, borderRadius:50, borderColor: '#55B1CE', borderWidth:3}}/>    
 
                     <Image 
                         source = {blueTeam[SUPPORT] === null 
                             ? require('../../pictures/others/blue_support.png')
                             : {uri: 'http://ddragon.leagueoflegends.com/cdn/11.12.1/img/champion/' + blueTeam[SUPPORT] + '.png'}}
-                        style ={{width: 50, height: 50, borderRadius:50}}/>    
+                        style ={{width: 50, height: 50, borderRadius:50, borderColor: '#55B1CE', borderWidth:3}}/>    
 
                 </View>
 
                 <View>
+
                     <Text style={{fontFamily:'Manticore', color: '#55BA46', fontSize: 70, alignSelf: 'center'}}>
                         VS
                     </Text>
-                </View>
-
-
-                    <Text style={styles.redText}> Red Team </Text>
-
-                <Text 
-                    style ={{marginLeft: 24, marginTop: 8, fontSize: 10, fontWeight: '500'}}
-                    onPress={() => navigation.navigate("ChampSelect", {blue: blueTeam, red: redTeam, isBlue: false})}> 
-                    Tap here to select 
-                </Text>
-
-
-                <View style={{flexDirection:'row', width:310, justifyContent: 'space-evenly', marginLeft: 20, marginTop: 15, height: 80}}>
-                    <Image
-                        source = {redTeam[TOP] === null 
-                            ? require('../../pictures/others/red_top.png')
-                            : {uri: 'http://ddragon.leagueoflegends.com/cdn/11.12.1/img/champion/' + redTeam[TOP] + '.png'}}
-                        style ={{width: 50, height: 50, marginBottom: 5, borderRadius:50}}/>
-
-                    <Image 
-                        source = {redTeam[JUNGLE] === null 
-                            ? require('../../pictures/others/red_jungle.png')
-                            : {uri: 'http://ddragon.leagueoflegends.com/cdn/11.12.1/img/champion/' + redTeam[JUNGLE] + '.png'}}
-                        style ={{width: 50, height: 50, borderRadius:50}}/>   
-                        
-                    <Image 
-                        source = {redTeam[MID] === null 
-                            ? require('../../pictures/others/red_mid.png')
-                            : {uri: 'http://ddragon.leagueoflegends.com/cdn/11.12.1/img/champion/' + redTeam[MID] + '.png'}}
-                        style ={{width: 50, height: 50, borderRadius:50}}/>   
-
-                    <Image 
-                        source = {redTeam[ADC] === null 
-                            ? require('../../pictures/others/red_ADC.png')
-                            : {uri: 'http://ddragon.leagueoflegends.com/cdn/11.12.1/img/champion/' + redTeam[ADC] + '.png'}}
-                        style ={{width: 50, height: 50, borderRadius:50}}/>    
-
-                    <Image 
-                        source = {redTeam[SUPPORT] === null 
-                            ? require('../../pictures/others/red_support.png')
-                            : {uri: 'http://ddragon.leagueoflegends.com/cdn/11.12.1/img/champion/' + redTeam[SUPPORT] + '.png'}}
-                        style ={{width: 50, height: 50, borderRadius:50}}/>    
 
                 </View>
+                    <View style={{flexDirection:'row'}}>
+                        <Text style={styles.redText}> Red Team </Text>
+
+                        <TouchableOpacity style={styles.tapHereRed} onPress={() => navigation.navigate("ChampSelect", {blue: blueTeam, red: redTeam, isBlue: false})}>
+                            <Text style ={styles.tapHereRedText}> 
+                                Tap to select 
+                            </Text>
+                        </TouchableOpacity>
+                    </View>
+                    
+                    <View style={{flexDirection:'row', width:310, justifyContent: 'space-evenly', alignSelf: 'center', marginTop: 15, height: 80}}>
+                        <Image
+                            source = {redTeam[TOP] === null 
+                                ? require('../../pictures/others/red_top.png')
+                                : {uri: 'http://ddragon.leagueoflegends.com/cdn/11.12.1/img/champion/' + redTeam[TOP] + '.png'}}
+                            style ={{width: 50, height: 50, marginBottom: 5, borderRadius:50, borderColor: '#DC5047', borderWidth:3}}/>
+
+                        <Image 
+                            source = {redTeam[JUNGLE] === null 
+                                ? require('../../pictures/others/red_jungle.png')
+                                : {uri: 'http://ddragon.leagueoflegends.com/cdn/11.12.1/img/champion/' + redTeam[JUNGLE] + '.png'}}
+                            style ={{width: 50, height: 50, borderRadius:50, borderColor: '#DC5047', borderWidth:3}}/>   
+                            
+                        <Image 
+                            source = {redTeam[MID] === null 
+                                ? require('../../pictures/others/red_mid.png')
+                                : {uri: 'http://ddragon.leagueoflegends.com/cdn/11.12.1/img/champion/' + redTeam[MID] + '.png'}}
+                            style ={{width: 50, height: 50, borderRadius:50, borderColor: '#DC5047', borderWidth:3}}/>   
+
+                        <Image 
+                            source = {redTeam[ADC] === null 
+                                ? require('../../pictures/others/red_ADC.png')
+                                : {uri: 'http://ddragon.leagueoflegends.com/cdn/11.12.1/img/champion/' + redTeam[ADC] + '.png'}}
+                            style ={{width: 50, height: 50, borderRadius:50, borderColor: '#DC5047', borderWidth:3}}/>    
+
+                        <Image 
+                            source = {redTeam[SUPPORT] === null 
+                                ? require('../../pictures/others/red_support.png')
+                                : {uri: 'http://ddragon.leagueoflegends.com/cdn/11.12.1/img/champion/' + redTeam[SUPPORT] + '.png'}}
+                            style ={{width: 50, height: 50, borderRadius:50, borderColor: '#DC5047', borderWidth:3}}/>    
+
+                    </View>
             </View>
             
             <TouchableOpacity 
@@ -164,15 +167,15 @@ const styles = StyleSheet.create({
         fontSize: 30, 
         color: '#55B1CE',
         marginTop: 36, 
-        marginLeft: 15,
-        fontWeight: '500',  
+        marginLeft: 5,
+        fontWeight: 'bold',  
     },
     redText: {
         fontSize: 30, 
         color: '#DC5047',
-        marginLeft: 15,
+        marginLeft: 5,
         marginTop: 30,
-        fontWeight: '500'
+        fontWeight: 'bold'
     }, 
     button:{
         width:237, 
@@ -197,5 +200,35 @@ const styles = StyleSheet.create({
         width: 30, 
         height: 30,
         marginTop: 10
+    },
+    tapHereRed: {
+        backgroundColor: 'white',
+        width: 120, 
+        alignItems: 'center',
+        height: 35,
+        marginTop: 33,
+        marginLeft: 20,
+        borderRadius: 5,
+        elevation:3
+    },
+    tapHereRedText: {
+        fontSize: 17,
+        marginTop: 5,
+        color: '#DC5047'
+    },
+    tapHereBlue: {
+        backgroundColor: 'white',
+        width: 120, 
+        alignItems: 'center',
+        height: 35,
+        marginTop: 40,
+        marginLeft: 20,
+        borderRadius: 5,
+        elevation:3
+    },
+    tapHereBlueText: {
+        fontSize: 17,
+        marginTop: 5,
+        color: '#55B1CE'
     }
 })

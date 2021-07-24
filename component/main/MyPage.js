@@ -11,10 +11,6 @@ import  MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunity
 function MyPage(props) {
     const { currentUser } = props;
     const {navigate} = props.navigation
-
-    const onLogout = () => {
-        firebase.auth().signOut()
-    }
     
     const [selectedRegion, setSelectedRegion] = useState('na1');
     const [Id, setId] = useState('');
@@ -186,14 +182,6 @@ function MyPage(props) {
                     </View>
                 </View>
 
-
-                <View style={{marginTop:40}}>
-                    <TouchableOpacity
-                        style = {{width: 180, height: 30, alignItems:'center', backgroundColor: "black", alignSelf:'center', elevation: 2}}
-                        onPress={() => onLogout()}>
-                        <Text style={{color: "white", marginTop: 5}}>Log out</Text>
-                    </TouchableOpacity>
-                </View>
             </View>
             </TouchableWithoutFeedback>
         </View>

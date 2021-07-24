@@ -1,6 +1,5 @@
 import React, { useState, useEffect} from 'react'
-import {Text, View, StyleSheet, Image, Dimensions} from 'react-native'
-import { ScrollView } from 'react-native-gesture-handler'
+import {Text, View, StyleSheet, Image, Dimensions, ScrollView} from 'react-native'
 
 export default function RedPerformance({ route, navigation}) {
     const {gameId, apiKey, data, redTeam, index, participants, participantIdentities} = route.params

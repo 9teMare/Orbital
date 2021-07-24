@@ -33,6 +33,7 @@ export default function MatchHistory({ route, navigation}) {
     const [redTeamWin, setRedTeamWin] = useState([])
 
     const [spell, setSpell] = useState({})
+    const [gameDuration, setGameDuration] = useState({})
 
     const getData = async () => {
         let isMounted = true
@@ -42,6 +43,7 @@ export default function MatchHistory({ route, navigation}) {
         const participant = responded.participants
         const identitiy = responded.participantIdentities
         const team = responded.teams
+        setGameDuration(responded["gameDuration"])
         
         for (var i = 0; i < participant.length/2 ; i++) {
             tempIndexArr[i] = i
@@ -92,26 +94,25 @@ export default function MatchHistory({ route, navigation}) {
         return <MaterialCommunityIcons name="emoticon-dead-outline" size={26} style={{position: 'absolute', top: 5, left: 5}}/>
     }
 
+    const winLoseRename = (win) => {
+        if (win === "Win") {
+            return "Victory"
+        }
+        return "Defeat"
+    }
+
     const renderBlueHeader = () => {
         return (
-            <View style={{backgroundColor: '#55B1CE', height: height/20}}>
+            <View style={{backgroundColor: '#55B1CE', height: height/20, width: width, elevation: 5}}>
                 <Text style={{fontSize: 20, fontWeight: 'bold', color: 'white', marginLeft: height / 40, marginTop: 5}}>Blue Team</Text>
-                <View style={styles.winView}>
-                    {winLoseIcon(blueTeamWin["win"])}
-                    <Text style={styles.win}>{blueTeamWin["win"]}</Text>
-                </View>
             </View>
         )
     }
 
     const renderRedHeader = () => {
         return (
-            <View style={{backgroundColor: '#DC5047', height: height/20, marginTop: 10}}>
+            <View style={{backgroundColor: '#DC5047', height: height/20, width: width, marginTop: 10, elevation: 5}}>
                 <Text style={{fontSize: 20, fontWeight: 'bold', color: 'white', marginLeft: height / 40, marginTop: 5}}>Red Team</Text>
-                <View style={styles.winView}>
-                    {winLoseIcon(redTeamWin["win"])}
-                    <Text style={styles.win}>{redTeamWin["win"]}</Text>
-                </View>
             </View>
         )
     }
@@ -151,7 +152,7 @@ export default function MatchHistory({ route, navigation}) {
             )
         }
         return (
-            <View style={{height: 29, width: 29, backgroundColor: '#474747', marginLeft: 1, borderColor: 'black', borderWidth: 1,  borderRadius: 5}}></View>
+            <View style={{height: 25, width: 25, backgroundColor: '#474747', marginLeft: 1, borderColor: 'black', borderWidth: 1,  borderRadius: 5}}></View>
         )
     }
 
@@ -163,7 +164,7 @@ export default function MatchHistory({ route, navigation}) {
                         source={{uri: `http://ddragon.leagueoflegends.com/cdn/11.15.1/img/champion/${data[blueTeam[index]["championId"]]}.png`}}
                         style= {styles.blueIcon}
                     />
-                    <View style={{position: 'absolute', top: 75, flexDirection: 'row', width: height / 10, justifyContent: 'center'}}>
+                    <View style={{position: 'absolute', top: 54, flexDirection: 'row', width: height / 10, justifyContent: 'center'}}>
                         <Image
                             source={{uri: `http://ddragon.leagueoflegends.com/cdn/11.15.1/img/spell/${spell[blueTeam[index]["spell1Id"]]}.png`}}
                             style= {{width: 20, height: 20, marginRight: 2, borderWidth: 1, borderColor: 'black', borderRadius: 20}}
@@ -176,7 +177,6 @@ export default function MatchHistory({ route, navigation}) {
                 </View>
                 <Text style={styles.summonerName}>
                     {currentSummoner(blueTeamIdentities[index]["player"]["summonerName"])}
-                    {/* {blueTeamIdentities[index]["player"]["summonerName"]} */}
                 </Text>
                 <Text style={styles.kda}>
                     {blueTeam[index]["stats"]["kills"]}/{blueTeam[index]["stats"]["deaths"]}/{blueTeam[index]["stats"]["assists"]}
@@ -184,21 +184,19 @@ export default function MatchHistory({ route, navigation}) {
                 <Text style={styles.kdaValue}>
                     KDA: {((parseInt(blueTeam[index]["stats"]["kills"]) + parseInt(blueTeam[index]["stats"]["assists"]))/infinityToOne(parseInt(blueTeam[index]["stats"]["deaths"]))).toFixed(2)}
                 </Text>
-                <View style={{position: 'absolute', height: 65 ,width: 125, left: width - 190, top: 30, backgroundColor: '#969696c0', borderRadius: 5}}>
-                    <View style={{flexDirection: 'row', alignSelf: 'center', marginTop: 3}}>
+                <View style={{position: 'absolute', height: 27, width: 183, left: width - 220, top: 28, backgroundColor: '#969696c0', borderRadius: 5}}>
+                    <View style={{flexDirection: 'row', alignSelf: 'center', marginTop: 1, marginBottom: 1, marginRight: 1}}>
                         {renderItem(blueTeam[index]["stats"]["item0"])}
                         {renderItem(blueTeam[index]["stats"]["item1"])}
                         {renderItem(blueTeam[index]["stats"]["item2"])}
                         {renderItem(blueTeam[index]["stats"]["item3"])}
-                    </View>
-                    <View style={{flexDirection: 'row', marginTop: 1, alignSelf: 'center'}}>
                         {renderItem(blueTeam[index]["stats"]["item4"])}
                         {renderItem(blueTeam[index]["stats"]["item5"])}
                         {renderItem(blueTeam[index]["stats"]["item6"])}
                     </View>
                 </View>
-                <View style={{position: 'absolute', right: 10, top: 30}}>
-                    <Icon name="arrow-right" size={40} color={'grey'}/>
+                <View style={{position: 'absolute', right: 2, top: 20}}>
+                    <Icon name="arrow-right" size={30} color={'grey'}/>
                 </View>
             </TouchableOpacity>
                   
@@ -213,7 +211,7 @@ export default function MatchHistory({ route, navigation}) {
                         source={{uri: `http://ddragon.leagueoflegends.com/cdn/11.15.1/img/champion/${data[redTeam[index]["championId"]]}.png`}}
                         style= {styles.redIcon}
                     />
-                    <View style={{position: 'absolute', top: 75, flexDirection: 'row', width: height / 10, justifyContent: 'center'}}>
+                    <View style={{position: 'absolute', top: 54, flexDirection: 'row', width: height / 10, justifyContent: 'center'}}>
                         <Image
                             source={{uri: `http://ddragon.leagueoflegends.com/cdn/11.15.1/img/spell/${spell[redTeam[index]["spell1Id"]]}.png`}}
                             style= {{width: 20, height: 20, marginRight: 2, borderWidth: 1, borderColor: 'black', borderRadius: 20}}
@@ -226,7 +224,6 @@ export default function MatchHistory({ route, navigation}) {
                 </View>
                 <Text style={styles.summonerName}>
                     {currentSummoner(redTeamIdentities[index]["player"]["summonerName"])}
-                    {/* {redTeamIdentities[index]["player"]["summonerName"]} */}
                 </Text>
                 <Text style={styles.kda}>
                     {redTeam[index]["stats"]["kills"]}/{redTeam[index]["stats"]["deaths"]}/{redTeam[index]["stats"]["assists"]}
@@ -234,21 +231,19 @@ export default function MatchHistory({ route, navigation}) {
                 <Text style={styles.kdaValue}>
                     KDA: {((parseInt(redTeam[index]["stats"]["kills"]) + parseInt(redTeam[index]["stats"]["assists"]))/infinityToOne(parseInt(redTeam[index]["stats"]["deaths"]))).toFixed(2)}
                 </Text>
-                <View style={{position: 'absolute', height: 65 ,width: 125, left: width - 190, top: 30, backgroundColor: '#969696c0', borderRadius: 5}}>
-                    <View style={{flexDirection: 'row', alignSelf: 'center', marginTop: 3}}>
+                <View style={{position: 'absolute', height: 27, width: 183, left: width - 220, top: 28, backgroundColor: '#969696c0', borderRadius: 5}}>
+                    <View style={{flexDirection: 'row', alignSelf: 'center', marginTop: 1, marginBottom: 1, marginRight: 1}}>
                         {renderItem(redTeam[index]["stats"]["item0"])}
                         {renderItem(redTeam[index]["stats"]["item1"])}
                         {renderItem(redTeam[index]["stats"]["item2"])}
                         {renderItem(redTeam[index]["stats"]["item3"])}
-                    </View>
-                    <View style={{flexDirection: 'row', marginTop: 1, alignSelf: 'center'}}>
                         {renderItem(redTeam[index]["stats"]["item4"])}
                         {renderItem(redTeam[index]["stats"]["item5"])}
                         {renderItem(redTeam[index]["stats"]["item6"])}
                     </View>
                 </View>
-                <View style={{position: 'absolute', right: 10, top: 30}}>
-                    <Icon name="arrow-right" size={40} color={'grey'}/>
+                <View style={{position: 'absolute', right: 2, top: 20}}>
+                    <Icon name="arrow-right" size={30} color={'grey'}/>
                 </View>
             </TouchableOpacity>
         </View>
@@ -269,17 +264,73 @@ export default function MatchHistory({ route, navigation}) {
         )
     } 
 
+    const overallKDA = (team) => {
+        var kill = 0
+        var death = 0
+        var assists = 0
+        for (var i in team) {
+            kill += team[i]["stats"]["kills"]
+            death += team[i]["stats"]["deaths"]
+            assists += team[i]["stats"]["assists"]
+        }
+        return kill + "/" + death + "/" + assists
+    }
+
+    function fancyTimeFormat(duration) {   
+        // Hours, minutes and seconds
+        var hrs = ~~(duration / 3600);
+        var mins = ~~((duration % 3600) / 60);
+        var secs = ~~duration % 60;
+    
+        // Output like "1:01" or "4:03:59" or "123:03:59"
+        var ret = "";
+    
+        if (hrs > 0) {
+            ret += "" + hrs + ":" + (mins < 10 ? "0" : "");
+        }
+    
+        ret += "" + mins + "m" + " " + (secs < 10 ? "0" : "");
+        ret += "" + secs + "s";
+        return ret;
+    }
+    
+    const rankToAnalysis = (queue) => {
+        if (queue === 420) {
+            return (
+                <TouchableOpacity style={{backgroundColor: '#d4d6d5', height: 50, elevation: 2, borderColor: '#b8bab9', borderWidth: 1}} 
+                                onPress={() => navigation.navigate("Identify Roles", {blueTeam, redTeam, gameId, apiKey, data, spell})}>
+                    <Text style={{alignSelf: 'center', marginTop: 13, fontSize: 15, fontWeight: 'bold', color: 'white'}}>Analyse This Team Composition</Text>
+                </TouchableOpacity>
+            )
+        }
+    }
+
     return (
         <View>
             <ScrollView>
-                <TouchableOpacity style={{backgroundColor: '#d4d6d5', height: 50, 
-                                        elevation: 2, 
-                                        borderColor: '#b8bab9', borderWidth: 1
-                                        }}>
-                    <Text style={{alignSelf: 'center', marginTop: 10, fontSize: 15, fontWeight: 'bold', color: 'white'}}>Analyse This Team Composition</Text>
-                </TouchableOpacity>
-                <View style={{height: 50, backgroundColor: 'white', elevation: 10}}>
-                    <Text style={{fontSize: 20, alignSelf: 'center', marginTop: 10}}>{gameMode[queue].replace(" games", "")}</Text>
+                {rankToAnalysis(queue)}
+                <View style={{height: 125, backgroundColor: 'white'}}>
+                    <View style={{height: 50, width: 50, borderRadius: 40, backgroundColor: '#55B1CE', position: 'absolute', left: 10, top: 10, elevation: 3}}>
+                        <Text style={{textAlign: 'center', marginTop: 6, color: 'white'}}>Blue Team</Text>
+                        <View style={{position: "absolute", width: 45, height: 18, backgroundColor: "#ebc034", left: 3, top: 42}}>
+                            <Text style={{fontSize: 12, alignSelf: "center", position:'absolute', fontWeight: 'bold'}}>
+                                {winLoseRename(blueTeamWin["win"])}
+                            </Text>
+                        </View>
+                    </View>
+                    <Text style={{textAlign: 'center', color: 'black', alignSelf: 'center', fontSize: 18, position: 'absolute', top: 20, fontWeight: 'bold'}}>VS</Text>
+                    <Text style={{position: 'absolute', left: 75, top: 20, color: '#55B1CE', fontSize: 18}}>{overallKDA(blueTeam)}</Text>
+                    <Text style={{position: 'absolute', right: 75, top: 20, color: '#DC5047', fontSize: 18}}>{overallKDA(redTeam)}</Text>
+                    <View style={{height: 50, width: 50, borderRadius: 40, backgroundColor: '#DC5047', position: 'absolute', right: 10, top: 10, elevation: 3}}>
+                        <Text style={{textAlign: 'center', marginTop: 6, color: 'white'}}>Red Team</Text>
+                        <View style={{position: "absolute", width: 45, height: 18, backgroundColor: "#ebc034", right: 3, top: 42}}>
+                            <Text style={{fontSize: 12, alignSelf: "center", position:'absolute', fontWeight: 'bold'}}>
+                                {winLoseRename(redTeamWin["win"])}
+                            </Text>
+                        </View>
+                    </View>
+                    <Text style={{position: 'absolute', alignSelf: 'center', top: 70, fontSize: 16}}>Game Type: {gameMode[queue].replace(" games", "")}</Text>
+                    <Text style={{position: 'absolute', alignSelf: 'center', top: 90, fontSize: 16, marginTop: 3}}>Duration: {fancyTimeFormat(gameDuration)}</Text>
                 </View>
                 {renderBlueHeader()}
                 {renderBlueTeam()}
@@ -294,7 +345,7 @@ const {width, height} = Dimensions.get("window")
 
 const styles = StyleSheet.create({
     championBox: {
-        height: height / 7.5,
+        height: height / 10,
         marginBottom: 3,
         // borderColor: 'black',
         // borderWidth: 1,
@@ -302,24 +353,24 @@ const styles = StyleSheet.create({
         elevation: 3
     },
     iconAndName: {
-        height: height / 7.5,
+        height: height / 10,
         width: height / 10,
         backgroundColor: '#f0f0f0',
     },
     blueIcon: {
-        height: 60,
-        width: 60,
+        height: 50,
+        width: 50,
         borderRadius: 60,
-        marginTop: 8,
+        marginTop: 3,
         alignSelf: 'center',
         borderColor: '#55B1CE',
         borderWidth: 2,
     },
     redIcon: {
-        height: 60,
-        width: 60,
+        height: 50,
+        width: 50,
         borderRadius: 60,
-        marginTop: 8,
+        marginTop: 3,
         alignSelf: 'center',
         borderColor: '#DC5047',
         borderWidth: 2
@@ -327,42 +378,40 @@ const styles = StyleSheet.create({
     summonerName: {
         position: 'absolute',
         left: height / 10 + 10,
-        fontWeight: 'bold',
-        fontSize: 18,
-        marginTop: 5
+        fontWeight: '100',
+        fontSize: 16,
+        marginTop: 3
     },
     kda: {
         position: 'absolute',
         left: height / 10 + 10,
         fontSize: 14,
-        marginTop: 42,
+        marginTop: 30,
         fontWeight: '300'
     },
     kdaValue: {
         position: 'absolute',
         left: height / 10 + 10,
         fontSize: 14,
-        marginTop: 78,
+        marginTop: 55,
         fontWeight: '300'
     },
     winView: {
         position: 'absolute',
         height: height/20,
-        width: height/10,
+        width: height/7.5,
         right: 0,
         backgroundColor: '#f5f24e'
     },
     win: {
-        fontSize: 20,
+        fontSize: 12,
         alignSelf: "center",
         position:'absolute',
-        right: 11,
-        top: 5,
         fontWeight: 'bold'
     },
     itemIcon: {
-        height: 29,
-        width: 29,
+        height: 25,
+        width: 25,
         borderColor: 'black',
         borderWidth: 1,
         marginLeft: 1,

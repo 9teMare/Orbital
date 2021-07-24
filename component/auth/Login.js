@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
-import { TouchableOpacity, StyleSheet, View, Button, TextInput, Text} from 'react-native'
-
+import { TouchableOpacity, StyleSheet, View, Button, TextInput, Text, Dimensions, Keyboard, TouchableWithoutFeedback} from 'react-native'
 import firebase from 'firebase'
 
 export class Login extends Component {
@@ -26,40 +25,51 @@ export class Login extends Component {
         })
     }
 
+    buttonPress() {
+        this.onSignIn()
+        Keyboard.dismiss()
+    }
+
     render() {
         return (
-            <View>
-                <Text 
-                    style ={{fontSize: 30, fontWeight: 'bold', marginLeft: 10, marginTop: 80, alignSelf: 'center'}}>
-                GREETING, SUMMONERS!
-                </Text>
+            <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
+                <View style={{backgroundColor: '#232323', height: height + 100, width: width}}>
+                    <Text style ={{fontSize: 40, fontWeight: 'bold', marginLeft: 10, marginTop: 80, alignSelf: 'center', color: 'grey'}}>
+                        Greetings,
+                    </Text>
+                    <Text style ={{fontSize: 40, fontWeight: 'bold', marginLeft: 10, marginTop: 10, alignSelf: 'center', color: 'grey'}}>
+                        Summoner !
+                    </Text>
 
-                <View style={{marginTop: '20%'}}>
-                    <TextInput
-                        style={styles.input}
-                        placeholder="email"
-                        onChangeText={(email) => this.setState({ email })}
-                    />
-                    <TextInput
-                        style = {styles.input}
-                        placeholder="password"
-                        secureTextEntry={true}
-                        onChangeText={(password) => this.setState({ password })}
-                    />
+                    <View style={{marginTop: height/20}}>
+                        <TextInput
+                            style={styles.input}
+                            placeholder="Email"
+                            placeholderTextColor='grey'
+                            onChangeText={(email) => this.setState({ email })}
+                        />
+                        <TextInput
+                            style = {styles.input}
+                            placeholder="Password"
+                            placeholderTextColor='grey'
+                            secureTextEntry={true}
+                            onChangeText={(password) => this.setState({ password })}
+                        />
 
-                    <TouchableOpacity
-                        onPress={ () => this.onSignIn()}
-                        style = {{width: 340, height: 50, alignItems:'center', backgroundColor: "black", alignSelf:'center',
-                        marginTop: 20}}>
-                            <Text style={{color: "white", marginTop: 15}}> SIGN IN </Text>
-
-                    </TouchableOpacity>
+                        <TouchableOpacity
+                            activeOpacity={0.5}
+                            onPress={ () => this.buttonPress()}
+                            style = {styles.button}>
+                                <Text style={{color: "#6BDB5A", marginTop: 15, fontWeight: 'bold'}}> SIGN IN </Text>
+                        </TouchableOpacity>
+                    </View>
                 </View>
-                
-            </View>
+            </TouchableWithoutFeedback>
         )
     }
 }
+
+const {width, height} = Dimensions.get("window")
 
 const styles = StyleSheet.create({
     input: {
@@ -67,7 +77,19 @@ const styles = StyleSheet.create({
         margin: 12,
         borderBottomWidth: 1,
         width: '80%', 
-        alignSelf: 'center'
+        alignSelf: 'center',
+        borderColor: 'grey',
+        color: "grey"
+    },
+    button: {
+        width: width - 100, 
+        height: 50, 
+        backgroundColor: "#252525", 
+        alignSelf:'center',
+        alignItems: 'center',
+        marginTop: 30,
+        borderRadius: 10,
+        elevation: 10
     }
 })
 
