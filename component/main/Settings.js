@@ -1,9 +1,14 @@
 import React from 'react'
 import {View, Text, TouchableOpacity, StyleSheet, Dimensions} from 'react-native'
+import firebase from 'firebase'
 
 export default function Settings(props) {
     const { currentUser } = props;
     const {navigate} = props.navigation
+
+    const onLogout = () => {
+        firebase.auth().signOut()
+    }
    
     return (
         <View>
@@ -13,6 +18,14 @@ export default function Settings(props) {
             <TouchableOpacity style={styles.feedback} onPress={() => {navigate("Feedback")}}>
                 <Text style={styles.buttonText}>Feedback</Text>
             </TouchableOpacity>
+
+            <View style={{marginTop:40}}>
+                <TouchableOpacity
+                    style = {styles.logout}
+                    onPress={() => onLogout()}>
+                    <Text style={{color: "black", marginTop: 15, fontWeight: 'bold', fontSize: 15}}>Log out</Text>
+                </TouchableOpacity>
+            </View>
         </View>
         
     )
@@ -34,10 +47,21 @@ const styles = StyleSheet.create({
     },
     buttonText: {
         fontSize: 15,
-        fontWeight: '500',
+        fontWeight: 'bold',
         alignSelf: 'center',
         justifyContent: 'center',
         marginTop: 15,
+        flexDirection: 'column'
+    },
+    logout:{
+        width:237, 
+        height:50, 
+        marginTop: height / 1.8, 
+        backgroundColor: 'white', 
+        alignItems: 'center', 
+        alignSelf: 'center',
+        borderRadius: 5,
+        elevation: 2,
         flexDirection: 'column'
     }
 })

@@ -53,7 +53,7 @@ function ChampSelect({navigation, route}) {
     
 
     const Item = ({ item, onPress, weight, color}) => (
-        <TouchableOpacity onPress={onPress}>
+        <TouchableOpacity onPress={onPress} style={{alignItems: 'center'}}>
             <Image 
                 source={{uri: 'http://ddragon.leagueoflegends.com/cdn/11.12.1/img/champion/' + item + '.png'}}
                 style= {[styles.image, color]}
@@ -260,10 +260,10 @@ const {width, height} = Dimensions.get("window")
 
 const styles = StyleSheet.create({
     image: {
-        width: width/6, height: width/6, marginTop:20, marginLeft:20,borderWidth:2
+        width: width/6, height: width/6, marginTop:20, borderWidth:2, marginLeft: 10, marginRight: 10
     },
     title: {
-        fontSize:12, alignSelf: 'center', marginLeft: 20
+        fontSize:12, alignSelf: 'center'
     },
     imageSelected: {
         width: width/6, height: width/6, marginTop:20, marginLeft:20, borderRadius:3, borderColor:'green'

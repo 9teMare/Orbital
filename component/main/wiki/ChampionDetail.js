@@ -13,12 +13,16 @@ export default function ChampionDetail({ route, navigation}) {
     const [meta, setMeta] = useState('');
 
     useEffect(() => {
+        let isMounted = true
         fetch(latestMetaNAUrl,{
             "method": "GET"
           })
         .then(response => response.json())
         .then(response => {
-            setMeta(response[0])
+            if (isMounted) {
+                setMeta(response[0])
+            }
+            return () => { isMounted = false }    
         })
         .catch(err => {
             console.log(err)
@@ -94,27 +98,31 @@ export default function ChampionDetail({ route, navigation}) {
     }), [resourceType]
 
     useEffect(() => {
+        let isMounted = true
         fetch(`http://ddragon.leagueoflegends.com/cdn/11.15.1/data/en_US/champion/${champName}.json`, {
             "method": "GET"
           })
         .then((response) => response.json())
         .then((response) => {
-            setTitle(response["data"][champName]["title"])
-            setLore(response["data"][champName]["lore"])
-            setPassiveId(response["data"][champName]["passive"]["image"]["full"])
-            setQId(response["data"][champName]["spells"][0]["image"]["full"])
-            setWId(response["data"][champName]["spells"][1]["image"]["full"])
-            setEId(response["data"][champName]["spells"][2]["image"]["full"])
-            setRId(response["data"][champName]["spells"][3]["image"]["full"])
-
-            for (var i = 1; i < response["data"][champName]["skins"].length; i ++) {
-                skinIdArray.push(i - 1)
-                skinNumArray.push(response["data"][champName]["skins"][i]["num"])
-                skinNameArray.push(response["data"][champName]["skins"][i]["name"])
+            if (isMounted) {
+                setTitle(response["data"][champName]["title"])
+                setLore(response["data"][champName]["lore"])
+                setPassiveId(response["data"][champName]["passive"]["image"]["full"])
+                setQId(response["data"][champName]["spells"][0]["image"]["full"])
+                setWId(response["data"][champName]["spells"][1]["image"]["full"])
+                setEId(response["data"][champName]["spells"][2]["image"]["full"])
+                setRId(response["data"][champName]["spells"][3]["image"]["full"])
+    
+                for (var i = 1; i < response["data"][champName]["skins"].length; i ++) {
+                    skinIdArray.push(i - 1)
+                    skinNumArray.push(response["data"][champName]["skins"][i]["num"])
+                    skinNameArray.push(response["data"][champName]["skins"][i]["name"])
+                }
+                setSkinId(skinIdArray)
+                setSkinNum(skinNumArray)
+                setSkinName(skinNameArray)
             }
-            setSkinId(skinIdArray)
-            setSkinNum(skinNumArray)
-            setSkinName(skinNameArray)
+            return () => { isMounted = false }    
         })
         .catch((error) => console.error(error))
       }, [])

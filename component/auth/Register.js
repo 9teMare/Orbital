@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, TouchableOpacity, TextInput, Text, StyleSheet} from 'react-native'
+import { View, TouchableOpacity, TextInput, Text, StyleSheet, Keyboard, Dimensions, TouchableWithoutFeedback} from 'react-native'
 
 import firebase from 'firebase'
 
@@ -33,42 +33,61 @@ export class Register extends Component {
         })
     }
 
+    buttonPress() {
+        this.onSignUp()
+        Keyboard.dismiss()
+    }
+
     render() {
         return (
-            <View style ={{marginTop: 120}}>
+            <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
+                <View style ={{backgroundColor: '#232323', height: height + 100, width: width}}>
+                    <Text style ={{fontSize: 40, fontWeight: 'bold', marginLeft: 10, marginTop: 80, alignSelf: 'center', color: 'grey'}}>
+                        Welcome to
+                    </Text>
+                    <Text style ={{fontSize: 40, fontWeight: 'bold', marginLeft: 10, marginTop: 10, alignSelf: 'center', color: 'grey'}}>
+                        Legendarily
+                    </Text>
+
+                    <View style={{marginTop: height/20}}>
+                        <TextInput
+                            style={styles.input}
+                            placeholder="Name"
+                            placeholderTextColor='grey'
+                            onChangeText={(name) => this.setState({ name })}
+                        />
 
 
-                <TextInput
-                    style={styles.input}
-                    placeholder="name"
-                    onChangeText={(name) => this.setState({ name })}
-                />
+                        <TextInput
+                            style={styles.input}
+                            placeholder="Email"
+                            placeholderTextColor='grey'
+                            onChangeText={(email) => this.setState({ email })}
+                        />
 
+                        <TextInput
+                            style={styles.input}
+                            placeholder="Password"
+                            placeholderTextColor='grey'
+                            secureTextEntry={true}
+                            onChangeText={(password) => this.setState({ password })}
+                        />
 
-                <TextInput
-                    style={styles.input}
-                    placeholder="email"
-                    onChangeText={(email) => this.setState({ email })}
-                />
+                        <TouchableOpacity
+                            activeOpacity={0.5}
+                            onPress={ () => this.buttonPress()}
+                            style = {styles.button}>
+                                <Text style={{color: "#6BDB5A", marginTop: 15, fontWeight: 'bold'}}>SIGN UP</Text>
 
-                <TextInput
-                    style={styles.input}
-                    placeholder="password"
-                    secureTextEntry={true}
-                    onChangeText={(password) => this.setState({ password })}
-                />
-
-                <TouchableOpacity
-                    onPress={ () => this.onSignUp()}
-                    style = {{width: 340, height: 50, alignItems:'center', backgroundColor: "black", alignSelf:'center',
-                    marginTop: 20}}>
-                        <Text style={{color: "white", marginTop: 15}}>SIGN UP</Text>
-
-                </TouchableOpacity>
-            </View>
+                        </TouchableOpacity>
+                    </View>
+                </View>
+            </TouchableWithoutFeedback>
         )
     }
 }
+
+const {width, height} = Dimensions.get("window")
 
 const styles = StyleSheet.create({
     input: {
@@ -76,7 +95,19 @@ const styles = StyleSheet.create({
         margin: 12,
         borderBottomWidth: 1,
         width: '80%', 
-        alignSelf: 'center'
+        alignSelf: 'center',
+        borderColor: 'grey',
+        color: "grey"
+    },
+    button: {
+        width: width - 100, 
+        height: 50, 
+        backgroundColor: "#252525", 
+        alignSelf:'center',
+        alignItems: 'center',
+        marginTop: 30,
+        borderRadius: 10,
+        elevation: 10
     }
 })
 

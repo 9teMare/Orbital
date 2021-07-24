@@ -20,12 +20,12 @@ export default function ItemDetail({ route, navigation}) {
     const [statsNum, setStatsNum] = useState([])
 
     useEffect(() => {
-        fetch('http://ddragon.leagueoflegends.com/cdn/11.14.1/data/en_US/item.json')
+        fetch('http://ddragon.leagueoflegends.com/cdn/11.15.1/data/en_US/item.json')
         .then((response) => response.json())
         .then((response) => {
             setItemName(response["data"][itemId]["name"])
             setDescription(response["data"][itemId]["description"])
-            setItemIconUrl({uri: `http://ddragon.leagueoflegends.com/cdn/11.14.1/img/item/${itemId}.png`})
+            setItemIconUrl({uri: `http://ddragon.leagueoflegends.com/cdn/11.15.1/img/item/${itemId}.png`})
             for (var i in response["data"][itemId]["from"]) {
                 fromArr.push(response["data"][itemId]["from"][i])
             }
@@ -60,13 +60,13 @@ export default function ItemDetail({ route, navigation}) {
 
     const displayFrom = indexArrFrom.map(index => (
         <View key={index} style={styles.fromAndIntoView}>
-            <Image source={{uri: `http://ddragon.leagueoflegends.com/cdn/11.14.1/img/item/${from[indexArrFrom[index]]}.png`}} style={styles.fromAndInto}/>
+            <Image source={{uri: `http://ddragon.leagueoflegends.com/cdn/11.15.1/img/item/${from[indexArrFrom[index]]}.png`}} style={styles.fromAndInto}/>
         </View>
     ))
 
     const displayInto = indexArrInto.map(index => (
         <View key={index} style={styles.fromAndIntoView}>
-            <Image source={{uri: `http://ddragon.leagueoflegends.com/cdn/11.14.1/img/item/${into[indexArrFrom[index]]}.png`}} style={styles.fromAndInto}/>
+            <Image source={{uri: `http://ddragon.leagueoflegends.com/cdn/11.15.1/img/item/${into[indexArrFrom[index]]}.png`}} style={styles.fromAndInto}/>
         </View>
     ))
 

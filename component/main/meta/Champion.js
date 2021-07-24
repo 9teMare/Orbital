@@ -1,5 +1,5 @@
 import React, { useState, useEffect, version } from 'react'
-import {Text, View, StyleSheet, Image, Dimensions, FlatList} from 'react-native'
+import {Text, View, StyleSheet, Image, Dimensions, ActivityIndicator} from 'react-native'
 import { ScrollView } from 'react-native-gesture-handler'
 import WebView from 'react-native-webview'
 
@@ -14,58 +14,35 @@ export default function Champion() {
 
     const combinedArr = []
     const [combined, setCombined] = useState([])
+    const [isLoading, setLoader] = useState(true)
 
-    const testArray = (arr) => {
-        if (Array.isArray(arr)) return "true"
-        return "false"
-    }
-
-    useEffect(() => {
+   const getChampionUpdates = async() =>{
         let isMounted = true
-        fetch(patchNote, {
-            "method": "GET"
-        })
-        .then((response) => response.json())
-        .then((response) => {
-            if (isMounted) {
-                for (var i in response["champions"]) {
-                    nameArr.push(i)
-                    // var temp = []
-                    // for (var j in response["champions"][i]["updates"]) {
-                    //     temp.push([<Text style={styles.skill} key={j}>{response["champions"][i]["updates"][j]["skill"]}</Text>])
-                    // }
-                    // skillArr.push(temp)
-                    // setSkill(skillArr)
-                    
-                    // var temp2 = []
-                    // for (var k in response["champions"][i]["updates"]) {
-                    //     temp2.push([<Text style={styles.skill} key={k}>{response["champions"][i]["updates"][k]["description"]}</Text>])
-                    // }
-                    // descriptionArr.push(temp2)
-                    // setDescription(descriptionArr)
+        const patchNoteResponse = await fetch(patchNote, {"method": "GET"})
+        const patchNoteResponded = await patchNoteResponse.json()
+
+        if (isMounted) {
+            for (var i in patchNoteResponded["champions"]) {
+                nameArr.push(i)
+            }
+            setName(nameArr)
+
+            var v = 0
+            for (var i in patchNoteResponded["champions"]) {
+                combinedArr.push([])
+
+                for (var j in patchNoteResponded["champions"][i]["updates"]) {
+                    combinedArr[v].push(<Text style={styles.skill} key={j+100}>{patchNoteResponded["champions"][i]["updates"][j]["skill"]}</Text>)
+                    // combinedArr[v].push(<Text style={styles.description} key={j}>{response["champions"][i]["updates"][j]["description"]}</Text>)
+                    combinedArr[v].push(<Text style={styles.description} key={j+500}>{patchNoteResponded["champions"][i]["updates"][j]["description"]}</Text>)
                 }
-                setName(nameArr)
-
-                var v = 0
-                for (var i in response["champions"]) {
-                    combinedArr.push([])
-
-                    var z = 0
-                    for (var j in response["champions"][i]["updates"]) {
-                        combinedArr[v].push(<Text style={styles.skill} key={j}>{response["champions"][i]["updates"][j]["skill"]}</Text>)
-                        // combinedArr[v].push(<Text style={styles.description} key={j}>{response["champions"][i]["updates"][j]["description"]}</Text>)
-                        combinedArr[v].push(<Text style={styles.description} key={j}>{response["champions"][i]["updates"][j]["description"]}</Text>)
-                        z += 1
-                    }
-                    v += 1
-                }
-
-                setCombined(combinedArr)
-            }   
-            return () => { isMounted = false }    
-        })
-        .catch((error) => console.error(error))
-        }, [])
+                v += 1
+            }
+            setCombined(combinedArr)
+            setLoader(false)
+        }   
+        return () => { isMounted = false }    
+   }
 
     const championSectionArr = []
 
@@ -73,7 +50,7 @@ export default function Champion() {
         championSectionArr[i] = i;
     }
 
-    const championSection = championSectionArr.map(index => (
+    const championSection = () => championSectionArr.map(index => (
         <View key={index} style={styles.championSection}>
             <Image 
                 source={{uri: `http://ddragon.leagueoflegends.com/cdn/11.15.1/img/champion/${name[index]}.png`}}
@@ -86,10 +63,25 @@ export default function Champion() {
         </View>
     ))
 
+    useEffect(() => {
+        getChampionUpdates()
+    }, [])
+
+    if (isLoading) {
+        return (
+            <View style={{height: width / 3, width: width / 2, backgroundColor: '#b8bab9c0', alignSelf: 'center', marginTop: height / 3, borderRadius: 10}}>
+                <ActivityIndicator size="large" color="grey" style={{alignSelf: 'center', marginTop: 20}}/>
+                <Text style={{fontSize: 20, fontWeight: 'bold', alignSelf: 'center', marginTop: 20, color: 'grey'}}> 
+                    Loading...
+                </Text>
+            </View>
+        )
+    }   
+
     return (
         <View>
             <ScrollView style={styles.ScrollView}>
-                {championSection}
+                {championSection()}
             </ScrollView>
         </View>
         
@@ -107,7 +99,7 @@ const styles = StyleSheet.create({
         width: width,
         //alignItems: 'center',
         backgroundColor:"white", 
-        marginTop: 10,
+        marginBottom: 10,
         minHeight: height/8,
         elevation: 3
     },

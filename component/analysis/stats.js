@@ -518,6 +518,7 @@ export default function stats({ route }) {
     )
 }
 
+const {width, height} = Dimensions.get("window")
 
 const styles = StyleSheet.create({
     IconBig: {
