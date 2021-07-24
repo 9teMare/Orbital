@@ -1,112 +1,411 @@
-import React from 'react'
-import { View, Text, Image, StyleSheet } from 'react-native'
+import React, { useEffect, useState } from 'react'
+import { View, Text, Image, StyleSheet, ScrollView } from 'react-native'
+import { Tooltip } from 'react-native-elements';
+import { TouchableOpacity } from 'react-native-gesture-handler';
+import Unorderedlist from 'react-native-unordered-list';
 
-export default function lane({route}) {
+export default function lane({ route }) {
     const TOP = 0, JUNGLE = 1, MID = 2, ADC = 3, SUPPORT = 4
-    const {blue, red} = route.params
+    const { blue, red } = route.params
+    const [isLoading, setLoader] = useState(true)
+    const [topOpened, setTopOpened] = useState(false)
+    const [jgOpened, setjgOpened] = useState(false)
+    const [midOpened, setMidOpened] = useState(false)
+    const [botOpened, setBotOpened] = useState(false)
+
+    const CCpriorityPoints = {
+        "knockAside": 0.9, "knockBack": 1.1, "knockUp": 1, "pull": 1.2,
+        "blind": 0.1, "charm": 0.8, "flee": 0.7, "taunt": 0.8, "ground": 0.3,
+        "knockDown": 0.2, "root": 0.7, "silence": 0.6, "polymorph": 0.65,
+        "sleep": 0.75, "stun": 0.8, "suppression": 1, "slow": 0.2, "stasis": 0.5,
+        "landScapeControl_JarvanIV": 0.7, "landScapeControl_Camille": 0.8, "landScapeControl_Yorick": 0.6,
+        "landScapeControl_Taliyah": 0.2, "landScapeControl_Anivia": 0.4, "landScapeControl_Trundle": 0.7,
+        "landScapeControl_Mordekaiser": 0.7, "selectableCC_Sylas": 0.5, "selectableCC_Viego": 0.6
+    }
+
+    const [positionWinRate, setPositionWinRate] = useState([])
+    const [JGrotation, setJGrotation] = useState([])
+
+    const fetching = async () => {
+
+        //from CDN
+        var blue_playStyleInfo = [], red_playStyleInfo = []
+
+        //from ddragon
+        var blue_range = [], red_range = []
+        var adSpeed = [] //[blueAD, redAD]
+
+        //from other info 
+        var blue_CCpoints = [], red_CCpoints = []
+        var blue_waveclear = [], red_waveclear = []
+        var dragonRush = [] //[blueJG, redJG]
+
+        const champOtherInfo = "https://orbital-riot-api.herokuapp.com/champOtherInfo"
+        const fetchChampOtherInfo = await fetch(champOtherInfo, {
+            "method": "GET"
+        })
+        const champOtherInfo_responded = await fetchChampOtherInfo.json()
+
+        const response = await fetch('http://ddragon.leagueoflegends.com/cdn/11.15.1/data/en_US/champion.json')
+        const responded = await response.json()
+        const data = responded.data
+
+        for (var i = 0; i < 5; i++) {
+            const blueName = new String
+            blueName = blue[i]
+            const redName = new String
+            redName = red[i]
+
+            //from ddragon
+            blue_range.push(data[blueName]["stats"]["attackrange"])
+            red_range.push(data[redName]["stats"]["attackrange"])
+
+            //from CDN
+            const response_CDN_blue = await fetch('https://cdn.communitydragon.org/11.12.1/champion/' + blueName + '/data')
+            const responded_CDN_blue = await response_CDN_blue.json()
+            const data_CDN_blue = responded_CDN_blue.playstyleInfo
+
+            blue_playStyleInfo.push(data_CDN_blue)
+
+            const response_CDN_red = await fetch('https://cdn.communitydragon.org/11.12.1/champion/' + redName + '/data')
+            const responded_CDN_red = await response_CDN_red.json()
+            const data_CDN_red = responded_CDN_red.playstyleInfo
+
+            red_playStyleInfo.push(data_CDN_red)
+
+            //Other info - CC points
+            const blueCC = champOtherInfo_responded[blueName]["CC"]
+            const redCC = champOtherInfo_responded[redName]["CC"]
+            const blueCCcount = blueCC["CCtypes"].length
+            const redCCcount = redCC["CCtypes"].length
+
+            var CCpoint_blue = 0 //individual CC points
+            var CCpoint_red = 0
+
+            for (var b = 0; b < blueCCcount; b++) {
+                var CCpoint_blue = CCpoint_blue + (CCpriorityPoints[blueCC["CCtypes"][b]]
+                    * blueCC["CCtimeFrame"][b]
+                    * blueCC["CCrange"][b]
+                    * blueCC["targetableNumber"][b])
+            }
+            blue_CCpoints.push(CCpoint_blue)
+
+            for (var r = 0; r < redCCcount; r++) {
+                CCpoint_red += (CCpriorityPoints[redCC["CCtypes"][r]]
+                    * redCC["CCtimeFrame"][r]
+                    * redCC["CCrange"][r]
+                    * redCC["targetableNumber"][r])
+            }
+            red_CCpoints.push(CCpoint_red)
+
+            //Other info - wave clear
+            blue_waveclear.push(champOtherInfo_responded[blueName]["waveClearRating"])
+            red_waveclear.push(champOtherInfo_responded[redName]["waveClearRating"])
+
+        }
+
+
+        //other info - dragon rush
+        dragonRush.push(champOtherInfo_responded[blue[JUNGLE]]["dragonRushRating"])
+        dragonRush.push(champOtherInfo_responded[red[JUNGLE]]["dragonRushRating"])
+
+        //ddragon - AD attack speed
+        adSpeed.push(data[blue[ADC]]["stats"]["attackspeed"])
+        adSpeed.push(data[red[ADC]]["stats"]["attackspeed"])
+
+
+        //calculate TOP
+        const blue_top = 0.3 * blue_playStyleInfo[TOP]["damage"] + 0.2 * blue_playStyleInfo[TOP]["durability"]
+            + 0.3 * blue_waveclear[TOP] + 0.2 * blue_range[TOP]
+        const red_top = 0.3 * red_playStyleInfo[TOP]["damage"] + 0.2 * red_playStyleInfo[TOP]["durability"]
+            + 0.3 * red_waveclear[TOP] + 0.2 * red_range[TOP]
+
+        //calculate JG
+        const blue_jungle = 0.2 * blue_playStyleInfo[JUNGLE]["mobility"] + 0.3 * blue_waveclear[JUNGLE]
+            + 0.2 * dragonRush[0] + 0.3 * blue_CCpoints[JUNGLE]
+        const red_jungle = 0.2 * red_playStyleInfo[JUNGLE]["mobility"] + 0.3 * red_waveclear[JUNGLE]
+            + 0.2 * dragonRush[1] + 0.3 * red_CCpoints[JUNGLE]
+
+        //calculate MID
+        const blue_mid = 0.4 * blue_waveclear[MID] + 0.3 * blue_playStyleInfo[MID]["damage"]
+            + 0.2 * blue_range[MID] + 0.1 * blue_playStyleInfo[MID]["durability"]
+        const red_mid = 0.4 * red_waveclear[MID] + 0.3 * red_playStyleInfo[MID]["damage"]
+            + 0.2 * red_range[MID] + 0.1 * red_playStyleInfo[MID]["durability"]
+
+        //calculate BOT
+        const blue_bot = 0.2 * blue_range[ADC] + 0.15 * adSpeed[0] + 0.15 * blue_playStyleInfo[ADC]["damage"]
+            + 0.15 * blue_playStyleInfo[SUPPORT]["utility"] + 0.15 * blue_playStyleInfo[SUPPORT]["durability"] + 0.2 * blue_CCpoints[SUPPORT]
+        const red_bot = 0.2 * red_range[ADC] + 0.15 * adSpeed[1] + 0.15 * red_playStyleInfo[ADC]["damage"]
+            + 0.15 * red_playStyleInfo[SUPPORT]["utility"] + 0.15 * red_playStyleInfo[SUPPORT]["durability"] + 0.2 * red_CCpoints[SUPPORT]
+
+        //JG-TOP
+        const blue_JGTOP = 0.3 * blue_waveclear[TOP] + 0.1 * blue_CCpoints[TOP] + 0.1 * blue_playStyleInfo[JUNGLE]["mobility"]
+            + 0.2 * blue_CCpoints[JUNGLE] + 0.3 * (blue_playStyleInfo[TOP]["damage"] + blue_playStyleInfo[JUNGLE]["damage"])
+        const red_JGTOP = 0.3 * red_waveclear[TOP] + 0.1 * red_CCpoints[TOP] + 0.1 * red_playStyleInfo[JUNGLE]["mobility"]
+            + 0.2 * red_CCpoints[JUNGLE] + 0.3 * (red_playStyleInfo[TOP]["damage"] + red_playStyleInfo[JUNGLE]["damage"])
+
+        //JG_MID
+        const blue_JGMID = 0.3 * blue_waveclear[MID] + 0.1 * blue_CCpoints[MID] + 0.1 * blue_playStyleInfo[JUNGLE]["mobility"]
+            + 0.2 * blue_CCpoints[JUNGLE] + 0.3 * (blue_playStyleInfo[MID]["damage"] + blue_playStyleInfo[JUNGLE]["damage"])
+        const red_JGMID = 0.3 * red_waveclear[MID] + 0.1 * red_CCpoints[MID] + 0.1 * red_playStyleInfo[JUNGLE]["mobility"]
+            + 0.2 * red_CCpoints[JUNGLE] + 0.3 * (red_playStyleInfo[MID]["damage"] + red_playStyleInfo[JUNGLE]["damage"])
+
+        //JG-BOT
+        const blue_JGBOT = 0.3 * (blue_waveclear[ADC] + blue_waveclear[SUPPORT]) + 0.1 * (blue_CCpoints[ADC] + blue_CCpoints[SUPPORT]) + 0.1 * blue_playStyleInfo[JUNGLE]["mobility"]
+            + 0.2 * blue_CCpoints[JUNGLE] + 0.3 * (blue_playStyleInfo[ADC]["damage"] + blue_playStyleInfo[SUPPORT]["damage"] + blue_playStyleInfo[JUNGLE]["damage"])
+        const red_JGBOT = 0.3 * (red_waveclear[ADC] + red_waveclear[SUPPORT]) + 0.1 * (red_CCpoints[ADC] + red_CCpoints[SUPPORT]) + 0.1 * red_playStyleInfo[JUNGLE]["mobility"]
+            + 0.2 * red_CCpoints[JUNGLE] + 0.3 * (red_playStyleInfo[ADC]["damage"] + red_playStyleInfo[SUPPORT]["damage"] + red_playStyleInfo[JUNGLE]["damage"])
+
+        setPositionWinRate([{ top: blue_top, jg: blue_jungle, mid: blue_mid, bot: blue_bot },
+        { top: red_top, jg: red_jungle, mid: red_mid, bot: red_bot }])
+        setJGrotation([{ jgtop: blue_JGTOP, jgmid: blue_JGMID, jgbot: blue_JGBOT },
+        { jgtop: red_JGTOP, jgmid: red_JGMID, jgbot: red_JGBOT }])
+
+        setLoader(false)
+    }
+
+    useEffect(() => {
+        fetching()
+    }, []);
+
+    if (isLoading) {
+        return (
+            <Text>Loading...</Text>
+        )
+    }
 
     return (
-        <View style={{flexDirection:'column', minHeight:404}}>
-            <View style={{backgroundColor:"white"}}>
-                <Text style={styles.category}>
-                    Win rate by position
+        <ScrollView>
+        <View style={{ flexDirection: 'column', minHeight: 404 }}>
+            <View style={{ backgroundColor: "white" }}>
+                <View style={{ flexDirection: "row" }}>
+                    <Text style={styles.category}>
+                        Win rate by position
                 </Text>
+                    <View style={{ height: 20, width: 20, borderRadius: 20, borderColor: "gray", borderWidth: 1, alignSelf: "center", marginTop: 10, marginLeft: 10 }}>
+                        <Tooltip popover={<Text style={{ color: "white" }}>This section shows the estimated win rate of each lane in the laning phase (especially in the early game). Tap on the individual sections below to see what factors are taken into consideration.</Text>}
+                            width={280} height={125}>
+                            <Text style={{ alignSelf: "center", fontWeight: "bold" }}>?</Text>
+                        </Tooltip>
+                    </View>
 
+                </View>
+                
+                <TouchableOpacity onPress={() => setTopOpened(!topOpened)}>
                 <View style={styles.positionRowContainer}>
-                    <Image 
-                        source={{uri: 'http://ddragon.leagueoflegends.com/cdn/11.12.1/img/champion/' + blue[TOP] + '.png'}}
+                    <Image
+                        source={{ uri: 'http://ddragon.leagueoflegends.com/cdn/11.12.1/img/champion/' + blue[TOP] + '.png' }}
                         style={styles.blueIcon} />
-
+                    <Text style={styles.positionRatio}>{parseFloat(((positionWinRate[0]["top"] / (positionWinRate[0]["top"] + positionWinRate[1]["top"])) * 100).toFixed(1))}%</Text>
                     <Text style={styles.positionText}> TOP </Text>
+                    <Text style={styles.positionRatio}>{parseFloat(((positionWinRate[1]["top"] / (positionWinRate[1]["top"] + positionWinRate[0]["top"])) * 100).toFixed(1))}%</Text>
 
-                    <Image 
-                        source={{uri: 'http://ddragon.leagueoflegends.com/cdn/11.12.1/img/champion/' + red[TOP] + '.png'}}
+                    <Image
+                        source={{ uri: 'http://ddragon.leagueoflegends.com/cdn/11.12.1/img/champion/' + red[TOP] + '.png' }}
                         style={styles.redIcon} />
                 </View>
+                </TouchableOpacity>
 
+
+                <View style={{ flexDirection: "row" }}>
+                    <View
+                        style={{ backgroundColor: "#DC5047", height: 2, top: -2, bottom: 10, left: 47, right: 47, position: "absolute", flexDirection: "row" }}>
+                        <View style={{
+                            width: parseFloat(((positionWinRate[0]["top"] / (positionWinRate[0]["top"] + positionWinRate[1]["top"])) * 100).toFixed(2)) + "%",
+                            backgroundColor: "#55B1CE"
+                        }} />
+                    </View>
+                </View>
+
+                {topOpened
+                    ? <View style={{marginLeft:30, marginRight:30, marginTop: 10, marginBottom:5}}>
+                        <Text style={{fontWeight:"500"}}> Factors: </Text>
+                        <Unorderedlist><Text>Wave clear (split push option) - 30%</Text></Unorderedlist>
+                        <Unorderedlist><Text>Attack range - 20%</Text></Unorderedlist>
+                        <Unorderedlist><Text>Damage - 30%</Text></Unorderedlist>
+                        <Unorderedlist><Text>Sustain - 20%</Text></Unorderedlist>
+                    </View>
+                    : <View></View>
+                }
+
+                <TouchableOpacity onPress={() => setjgOpened(!jgOpened)}>
                 <View style={styles.positionRowContainer}>
-                    <Image 
-                        source={{uri: 'http://ddragon.leagueoflegends.com/cdn/11.12.1/img/champion/' + blue[JUNGLE] + '.png'}}
+                    <Image
+                        source={{ uri: 'http://ddragon.leagueoflegends.com/cdn/11.12.1/img/champion/' + blue[JUNGLE] + '.png' }}
                         style={styles.blueIcon} />
 
+                    <Text style={styles.positionRatio}>{parseFloat(((positionWinRate[0]["jg"] / (positionWinRate[0]["jg"] + positionWinRate[1]["jg"])) * 100).toFixed(1))}%</Text>
                     <Text style={styles.positionText}> JUNGLE </Text>
+                    <Text style={styles.positionRatio}>{parseFloat(((positionWinRate[1]["jg"] / (positionWinRate[1]["jg"] + positionWinRate[0]["jg"])) * 100).toFixed(1))}%</Text>
 
-                    <Image 
-                        source={{uri: 'http://ddragon.leagueoflegends.com/cdn/11.12.1/img/champion/' + red[JUNGLE] + '.png'}}
+                    <Image
+                        source={{ uri: 'http://ddragon.leagueoflegends.com/cdn/11.12.1/img/champion/' + red[JUNGLE] + '.png' }}
                         style={styles.redIcon} />
                 </View>
+                <View style={{ flexDirection: "row" }}>
+                    <View
+                        style={{ backgroundColor: "#DC5047", height: 2, top: -2, bottom: 10, left: 47, right: 47, position: "absolute", flexDirection: "row" }}>
+                        <View style={{
+                            width: parseFloat(((positionWinRate[0]["jg"] / (positionWinRate[0]["jg"] + positionWinRate[1]["jg"])) * 100).toFixed(2)) + "%",
+                            backgroundColor: "#55B1CE"
+                        }} />
+                    </View>
+                </View>
+                </TouchableOpacity>
 
+                {jgOpened
+                    ? <View style={{marginLeft:30, marginRight:30, marginTop: 10, marginBottom:5}}>
+                        <Text style={{fontWeight:"500"}}> Factors: </Text>
+                        <Unorderedlist><Text>Mobility - 20%</Text></Unorderedlist>
+                        <Unorderedlist><Text>AOE (for clearing jungle camps) - 30%</Text></Unorderedlist>
+                        <Unorderedlist><Text>Dragon rush - 20%</Text></Unorderedlist>
+                        <Unorderedlist><Text>Crowd control (for ganking) - 30%</Text></Unorderedlist>
+                    </View>
+                    : <View></View>
+                }
+
+                <TouchableOpacity onPress={() => setMidOpened(!midOpened)}>
                 <View style={styles.positionRowContainer}>
-                    <Image 
-                        source={{uri: 'http://ddragon.leagueoflegends.com/cdn/11.12.1/img/champion/' + blue[MID] + '.png'}}
+                    <Image
+                        source={{ uri: 'http://ddragon.leagueoflegends.com/cdn/11.12.1/img/champion/' + blue[MID] + '.png' }}
                         style={styles.blueIcon} />
 
+                    <Text style={styles.positionRatio}>{parseFloat(((positionWinRate[0]["mid"] / (positionWinRate[0]["mid"] + positionWinRate[1]["mid"])) * 100).toFixed(1))}%</Text>
                     <Text style={styles.positionText}> MID </Text>
+                    <Text style={styles.positionRatio}>{parseFloat(((positionWinRate[1]["mid"] / (positionWinRate[1]["mid"] + positionWinRate[0]["mid"])) * 100).toFixed(1))}%</Text>
 
-                    <Image 
-                        source={{uri: 'http://ddragon.leagueoflegends.com/cdn/11.12.1/img/champion/' + red[MID] + '.png'}}
+                    <Image
+                        source={{ uri: 'http://ddragon.leagueoflegends.com/cdn/11.12.1/img/champion/' + red[MID] + '.png' }}
                         style={styles.redIcon} />
                 </View>
-
-                <View style={{flexDirection:'row', justifyContent:'space-between', marginStart:24, marginEnd:24, marginTop: 26, marginBottom:20}}>
-                    <View>
-                        <Image 
-                            source={{uri: 'http://ddragon.leagueoflegends.com/cdn/11.12.1/img/champion/' + blue[ADC] + '.png'}}
-                            style={styles.blueIcon} />
-                        <Image 
-                            source={{uri: 'http://ddragon.leagueoflegends.com/cdn/11.12.1/img/champion/' + blue[SUPPORT] + '.png'}}
-                            style={styles.blueIcon} /> 
-                    </View>
-                    
-
-                    <Text style={styles.positionText}> BOT </Text>
-
-                    <View>
-                        <Image 
-                            source={{uri: 'http://ddragon.leagueoflegends.com/cdn/11.12.1/img/champion/' + red[ADC] + '.png'}}
-                            style={styles.redIcon} />
-                        <Image 
-                            source={{uri: 'http://ddragon.leagueoflegends.com/cdn/11.12.1/img/champion/' + red[SUPPORT] + '.png'}}
-                            style={styles.redIcon} />    
+                <View style={{ flexDirection: "row" }}>
+                    <View
+                        style={{ backgroundColor: "#DC5047", height: 2, top: -2, bottom: 10, left: 47, right: 47, position: "absolute", flexDirection: "row" }}>
+                        <View style={{
+                            width: parseFloat(((positionWinRate[0]["mid"] / (positionWinRate[0]["mid"] + positionWinRate[1]["mid"])) * 100).toFixed(2)) + "%",
+                            backgroundColor: "#55B1CE"
+                        }} />
                     </View>
                 </View>
+                </TouchableOpacity>
+
+                {midOpened
+                    ? <View style={{marginLeft:30, marginRight:30, marginTop: 10, marginBottom:5}}>
+                        <Text style={{fontWeight:"500"}}> Factors: </Text>
+                        <Unorderedlist><Text>Wave clear (split push option) - 40%</Text></Unorderedlist>
+                        <Unorderedlist><Text>Damage - 30%</Text></Unorderedlist>
+                        <Unorderedlist><Text>Attack range - 20%</Text></Unorderedlist>
+                        <Unorderedlist><Text>Sustain - 10%</Text></Unorderedlist>
+                    </View>
+                    : <View></View>
+                }
+                
+                <TouchableOpacity onPress={() => setBotOpened(!botOpened)}>
+                <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginStart: 24, marginEnd: 24, marginTop: 26, marginBottom: 20 }}>
+                    <View>
+                        <Image
+                            source={{ uri: 'http://ddragon.leagueoflegends.com/cdn/11.12.1/img/champion/' + blue[ADC] + '.png' }}
+                            style={styles.blueIcon} />
+                        <Image
+                            source={{ uri: 'http://ddragon.leagueoflegends.com/cdn/11.12.1/img/champion/' + blue[SUPPORT] + '.png' }}
+                            style={styles.blueIcon} />
+                    </View>
+
+
+                    <Text style={styles.positionRatio}>{parseFloat(((positionWinRate[0]["bot"] / (positionWinRate[0]["bot"] + positionWinRate[1]["bot"])) * 100).toFixed(1))}%</Text>
+                    <Text style={styles.positionText}> BOT </Text>
+                    <Text style={styles.positionRatio}>{parseFloat(((positionWinRate[1]["bot"] / (positionWinRate[1]["bot"] + positionWinRate[0]["bot"])) * 100).toFixed(1))}%</Text>
+
+                    <View>
+                        <Image
+                            source={{ uri: 'http://ddragon.leagueoflegends.com/cdn/11.12.1/img/champion/' + red[ADC] + '.png' }}
+                            style={styles.redIcon} />
+                        <Image
+                            source={{ uri: 'http://ddragon.leagueoflegends.com/cdn/11.12.1/img/champion/' + red[SUPPORT] + '.png' }}
+                            style={styles.redIcon} />
+                    </View>
+                </View>
+                <View style={{ flexDirection: "row" }}>
+                    <View
+                        style={{ backgroundColor: "#DC5047", height: 2, top: -22, bottom: 10, left: 47, right: 47, position: "absolute", flexDirection: "row" }}>
+                        <View style={{
+                            width: parseFloat(((positionWinRate[0]["bot"] / (positionWinRate[0]["bot"] + positionWinRate[1]["bot"])) * 100).toFixed(2)) + "%",
+                            backgroundColor: "#55B1CE"
+                        }} />
+                    </View>
+                </View>
+                </TouchableOpacity>
+
+                {botOpened
+                    ? <View style={{marginLeft:30, marginRight:30, marginTop: 5, marginBottom:10}}>
+                        <Text style={{fontWeight:"500"}}> Factors : </Text>
+                        <Unorderedlist><Text>ADC: attack range - 20%</Text></Unorderedlist>
+                        <Unorderedlist><Text>ADC: attack speed - 15%</Text></Unorderedlist>
+                        <Unorderedlist><Text>ADC: damage - 15%</Text></Unorderedlist>
+                        <Unorderedlist><Text>Support: ultility - 15%</Text></Unorderedlist>
+                        <Unorderedlist><Text>Support: durability - 15%</Text></Unorderedlist>
+                        <Unorderedlist><Text>Support: crowd control - 20%</Text></Unorderedlist>
+                    </View>
+                    : <View></View>
+                }
 
             </View>
 
-            <View style={{backgroundColor:"white", marginTop: 5}}>
-                <Text style={styles.category}>
-                    Win rate by jungle rotation
+            <View style={{ backgroundColor: "white", marginTop: 5 }}>
+
+                <View style={{ flexDirection: "row" }}>
+                    <Text style={styles.category}>
+                        Win rate by jungle rotation
                 </Text>
+                    <View style={{ height: 20, width: 20, borderRadius: 20, borderColor: "gray", borderWidth: 1, alignSelf: "center", marginTop: 10, marginLeft: 10 }}>
+                        <Tooltip popover={<Text style={{ color: "white" }}>This section tells the estimated win rate when junglers rotate to each lane of the map. The factors taken into consideration are: Damage(30%), crowd control(30%), jungler's mobility(10%), laner's wave clear ability(30%)</Text>}
+                            width={280} height={150}>
+                            <Text style={{ alignSelf: "center", fontWeight: "bold" }}>?</Text>
+                        </Tooltip>
+                    </View>
+                </View>
 
 
                 <View style={styles.jgRowContainer}>
-                    <Image 
-                        source={{uri: 'http://ddragon.leagueoflegends.com/cdn/11.12.1/img/champion/' + blue[JUNGLE] + '.png'}}
-                        style={styles.blueIcon}/>
+                    <Image
+                        source={{ uri: 'http://ddragon.leagueoflegends.com/cdn/11.12.1/img/champion/' + blue[JUNGLE] + '.png' }}
+                        style={styles.blueIcon} />
 
-                    <Text style={{fontWeight:'500'}}> vs </Text>
+                    <Text style={{ fontWeight: '500' }}> vs </Text>
 
 
-                    <Image 
-                        source={{uri: 'http://ddragon.leagueoflegends.com/cdn/11.12.1/img/champion/' + red[JUNGLE] + '.png'}}
-                        style={styles.redIcon}/>
+                    <Image
+                        source={{ uri: 'http://ddragon.leagueoflegends.com/cdn/11.12.1/img/champion/' + red[JUNGLE] + '.png' }}
+                        style={styles.redIcon} />
                 </View>
 
-                <View style={{flexDirection:'row', justifyContent:'space-between', marginStart:26, marginEnd:26, marginTop:10}}>
-                    <Text style={styles.jgPositionFont}>JG - TOP</Text>
-                    <Text style={styles.jgPositionFont}>JG - MID</Text>
-                    <Text style={styles.jgPositionFont}>JG - BOT</Text>
-                </View>
+                <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginStart: 26, marginEnd: 26, marginTop: 10, marginBottom: 10 }}>
+                    <View style={{ flexDirection: "column", alignItems: 'center' }}>
+                        <Text style={styles.jgPositionFont}>JG - TOP</Text>
+                        <Text style={{ color: '#55B1CE', fontWeight: "400", fontSize: 18 }}>{((JGrotation[0]["jgtop"] / (JGrotation[0]["jgtop"] + JGrotation[1]["jgtop"]) * 100)).toFixed(1)}%</Text>
+                        <Text style={{ fontWeight: "300", fontSize: 20 }}> X </Text>
+                        <Text style={{ color: '#DC5047', fontWeight: "400", fontSize: 18 }}>{((JGrotation[1]["jgtop"] / (JGrotation[1]["jgtop"] + JGrotation[0]["jgtop"]) * 100)).toFixed(1)}%</Text>
+                    </View>
 
-                <View style={{flexDirection:'row', justifyContent:'space-between', marginStart:26, marginEnd:26, marginTop:10}}>
-                    <Text> ??</Text> 
-                    <Text> ??</Text> 
-                    <Text> ??</Text> 
+                    <View style={{ flexDirection: "column", alignItems: 'center' }}>
+                        <Text style={styles.jgPositionFont}>JG - MID</Text>
+                        <Text style={{ color: '#55B1CE', fontWeight: "400", fontSize: 18 }}>{((JGrotation[0]["jgmid"] / (JGrotation[0]["jgmid"] + JGrotation[1]["jgmid"]) * 100)).toFixed(1)}%</Text>
+                        <Text style={{ fontWeight: "300", fontSize: 20 }}> X </Text>
+                        <Text style={{ color: '#DC5047', fontWeight: "400", fontSize: 18 }}>{((JGrotation[1]["jgmid"] / (JGrotation[1]["jgmid"] + JGrotation[0]["jgmid"]) * 100)).toFixed(1)}%</Text>
+                    </View>
+
+                    <View style={{ flexDirection: "column", alignItems: 'center' }}>
+                        <Text style={styles.jgPositionFont}>JG - BOT</Text>
+                        <Text style={{ color: '#55B1CE', fontWeight: "400", fontSize: 18 }}>{((JGrotation[0]["jgbot"] / (JGrotation[0]["jgbot"] + JGrotation[1]["jgbot"]) * 100)).toFixed(1)}%</Text>
+                        <Text style={{ fontWeight: "300", fontSize: 20 }}> X </Text>
+                        <Text style={{ color: '#DC5047', fontWeight: "400", fontSize: 18 }}>{((JGrotation[1]["jgbot"] / (JGrotation[1]["jgbot"] + JGrotation[0]["jgbot"]) * 100)).toFixed(1)}%</Text>
+                    </View>
                 </View>
 
             </View>
 
         </View>
+        </ScrollView>
     )
 }
 
@@ -118,18 +417,21 @@ const styles = StyleSheet.create({
         height: 50, width: 50, borderRadius: 50, borderColor: "#DC5047", borderWidth: 2
     },
     positionText: {
-        fontWeight: '500', flexDirection:'column', alignSelf:'center'
+        fontWeight: '500', flexDirection: 'column', alignSelf: 'center', fontSize: 15, textDecorationLine: 'underline'
     },
     positionRowContainer: {
-        flexDirection:'row', justifyContent:'space-between', marginStart:24, marginEnd:24, marginTop: 26
+        flexDirection: 'row', justifyContent: 'space-between', marginStart: 24, marginEnd: 24, marginTop: 26
     },
     category: {
-        fontSize: 18, fontWeight:'500', marginLeft:24, marginTop:10
+        fontSize: 18, fontWeight: '500', marginLeft: 24, marginTop: 10
     },
     jgRowContainer: {
-        flexDirection:'row', justifyContent:'space-between', marginStart:109, marginEnd:109, marginTop:10
+        flexDirection: 'row', justifyContent: 'space-between', marginStart: 109, marginEnd: 109, marginTop: 20
     },
     jgPositionFont: {
-        fontSize: 24, fontWeight: '500'
+        fontSize: 20, fontWeight: '500'
+    },
+    positionRatio: {
+        alignSelf: 'center', flexDirection: 'column', fontWeight: "400"
     }
 })
