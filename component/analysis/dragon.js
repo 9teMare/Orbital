@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { View, Text, TouchableOpacity, StyleSheet, Image, FlatList, ScrollView, Dimensions } from 'react-native'
+import { View, Text, TouchableOpacity, StyleSheet, Image, FlatList, ScrollView, Dimensions, ActivityIndicator } from 'react-native'
 import { Tooltip } from 'react-native-elements';
 
 export default function lane({ route }) {
@@ -28,7 +28,7 @@ export default function lane({ route }) {
 
     const fetching = async () => {
 
-        const response = await fetch('http://ddragon.leagueoflegends.com/cdn/11.12.1/data/en_US/champion.json')
+        const response = await fetch('http://ddragon.leagueoflegends.com/cdn/11.15.1/data/en_US/champion.json')
         const responded = await response.json()
         const data = responded.data
 
@@ -79,14 +79,14 @@ export default function lane({ route }) {
             }
 
             //get durability & mobility from Communitiy Dragon
-            const cdnResponse_blue = await fetch('https://cdn.communitydragon.org/11.12.1/champion/' + blueName + '/data')
+            const cdnResponse_blue = await fetch('https://cdn.communitydragon.org/11.15.1/champion/' + blueName + '/data')
             const cdnResponded_blue = await cdnResponse_blue.json()
             const cdnData_blue = cdnResponded_blue.playstyleInfo
 
             blue_durability_total += cdnData_blue["durability"]
             blue_mobility_total += cdnData_blue["mobility"]
 
-            const cdnResponse_red = await fetch('https://cdn.communitydragon.org/11.12.1/champion/' + redName + '/data')
+            const cdnResponse_red = await fetch('https://cdn.communitydragon.org/11.15.1/champion/' + redName + '/data')
             const cdnResponded_red = await cdnResponse_red.json()
             const cdnData_red = cdnResponded_red.playstyleInfo
 

@@ -78,7 +78,7 @@ export default function overall({ route }) {
             red_range.push(data[redName]["stats"]["attackrange"])
 
             //from CDN
-            const response_CDN_blue = await fetch('https://cdn.communitydragon.org/11.12.1/champion/' + blueName + '/data')
+            const response_CDN_blue = await fetch('https://cdn.communitydragon.org/11.15.1/champion/' + blueName + '/data')
             const responded_CDN_blue = await response_CDN_blue.json()
             const data_CDN_blue = responded_CDN_blue.playstyleInfo
 
@@ -86,7 +86,7 @@ export default function overall({ route }) {
             blue_durability_total += data_CDN_blue["durability"]
             blue_mobility_total += data_CDN_blue["mobility"]
 
-            const response_CDN_red = await fetch('https://cdn.communitydragon.org/11.12.1/champion/' + redName + '/data')
+            const response_CDN_red = await fetch('https://cdn.communitydragon.org/11.15.1/champion/' + redName + '/data')
             const responded_CDN_red = await response_CDN_red.json()
             const data_CDN_red = responded_CDN_red.playstyleInfo
 

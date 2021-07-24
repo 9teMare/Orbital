@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import { StyleSheet, View, Text, TouchableOpacity, Image, Alert, StatusBar} from 'react-native'
-import {Header} from 'react-native-elements'
 import { useFonts } from 'expo-font';
 
 export default function Composition({navigation, route}) {
@@ -65,31 +64,31 @@ export default function Composition({navigation, route}) {
                     <Image
                         source = {blueTeam[TOP] === null 
                             ? require('../../pictures/others/blue_top.png')
-                            : {uri: 'http://ddragon.leagueoflegends.com/cdn/11.12.1/img/champion/' + blueTeam[TOP] + '.png'}}
+                            : {uri: 'http://ddragon.leagueoflegends.com/cdn/11.15.1/img/champion/' + blueTeam[TOP] + '.png'}}
                         style ={{width: 50, height: 50, borderRadius:50, borderColor: '#55B1CE', borderWidth:3}}/>
 
                     <Image 
                         source = {blueTeam[JUNGLE] === null 
                             ? require('../../pictures/others/blue_jungle.png')
-                            : {uri: 'http://ddragon.leagueoflegends.com/cdn/11.12.1/img/champion/' + blueTeam[JUNGLE] + '.png'}}
+                            : {uri: 'http://ddragon.leagueoflegends.com/cdn/11.15.1/img/champion/' + blueTeam[JUNGLE] + '.png'}}
                         style ={{width: 50, height: 50, borderRadius:50, borderColor: '#55B1CE', borderWidth:3}}/>   
                         
                     <Image 
                         source = {blueTeam[MID] === null 
                             ? require('../../pictures/others/blue_mid.png')
-                            : {uri: 'http://ddragon.leagueoflegends.com/cdn/11.12.1/img/champion/' + blueTeam[MID] + '.png'}}
+                            : {uri: 'http://ddragon.leagueoflegends.com/cdn/11.15.1/img/champion/' + blueTeam[MID] + '.png'}}
                         style ={{width: 50, height: 50, borderRadius:50, borderColor: '#55B1CE', borderWidth:3}}/>   
 
                     <Image 
                         source = {blueTeam[ADC] === null 
                             ? require('../../pictures/others/blue_ADC.png')
-                            : {uri: 'http://ddragon.leagueoflegends.com/cdn/11.12.1/img/champion/' + blueTeam[ADC] + '.png'}}
+                            : {uri: 'http://ddragon.leagueoflegends.com/cdn/11.15.1/img/champion/' + blueTeam[ADC] + '.png'}}
                         style ={{width: 50, height: 50, borderRadius:50, borderColor: '#55B1CE', borderWidth:3}}/>    
 
                     <Image 
                         source = {blueTeam[SUPPORT] === null 
                             ? require('../../pictures/others/blue_support.png')
-                            : {uri: 'http://ddragon.leagueoflegends.com/cdn/11.12.1/img/champion/' + blueTeam[SUPPORT] + '.png'}}
+                            : {uri: 'http://ddragon.leagueoflegends.com/cdn/11.15.1/img/champion/' + blueTeam[SUPPORT] + '.png'}}
                         style ={{width: 50, height: 50, borderRadius:50, borderColor: '#55B1CE', borderWidth:3}}/>    
 
                 </View>
@@ -115,31 +114,31 @@ export default function Composition({navigation, route}) {
                         <Image
                             source = {redTeam[TOP] === null 
                                 ? require('../../pictures/others/red_top.png')
-                                : {uri: 'http://ddragon.leagueoflegends.com/cdn/11.12.1/img/champion/' + redTeam[TOP] + '.png'}}
+                                : {uri: 'http://ddragon.leagueoflegends.com/cdn/11.15.1/img/champion/' + redTeam[TOP] + '.png'}}
                             style ={{width: 50, height: 50, marginBottom: 5, borderRadius:50, borderColor: '#DC5047', borderWidth:3}}/>
 
                         <Image 
                             source = {redTeam[JUNGLE] === null 
                                 ? require('../../pictures/others/red_jungle.png')
-                                : {uri: 'http://ddragon.leagueoflegends.com/cdn/11.12.1/img/champion/' + redTeam[JUNGLE] + '.png'}}
+                                : {uri: 'http://ddragon.leagueoflegends.com/cdn/11.15.1/img/champion/' + redTeam[JUNGLE] + '.png'}}
                             style ={{width: 50, height: 50, borderRadius:50, borderColor: '#DC5047', borderWidth:3}}/>   
                             
                         <Image 
                             source = {redTeam[MID] === null 
                                 ? require('../../pictures/others/red_mid.png')
-                                : {uri: 'http://ddragon.leagueoflegends.com/cdn/11.12.1/img/champion/' + redTeam[MID] + '.png'}}
+                                : {uri: 'http://ddragon.leagueoflegends.com/cdn/11.15.1/img/champion/' + redTeam[MID] + '.png'}}
                             style ={{width: 50, height: 50, borderRadius:50, borderColor: '#DC5047', borderWidth:3}}/>   
 
                         <Image 
                             source = {redTeam[ADC] === null 
                                 ? require('../../pictures/others/red_ADC.png')
-                                : {uri: 'http://ddragon.leagueoflegends.com/cdn/11.12.1/img/champion/' + redTeam[ADC] + '.png'}}
+                                : {uri: 'http://ddragon.leagueoflegends.com/cdn/11.15.1/img/champion/' + redTeam[ADC] + '.png'}}
                             style ={{width: 50, height: 50, borderRadius:50, borderColor: '#DC5047', borderWidth:3}}/>    
 
                         <Image 
                             source = {redTeam[SUPPORT] === null 
                                 ? require('../../pictures/others/red_support.png')
-                                : {uri: 'http://ddragon.leagueoflegends.com/cdn/11.12.1/img/champion/' + redTeam[SUPPORT] + '.png'}}
+                                : {uri: 'http://ddragon.leagueoflegends.com/cdn/11.15.1/img/champion/' + redTeam[SUPPORT] + '.png'}}
                             style ={{width: 50, height: 50, borderRadius:50, borderColor: '#DC5047', borderWidth:3}}/>    
 
                     </View>

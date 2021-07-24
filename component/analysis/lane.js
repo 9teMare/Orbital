@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { View, Text, Image, StyleSheet, ScrollView } from 'react-native'
+import { View, Text, Image, StyleSheet, ScrollView, Dimensions } from 'react-native'
 import { Tooltip } from 'react-native-elements';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import Unorderedlist from 'react-native-unordered-list';
@@ -61,13 +61,13 @@ export default function lane({ route }) {
             red_range.push(data[redName]["stats"]["attackrange"])
 
             //from CDN
-            const response_CDN_blue = await fetch('https://cdn.communitydragon.org/11.12.1/champion/' + blueName + '/data')
+            const response_CDN_blue = await fetch('https://cdn.communitydragon.org/11.15.1/champion/' + blueName + '/data')
             const responded_CDN_blue = await response_CDN_blue.json()
             const data_CDN_blue = responded_CDN_blue.playstyleInfo
 
             blue_playStyleInfo.push(data_CDN_blue)
 
-            const response_CDN_red = await fetch('https://cdn.communitydragon.org/11.12.1/champion/' + redName + '/data')
+            const response_CDN_red = await fetch('https://cdn.communitydragon.org/11.15.1/champion/' + redName + '/data')
             const responded_CDN_red = await response_CDN_red.json()
             const data_CDN_red = responded_CDN_red.playstyleInfo
 
@@ -194,14 +194,14 @@ export default function lane({ route }) {
                 <TouchableOpacity onPress={() => setTopOpened(!topOpened)}>
                 <View style={styles.positionRowContainer}>
                     <Image
-                        source={{ uri: 'http://ddragon.leagueoflegends.com/cdn/11.12.1/img/champion/' + blue[TOP] + '.png' }}
+                        source={{ uri: 'http://ddragon.leagueoflegends.com/cdn/11.15.1/img/champion/' + blue[TOP] + '.png' }}
                         style={styles.blueIcon} />
                     <Text style={styles.positionRatio}>{parseFloat(((positionWinRate[0]["top"] / (positionWinRate[0]["top"] + positionWinRate[1]["top"])) * 100).toFixed(1))}%</Text>
                     <Text style={styles.positionText}> TOP </Text>
                     <Text style={styles.positionRatio}>{parseFloat(((positionWinRate[1]["top"] / (positionWinRate[1]["top"] + positionWinRate[0]["top"])) * 100).toFixed(1))}%</Text>
 
                     <Image
-                        source={{ uri: 'http://ddragon.leagueoflegends.com/cdn/11.12.1/img/champion/' + red[TOP] + '.png' }}
+                        source={{ uri: 'http://ddragon.leagueoflegends.com/cdn/11.15.1/img/champion/' + red[TOP] + '.png' }}
                         style={styles.redIcon} />
                 </View>
                 </TouchableOpacity>
@@ -231,7 +231,7 @@ export default function lane({ route }) {
                 <TouchableOpacity onPress={() => setjgOpened(!jgOpened)}>
                 <View style={styles.positionRowContainer}>
                     <Image
-                        source={{ uri: 'http://ddragon.leagueoflegends.com/cdn/11.12.1/img/champion/' + blue[JUNGLE] + '.png' }}
+                        source={{ uri: 'http://ddragon.leagueoflegends.com/cdn/11.15.1/img/champion/' + blue[JUNGLE] + '.png' }}
                         style={styles.blueIcon} />
 
                     <Text style={styles.positionRatio}>{parseFloat(((positionWinRate[0]["jg"] / (positionWinRate[0]["jg"] + positionWinRate[1]["jg"])) * 100).toFixed(1))}%</Text>
@@ -239,7 +239,7 @@ export default function lane({ route }) {
                     <Text style={styles.positionRatio}>{parseFloat(((positionWinRate[1]["jg"] / (positionWinRate[1]["jg"] + positionWinRate[0]["jg"])) * 100).toFixed(1))}%</Text>
 
                     <Image
-                        source={{ uri: 'http://ddragon.leagueoflegends.com/cdn/11.12.1/img/champion/' + red[JUNGLE] + '.png' }}
+                        source={{ uri: 'http://ddragon.leagueoflegends.com/cdn/11.15.1/img/champion/' + red[JUNGLE] + '.png' }}
                         style={styles.redIcon} />
                 </View>
                 <View style={{ flexDirection: "row" }}>
@@ -267,7 +267,7 @@ export default function lane({ route }) {
                 <TouchableOpacity onPress={() => setMidOpened(!midOpened)}>
                 <View style={styles.positionRowContainer}>
                     <Image
-                        source={{ uri: 'http://ddragon.leagueoflegends.com/cdn/11.12.1/img/champion/' + blue[MID] + '.png' }}
+                        source={{ uri: 'http://ddragon.leagueoflegends.com/cdn/11.15.1/img/champion/' + blue[MID] + '.png' }}
                         style={styles.blueIcon} />
 
                     <Text style={styles.positionRatio}>{parseFloat(((positionWinRate[0]["mid"] / (positionWinRate[0]["mid"] + positionWinRate[1]["mid"])) * 100).toFixed(1))}%</Text>
@@ -275,7 +275,7 @@ export default function lane({ route }) {
                     <Text style={styles.positionRatio}>{parseFloat(((positionWinRate[1]["mid"] / (positionWinRate[1]["mid"] + positionWinRate[0]["mid"])) * 100).toFixed(1))}%</Text>
 
                     <Image
-                        source={{ uri: 'http://ddragon.leagueoflegends.com/cdn/11.12.1/img/champion/' + red[MID] + '.png' }}
+                        source={{ uri: 'http://ddragon.leagueoflegends.com/cdn/11.15.1/img/champion/' + red[MID] + '.png' }}
                         style={styles.redIcon} />
                 </View>
                 <View style={{ flexDirection: "row" }}>
@@ -304,10 +304,10 @@ export default function lane({ route }) {
                 <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginStart: 24, marginEnd: 24, marginTop: 26, marginBottom: 20 }}>
                     <View>
                         <Image
-                            source={{ uri: 'http://ddragon.leagueoflegends.com/cdn/11.12.1/img/champion/' + blue[ADC] + '.png' }}
+                            source={{ uri: 'http://ddragon.leagueoflegends.com/cdn/11.15.1/img/champion/' + blue[ADC] + '.png' }}
                             style={styles.blueIcon} />
                         <Image
-                            source={{ uri: 'http://ddragon.leagueoflegends.com/cdn/11.12.1/img/champion/' + blue[SUPPORT] + '.png' }}
+                            source={{ uri: 'http://ddragon.leagueoflegends.com/cdn/11.15.1/img/champion/' + blue[SUPPORT] + '.png' }}
                             style={styles.blueIcon} />
                     </View>
 
@@ -318,10 +318,10 @@ export default function lane({ route }) {
 
                     <View>
                         <Image
-                            source={{ uri: 'http://ddragon.leagueoflegends.com/cdn/11.12.1/img/champion/' + red[ADC] + '.png' }}
+                            source={{ uri: 'http://ddragon.leagueoflegends.com/cdn/11.15.1/img/champion/' + red[ADC] + '.png' }}
                             style={styles.redIcon} />
                         <Image
-                            source={{ uri: 'http://ddragon.leagueoflegends.com/cdn/11.12.1/img/champion/' + red[SUPPORT] + '.png' }}
+                            source={{ uri: 'http://ddragon.leagueoflegends.com/cdn/11.15.1/img/champion/' + red[SUPPORT] + '.png' }}
                             style={styles.redIcon} />
                     </View>
                 </View>
@@ -368,14 +368,14 @@ export default function lane({ route }) {
 
                 <View style={styles.jgRowContainer}>
                     <Image
-                        source={{ uri: 'http://ddragon.leagueoflegends.com/cdn/11.12.1/img/champion/' + blue[JUNGLE] + '.png' }}
+                        source={{ uri: 'http://ddragon.leagueoflegends.com/cdn/11.15.1/img/champion/' + blue[JUNGLE] + '.png' }}
                         style={styles.blueIcon} />
 
                     <Text style={{ fontWeight: '500' }}> vs </Text>
 
 
                     <Image
-                        source={{ uri: 'http://ddragon.leagueoflegends.com/cdn/11.12.1/img/champion/' + red[JUNGLE] + '.png' }}
+                        source={{ uri: 'http://ddragon.leagueoflegends.com/cdn/11.15.1/img/champion/' + red[JUNGLE] + '.png' }}
                         style={styles.redIcon} />
                 </View>
 

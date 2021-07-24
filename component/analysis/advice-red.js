@@ -56,11 +56,11 @@ export default function adviceRed({route}) {
             const blueName = new String
             blueName = blue[i]
 
-            const response = await fetch("http://ddragon.leagueoflegends.com/cdn/11.12.1/data/en_US/champion/" + redName +".json")
+            const response = await fetch("http://ddragon.leagueoflegends.com/cdn/11.15.1/data/en_US/champion/" + redName +".json")
             const responded = await response.json()
             const data = responded.data
 
-            const response_enemy = await fetch("http://ddragon.leagueoflegends.com/cdn/11.12.1/data/en_US/champion/" + blueName +".json")
+            const response_enemy = await fetch("http://ddragon.leagueoflegends.com/cdn/11.15.1/data/en_US/champion/" + blueName +".json")
             const responded_enemy = await response_enemy.json()
             const data_enemy = responded_enemy.data
 
@@ -182,35 +182,35 @@ export default function adviceRed({route}) {
             <View style={{flexDirection:"row", justifyContent:"space-evenly", marginTop:10, marginBottom:5}}> 
                 <TouchableOpacity onPress={() => setSelectedAlly(TOP)}>
                 <Image 
-                    source={{uri: 'http://ddragon.leagueoflegends.com/cdn/11.12.1/img/champion/' + red[TOP] + '.png'}}
+                    source={{uri: 'http://ddragon.leagueoflegends.com/cdn/11.15.1/img/champion/' + red[TOP] + '.png'}}
                     style = {TOP === selectedAlly ? {height:45, width:45, borderColor:"#DC5047", borderWidth:2} 
                                                         : {height:45, width:45}}  
                 />
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() => setSelectedAlly(JUNGLE)}>
                 <Image 
-                    source={{uri: 'http://ddragon.leagueoflegends.com/cdn/11.12.1/img/champion/' + red[JUNGLE] + '.png'}}
+                    source={{uri: 'http://ddragon.leagueoflegends.com/cdn/11.15.1/img/champion/' + red[JUNGLE] + '.png'}}
                     style = {JUNGLE === selectedAlly ? {height:45, width:45, borderColor:"#DC5047", borderWidth:2} 
                                                         : {height:45, width:45}}
                 />
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() => setSelectedAlly(MID)}>
                 <Image 
-                    source={{uri: 'http://ddragon.leagueoflegends.com/cdn/11.12.1/img/champion/' + red[MID] + '.png'}}
+                    source={{uri: 'http://ddragon.leagueoflegends.com/cdn/11.15.1/img/champion/' + red[MID] + '.png'}}
                     style = {MID === selectedAlly ? {height:45, width:45, borderColor:"#DC5047", borderWidth:2} 
                                                         : {height:45, width:45}}
                 />
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() => setSelectedAlly(ADC)}>
                 <Image 
-                    source={{uri: 'http://ddragon.leagueoflegends.com/cdn/11.12.1/img/champion/' + red[ADC] + '.png'}}
+                    source={{uri: 'http://ddragon.leagueoflegends.com/cdn/11.15.1/img/champion/' + red[ADC] + '.png'}}
                     style = {ADC === selectedAlly ? {height:45, width:45, borderColor:"#DC5047", borderWidth:2} 
                                                         : {height:45, width:45}}
                 />
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() => setSelectedAlly(SUPPORT)}>
                 <Image 
-                    source={{uri: 'http://ddragon.leagueoflegends.com/cdn/11.12.1/img/champion/' + red[SUPPORT] + '.png'}}
+                    source={{uri: 'http://ddragon.leagueoflegends.com/cdn/11.15.1/img/champion/' + red[SUPPORT] + '.png'}}
                     style = {SUPPORT === selectedAlly ? {height:45, width:45, borderColor:"#DC5047", borderWidth:2} 
                                                         : {height:45, width:45}}
                 />
@@ -235,35 +235,35 @@ export default function adviceRed({route}) {
             <View style={{flexDirection:"row", justifyContent:"space-evenly", marginTop:10, marginBottom:5}}> 
                 <TouchableOpacity onPress={() => setSelectedEmeny(TOP)}>
                 <Image 
-                    source={{uri: 'http://ddragon.leagueoflegends.com/cdn/11.12.1/img/champion/' + blue[TOP] + '.png'}}
+                    source={{uri: 'http://ddragon.leagueoflegends.com/cdn/11.15.1/img/champion/' + blue[TOP] + '.png'}}
                     style = {TOP === selectedEnemy ? {height:45, width:45, borderColor:"#DC5047", borderWidth:2} 
                                                         : {height:45, width:45}}  
                 />
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() => setSelectedEmeny(JUNGLE)}>
                 <Image 
-                    source={{uri: 'http://ddragon.leagueoflegends.com/cdn/11.12.1/img/champion/' + blue[JUNGLE] + '.png'}}
+                    source={{uri: 'http://ddragon.leagueoflegends.com/cdn/11.15.1/img/champion/' + blue[JUNGLE] + '.png'}}
                     style = {JUNGLE === selectedEnemy ? {height:45, width:45, borderColor:"#DC5047", borderWidth:2} 
                                                         : {height:45, width:45}}
                 />
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() => setSelectedEmeny(MID)}>
                 <Image 
-                    source={{uri: 'http://ddragon.leagueoflegends.com/cdn/11.12.1/img/champion/' + blue[MID] + '.png'}}
+                    source={{uri: 'http://ddragon.leagueoflegends.com/cdn/11.15.1/img/champion/' + blue[MID] + '.png'}}
                     style = {MID === selectedEnemy ? {height:45, width:45, borderColor:"#DC5047", borderWidth:2} 
                                                         : {height:45, width:45}}
                 />
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() => setSelectedEmeny(ADC)}>
                 <Image 
-                    source={{uri: 'http://ddragon.leagueoflegends.com/cdn/11.12.1/img/champion/' + blue[ADC] + '.png'}}
+                    source={{uri: 'http://ddragon.leagueoflegends.com/cdn/11.15.1/img/champion/' + blue[ADC] + '.png'}}
                     style = {ADC === selectedEnemy ? {height:45, width:45, borderColor:"#DC5047", borderWidth:2} 
                                                         : {height:45, width:45}}
                 />
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() => setSelectedEmeny(SUPPORT)}>
                 <Image 
-                    source={{uri: 'http://ddragon.leagueoflegends.com/cdn/11.12.1/img/champion/' + blue[SUPPORT] + '.png'}}
+                    source={{uri: 'http://ddragon.leagueoflegends.com/cdn/11.15.1/img/champion/' + blue[SUPPORT] + '.png'}}
                     style = {SUPPORT === selectedEnemy ? {height:45, width:45, borderColor:"#DC5047", borderWidth:2} 
                                                         : {height:45, width:45}}
                 />

@@ -1,6 +1,6 @@
 
 import React, { useEffect, useState } from 'react'
-import { View, Text, Image, StyleSheet, FlatList, ScrollView } from 'react-native'
+import { View, Text, Image, StyleSheet, FlatList, ScrollView, Dimensions } from 'react-native'
 import { Tooltip } from 'react-native-elements';
 
 const TOP = 0, JUNGLE = 1, MID = 2, ADC = 3, SUPPORT = 4
@@ -77,7 +77,7 @@ export default function stats({ route }) {
         var scaling_AD = [[], []], scaling_AP = [[], []], attackRange = [[], []]
         var blueCC_all = [], redCC_all = []
 
-        const response = await fetch('http://ddragon.leagueoflegends.com/cdn/11.12.1/data/en_US/champion.json')
+        const response = await fetch('http://ddragon.leagueoflegends.com/cdn/11.15.1/data/en_US/champion.json')
         const responded = await response.json()
         const data = responded.data
 
@@ -253,7 +253,7 @@ export default function stats({ route }) {
             return (
                 <View style={{ marginTop: 15 }}>
                     <Image
-                        source={{ uri: 'http://ddragon.leagueoflegends.com/cdn/11.12.1/img/champion/' + arr[0] + '.png' }}
+                        source={{ uri: 'http://ddragon.leagueoflegends.com/cdn/11.15.1/img/champion/' + arr[0] + '.png' }}
                         style={styles.IconBig}
                     />
                 </View>
@@ -263,11 +263,11 @@ export default function stats({ route }) {
             return (
                 <View style={{ flexDirection: "row", justifyContent: 'space-evenly', marginTop: 23 }}>
                     <Image
-                        source={{ uri: 'http://ddragon.leagueoflegends.com/cdn/11.12.1/img/champion/' + arr[0] + '.png' }}
+                        source={{ uri: 'http://ddragon.leagueoflegends.com/cdn/11.15.1/img/champion/' + arr[0] + '.png' }}
                         style={{ height: 40, width: 40, borderRadius: 40 }}
                     />
                     <Image
-                        source={{ uri: 'http://ddragon.leagueoflegends.com/cdn/11.12.1/img/champion/' + arr[1] + '.png' }}
+                        source={{ uri: 'http://ddragon.leagueoflegends.com/cdn/11.15.1/img/champion/' + arr[1] + '.png' }}
                         style={{ height: 40, width: 40, borderRadius: 40 }}
                     />
                 </View>
@@ -278,18 +278,18 @@ export default function stats({ route }) {
                 <View style={{ marginTop: 10 }}>
                     <View style={{ alignItems: "center" }}>
                         <Image
-                            source={{ uri: 'http://ddragon.leagueoflegends.com/cdn/11.12.1/img/champion/' + arr[0] + '.png' }}
+                            source={{ uri: 'http://ddragon.leagueoflegends.com/cdn/11.15.1/img/champion/' + arr[0] + '.png' }}
                             style={styles.IconMid}
                         />
                     </View>
 
                     <View style={{ justifyContent: "space-evenly", flexDirection: "row" }}>
                         <Image
-                            source={{ uri: 'http://ddragon.leagueoflegends.com/cdn/11.12.1/img/champion/' + arr[1] + '.png' }}
+                            source={{ uri: 'http://ddragon.leagueoflegends.com/cdn/11.15.1/img/champion/' + arr[1] + '.png' }}
                             style={styles.IconMid}
                         />
                         <Image
-                            source={{ uri: 'http://ddragon.leagueoflegends.com/cdn/11.12.1/img/champion/' + arr[2] + '.png' }}
+                            source={{ uri: 'http://ddragon.leagueoflegends.com/cdn/11.15.1/img/champion/' + arr[2] + '.png' }}
                             style={styles.IconMid}
                         />
                     </View>
@@ -301,21 +301,21 @@ export default function stats({ route }) {
                 <View>
                     <View style={{ justifyContent: "space-evenly", flexDirection: "row" }}>
                         <Image
-                            source={{ uri: 'http://ddragon.leagueoflegends.com/cdn/11.12.1/img/champion/' + arr[0] + '.png' }}
+                            source={{ uri: 'http://ddragon.leagueoflegends.com/cdn/11.15.1/img/champion/' + arr[0] + '.png' }}
                             style={styles.IconMid}
                         />
                         <Image
-                            source={{ uri: 'http://ddragon.leagueoflegends.com/cdn/11.12.1/img/champion/' + arr[1] + '.png' }}
+                            source={{ uri: 'http://ddragon.leagueoflegends.com/cdn/11.15.1/img/champion/' + arr[1] + '.png' }}
                             style={styles.IconMid}
                         />
                     </View>
                     <View style={{ justifyContent: "space-evenly", flexDirection: "row" }}>
                         <Image
-                            source={{ uri: 'http://ddragon.leagueoflegends.com/cdn/11.12.1/img/champion/' + arr[2] + '.png' }}
+                            source={{ uri: 'http://ddragon.leagueoflegends.com/cdn/11.15.1/img/champion/' + arr[2] + '.png' }}
                             style={styles.IconMid}
                         />
                         <Image
-                            source={{ uri: 'http://ddragon.leagueoflegends.com/cdn/11.12.1/img/champion/' + arr[3] + '.png' }}
+                            source={{ uri: 'http://ddragon.leagueoflegends.com/cdn/11.15.1/img/champion/' + arr[3] + '.png' }}
                             style={styles.IconMid}
                         />
                     </View>
@@ -327,25 +327,25 @@ export default function stats({ route }) {
                 <View>
                     <View style={{ justifyContent: "space-evenly", flexDirection: "row" }}>
                         <Image
-                            source={{ uri: 'http://ddragon.leagueoflegends.com/cdn/11.12.1/img/champion/' + arr[0] + '.png' }}
+                            source={{ uri: 'http://ddragon.leagueoflegends.com/cdn/11.15.1/img/champion/' + arr[0] + '.png' }}
                             style={styles.IconSmall}
                         />
                         <Image
-                            source={{ uri: 'http://ddragon.leagueoflegends.com/cdn/11.12.1/img/champion/' + arr[1] + '.png' }}
+                            source={{ uri: 'http://ddragon.leagueoflegends.com/cdn/11.15.1/img/champion/' + arr[1] + '.png' }}
                             style={styles.IconSmall}
                         />
                     </View>
                     <View style={{ justifyContent: "space-evenly", flexDirection: "row" }}>
                         <Image
-                            source={{ uri: 'http://ddragon.leagueoflegends.com/cdn/11.12.1/img/champion/' + arr[2] + '.png' }}
+                            source={{ uri: 'http://ddragon.leagueoflegends.com/cdn/11.15.1/img/champion/' + arr[2] + '.png' }}
                             style={styles.IconSmall}
                         />
                         <Image
-                            source={{ uri: 'http://ddragon.leagueoflegends.com/cdn/11.12.1/img/champion/' + arr[3] + '.png' }}
+                            source={{ uri: 'http://ddragon.leagueoflegends.com/cdn/11.15.1/img/champion/' + arr[3] + '.png' }}
                             style={styles.IconSmall}
                         />
                         <Image
-                            source={{ uri: 'http://ddragon.leagueoflegends.com/cdn/11.12.1/img/champion/' + arr[4] + '.png' }}
+                            source={{ uri: 'http://ddragon.leagueoflegends.com/cdn/11.15.1/img/champion/' + arr[4] + '.png' }}
                             style={styles.IconSmall}
                         />
                     </View>
@@ -385,7 +385,7 @@ export default function stats({ route }) {
         return (
             <View style={{ alignItems: "center", marginLeft: 4, marginRight: 4 }}>
                 <Image
-                    source={{ uri: "http://ddragon.leagueoflegends.com/cdn/11.14.1/img/spell/" + skill + ".png" }}
+                    source={{ uri: "http://ddragon.leagueoflegends.com/cdn/11.15.1/img/spell/" + skill + ".png" }}
                     style={{ height: 40, width: 40 }}
                 />
                 <Text>{keyIndex}</Text>
@@ -453,7 +453,7 @@ export default function stats({ route }) {
                 <View style={{ marginLeft: 20, marginRight: 20, marginTop: 10 }}>
                     <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
                         <Image
-                            source={{ uri: 'http://ddragon.leagueoflegends.com/cdn/11.12.1/img/champion/' + CC_names_blue[0] + '.png' }}
+                            source={{ uri: 'http://ddragon.leagueoflegends.com/cdn/11.15.1/img/champion/' + CC_names_blue[0] + '.png' }}
                             style={styles.blueIcon}
                         />
                         {/* <Text>CCs: {arrToStr(CC_details_blue[0].types)}</Text> */}
@@ -469,7 +469,7 @@ export default function stats({ route }) {
 
                     <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
                         <Image
-                            source={{ uri: 'http://ddragon.leagueoflegends.com/cdn/11.12.1/img/champion/' + CC_names_blue[1] + '.png' }}
+                            source={{ uri: 'http://ddragon.leagueoflegends.com/cdn/11.15.1/img/champion/' + CC_names_blue[1] + '.png' }}
                             style={styles.blueIcon}
                         />
                         <View style={{ alignSelf: "center" }}>
@@ -484,7 +484,7 @@ export default function stats({ route }) {
 
                     <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
                         <Image
-                            source={{ uri: 'http://ddragon.leagueoflegends.com/cdn/11.12.1/img/champion/' + CC_names_red[0] + '.png' }}
+                            source={{ uri: 'http://ddragon.leagueoflegends.com/cdn/11.15.1/img/champion/' + CC_names_red[0] + '.png' }}
                             style={styles.redIcon}
                         />
                         <View style={{ alignSelf: "center" }}>
@@ -499,7 +499,7 @@ export default function stats({ route }) {
 
                     <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
                         <Image
-                            source={{ uri: 'http://ddragon.leagueoflegends.com/cdn/11.12.1/img/champion/' + CC_names_red[1] + '.png' }}
+                            source={{ uri: 'http://ddragon.leagueoflegends.com/cdn/11.15.1/img/champion/' + CC_names_red[1] + '.png' }}
                             style={styles.redIcon}
                         />
                         <View style={{ alignSelf: "center" }}>

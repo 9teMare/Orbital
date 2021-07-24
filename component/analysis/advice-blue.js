@@ -55,11 +55,11 @@ export default function adviceBlue({route}) {
             const redName = new String
             redName = red[i]
 
-            const response = await fetch("http://ddragon.leagueoflegends.com/cdn/11.12.1/data/en_US/champion/" + blueName +".json")
+            const response = await fetch("http://ddragon.leagueoflegends.com/cdn/11.15.1/data/en_US/champion/" + blueName +".json")
             const responded = await response.json()
             const data = responded.data
 
-            const response_enemy = await fetch("http://ddragon.leagueoflegends.com/cdn/11.12.1/data/en_US/champion/" + redName +".json")
+            const response_enemy = await fetch("http://ddragon.leagueoflegends.com/cdn/11.15.1/data/en_US/champion/" + redName +".json")
             const responded_enemy = await response_enemy.json()
             const data_enemy = responded_enemy.data
             

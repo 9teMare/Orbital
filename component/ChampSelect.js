@@ -14,7 +14,7 @@ function ChampSelect({navigation, route}) {
 
     useEffect(() => {
         let isMounted = true
-        fetch('http://ddragon.leagueoflegends.com/cdn/11.12.1/data/en_US/champion.json')
+        fetch('http://ddragon.leagueoflegends.com/cdn/11.15.1/data/en_US/champion.json')
         .then((response) => response.json())
         .then((response) => {
             if (isMounted) {
@@ -39,15 +39,15 @@ function ChampSelect({navigation, route}) {
     const [team, setTeam] = useState(arrUsed)
         
     const [top, setTop] = arrUsed[TOP] === null
-        ?useState(emptySlot) :useState({uri: 'http://ddragon.leagueoflegends.com/cdn/11.12.1/img/champion/'+arrUsed[TOP]+'.png'})
+        ?useState(emptySlot) :useState({uri: 'http://ddragon.leagueoflegends.com/cdn/11.15.1/img/champion/'+arrUsed[TOP]+'.png'})
     const [jungle, setJungle] = arrUsed[JUNGLE] === null
-        ?useState(emptySlot) :useState({uri: 'http://ddragon.leagueoflegends.com/cdn/11.12.1/img/champion/'+arrUsed[JUNGLE]+'.png'})
+        ?useState(emptySlot) :useState({uri: 'http://ddragon.leagueoflegends.com/cdn/11.15.1/img/champion/'+arrUsed[JUNGLE]+'.png'})
     const [mid, setMid] = arrUsed[MID] === null
-        ?useState(emptySlot) :useState({uri: 'http://ddragon.leagueoflegends.com/cdn/11.12.1/img/champion/'+arrUsed[MID]+'.png'})
+        ?useState(emptySlot) :useState({uri: 'http://ddragon.leagueoflegends.com/cdn/11.15.1/img/champion/'+arrUsed[MID]+'.png'})
     const [adc, setAdc] = arrUsed[ADC] === null
-        ?useState(emptySlot) :useState({uri: 'http://ddragon.leagueoflegends.com/cdn/11.12.1/img/champion/'+arrUsed[ADC]+'.png'})
+        ?useState(emptySlot) :useState({uri: 'http://ddragon.leagueoflegends.com/cdn/11.15.1/img/champion/'+arrUsed[ADC]+'.png'})
     const [support, setSupport] = arrUsed[SUPPORT] === null
-        ?useState(emptySlot) :useState({uri: 'http://ddragon.leagueoflegends.com/cdn/11.12.1/img/champion/'+arrUsed[SUPPORT]+'.png'})
+        ?useState(emptySlot) :useState({uri: 'http://ddragon.leagueoflegends.com/cdn/11.15.1/img/champion/'+arrUsed[SUPPORT]+'.png'})
 
 
     
@@ -55,7 +55,7 @@ function ChampSelect({navigation, route}) {
     const Item = ({ item, onPress, weight, color}) => (
         <TouchableOpacity onPress={onPress} style={{alignItems: 'center'}}>
             <Image 
-                source={{uri: 'http://ddragon.leagueoflegends.com/cdn/11.12.1/img/champion/' + item + '.png'}}
+                source={{uri: 'http://ddragon.leagueoflegends.com/cdn/11.15.1/img/champion/' + item + '.png'}}
                 style= {[styles.image, color]}
             />
             <Text style={[styles.title, weight]}>
@@ -84,7 +84,7 @@ function ChampSelect({navigation, route}) {
             let temp = team
             team[TOP] = selectedChamp
             setTeam(temp)
-            setTop({uri: 'http://ddragon.leagueoflegends.com/cdn/11.12.1/img/champion/'+selectedChamp+'.png'})
+            setTop({uri: 'http://ddragon.leagueoflegends.com/cdn/11.15.1/img/champion/'+selectedChamp+'.png'})
         }
     }
     
@@ -93,7 +93,7 @@ function ChampSelect({navigation, route}) {
             let temp = team
             team[JUNGLE] = selectedChamp
             setTeam(temp)
-            setJungle({uri: 'http://ddragon.leagueoflegends.com/cdn/11.12.1/img/champion/'+selectedChamp+'.png'})
+            setJungle({uri: 'http://ddragon.leagueoflegends.com/cdn/11.15.1/img/champion/'+selectedChamp+'.png'})
         }
     }
     
@@ -102,7 +102,7 @@ function ChampSelect({navigation, route}) {
             let temp = team
             team[MID] = selectedChamp
             setTeam(temp)
-            setMid({uri: 'http://ddragon.leagueoflegends.com/cdn/11.12.1/img/champion/'+selectedChamp+'.png'})
+            setMid({uri: 'http://ddragon.leagueoflegends.com/cdn/11.15.1/img/champion/'+selectedChamp+'.png'})
         }
     }
     
@@ -111,7 +111,7 @@ function ChampSelect({navigation, route}) {
             let temp = team
             team[ADC] = selectedChamp
             setTeam(temp)
-            setAdc({uri: 'http://ddragon.leagueoflegends.com/cdn/11.12.1/img/champion/'+selectedChamp+'.png'})
+            setAdc({uri: 'http://ddragon.leagueoflegends.com/cdn/11.15.1/img/champion/'+selectedChamp+'.png'})
         }
     }
     
@@ -120,7 +120,7 @@ function ChampSelect({navigation, route}) {
             let temp = team
             team[SUPPORT] = selectedChamp
             setTeam(temp)
-            setSupport({uri: 'http://ddragon.leagueoflegends.com/cdn/11.12.1/img/champion/'+selectedChamp+'.png'})
+            setSupport({uri: 'http://ddragon.leagueoflegends.com/cdn/11.15.1/img/champion/'+selectedChamp+'.png'})
         }
     }
 
