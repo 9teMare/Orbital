@@ -5,8 +5,8 @@ import  MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunity
 import { Icon } from 'react-native-elements'
 
 export default function MatchHistory({ route, navigation}) {
-    const {gameId, apiKey, data, summonerName , gameMode, queue} = route.params
-    const gameUrl = `https://na1.api.riotgames.com/lol/match/v4/matches/${gameId}?api_key=${apiKey}`
+    const {selectedRegion, gameId, apiKey, data, summonerName , gameMode, queue} = route.params
+    const gameUrl = `https://${selectedRegion}.api.riotgames.com/lol/match/v4/matches/${gameId}?api_key=${apiKey}`
     const [participants, setParticipants] = useState({})
     const [participantIdentities, setParticipantIdentities] = useState({})
 

@@ -144,7 +144,7 @@ export default function MatchHistory({ route, navigation}) {
 
     const Item = ({ champion, gameId, queue, win }) => (
         <View>
-            <TouchableOpacity style={styles.item} onPress={() => {navigation.navigate("Match History Detail", {gameId, apiKey, data, summonerName, gameMode, queue})}}>
+            <TouchableOpacity style={styles.item} onPress={() => {navigation.navigate("Match History Detail", {selectedRegion, gameId, apiKey, data, summonerName, gameMode, queue})}}>
                 <View style={styles.iconAndName}>
                     <Image
                         source={{uri: `http://ddragon.leagueoflegends.com/cdn/11.15.1/img/champion/${data[champion]}.png`}}
