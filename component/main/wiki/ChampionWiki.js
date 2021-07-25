@@ -82,14 +82,12 @@ export default function ChampionWiki({navigation}) {
         }}
       >
         <TextInput
-          keyboardShouldPersistTaps={'always'}
           autoCapitalize='words'
-          autoCorrect={false}
           clearButtonMode="always"
           value={query}
           onChangeText={queryText => handleSearch(queryText)}
           placeholder="Search"
-          style={{ backgroundColor: '#fff', paddingHorizontal: 10, maxWidth: width }}
+          style={{ backgroundColor: '#fff', paddingHorizontal: 100, maxWidth: width }}
         />
       </View>    
     );
@@ -114,7 +112,7 @@ export default function ChampionWiki({navigation}) {
       <View style={{flexDirection: 'row'}}>
         <View style={{justifyContent: 'space-between', alignItems: 'center', width: width}}>
           <FlatList
-            ListHeaderComponent={renderHeader}
+            ListHeaderComponent={renderHeader()}
             numColumns={4}
             horizontal={false}
             data={data}

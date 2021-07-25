@@ -238,7 +238,7 @@ function ChampSelect({navigation, route}) {
         
             <View style={{marginTop: 10}}>
                 <FlatList
-                    ListHeaderComponent={renderHeader} //search function
+                    ListHeaderComponent={renderHeader()} //search function
                     numColumns={3}
                     horizontal={false}
                     data={data}

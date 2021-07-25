@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
         borderRadius: 50,
         alignSelf: 'center',
         marginTop: 20,
-        borderColor: '#DC5047',
+        borderColor: '#55B1CE',
         borderWidth: 3,
     },
     summonerName: {

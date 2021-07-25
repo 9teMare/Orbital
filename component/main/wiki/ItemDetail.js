@@ -91,8 +91,9 @@ export default function ItemDetail({ route, navigation}) {
         return
     }
     
-    const styledDescription = '<div style="font-size: 270%; margin-left: 30px; margin-right: 30px; margin-top: 30px; line-height: 1.5">' + description + '</div>'
-
+    const styledDescription = '<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0"><div style="font-size: 110%; margin-left: 10px; margin-right: 10px; line-height: 1.8">' + description + '</div>'
+    const INJECTEDJAVASCRIPT = "document.body.style.userSelect = 'none'";
+    
     return (
         <View style={{flex : 1}}>
             <View style={styles.headerView}>
@@ -108,13 +109,17 @@ export default function ItemDetail({ route, navigation}) {
                     {/* {displayFrom} */}
                 </View>
             </View>
-            <View style={styles.descriptionView} pointerEvents="none">
-                <Text style={styles.descriptionTitle}>Description</Text>
+
+            <View style={{flex: 1}} >
+                <View style={{width: width, elevation: 4, backgroundColor: 'white'}}>
+                    <Text style={styles.descriptionTitle}>Description</Text>
+                </View>
                 <WebView
                     originWhitelist={['*']}
                     source={{ html: styledDescription }}
-                    style={{flex: 1}}
-                    scrollEnabled={false}
+                    style={{}}
+                    scrollEnabled={true}
+                    injectedJavaScript={INJECTEDJAVASCRIPT}
                 />
             </View>
         </View>
@@ -185,17 +190,12 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
         textAlign: 'center'
     },
-    descriptionView: {
-        flex: 1,
-        backgroundColor: 'white',
-        elevation: 30,
-        //marginTop: 100
-    },
     descriptionTitle: {
-        fontSize: 25,
+        fontSize: 20,
         fontWeight: 'bold',
         marginLeft: 15,
-        marginTop: 15
+        marginTop: 10,
+        marginBottom: 10
     },
     infoName: {
         fontSize: 15,
