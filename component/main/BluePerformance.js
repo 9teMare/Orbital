@@ -1,5 +1,6 @@
 import React, { useState, useEffect} from 'react'
 import {Text, View, StyleSheet, Image, Dimensions, ScrollView} from 'react-native'
+import { Tooltip } from 'react-native-elements/dist/tooltip/Tooltip'
 
 export default function BluePerformance({ route, navigation}) {
     const {gameId, apiKey, data, blueTeam, index, participants, participantIdentities} = route.params
@@ -13,6 +14,11 @@ export default function BluePerformance({ route, navigation}) {
                 />
                 <Text style={styles.summonerName}>
                     {participantIdentities[index]["player"]["summonerName"]}
+                </Text>
+            </View>
+            <View>
+                <Text style={{fontSize: 20, fontWeight: 'bold', textAlign: 'center', color: 'grey', marginTop: 10}}>
+                    More details will be available in the next version 🙂
                 </Text>
             </View>
         </View>

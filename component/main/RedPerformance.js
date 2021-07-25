@@ -16,6 +16,9 @@ export default function RedPerformance({ route, navigation}) {
                     {participantIdentities[redIndex]["player"]["summonerName"]}
                 </Text>
             </View>
+            <Text style={{fontSize: 20, fontWeight: 'bold', textAlign: 'center', color: 'grey', marginTop: 10}}>
+                    More details will be available in the next version 🙂
+            </Text>
         </View>
     )
 }
