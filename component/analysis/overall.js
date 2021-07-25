@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { View, Text, StyleSheet } from 'react-native'
+import { View, Text, StyleSheet, ActivityIndicator, Dimensions } from 'react-native'
 
 
 export default function overall({ route }) {
@@ -203,7 +203,12 @@ export default function overall({ route }) {
 
     if (isLoading) {
         return (
-            <Text>Loading...</Text>
+            <View style={{height: width / 3, width: width / 2, backgroundColor: '#b8bab9c0', alignSelf: 'center', marginTop: height / 3, borderRadius: 10}}>
+                <ActivityIndicator size="large" color="grey" style={{alignSelf: 'center', marginTop: 20}}/>
+                <Text style={{fontSize: 20, fontWeight: 'bold', alignSelf: 'center', marginTop: 20, color: 'grey'}}> 
+                    Loading...
+                </Text>
+            </View>
         )
     }
 
@@ -248,8 +253,8 @@ export default function overall({ route }) {
 
                 <View style={{alignItems:"center", marginTop:10}}>
                 <View style={{ flexDirection: "row", justifyContent:"space-between"}}>
-                    <Text style={{ color: "#55B1CE", fontSize: 18 }}>{(overall[0] / (overall[0] + overall[1])).toFixed(2) * 100}%       </Text>
-                    <Text style={{ color: "#DC5047", fontSize: 18 }}>       {(overall[1] / (overall[1] + overall[0])).toFixed(2) * 100}%</Text>
+                    <Text style={{ color: "#55B1CE", fontSize: 18 }}>{((overall[0] / (overall[0] + overall[1]))* 100).toFixed(2) }%       </Text>
+                    <Text style={{ color: "#DC5047", fontSize: 18 }}>       {((overall[1] / (overall[1] + overall[0])) * 100).toFixed(2)}%</Text>
                 </View>
                 </View>
             </View>
@@ -258,6 +263,7 @@ export default function overall({ route }) {
     )
 }
 
+const {width, height} = Dimensions.get("window")
 
 const styles = StyleSheet.create({
     category: {

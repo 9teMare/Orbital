@@ -177,7 +177,7 @@ export default function adviceBlue({route}) {
         </View>
 
         {/* ally tips */}
-        <View style={{backgroundColor: "white", marginTop:5}}>
+        <View style={{backgroundColor: "white"}}>
             <Text style={{fontSize: 18, fontWeight:'500', marginLeft:24, marginTop:10}}>Ally Tips</Text>
             <View style={{flexDirection:"row", justifyContent:"space-evenly", marginTop:10, marginBottom:5}}> 
                 <TouchableOpacity onPress={() => setSelectedAlly(TOP)}>

@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react'
-import {View, Text, Image, StyleSheet, ImageBackground, Dimensions, TouchableOpacity, ScrollView } from 'react-native'
+import {View, Text, Image, StyleSheet, ImageBackground, Dimensions, TouchableOpacity, ScrollView, ActivityIndicator } from 'react-native'
 import { Tabs } from 'react-native-collapsible-tab-view'
 import { useFonts } from 'expo-font';
+import { WebView } from 'react-native-webview';
+import { Tooltip } from 'react-native-elements/dist/tooltip/Tooltip';
 
 export default function ChampionDetail({ route, navigation}) {
 
@@ -62,6 +64,8 @@ export default function ChampionDetail({ route, navigation}) {
     const [skinNum, setSkinNum] = useState([])
     const [skinName, setSkinName] = useState([])
 
+    const [isLoading, setLoader] = useState(true)
+
     const skillIndex = (skill) => {
         if (skill === 'q') {
             return 0
@@ -121,6 +125,7 @@ export default function ChampionDetail({ route, navigation}) {
                 setSkinId(skinIdArray)
                 setSkinNum(skinNumArray)
                 setSkinName(skinNameArray)
+                setLoader(false)
             }
             return () => { isMounted = false }    
         })
@@ -136,12 +141,32 @@ export default function ChampionDetail({ route, navigation}) {
             </View>
     }
 
-    const displaySkins = skinId.map(index => (
+    const displaySkins = () => skinId.map(index => (
         <View key={index} style={styles.skinWrap}>
             <Image source={champSplashUrl(skinNum[index])} style={styles.skins}/>
             <Text style={styles.skinName}>{skinName[index]}</Text>
         </View>
     ))
+
+    const loreLoad = () => {
+        if (isLoading) {
+            return (
+                <View style={{height: width / 3, width: width / 2, backgroundColor: '#b8bab9c0', alignSelf: 'center', marginTop: height / 8, borderRadius: 10}}>
+                    <ActivityIndicator size="large" color="grey" style={{alignSelf: 'center', marginTop: 20}}/>
+                    <Text style={{fontSize: 20, fontWeight: 'bold', alignSelf: 'center', marginTop: 20, color: 'grey'}}> 
+                        Loading...
+                    </Text>
+                </View>
+            )
+        }
+        return (
+            <View style={styles.loreWrap}>
+                <Text style={styles.lore}>{lore}</Text>
+            </View>
+        )
+    }
+
+    const styledTooptil = '<div style="font-size: 290%; margin-left: 25px; margin-right: 25px; margin-top: 20px; line-height: 1.5">' + skillTooltip + '</div>'
 
     if (!loaded) {
         return null
@@ -154,11 +179,10 @@ export default function ChampionDetail({ route, navigation}) {
         >
             <Tabs.Tab name="Lore">
                 <Tabs.ScrollView>
-                    <View>
-                        <View style={styles.loreWrap}>
+                        {/* <View style={styles.loreWrap}>
                             <Text style={styles.lore}>{lore}</Text>
-                        </View>
-                    </View>
+                        </View> */}
+                        {loreLoad()}
                 </Tabs.ScrollView>
             </Tabs.Tab>
 
@@ -194,7 +218,13 @@ export default function ChampionDetail({ route, navigation}) {
                     </View>
                     <View style={styles.skillWrap}>
                         <Text style={styles.skill}>{skill}</Text>
-                        <Text style={styles.skillTooltip}>{skillTooltip}</Text>
+                        {/* <Text style={styles.skillTooltip}>{skillTooltip}</Text> */}
+                        <WebView
+                            originWhitelist={['*']}
+                            source={{ html: styledTooptil }}
+                            style={{flex: 1}}
+                            scrollEnabled={false}
+                        />
                     </View>
                 </Tabs.ScrollView>
             </Tabs.Tab>
@@ -202,7 +232,7 @@ export default function ChampionDetail({ route, navigation}) {
             <Tabs.Tab name="Skins">
                 <Tabs.ScrollView>
                     <ScrollView>
-                        {displaySkins}
+                        {displaySkins()}
                     </ScrollView>
                 </Tabs.ScrollView>
             </Tabs.Tab>
@@ -257,7 +287,8 @@ const styles = StyleSheet.create({
     },
     loreWrap: {
         backgroundColor: 'white',
-        elevation: 3
+        height: height
+        //elevation: 3
     },
       skill: {
         fontSize: 25,
@@ -287,8 +318,8 @@ const styles = StyleSheet.create({
       },
       skillWrap: {
         backgroundColor: 'white',
-        elevation: 3,
-        minHeight: height/3
+        minHeight: height/3,
+        flex: 1
       },
       icon: {
         //  width:53, 

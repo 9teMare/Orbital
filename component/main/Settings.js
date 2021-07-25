@@ -12,8 +12,9 @@ export default function Settings(props) {
    
     return (
         <View>
-            <View style={{backgroundColor:'white'}}> 
-                <Text> MY RIOT ACCOUNT </Text>
+            <View style={{backgroundColor:'white', height: 50, marginBottom: 10, elevation: 2, justifyContent: 'space-between', flexDirection: 'row', marginTop: 2}}> 
+                <Text style={{fontSize: 17, marginTop: 12, marginLeft: 20}}>Version</Text>
+                <Text style={{fontSize: 17, marginTop: 12, marginRight: 20, color: 'grey'}}>MS3</Text>
             </View>
             <TouchableOpacity style={styles.feedback} onPress={() => {navigate("Feedback")}}>
                 <Text style={styles.buttonText}>Feedback</Text>

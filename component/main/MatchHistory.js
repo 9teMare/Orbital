@@ -152,7 +152,7 @@ export default function MatchHistory({ route, navigation}) {
                     />
                     <Text style={styles.name}>{data[champion]}</Text>
                 </View>
-                <Text style={{position: 'absolute', right: 10}}>{gameMode[queue].replace(" games", "")}</Text>
+                <Text style={{position: 'absolute', right: 10, top: 35}}>{gameMode[queue].replace(" games", "")}</Text>
                 <Text style={{position: 'absolute', right: 10, top: 10}}>{win}</Text>
             </TouchableOpacity>
         </View>

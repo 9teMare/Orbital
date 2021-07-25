@@ -156,9 +156,7 @@ export default function lane({ route }) {
         { key: 'Speed', ratio: parseFloat(speed_ratio), per: speed_percentage }])
 
         setLoader(false)
-
     }
-
 
     const Item = ({ ratio, per }) => {
         return (
@@ -177,7 +175,7 @@ export default function lane({ route }) {
                         </View>
                     </View>
                 </View>
-                <Text style={{ fontSize: 11, alignSelf: 'center', marginTop: 8, fontWeight: 'bold' }}>{per}/{100 - per}</Text>
+                <Text style={{ fontSize: 11, alignSelf: 'center', marginTop: 8, fontWeight: 'bold' }}>{Math.round(per * 100) / 100}/{Math.round((100 - per) * 100) / 100}</Text>
             </View>
         )
     }
@@ -210,9 +208,16 @@ export default function lane({ route }) {
                     <View style={{ flexDirection: "row" }}>
                         <Text style={styles.category}> These dragons might favor... </Text>
                         <View style={{ height: 20, width: 20, borderRadius: 20, borderColor: "gray", borderWidth: 1, alignSelf: "center", marginTop: 10, marginLeft: 10 }}>
-                            <Tooltip popover={<Text style={{ color: "white" }}>This section compares the amount of favor different types of dragon will bring to each team. The estimation is based on the type of buffs each dragon has and the properties of champions in the teams. </Text>}
-                                width={280} height={125}>
-                                <Text style={{ alignSelf: "center", fontWeight: "bold" }}>?</Text>
+                            <Text style={{position: 'absolute', marginLeft: 5.5}}>?</Text>
+                            <Tooltip 
+                                popover={<Text style={{ color: "white", lineHeight: 20 }}>This section compares the amount of favor different types of dragon will bring to each team. The estimation is based on the type of buffs each dragon has and the properties of champions in the teams. </Text>}
+                                width={280} 
+                                height={135}
+                                backgroundColor={"#232323"}
+                                containerStyle={{marginTop: 35, marginLeft: 30}}
+                                withPointer={false}
+                            >
+                                <Text style={{ alignSelf: "center", fontWeight: "bold" }}></Text>
                             </Tooltip>
                         </View>
                     </View>
@@ -255,10 +260,23 @@ export default function lane({ route }) {
 
                     <View style={{ flexDirection: "row" }}>
                         <Text style={styles.category}>Teamfights</Text>
-                        <View style={{ height: 20, width: 20, borderRadius: 20, borderColor: "gray", borderWidth: 1, alignSelf: "center", marginTop: 10, marginLeft: 10 }}>
+                        {/* <View style={{ height: 20, width: 20, borderRadius: 20, borderColor: "gray", borderWidth: 1, alignSelf: "center", marginTop: 10, marginLeft: 10 }}>
                             <Tooltip popover={<Text style={{ color: "white" }}>This section estimates the outcome when 2 teams start a teamfight. Dragon fights are not considered as team fights due to the terrain of the dragon pit (which affects the factors taken into consideration for the team fight) </Text>}
                                 width={280} height={125}>
                                 <Text style={{ alignSelf: "center", fontWeight: "bold" }}>?</Text>
+                            </Tooltip>
+                        </View> */}
+                        <View style={{ height: 20, width: 20, borderRadius: 20, borderColor: "gray", borderWidth: 1, alignSelf: "center", marginTop: 10, marginLeft: 10 }}>
+                            <Text style={{position: 'absolute', marginLeft: 5.5}}>?</Text>
+                            <Tooltip 
+                                popover={<Text style={{ color: "white", lineHeight: 20 }}>This section estimates the outcome when 2 teams start a teamfight. Dragon fights are not considered as team fights due to the terrain of the dragon pit (which affects the factors taken into consideration for the team fight) </Text>}
+                                width={280} 
+                                height={135}
+                                backgroundColor={"#232323"}
+                                containerStyle={{marginTop: 35}}
+                                withPointer={false}
+                            >
+                                <Text style={{ alignSelf: "center", fontWeight: "bold" }}></Text>
                             </Tooltip>
                         </View>
                     </View>
@@ -304,10 +322,23 @@ export default function lane({ route }) {
                 <View style={{ backgroundColor: "white", marginTop: 5 }}>
                     <View>
                         <Text style={styles.category}>Dragon Fights</Text>
-                        <View style={{ height: 20, width: 20, borderRadius: 20, borderColor: "gray", borderWidth: 1, alignSelf: "center", marginTop: 10, marginLeft: 10 }}>
+                        {/* <View style={{ height: 20, width: 20, borderRadius: 20, borderColor: "gray", borderWidth: 1, alignSelf: "center", marginTop: 10, marginLeft: 10 }}>
                             <Tooltip popover={<Text style={{ color: "white" }}>This section estimates the outcome of dragon fights. This is separated from other team fights due to the terrain of the dragon pit (which affects the factors taken into consideration) </Text>}
                                 width={280} height={125}>
                                 <Text style={{ alignSelf: "center", fontWeight: "bold" }}>?</Text>
+                            </Tooltip>
+                        </View> */}
+                        <View style={{ height: 20, width: 20, borderRadius: 20, borderColor: "gray", borderWidth: 1, alignSelf: "center", marginTop: -20, marginLeft: -50 }}>
+                            <Text style={{position: 'absolute', marginLeft: 5.5}}>?</Text>
+                            <Tooltip 
+                                popover={<Text style={{ color: "white", lineHeight: 20 }}>This section estimates the outcome of dragon fights. This is separated from other team fights due to the terrain of the dragon pit (which affects the factors taken into consideration) </Text>}
+                                width={280} 
+                                height={115}
+                                backgroundColor={"#232323"}
+                                containerStyle={{marginTop: 30}}
+                                withPointer={false}
+                            >
+                                <Text style={{ alignSelf: "center", fontWeight: "bold" }}></Text>
                             </Tooltip>
                         </View>
                     </View>

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { View, Text, Image, StyleSheet, ScrollView, Dimensions } from 'react-native'
+import { View, Text, Image, StyleSheet, ScrollView, Dimensions, ActivityIndicator } from 'react-native'
 import { Tooltip } from 'react-native-elements';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import Unorderedlist from 'react-native-unordered-list';
@@ -170,9 +170,14 @@ export default function lane({ route }) {
 
     if (isLoading) {
         return (
-            <Text>Loading...</Text>
+            <View style={{height: width / 3, width: width / 2, backgroundColor: '#b8bab9c0', alignSelf: 'center', marginTop: height / 3, borderRadius: 10}}>
+                <ActivityIndicator size="large" color="grey" style={{alignSelf: 'center', marginTop: 20}}/>
+                <Text style={{fontSize: 20, fontWeight: 'bold', alignSelf: 'center', marginTop: 20, color: 'grey'}}> 
+                    Loading...
+                </Text>
+            </View>
         )
-    }
+    } 
 
     return (
         <ScrollView>
@@ -183,9 +188,16 @@ export default function lane({ route }) {
                         Win rate by position
                 </Text>
                     <View style={{ height: 20, width: 20, borderRadius: 20, borderColor: "gray", borderWidth: 1, alignSelf: "center", marginTop: 10, marginLeft: 10 }}>
-                        <Tooltip popover={<Text style={{ color: "white" }}>This section shows the estimated win rate of each lane in the laning phase (especially in the early game). Tap on the individual sections below to see what factors are taken into consideration.</Text>}
-                            width={280} height={125}>
-                            <Text style={{ alignSelf: "center", fontWeight: "bold" }}>?</Text>
+                        <Text style={{position: 'absolute', marginLeft: 5.5}}>?</Text>
+                        <Tooltip 
+                            popover={<Text style={{ color: "white", lineHeight: 20 }}>This section shows the estimated win rate of each lane in the laning phase (especially in the early game). Tap on the individual sections below to see what factors are taken into consideration.</Text>}
+                            width={280} 
+                            height={125}
+                            backgroundColor={"#232323"}
+                            containerStyle={{marginTop: 35}}
+                            withPointer={false}
+                        >
+                            <Text style={{ alignSelf: "center", fontWeight: "bold" }}></Text>
                         </Tooltip>
                     </View>
 
@@ -358,9 +370,16 @@ export default function lane({ route }) {
                         Win rate by jungle rotation
                 </Text>
                     <View style={{ height: 20, width: 20, borderRadius: 20, borderColor: "gray", borderWidth: 1, alignSelf: "center", marginTop: 10, marginLeft: 10 }}>
-                        <Tooltip popover={<Text style={{ color: "white" }}>This section tells the estimated win rate when junglers rotate to each lane of the map. The factors taken into consideration are: Damage(30%), crowd control(30%), jungler's mobility(10%), laner's wave clear ability(30%)</Text>}
-                            width={280} height={150}>
-                            <Text style={{ alignSelf: "center", fontWeight: "bold" }}>?</Text>
+                        <Text style={{position: 'absolute', marginLeft: 5.5}}>?</Text>
+                        <Tooltip 
+                            popover={<Text style={{ color: "white", lineHeight: 20 }}>This section tells the estimated win rate when junglers rotate to each lane of the map. The factors taken into consideration are: Damage(30%), crowd control(30%), jungler's mobility(10%), laner's wave clear ability(30%)</Text>}
+                            width={280} 
+                            height={140}
+                            backgroundColor={"#232323"}
+                            containerStyle={{marginTop: 30}}
+                            withPointer={false}
+                        >
+                            <Text style={{ alignSelf: "center", fontWeight: "bold" }}></Text>
                         </Tooltip>
                     </View>
                 </View>
@@ -408,6 +427,8 @@ export default function lane({ route }) {
         </ScrollView>
     )
 }
+
+const {width, height} = Dimensions.get("window")
 
 const styles = StyleSheet.create({
     blueIcon: {

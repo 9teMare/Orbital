@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import {View, Text, Image, StyleSheet, ImageBackground, Dimensions, TouchableOpacity, ScrollView } from 'react-native'
 import { WebView } from 'react-native-webview';
 
+
 export default function ItemDetail({ route, navigation}) {
 
     const itemId = route.params;
@@ -14,11 +15,6 @@ export default function ItemDetail({ route, navigation}) {
     const [into, setInto] = useState([])
     const [gold, setGold] = useState('')
 
-    const statsArr = []
-    const statsNumArr = []
-    const [stats, setStats] = useState([])
-    const [statsNum, setStatsNum] = useState([])
-
     useEffect(() => {
         fetch('http://ddragon.leagueoflegends.com/cdn/11.15.1/data/en_US/item.json')
         .then((response) => response.json())
@@ -26,23 +22,21 @@ export default function ItemDetail({ route, navigation}) {
             setItemName(response["data"][itemId]["name"])
             setDescription(response["data"][itemId]["description"])
             setItemIconUrl({uri: `http://ddragon.leagueoflegends.com/cdn/11.15.1/img/item/${itemId}.png`})
-            for (var i in response["data"][itemId]["from"]) {
-                fromArr.push(response["data"][itemId]["from"][i])
+            if ("from" in response["data"][itemId]) {
+                for (var i in response["data"][itemId]["from"]) {
+                    fromArr.push(response["data"][itemId]["from"][i])
+                }
+                setFrom(fromArr)
             }
-            setFrom(fromArr)
-
-            for (var i in response["data"][itemId]["into"]) {
-                intoArr.push(response["data"][itemId]["into"][i])
+            
+            if ("into" in response["data"][itemId]) {
+                for (var i in response["data"][itemId]["into"]) {
+                    intoArr.push(response["data"][itemId]["into"][i])
+                }
+                setInto(intoArr)
             }
-            setInto(intoArr)
         
-            setGold(response["data"][itemId]["gold"]["base"])
-            for (var i in response["data"][itemId]["stats"]) {
-                statsArr.push(i)
-                statsNumArr.push(response["data"][itemId]["stats"][i])
-            }
-            setStats(statsArr)
-            setStatsNum(statsNumArr)
+            setGold(response["data"][itemId]["gold"]["total"])
         })
         .catch((error) => console.error(error))
       }, [])
@@ -54,23 +48,50 @@ export default function ItemDetail({ route, navigation}) {
         indexArrFrom[i] = i
     }
 
-    for (var i = 0; i < into.length; i ++) {
-        indexArrInto[i] = i
+    for (var j = 0; j < into.length; j ++) {
+        indexArrInto[j] = j
     }
 
-    const displayFrom = indexArrFrom.map(index => (
-        <View key={index} style={styles.fromAndIntoView}>
-            <Image source={{uri: `http://ddragon.leagueoflegends.com/cdn/11.15.1/img/item/${from[indexArrFrom[index]]}.png`}} style={styles.fromAndInto}/>
-        </View>
+    const displayFrom = () => indexArrFrom.map(index => (
+        <Image key={index} source={{uri: `http://ddragon.leagueoflegends.com/cdn/11.15.1/img/item/${from[indexArrFrom[index]]}.png`}} style={styles.fromAndInto}/>
     ))
 
-    const displayInto = indexArrInto.map(index => (
-        <View key={index} style={styles.fromAndIntoView}>
-            <Image source={{uri: `http://ddragon.leagueoflegends.com/cdn/11.15.1/img/item/${into[indexArrFrom[index]]}.png`}} style={styles.fromAndInto}/>
-        </View>
+    const displayInto = () => indexArrInto.map(index => (
+        <Image key={index} source={{uri: `http://ddragon.leagueoflegends.com/cdn/11.15.1/img/item/${into[indexArrInto[index]]}.png`}} style={styles.fromAndInto}/>
     ))
 
-    const styledDescription = '<div style="font-size: 250%; margin-left: 30px; margin-right: 30px; margin-top: 30px">' + description + '</div>'
+    const whetherHaveFrom = () => {
+        if (indexArrFrom.length !== 0) {
+            return (
+                <View>
+                    <Text style={styles.infoName}>Obtain from: </Text>
+                    <View style={styles.fromView}>
+                        {displayFrom()}
+                    </View>
+                </View>
+                
+            )
+        }
+        return
+    }
+
+    const whetherHaveInto = () => {
+        if (indexArrInto.length !== 0) {
+            {console.log(into[1])}
+            return (
+                <View>
+                    <Text style={styles.infoName}>Combine into: </Text>
+                    <View style={styles.intoView}>
+                        {displayInto()}
+                    </View>
+                </View>
+                
+            )
+        }
+        return
+    }
+    
+    const styledDescription = '<div style="font-size: 270%; margin-left: 30px; margin-right: 30px; margin-top: 30px; line-height: 1.5">' + description + '</div>'
 
     return (
         <View style={{flex : 1}}>
@@ -81,9 +102,9 @@ export default function ItemDetail({ route, navigation}) {
                 </View>
                 
                 <View style={styles.shortInfo}>
-                    <Text style={styles.name}>Gold: {gold}</Text>
-                    <Text style={styles.name}>from: {from}</Text>
-                    <Text style={styles.name}>into: {into.length}</Text>
+                    <Text style={styles.infoName}>Gold: {gold}</Text>           
+                    {whetherHaveFrom()}
+                    {whetherHaveInto()}
                     {/* {displayFrom} */}
                 </View>
             </View>
@@ -104,27 +125,50 @@ const {width, height} = Dimensions.get("window")
 
 const styles = StyleSheet.create({
     headerView: {
-        justifyContent: 'space-between',
+        justifyContent: 'space-evenly',
         flexDirection: 'row',
-        marginBottom: 30,
-        marginLeft: width/10
+        //marginBottom: 30,
+        minHeight: 150
     },
     iconAndName: {
-        marginTop: 30
+        marginTop: 30,
+        //position: 'absolute',
+        top: -10,
+        left: 50,
+        bottom: 10,
+        alignItems: 'center'
     },
     fromAndInto: {
         height: 30,
         width: 30,
+        marginLeft:1.5,
+        marginRight: 1.5,
+        marginTop: 3,
+        //alignSelf: 'center'
     },
-    fromAndIntoView: {
-        justifyContent: 'space-between',
-        alignItems: 'center'
+    fromView: {
+        flexDirection: 'row',
+        width: 133,
+        flexWrap: 'wrap',
+        marginBottom: 10,
+        backgroundColor: 'white',
+        alignItems: 'center',
+        elevation: 3,
+        justifyContent: 'flex-start'
+    },
+    intoView: {
+        flexDirection: 'row',
+        width: 133,
+        flexWrap: 'wrap',
+        marginBottom: 10,
+        backgroundColor: 'white',
+        alignItems: 'center',
+        elevation: 3,
+        justifyContent: 'flex-start'
     },
     shortInfo: {
-        marginTop: 30,
-        marginRight: width/10,
-        alignSelf: 'flex-start',
-        maxWidth: width / 2
+        marginRight: 180,
+        left: 150
     },
     icon: {
         height: width/5,
@@ -136,8 +180,10 @@ const styles = StyleSheet.create({
     name: {
         marginTop: 10,
         fontSize: 20,
+        width: 110,
         fontWeight: 'bold',
-        alignSelf: 'center'
+        alignSelf: 'center',
+        textAlign: 'center'
     },
     descriptionView: {
         flex: 1,
@@ -150,5 +196,11 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         marginLeft: 15,
         marginTop: 15
+    },
+    infoName: {
+        fontSize: 15,
+        marginTop: 15,
+        width: 100,
+        fontWeight: 'bold'
     }
 })

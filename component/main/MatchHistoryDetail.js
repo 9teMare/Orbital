@@ -3,7 +3,6 @@ import {View, Text, TouchableOpacity, StyleSheet, Dimensions, ActivityIndicator,
 import { ScrollView } from 'react-native-gesture-handler'
 import  MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
 import { Icon } from 'react-native-elements'
-import { MessageOutlined  } from '@ant-design/icons';
 
 export default function MatchHistory({ route, navigation}) {
     const {gameId, apiKey, data, summonerName , gameMode, queue} = route.params
@@ -34,6 +33,11 @@ export default function MatchHistory({ route, navigation}) {
 
     const [spell, setSpell] = useState({})
     const [gameDuration, setGameDuration] = useState({})
+
+    const blueChampsArr = []
+    const redChampsArr = []
+    const [blueChamps, setBlueChamps] = useState([])
+    const [redChamps, setRedChamps] = useState([])
 
     const getData = async () => {
         let isMounted = true
@@ -69,15 +73,20 @@ export default function MatchHistory({ route, navigation}) {
                 if (i < participant.length / 2) {
                     blueTeamArr.push(participant[i])
                     blueTeamIdentitiesArr.push(identitiy[i])
+                    blueChampsArr.push(data[participant[i]["championId"]])
                 } else {
                     redTeamArr.push(participant[i])
                     redTeamIdentitiesArr.push(identitiy[i])
+                    redChampsArr.push(data[participant[i]["championId"]])
                 }
             }
             setBlueTeam(blueTeamArr)
             setBlueTeamIdentities(blueTeamIdentitiesArr)
             setRedTeam(redTeamArr)
             setRedTeamIdentities(redTeamIdentitiesArr)
+
+            setBlueChamps(blueChampsArr)
+            setRedChamps(redChampsArr)
 
             setBlueTeamWin(team[0])
             setRedTeamWin(team[1])
@@ -297,9 +306,15 @@ export default function MatchHistory({ route, navigation}) {
     const rankToAnalysis = (queue) => {
         if (queue === 420) {
             return (
-                <TouchableOpacity style={{backgroundColor: '#d4d6d5', height: 50, elevation: 2, borderColor: '#b8bab9', borderWidth: 1}} 
-                                onPress={() => navigation.navigate("Identify Roles", {blueTeam, redTeam, gameId, apiKey, data, spell})}>
-                    <Text style={{alignSelf: 'center', marginTop: 13, fontSize: 15, fontWeight: 'bold', color: 'white'}}>Analyse This Team Composition</Text>
+                <TouchableOpacity style={{backgroundColor: '#d4d6d5', height: 40, elevation: 2, width: width - 10, alignSelf: 'center', marginTop: 5, marginBottom: 5}} 
+                                onPress={() => navigation.navigate({
+                                    name: 'Composition',
+                                    params: {blueTeam: blueChamps, redTeam: redChamps},
+                                    merge: true,
+                                }
+                                    //"Composition", {blueTeam, redTeam, gameId, apiKey, data, spell}
+                                )}>
+                    <Text style={{alignSelf: 'center', marginTop: 8, fontSize: 15, fontWeight: 'bold', color: 'white'}}>Tap Here To Analyse</Text>
                 </TouchableOpacity>
             )
         }
