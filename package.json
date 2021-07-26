@@ -33,6 +33,7 @@
     "lodash.filter": "^4.6.0",
     "negotiator": "^0.6.2",
     "react": "16.13.1",
+    "react-animated-heart": "^0.0.7-alpha.1",
     "react-dom": "16.13.1",
     "react-minimal-pie-chart": "^8.2.0",
     "react-native": "0.63",

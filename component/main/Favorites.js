@@ -196,11 +196,14 @@ export default function Favorites() {
     //   </DraxProvider>
     // </GestureHandlerRootView>
       <View style={{alignItems: 'center'}}>
-        <Text style={{fontSize: 20, fontWeight: 'bold', textAlign: 'center', color: 'grey', marginTop: 250}}>
-          Your favorite matches will be displayed here
+        <Text style={{fontSize: 20, fontWeight: 'bold', textAlign: 'center', color: 'grey', marginTop: 230, lineHeight: 35}}>
+          Your favorite matches will be displayed here.
         </Text>
-        <Text style={{fontSize: 20, fontWeight: 'bold', textAlign: 'center', color: 'grey', marginTop: 10}}>
-          Available in the next version 🙂
+        <Text style={{fontSize: 20, fontWeight: '300', textAlign: 'center', color: 'grey', marginTop: 10, marginLeft: 10, marginRight: 10, lineHeight: 35}}>
+          Will be available in the next release if we have time 🙂
+        </Text>
+        <Text style={{fontSize: 20, fontWeight: '300', textAlign: 'center', color: 'grey', marginTop: 10, lineHeight: 35, marginLeft: 10, marginRight: 10}}>
+          Like button in Match History Detail does not work currently
         </Text>
       </View>
     )

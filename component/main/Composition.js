@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { StyleSheet, View, Text, TouchableOpacity, Image, Alert, StatusBar} from 'react-native'
+import { StyleSheet, View, Text, TouchableOpacity, Image, Alert, StatusBar, Dimensions} from 'react-native'
 import { useFonts } from 'expo-font';
 
 export default function Composition({navigation, route}) {
@@ -48,8 +48,9 @@ export default function Composition({navigation, route}) {
     return (
         <View >
             <StatusBar/>
-            <Text style={styles.titleText}> Team Composition Analysis </Text>
-
+            <View style={{backgroundColor: 'white', width: width, height: 70, elevation: 2}}>
+                <Text style={styles.titleText}> Team Composition Analysis </Text>
+            </View>
             <View style={{alignSelf: 'center'}}>
                 <View style={{flexDirection:'row', marginTop: 30}}>
                     <Text style={styles.blueText}> Blue Team </Text>
@@ -155,13 +156,15 @@ export default function Composition({navigation, route}) {
     );
 }
 
+const {width, height} = Dimensions.get("window")
+
 const styles = StyleSheet.create({
     titleText: {
         fontSize: 20,
-        marginTop: 50,
-        marginLeft: 30, 
+        marginTop: 20,
         fontWeight: 'bold',
         color: '#55BA46',
+        alignSelf: 'center'
     },
     blueText: {
         fontSize: 30, 
