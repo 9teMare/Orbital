@@ -57,7 +57,7 @@ function MyPage(props) {
               } else if (response.status === 404) {
                 return invalidUsernameAlert()
               } else {
-                return otherError(response.status)
+                return otherError()
               }
           })
           .then(response => {
@@ -92,9 +92,10 @@ function MyPage(props) {
           setLoader(false)
       }
 
-      const otherError = (status) => {
+      const otherError = () => {
         Alert.alert(
-            "Status code: " + status,
+            "Network error",
+            "Please try again"
             [
               {
                 text: "Cancel",

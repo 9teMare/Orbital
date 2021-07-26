@@ -96,12 +96,6 @@ export default function MatchHistory({ route, navigation}) {
         return () => { isMounted = false }
     }
     
-    const winLoseIcon = (win) => {
-        if (win === "Win") {
-            return <MaterialCommunityIcons name="emoticon-cool-outline" size={26} style={{position: 'absolute', top: 5, left: 5}}/>
-        }
-        return <MaterialCommunityIcons name="emoticon-dead-outline" size={26} style={{position: 'absolute', top: 5, left: 5}}/>
-    }
 
     const winLoseRename = (win) => {
         if (win === "Win") {

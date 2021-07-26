@@ -1,5 +1,6 @@
 import React, { useState, useEffect }  from 'react'
 import {View, Text, TouchableOpacity, StyleSheet, Dimensions, FlatList, Image, ActivityIndicator} from 'react-native'
+import { Icon } from 'react-native-elements'
 
 export default function MatchHistory({ route, navigation}) {
     const {selectedRegion, summonerName, accountId, apiKey} = route.params;
@@ -152,8 +153,11 @@ export default function MatchHistory({ route, navigation}) {
                     />
                     <Text style={styles.name}>{data[champion]}</Text>
                 </View>
-                <Text style={{position: 'absolute', right: 10, top: 35}}>{gameMode[queue].replace(" games", "")}</Text>
+                <Text style={{position: 'absolute', right: 60, top: 35, color: 'grey', fontSize: 20, fontWeight: '200'}}>{gameMode[queue].replace(" games", "")}</Text>
                 <Text style={{position: 'absolute', right: 10, top: 10}}>{win}</Text>
+                <View style={{position: 'absolute', right: 10 , top: 33}}>
+                    <Icon name="arrow-right" size={30} color={'grey'}/>
+                </View>
             </TouchableOpacity>
         </View>
     );

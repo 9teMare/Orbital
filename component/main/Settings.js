@@ -20,7 +20,7 @@ export default function Settings(props) {
                 <Text style={styles.buttonText}>Feedback</Text>
             </TouchableOpacity>
 
-            <View style={{marginTop:40}}>
+            <View>
                 <TouchableOpacity
                     style = {styles.logout}
                     onPress={() => onLogout()}>
@@ -57,7 +57,8 @@ const styles = StyleSheet.create({
     logout:{
         width:237, 
         height:50, 
-        marginTop: height / 1.8, 
+        marginTop: 380, 
+        marginBottom: 30, 
         backgroundColor: 'white', 
         alignItems: 'center', 
         alignSelf: 'center',

@@ -8,7 +8,7 @@ export default function Esports() {
                 Keep track to Esport news
             </Text>
             <Text style={{fontSize: 20, fontWeight: 'bold', textAlign: 'center', color: 'grey', marginTop: 10}}>
-                Available in the next version 🙂
+                Might be available in the future releases 🙂
             </Text>
       </View>
     )

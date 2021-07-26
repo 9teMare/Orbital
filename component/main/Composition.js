@@ -100,56 +100,57 @@ export default function Composition({navigation, route}) {
                     </Text>
 
                 </View>
-                    <View style={{flexDirection:'row'}}>
-                        <Text style={styles.redText}> Red Team </Text>
 
-                        <TouchableOpacity style={styles.tapHereRed} onPress={() => navigation.navigate("ChampSelect", {blue: blueTeam, red: redTeam, isBlue: false})}>
-                            <Text style ={styles.tapHereRedText}> 
-                                Tap to select 
-                            </Text>
-                        </TouchableOpacity>
-                    </View>
+                <View style={{flexDirection:'row'}}>
+                    <Text style={styles.redText}> Red Team </Text>
+
+                    <TouchableOpacity style={styles.tapHereRed} onPress={() => navigation.navigate("ChampSelect", {blue: blueTeam, red: redTeam, isBlue: false})}>
+                        <Text style ={styles.tapHereRedText}> 
+                            Tap to select 
+                        </Text>
+                    </TouchableOpacity>
+                </View>
                     
-                    <View style={{flexDirection:'row', width:310, justifyContent: 'space-evenly', alignSelf: 'center', marginTop: 15, height: 80}}>
-                        <Image
-                            source = {redTeam[TOP] === null 
-                                ? require('../../pictures/others/red_top.png')
-                                : {uri: 'http://ddragon.leagueoflegends.com/cdn/11.15.1/img/champion/' + redTeam[TOP] + '.png'}}
-                            style ={{width: 50, height: 50, marginBottom: 5, borderRadius:50, borderColor: '#DC5047', borderWidth:3}}/>
+                <View style={{flexDirection:'row', width:310, justifyContent: 'space-evenly', alignSelf: 'center', marginTop: 15, height: 80}}>
+                    <Image
+                        source = {redTeam[TOP] === null 
+                            ? require('../../pictures/others/red_top.png')
+                            : {uri: 'http://ddragon.leagueoflegends.com/cdn/11.15.1/img/champion/' + redTeam[TOP] + '.png'}}
+                        style ={{width: 50, height: 50, marginBottom: 5, borderRadius:50, borderColor: '#DC5047', borderWidth:3}}/>
 
-                        <Image 
-                            source = {redTeam[JUNGLE] === null 
-                                ? require('../../pictures/others/red_jungle.png')
-                                : {uri: 'http://ddragon.leagueoflegends.com/cdn/11.15.1/img/champion/' + redTeam[JUNGLE] + '.png'}}
-                            style ={{width: 50, height: 50, borderRadius:50, borderColor: '#DC5047', borderWidth:3}}/>   
-                            
-                        <Image 
-                            source = {redTeam[MID] === null 
-                                ? require('../../pictures/others/red_mid.png')
-                                : {uri: 'http://ddragon.leagueoflegends.com/cdn/11.15.1/img/champion/' + redTeam[MID] + '.png'}}
-                            style ={{width: 50, height: 50, borderRadius:50, borderColor: '#DC5047', borderWidth:3}}/>   
+                    <Image 
+                        source = {redTeam[JUNGLE] === null 
+                            ? require('../../pictures/others/red_jungle.png')
+                            : {uri: 'http://ddragon.leagueoflegends.com/cdn/11.15.1/img/champion/' + redTeam[JUNGLE] + '.png'}}
+                        style ={{width: 50, height: 50, borderRadius:50, borderColor: '#DC5047', borderWidth:3}}/>   
+                        
+                    <Image 
+                        source = {redTeam[MID] === null 
+                            ? require('../../pictures/others/red_mid.png')
+                            : {uri: 'http://ddragon.leagueoflegends.com/cdn/11.15.1/img/champion/' + redTeam[MID] + '.png'}}
+                        style ={{width: 50, height: 50, borderRadius:50, borderColor: '#DC5047', borderWidth:3}}/>   
 
-                        <Image 
-                            source = {redTeam[ADC] === null 
-                                ? require('../../pictures/others/red_ADC.png')
-                                : {uri: 'http://ddragon.leagueoflegends.com/cdn/11.15.1/img/champion/' + redTeam[ADC] + '.png'}}
-                            style ={{width: 50, height: 50, borderRadius:50, borderColor: '#DC5047', borderWidth:3}}/>    
+                    <Image 
+                        source = {redTeam[ADC] === null 
+                            ? require('../../pictures/others/red_ADC.png')
+                            : {uri: 'http://ddragon.leagueoflegends.com/cdn/11.15.1/img/champion/' + redTeam[ADC] + '.png'}}
+                        style ={{width: 50, height: 50, borderRadius:50, borderColor: '#DC5047', borderWidth:3}}/>    
 
-                        <Image 
-                            source = {redTeam[SUPPORT] === null 
-                                ? require('../../pictures/others/red_support.png')
-                                : {uri: 'http://ddragon.leagueoflegends.com/cdn/11.15.1/img/champion/' + redTeam[SUPPORT] + '.png'}}
-                            style ={{width: 50, height: 50, borderRadius:50, borderColor: '#DC5047', borderWidth:3}}/>    
+                    <Image 
+                        source = {redTeam[SUPPORT] === null 
+                            ? require('../../pictures/others/red_support.png')
+                            : {uri: 'http://ddragon.leagueoflegends.com/cdn/11.15.1/img/champion/' + redTeam[SUPPORT] + '.png'}}
+                        style ={{width: 50, height: 50, borderRadius:50, borderColor: '#DC5047', borderWidth:3}}/>    
 
-                    </View>
+                </View>
             </View>
-            
-            <TouchableOpacity 
-                style={styles.button}
-                onPress={() => analysisNavigate()}>
-                <Text style={{fontWeight:'500', fontSize:18, color:'#55BA46', marginTop: 14}}>START ANALYSIS</Text>
-            </TouchableOpacity>
-
+            <View style={{position: 'absolute', flexDirection: 'row', alignSelf: 'center', bottom: -90}}>
+                <TouchableOpacity 
+                    style={styles.button}
+                    onPress={() => analysisNavigate()}>
+                    <Text style={{fontWeight:'500', fontSize:18, color:'#55BA46', marginTop: 14}}>START ANALYSIS</Text>
+                </TouchableOpacity>
+            </View>
         </View>
     );
 }
@@ -179,7 +180,6 @@ const styles = StyleSheet.create({
     button:{
         width:237, 
         height:50, 
-        marginTop:40, 
         backgroundColor: 'white', 
         alignItems: 'center', 
         alignSelf: 'center',

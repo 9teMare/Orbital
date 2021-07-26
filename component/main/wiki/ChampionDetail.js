@@ -166,7 +166,8 @@ export default function ChampionDetail({ route, navigation}) {
         )
     }
 
-    const styledTooptil = '<div style="font-size: 290%; margin-left: 25px; margin-right: 25px; margin-top: 20px; line-height: 1.5">' + skillTooltip + '</div>'
+    const styledTooptil = '<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0"><div style="font-size: 110%; margin-left: 10px; margin-right: 10px; margin-top: 10px; line-height: 1.8">' + skillTooltip + '</div>'
+    const INJECTEDJAVASCRIPT = "document.body.style.userSelect = 'none'";
 
     if (!loaded) {
         return null
@@ -191,27 +192,27 @@ export default function ChampionDetail({ route, navigation}) {
                     <View style={styles.iconBackground}>
                         <View style={styles.icon}>
                             <TouchableOpacity onPress={() => {setResourceType('p')}}>
-                                <Image source={passiveIcon(passiveId)} style={styles.skillIcon}/>
+                                <Image source={passiveIcon(passiveId)} style={resourceType === "p" ? styles.skillIconFram : styles.skillIcon}/>
                                 <Text style={styles.skillLetter}>Passive</Text>
                             </TouchableOpacity>
 
                             <TouchableOpacity onPress={() => {setResourceType('q')}}>
-                                <Image source={skillIconUrl(qId)} style={styles.skillIcon}/>
+                                <Image source={skillIconUrl(qId)} style={resourceType === "q" ? styles.skillIconFram : styles.skillIcon}/>
                                 <Text style={styles.skillLetter}>Q</Text>
                             </TouchableOpacity>
 
                             <TouchableOpacity onPress={() => {setResourceType('w')}}>
-                                <Image source={skillIconUrl(wId)} style={styles.skillIcon}/>
+                                <Image source={skillIconUrl(wId)} style={resourceType === "w" ? styles.skillIconFram : styles.skillIcon}/>
                                 <Text style={styles.skillLetter}>W</Text>
                             </TouchableOpacity>
 
                             <TouchableOpacity onPress={() => {setResourceType('e')}}>
-                                <Image source={skillIconUrl(eId)} style={styles.skillIcon}/>
+                                <Image source={skillIconUrl(eId)} style={resourceType === "e" ? styles.skillIconFram : styles.skillIcon}/>
                                 <Text style={styles.skillLetter}>E</Text>
                             </TouchableOpacity>
                                 
                             <TouchableOpacity onPress={() => {setResourceType('r')}}>
-                                <Image source={skillIconUrl(rId)} style={styles.skillIcon}/>
+                                <Image source={skillIconUrl(rId)} style={resourceType === "r" ? styles.skillIconFram : styles.skillIcon}/>
                                 <Text style={styles.skillLetter}>R</Text>
                             </TouchableOpacity>
                         </View>
@@ -223,7 +224,8 @@ export default function ChampionDetail({ route, navigation}) {
                             originWhitelist={['*']}
                             source={{ html: styledTooptil }}
                             style={{flex: 1}}
-                            scrollEnabled={false}
+                            scrollEnabled={true}
+                            injectedJavaScript={INJECTEDJAVASCRIPT}
                         />
                     </View>
                 </Tabs.ScrollView>
@@ -292,7 +294,7 @@ const styles = StyleSheet.create({
     },
       skill: {
         fontSize: 25,
-        marginLeft: 10,
+        marginLeft: 17,
         marginRight: 10,
         marginTop: 10,
         fontWeight: 'bold'
@@ -310,6 +312,12 @@ const styles = StyleSheet.create({
         height:64,
         borderColor: '#000000c0', 
         borderWidth: 2
+      },
+      skillIconFram: {
+        width:64, 
+        height:64,
+        borderColor: '#55BA46', 
+        borderWidth: 3
       },
       skillLetter: {
         alignSelf: 'center',

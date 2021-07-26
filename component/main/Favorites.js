@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
 import { View, Text, StatusBar, StyleSheet, Dimensions } from 'react-native'
-import PagerView from 'react-native-pager-view';
-import { GestureHandlerRootView } from 'react-native-gesture-handler';
-import { DraxProvider, DraxView, DraxList } from 'react-native-drax';
+// import PagerView from 'react-native-pager-view';
+// import { GestureHandlerRootView } from 'react-native-gesture-handler';
+// import { DraxProvider, DraxView, DraxList } from 'react-native-drax';
 
-const gestureRootViewStyle = { flex: 1 };
+//const gestureRootViewStyle = { flex: 1 };
 
 export default function Favorites() {
   // const draggableItemList = [
