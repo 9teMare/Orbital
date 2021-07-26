@@ -49,14 +49,16 @@ export default function BluePerformance({ route, navigation}) {
     const triple = blueTeam[index]["stats"]["tripleKills"]
     const quadra = blueTeam[index]["stats"]["quadraKills"]
     const penta = blueTeam[index]["stats"]["quadraKills"]
+    const killingSpree = blueTeam[index]["stats"]["killingSprees"]
 
 
     const kills = () => {
-        if (double + triple + quadra + penta === 0) {
+        if (double + triple + quadra + penta + killingSpree === 0) {
             return
         }
         return (
             <View style={{flexDirection: 'row', alignSelf: 'center', alignItems: 'center', backgroundColor: 'white', width: width, height: 52, justifyContent: 'space-evenly', marginTop: 5, elevation: 1}}>
+                {displayKills("Killing Sprees", killingSpree)}
                 {displayKills("Double Kills", double)}
                 {displayKills("Triple Kills", triple)}
                 {displayKills("Quadra Kills", quadra)}
