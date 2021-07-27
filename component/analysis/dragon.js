@@ -3,7 +3,7 @@ import { View, Text, TouchableOpacity, StyleSheet, Image, FlatList, ScrollView, 
 import { Tooltip } from 'react-native-elements';
 
 export default function lane({ route }) {
-    const { blue, red } = route.params
+    const { blue, red, ddragon, cdn, otherInfo } = route.params
     const [isLoading, setLoader] = useState(true)
 
 
@@ -28,16 +28,6 @@ export default function lane({ route }) {
 
     const fetching = async () => {
 
-        const response = await fetch('http://ddragon.leagueoflegends.com/cdn/11.15.1/data/en_US/champion.json')
-        const responded = await response.json()
-        const data = responded.data
-
-        const champOtherInfo = "https://orbital-riot-api.herokuapp.com/champOtherInfo"
-        const fetchChampOtherInfo = await fetch(champOtherInfo, {
-            "method": "GET"
-        })
-        const champOtherInfo_responded = await fetchChampOtherInfo.json()
-
 
         var blue_ADAP = 0, red_ADAP = 0, blue_HP = 0, red_HP = 0, blue_speed = 0, red_speed = 0;
         var blue_durability_total = 0, red_durability_total = 0;
@@ -46,29 +36,27 @@ export default function lane({ route }) {
         var blue_waveclear = 0, red_waveclear = 0, blue_trueDamage = 0, red_trueDamage = 0;
 
         for (var i = 0; i < 5; i++) {
-            const blueName = new String
-            blueName = blue[i]
-            const redName = new String
-            redName = red[i]
 
             //get CC points,dragon rush & wave clear
-            const blueCC = champOtherInfo_responded[blueName]["CC"]
-            const redCC = champOtherInfo_responded[redName]["CC"]
+            const blueCC = otherInfo["blue"][i]["CC"]
+            const redCC = otherInfo["red"][i]["CC"]
             const blueCCcount = blueCC["CCtypes"].length
             const redCCcount = redCC["CCtypes"].length
 
-            blue_trueDamage += champOtherInfo_responded[blueName]["trueDamage"]["highestTotal"]
-            red_trueDamage += champOtherInfo_responded[redName]["trueDamage"]["highestTotal"]
-            blue_waveclear += champOtherInfo_responded[blueName]["waveClearRating"]
-            red_waveclear += champOtherInfo_responded[redName]["waveClearRating"]
-            blue_dragonRush += champOtherInfo_responded[blueName]["dragonRushRating"]
-            red_dragonRush += champOtherInfo_responded[redName]["dragonRushRating"]
+            blue_trueDamage += otherInfo["blue"][i]["trueDamage"]["highestTotal"]
+            red_trueDamage += otherInfo["red"][i]["trueDamage"]["highestTotal"]
+            blue_waveclear += otherInfo["blue"][i]["waveClearRating"]
+            red_waveclear += otherInfo["red"][i]["waveClearRating"]
+            blue_dragonRush += otherInfo["blue"][i]["dragonRushRating"]
+            red_dragonRush += otherInfo["red"][i]["dragonRushRating"]
 
+            //console.log(blueName)
             for (var b = 0; b < blueCCcount; b++) {
                 blueCC_total += (CCpriorityPoints[blueCC["CCtypes"][b]]
                     * blueCC["CCtimeFrame"][b]
                     * blueCC["CCrange"][b]
                     * blueCC["targetableNumber"][b])
+                
             }
 
             for (var r = 0; r < redCCcount; r++) {
@@ -76,44 +64,38 @@ export default function lane({ route }) {
                     * redCC["CCtimeFrame"][r]
                     * redCC["CCrange"][r]
                     * redCC["targetableNumber"][r])
+                    
             }
+            
 
-            //get durability & mobility from Communitiy Dragon
-            const cdnResponse_blue = await fetch('https://cdn.communitydragon.org/11.15.1/champion/' + blueName + '/data')
-            const cdnResponded_blue = await cdnResponse_blue.json()
-            const cdnData_blue = cdnResponded_blue.playstyleInfo
 
-            blue_durability_total += cdnData_blue["durability"]
-            blue_mobility_total += cdnData_blue["mobility"]
+            blue_durability_total += cdn["blue"][i]["durability"]    
+            blue_mobility_total += cdn["blue"][i]["mobility"]
 
-            const cdnResponse_red = await fetch('https://cdn.communitydragon.org/11.15.1/champion/' + redName + '/data')
-            const cdnResponded_red = await cdnResponse_red.json()
-            const cdnData_red = cdnResponded_red.playstyleInfo
-
-            red_durability_total += cdnData_red["durability"]
-            red_mobility_total += cdnData_red["mobility"]
+            red_durability_total += cdn["red"][i]["durability"] 
+            red_mobility_total += cdn["red"][i]["mobility"] 
 
             //INFERNAL - AD, AP
-            var blue_ADAP_18 = data[blueName]["stats"]["attackdamage"] + data[blueName]["stats"]["attackdamageperlevel"] * 17
-                + data[blueName]["stats"]["mp"] + data[blueName]["stats"]["mpperlevel"] * 17
-            var red_ADAP_18 = data[redName]["stats"]["attackdamage"] + data[redName]["stats"]["attackdamageperlevel"] * 17
-                + data[redName]["stats"]["mp"] + data[redName]["stats"]["mpperlevel"] * 17
+            var blue_ADAP_18 = ddragon["blue"][i]["stats"]["attackdamage"] + ddragon["blue"][i]["stats"]["attackdamageperlevel"] * 17
+                + ddragon["blue"][i]["stats"]["mp"] + ddragon["blue"][i]["stats"]["mpperlevel"] * 17
+            var red_ADAP_18 = ddragon["red"][i]["stats"]["attackdamage"] + ddragon["red"][i]["stats"]["attackdamageperlevel"] * 17
+                + ddragon["red"][i]["stats"]["mp"] + ddragon["red"][i]["stats"]["mpperlevel"] * 17
 
             blue_ADAP += blue_ADAP_18
             red_ADAP += red_ADAP_18
 
             //OCEAN - TANKS
-            var blue_HP_18 = data[blueName]["stats"]["hp"] + data[blueName]["stats"]["hpperlevel"] * 17
-                + data[blueName]["stats"]["armor"] + data[blueName]["stats"]["armorperlevel"] * 17
-            var red_HP_18 = data[redName]["stats"]["hp"] + data[redName]["stats"]["hpperlevel"] * 17
-                + data[redName]["stats"]["armor"] + data[redName]["stats"]["armorperlevel"] * 17
+            var blue_HP_18 = ddragon["blue"][i]["stats"]["hp"] + ddragon["blue"][i]["stats"]["hpperlevel"] * 17
+                + ddragon["blue"][i]["stats"]["armor"] + ddragon["blue"][i]["stats"]["armorperlevel"] * 17
+            var red_HP_18 = ddragon["red"][i]["stats"]["hp"] + ddragon["red"][i]["stats"]["hpperlevel"] * 17
+                + ddragon["red"][i]["stats"]["armor"] + ddragon["red"][i]["stats"]["armorperlevel"] * 17
 
             blue_HP += blue_HP_18
             red_HP += red_HP_18
 
             //CLOUD - movement speed
-            var blue_speed_18 = data[blueName]["stats"]["movespeed"]
-            var red_speed_18 = data[redName]["stats"]["movespeed"]
+            var blue_speed_18 = ddragon["blue"][i]["stats"]["movespeed"]
+            var red_speed_18 = ddragon["red"][i]["stats"]["movespeed"]
 
             blue_speed += blue_speed_18
             red_speed += red_speed_18
@@ -141,8 +123,8 @@ export default function lane({ route }) {
         const dragonFightRatio = ((blue_dragonFightPoints / (blue_dragonFightPoints + red_dragonFightPoints)) * 100).toFixed(2)
 
 
-        setTeamFightPoints([{ CC: blueCC_total, ADAP: blue_ADAP, durability: blue_durability_total },
-        { CC: redCC_total, ADAP: red_ADAP, durability: red_durability_total }])
+        setTeamFightPoints([{ CC: blueCC_total.toFixed(2), ADAP: blue_ADAP.toFixed(2), durability: blue_durability_total },
+        { CC: redCC_total.toFixed(2), ADAP: red_ADAP.toFixed(2), durability: red_durability_total }])
         setTeamFightPer(parseFloat(teamFightRatio))
 
 

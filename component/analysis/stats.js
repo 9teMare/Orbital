@@ -9,7 +9,7 @@ const BLUE = 0, RED = 1
 
 
 export default function stats({ route }) {
-    const { blue, red } = route.params
+    const { blue, red, ddragon, cdn, otherInfo } = route.params
     const [isLoading, setLoader] = useState(true)
     const [tag, setTag] = useState([])
 
@@ -77,15 +77,6 @@ export default function stats({ route }) {
         var scaling_AD = [[], []], scaling_AP = [[], []], attackRange = [[], []]
         var blueCC_all = [], redCC_all = []
 
-        const response = await fetch('http://ddragon.leagueoflegends.com/cdn/11.15.1/data/en_US/champion.json')
-        const responded = await response.json()
-        const data = responded.data
-
-        const champOtherInfo = "https://orbital-riot-api.herokuapp.com/champOtherInfo"
-        const fetchChampOtherInfo = await fetch(champOtherInfo, {
-            "method": "GET"
-        })
-        const champOtherInfo_responded = await fetchChampOtherInfo.json()
 
         const catagorize = (champ, s, sideInt) => { //0 = blue, 1 = red
             if (s === "Support") {
@@ -112,26 +103,22 @@ export default function stats({ route }) {
         var red_adScaling = [], red_apScaling = [], red_range = []
 
         for (let i = 0; i < 5; i++) {
-            const blueName = new String
-            blueName = blue[i]
-            const redName = new String
-            redName = red[i]
 
-            blueTag.push(data[blueName]["tags"])
-            redTag.push(data[redName]["tags"])
+            blueTag.push(ddragon["blue"][i]["tags"])
+            redTag.push(ddragon["blue"][i]["tags"])
 
-            blue_adScaling.push(data[blueName]["stats"]["attackdamageperlevel"] * data[blueName]["stats"]["attackspeedperlevel"])
-            red_adScaling.push(data[redName]["stats"]["attackdamageperlevel"] * data[redName]["stats"]["attackspeedperlevel"])
+            blue_adScaling.push(ddragon["blue"][i]["stats"]["attackdamageperlevel"] * ddragon["blue"][i]["stats"]["attackspeedperlevel"])
+            red_adScaling.push(ddragon["red"][i]["stats"]["attackdamageperlevel"] * ddragon["red"][i]["stats"]["attackspeedperlevel"])
 
-            blue_apScaling.push(data[blueName]["stats"]["mpperlevel"])
-            red_apScaling.push(data[redName]["stats"]["mpperlevel"])
+            blue_apScaling.push(ddragon["blue"][i]["stats"]["mpperlevel"])
+            red_apScaling.push(ddragon["red"][i]["stats"]["mpperlevel"])
 
-            blue_range.push(data[blueName]["stats"]["attackrange"])
-            red_range.push(data[blueName]["stats"]["attackrange"])
+            blue_range.push(ddragon["blue"][i]["stats"]["attackrange"])
+            red_range.push(ddragon["red"][i]["stats"]["attackrange"])
 
             //get CC points
-            const blueCC = champOtherInfo_responded[blueName]["CC"]
-            const redCC = champOtherInfo_responded[redName]["CC"]
+            const blueCC = otherInfo["blue"][i]["CC"]
+            const redCC = otherInfo["red"][i]["CC"]
             const blueCCcount = blueCC["CCtypes"].length
             const redCCcount = redCC["CCtypes"].length
 
@@ -176,28 +163,28 @@ export default function stats({ route }) {
 
         for (var j = 0; j < 2; j++) {
             var blue_skillsDetail = []
-            for (var k = 0; k < champOtherInfo_responded[blue[blue_top2[j]]]["CC"]["CCskillKeys"].length; k++) {
+            for (var k = 0; k < otherInfo["blue"][blue_top2[j]]["CC"]["CCskillKeys"].length; k++) {
                 blue_skillsDetail.push({
-                    key: champOtherInfo_responded[blue[blue_top2[j]]]["CC"]["CCskillKeys"][k],
-                    skill: champOtherInfo_responded[blue[blue_top2[j]]]["CC"]["CCskills"][k]
+                    key: otherInfo["blue"][blue_top2[j]]["CC"]["CCskillKeys"][k],
+                    skill: otherInfo["blue"][blue_top2[j]]["CC"]["CCskills"][k]
                 })
             }
 
             blue_top2_details.push({
                 skillDetail: blue_skillsDetail,
-                types: champOtherInfo_responded[blue[blue_top2[j]]]["CC"]["CCtypes"]
+                types: otherInfo["blue"][blue_top2[j]]["CC"]["CCtypes"]
             })
 
             var red_skillsDetail = []
-            for (var l = 0; l < champOtherInfo_responded[red[red_top2[j]]]["CC"]["CCskillKeys"].length; l++) {
+            for (var l = 0; l < otherInfo["red"][red_top2[j]]["CC"]["CCskillKeys"].length; l++) {
                 red_skillsDetail.push({
-                    key: champOtherInfo_responded[red[red_top2[j]]]["CC"]["CCskillKeys"][l],
-                    skill: champOtherInfo_responded[red[red_top2[j]]]["CC"]["CCskills"][l]
+                    key: otherInfo["red"][red_top2[j]]["CC"]["CCskillKeys"][l],
+                    skill: otherInfo["red"][red_top2[j]]["CC"]["CCskills"][l]
                 })
             }
             red_top2_details.push({
                 skillDetail: red_skillsDetail,
-                types: champOtherInfo_responded[red[red_top2[j]]]["CC"]["CCtypes"]
+                types: otherInfo["red"][red_top2[j]]["CC"]["CCtypes"]
             })
 
             blue_top2_names.push(blue[blue_top2[j]])
@@ -456,7 +443,6 @@ export default function stats({ route }) {
                             source={{ uri: 'http://ddragon.leagueoflegends.com/cdn/11.15.1/img/champion/' + CC_names_blue[0] + '.png' }}
                             style={styles.blueIcon}
                         />
-                        {/* <Text>CCs: {arrToStr(CC_details_blue[0].types)}</Text> */}
                         <View style={{ alignSelf: "center" }}>
                             <FlatList
                                 data={CC_details_blue[0]["skillDetail"]}
