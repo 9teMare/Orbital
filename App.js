@@ -55,7 +55,8 @@ import MatchHistoryScreen from './component/main/MatchHistory';
 import MatchHistoryDetailScreen from './component/main/MatchHistoryDetail';
 import BluePerformanceScreen from './component/main/BluePerformance';
 import RedPerformanceScreen from './component/main/RedPerformance';
-import  MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
+
+import Favorites from './component/main/Favorites';
 
 import { LogBox } from 'react-native';
 
@@ -155,21 +156,10 @@ export class App extends Component {
             <Stack.Screen name="Item Detail" component={itemDetailScreen}/>
             <Stack.Screen name="Feedback" component={FeedbackScreen}/>
             <Stack.Screen name="Match History" component={MatchHistoryScreen}/>
-            <Stack.Screen name="Match History Detail" component={MatchHistoryDetailScreen}
-                                                      options={{
-                                                        headerRight: () => (
-                                                          <View>
-                                                            {this.state.liked === false 
-                                                            ? <MaterialCommunityIcons name="heart-outline" size={26} style={{position: 'absolute', top: 15, right: 10}}/>
-                                                            : <MaterialCommunityIcons name="heart" size={26} style={{position: 'absolute', top: 15, right: 10}}/>}
-                                                            <TouchableOpacity onPress={() => this.toggle()} style={{position: 'absolute', width: 25, height: 25, right: 10, top: 15}}/>
-                                                          </View>
-                  
-                                                        ),
-                                                      }}
-            />
+            <Stack.Screen name="Match Detail" component={MatchHistoryDetailScreen}/>
             <Stack.Screen name="Blue Team Performance" component={BluePerformanceScreen}/>
             <Stack.Screen name="Red Team Performance" component={RedPerformanceScreen}/>
+            <Stack.Screen name="Favorites" component={Favorites}/>
             
           </Stack.Navigator>
         </NavigationContainer>

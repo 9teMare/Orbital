@@ -3,6 +3,7 @@ import {View, Text, TouchableOpacity, StyleSheet, Dimensions, ActivityIndicator,
 import { ScrollView } from 'react-native-gesture-handler'
 import  MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
 import { Icon } from 'react-native-elements'
+import firebase from 'firebase'
 
 export default function MatchHistory({ route, navigation}) {
     const {selectedRegion, gameId, apiKey, data, summonerName , gameMode, queue} = route.params

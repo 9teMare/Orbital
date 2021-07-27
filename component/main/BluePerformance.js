@@ -36,7 +36,7 @@ export default function BluePerformance({ route, navigation}) {
             return
         }
         return (
-            <View style={{backgroundColor: '#00203FFF', elevation: 3, flexDirection: 'row', borderRadius: 3, alignItems: 'center', alignSelf: 'center', justifyContent: 'space-evenly'}}>
+            <View style={{backgroundColor: '#00203FFF', elevation: 3, flexDirection: 'row', borderRadius: 3, alignItems: 'center', alignSelf: 'center', justifyContent: 'space-evenly', marginTop: 25}}>
                 <Text style={{fontSize: 17, marginTop: 1, marginLeft: 5, marginRight: 3, marginBottom: 1, fontWeight: 'bold', color: '#ADEFD1FF'}}>
                     {killType}:
                 </Text> 
@@ -57,7 +57,7 @@ export default function BluePerformance({ route, navigation}) {
             return
         }
         return (
-            <View style={{flexDirection: 'row', alignSelf: 'center', alignItems: 'center', backgroundColor: 'white', width: width, height: 52, justifyContent: 'space-evenly', marginTop: 5, elevation: 1}}>
+            <View style={{flexDirection: 'row', alignSelf: 'center', alignItems: 'center', backgroundColor: 'white', width: width, justifyContent: 'space-evenly', marginTop: 5, elevation: 1, flexWrap: 'wrap'}}>
                 {displayKills("Killing Sprees", killingSpree)}
                 {displayKills("Double Kills", double)}
                 {displayKills("Triple Kills", triple)}
@@ -263,7 +263,7 @@ const styles = StyleSheet.create({
         borderRadius: 50,
         alignSelf: 'center',
         marginTop: 20,
-        borderColor: '#DC5047',
+        borderColor: '#55B1CE',
         borderWidth: 3,
     },
     summonerName: {

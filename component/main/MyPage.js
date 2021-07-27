@@ -7,7 +7,6 @@ import { Ionicons } from '@expo/vector-icons';
 import { block } from 'react-native-reanimated'
 import  MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
 
-
 function MyPage(props) {
     const { currentUser } = props;
     const {navigate} = props.navigation
@@ -79,7 +78,7 @@ function MyPage(props) {
       const invalidUsernameAlert = () => {
         Alert.alert(
             "Username not found",
-            "Please try again"
+            "Please try again",
             [
               {
                 text: "Cancel",
@@ -95,7 +94,7 @@ function MyPage(props) {
       const otherError = () => {
         Alert.alert(
             "Network error",
-            "Please try again"
+            "Please try again",
             [
               {
                 text: "Cancel",
@@ -176,7 +175,7 @@ function MyPage(props) {
                         <Picker
                             selectedValue={selectedRegion}
                             style={{ height: 40, width: 100,  alignItems: 'center' }}
-                            onValueChange={(itemValue, itemIndex) =>
+                            onValueChange={(itemValue) =>
                                 setSelectedRegion(itemValue)
                             }>
                             <Picker.Item label="NA" value="na1"/>
@@ -209,12 +208,19 @@ function MyPage(props) {
                     </TouchableOpacity>
                     {welcomeSummoner()}
                     <View >
-                        <TouchableOpacity style={styles.expandMatchHistory} onPress={() => {navigate("Match History", {selectedRegion, summonerName, accountId, apiKey})}}>
+                        <TouchableOpacity style={styles.expandMatchHistory} onPress={() => {navigate("Match History", {selectedRegion, summonerName, accountId, apiKey, currentUser})}}>
                             <Text style={{position: 'absolute', marginTop: 10, left: 10}}>See Match History</Text>
                             <MaterialCommunityIcons name="arrow-right" size={26} style={{position: 'absolute', marginTop: 5, right: 10}}/>
                         </TouchableOpacity>
                     </View>
                 </View>
+                <TouchableOpacity style={styles.favorite} activeOpacity={0.7} onPress={() => {navigate("Favorites", {selectedRegion, summonerName, accountId, apiKey, currentUser})}}>
+                        <MaterialCommunityIcons name="star" size={26} style={{position: 'absolute', marginTop: 5, left: 10}}/>
+                        <Text style={{fontSize: 15, fontWeight: 'bold', position: 'absolute', marginLeft: 45}}>
+                            Favorite Compositions
+                        </Text>
+                        <MaterialCommunityIcons name="arrow-right" size={26} style={{position: 'absolute', marginTop: 5, right: 10}}/>
+                </TouchableOpacity>
 
             </View>
             </TouchableWithoutFeedback>
@@ -229,7 +235,7 @@ const styles = StyleSheet.create({
         width: width - 20, backgroundColor: 'white', alignSelf:'center', 
         shadowRadius:10, shadowOffset:{width:-6, height:6}, shadowOpacity:0.2,
         marginLeft: 30 , marginRight:30, 
-        elevation: 3
+        elevation: 3, marginTop: 20
     },
     expandMatchHistory: {
         width: width - 20,
@@ -238,6 +244,13 @@ const styles = StyleSheet.create({
         elevation: 10
         // borderColor: 'black', 
         // borderWidth: 2, 
+    },
+    favorite: {
+        width: width - 20, backgroundColor: 'white', alignSelf:'center', 
+        shadowRadius:10, shadowOffset:{width:-6, height:6}, shadowOpacity:0.2,
+        marginLeft: 30 , marginRight:30, 
+        elevation: 10, height: 80, marginTop: 70, marginBottom: 50, alignItems: 'center',
+        flexDirection: 'row'
     }
 })
 

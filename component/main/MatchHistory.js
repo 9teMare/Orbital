@@ -1,10 +1,11 @@
 import React, { useState, useEffect }  from 'react'
 import {View, Text, TouchableOpacity, StyleSheet, Dimensions, FlatList, Image, ActivityIndicator} from 'react-native'
 import { Icon } from 'react-native-elements'
+import  MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
+import firebase from 'firebase'
 
 export default function MatchHistory({ route, navigation}) {
     const {selectedRegion, summonerName, accountId, apiKey} = route.params;
-    
     const historyArr = []
     const [history, setHistory] = useState([])
     const [historyState, setHistoryState] = useState(true)
@@ -22,6 +23,9 @@ export default function MatchHistory({ route, navigation}) {
     const [gameIdArr, setGameIdArr] = useState([])
 
     const [historyWithWin, setHistoryWithWin] = useState([])
+
+    const likesArr = []
+    const [likes, setLikes] = useState([])
 
     //const [winLose, setWinLose] = useState('')
     
@@ -61,11 +65,14 @@ export default function MatchHistory({ route, navigation}) {
 
         if (isMounted) {
             for (var j = 0; j < historyResponded["matches"].length; j++) {
+                historyResponded["matches"][j]["liked"] = false
                 historyArr.push(historyResponded["matches"][j])
                 gameIdArrTemp.push(historyResponded["matches"][j]["gameId"])
+                likesArr.push(false)
             }
             setHistory(historyArr)
             setGameIdArr(gameIdArrTemp)
+            setLikes(likesArr)
 
             const keyToChampion = new Object()
             for (var i in championResponded["data"]) {
@@ -142,31 +149,88 @@ export default function MatchHistory({ route, navigation}) {
     //     }
     //     return () => { isMounted = false }
     // }
+    const [temp, setTemp] = useState([])
 
-    const Item = ({ champion, gameId, queue, win }) => (
-        <View>
-            <TouchableOpacity style={styles.item} onPress={() => {navigation.navigate("Match History Detail", {selectedRegion, gameId, apiKey, data, summonerName, gameMode, queue})}}>
-                <View style={styles.iconAndName}>
-                    <Image
-                        source={{uri: `http://ddragon.leagueoflegends.com/cdn/11.15.1/img/champion/${data[champion]}.png`}}
-                        style= {styles.icon}
-                    />
-                    <Text style={styles.name}>{data[champion]}</Text>
-                </View>
-                <Text style={{position: 'absolute', right: 60, top: 35, color: 'grey', fontSize: 20, fontWeight: '200'}}>{gameMode[queue].replace(" games", "")}</Text>
-                <Text style={{position: 'absolute', right: 10, top: 10}}>{win}</Text>
-                <View style={{position: 'absolute', right: 10 , top: 33}}>
-                    <Icon name="arrow-right" size={30} color={'grey'}/>
-                </View>
-            </TouchableOpacity>
-        </View>
-    );
+    const checkWhetherLiked = async(gameId) => {
+        let isMounted = true
+        if (isMounted) {
+            const collection =  firebase.firestore().collection("users").doc(firebase.auth().currentUser.uid)
+            const response = await collection.get()
+            if (!response.exists) {
+            console.log('No such document!');
+            }
+            setTemp(response.data()["favoriteMatches"])
+            for (var i in temp) {
+                if (temp[i] === gameId) {
+                    return true
+                }
+            }
+            return false
+        }
+        return () => { isMounted = false }   
+    }
 
-    const renderItem = ({ item }) => (
-        <View>
-            <Item champion={item["champion"]} gameId={item["gameId"]} queue={item["queue"]}  win={item["win"]}/>
-        </View>
-    );
+    const Item = ({ champion, gameId, queue, liked }) => {
+        const [like, setLike] = useState(liked)
+
+        const saveMatchIds = (gameId) => {
+            const collection = firebase.firestore().collection("users").doc(firebase.auth().currentUser.uid)
+            collection.update({
+                favoriteMatches: firebase.firestore.FieldValue.arrayUnion(gameId)       
+            })
+            setLike(!liked)
+        }
+    
+        const removeMatchIds = (gameId) => {
+            const collection = firebase.firestore().collection("users").doc(firebase.auth().currentUser.uid)
+            collection.update({
+                favoriteMatches: firebase.firestore.FieldValue.arrayRemove(gameId)
+            })
+            setLike(liked)
+        }
+
+        // useEffect(() => {
+        //     if (checkWhetherLiked(3984909115)) {
+        //         return console.log('true')
+        //     }
+        //     return console.log('false')
+        // }, [])
+
+        return (
+            <View>
+                <TouchableOpacity style={{position: 'absolute', height: height/8, width: 40, marginTop: 5, backgroundColor: 'white', elevation: 3}}
+                                    onPress={() => {like ? removeMatchIds(gameId) : saveMatchIds(gameId)}}>
+                    <View>
+                        {like
+                        ?  <MaterialCommunityIcons name="heart" size={26 } style={{position: 'absolute', top: 35, left: 8}}/>
+                        :  <MaterialCommunityIcons name="heart-outline" size={26} style={{position: 'absolute', top: 35, left: 8}}/>}
+                    </View>
+                </TouchableOpacity>
+            
+                <TouchableOpacity style={styles.item} onPress={() => {navigation.navigate("Match Detail", {selectedRegion, gameId, apiKey, data, summonerName, gameMode, queue})}}>
+                    <View style={styles.iconAndName}>
+                        <Image
+                            source={{uri: `http://ddragon.leagueoflegends.com/cdn/11.15.1/img/champion/${data[champion]}.png`}}
+                            style= {styles.icon}
+                        />
+                        <Text style={styles.name}>{data[champion]}</Text>
+                    </View>
+                    <Text style={{position: 'absolute', right: 60, top: 35, color: 'grey', fontSize: 20, fontWeight: '200'}}>{gameMode[queue].replace(" games", "")}</Text>
+                    <View style={{position: 'absolute', right: 10 , top: 33}}>
+                        <Icon name="arrow-right" size={30} color={'grey'}/>
+                    </View>
+                </TouchableOpacity>
+            </View>
+        )
+    }
+
+    const renderItem = ({ item }) => {
+        return (
+            <View>
+                <Item champion={item["champion"]} gameId={item["gameId"]} queue={item["queue"]}  liked={item["liked"]}/>
+            </View>
+        );
+    }
 
     const whetherHaveMatchHistory = () => {
         if (historyState) {
@@ -224,7 +288,8 @@ const styles = StyleSheet.create({
       height: height / 8,
       marginTop: 5,
       marginBottom: 5,
-      width: width,
+      width: width - 40,
+      marginLeft: 40,
       elevation: 3
     },
     name: {
@@ -242,7 +307,7 @@ const styles = StyleSheet.create({
         height: height / 8,
         width: height / 8,
         backgroundColor: '#f0f0f0',
-        marginLeft: 20
+        marginLeft: 0
     },
     gameId: {
         position: 'absolute',
