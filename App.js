@@ -1,7 +1,7 @@
 import { StatusBar } from 'expo-status-bar'
 import React, { Component } from 'react'
 
-import { View, Text, ActivityIndicator, Dimensions } from 'react-native'
+import { View, Text, ActivityIndicator, Dimensions, TouchableOpacity } from 'react-native'
 //import * as firebase from 'firebase'
 import firebase from 'firebase/app';
 import 'firebase/functions';
@@ -55,7 +55,7 @@ import MatchHistoryScreen from './component/main/MatchHistory';
 import MatchHistoryDetailScreen from './component/main/MatchHistoryDetail';
 import BluePerformanceScreen from './component/main/BluePerformance';
 import RedPerformanceScreen from './component/main/RedPerformance';
-import IdentifyRoles from './component/main/IdentifyRoles';
+import  MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
 
 import { LogBox } from 'react-native';
 
@@ -70,6 +70,7 @@ export class App extends Component {
     super(props);
     this.state = {
       loaded: false,
+      liked: false,   
     }
   }
 
@@ -88,6 +89,12 @@ export class App extends Component {
       }
     })
   }
+
+  toggle = () => {
+    let localLiked = this.state.liked;
+    localLiked = !localLiked;
+    this.setState({ liked: localLiked });
+  };
 
   render() {
     const { loggedIn, loaded } = this.state;
@@ -148,10 +155,21 @@ export class App extends Component {
             <Stack.Screen name="Item Detail" component={itemDetailScreen}/>
             <Stack.Screen name="Feedback" component={FeedbackScreen}/>
             <Stack.Screen name="Match History" component={MatchHistoryScreen}/>
-            <Stack.Screen name="Match History Detail" component={MatchHistoryDetailScreen}/>
+            <Stack.Screen name="Match History Detail" component={MatchHistoryDetailScreen}
+                                                      options={{
+                                                        headerRight: () => (
+                                                          <View>
+                                                            {this.state.liked === false 
+                                                            ? <MaterialCommunityIcons name="heart-outline" size={26} style={{position: 'absolute', top: 15, right: 10}}/>
+                                                            : <MaterialCommunityIcons name="heart" size={26} style={{position: 'absolute', top: 15, right: 10}}/>}
+                                                            <TouchableOpacity onPress={() => this.toggle()} style={{position: 'absolute', width: 25, height: 25, right: 10, top: 15}}/>
+                                                          </View>
+                  
+                                                        ),
+                                                      }}
+            />
             <Stack.Screen name="Blue Team Performance" component={BluePerformanceScreen}/>
             <Stack.Screen name="Red Team Performance" component={RedPerformanceScreen}/>
-            <Stack.Screen name="Identify Roles" component={IdentifyRoles}/>
             
           </Stack.Navigator>
         </NavigationContainer>

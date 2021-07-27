@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react'
-import {View, Text, Image, StyleSheet, ImageBackground, Dimensions, TouchableOpacity, ScrollView } from 'react-native'
+import {View, Text, Image, StyleSheet, ImageBackground, Dimensions, TouchableOpacity, ScrollView, ActivityIndicator } from 'react-native'
 import { Tabs } from 'react-native-collapsible-tab-view'
 import { useFonts } from 'expo-font';
+import { WebView } from 'react-native-webview';
+import { Tooltip } from 'react-native-elements/dist/tooltip/Tooltip';
 
 export default function ChampionDetail({ route, navigation}) {
 
@@ -62,6 +64,8 @@ export default function ChampionDetail({ route, navigation}) {
     const [skinNum, setSkinNum] = useState([])
     const [skinName, setSkinName] = useState([])
 
+    const [isLoading, setLoader] = useState(true)
+
     const skillIndex = (skill) => {
         if (skill === 'q') {
             return 0
@@ -121,6 +125,7 @@ export default function ChampionDetail({ route, navigation}) {
                 setSkinId(skinIdArray)
                 setSkinNum(skinNumArray)
                 setSkinName(skinNameArray)
+                setLoader(false)
             }
             return () => { isMounted = false }    
         })
@@ -136,12 +141,33 @@ export default function ChampionDetail({ route, navigation}) {
             </View>
     }
 
-    const displaySkins = skinId.map(index => (
+    const displaySkins = () => skinId.map(index => (
         <View key={index} style={styles.skinWrap}>
             <Image source={champSplashUrl(skinNum[index])} style={styles.skins}/>
             <Text style={styles.skinName}>{skinName[index]}</Text>
         </View>
     ))
+
+    const loreLoad = () => {
+        if (isLoading) {
+            return (
+                <View style={{height: width / 3, width: width / 2, backgroundColor: '#b8bab9c0', alignSelf: 'center', marginTop: height / 8, borderRadius: 10}}>
+                    <ActivityIndicator size="large" color="grey" style={{alignSelf: 'center', marginTop: 20}}/>
+                    <Text style={{fontSize: 20, fontWeight: 'bold', alignSelf: 'center', marginTop: 20, color: 'grey'}}> 
+                        Loading...
+                    </Text>
+                </View>
+            )
+        }
+        return (
+            <View style={styles.loreWrap}>
+                <Text style={styles.lore}>{lore}</Text>
+            </View>
+        )
+    }
+
+    const styledTooptil = '<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0"><div style="font-size: 110%; margin-left: 10px; margin-right: 10px; margin-top: 10px; line-height: 1.8">' + skillTooltip + '</div>'
+    const INJECTEDJAVASCRIPT = "document.body.style.userSelect = 'none'";
 
     if (!loaded) {
         return null
@@ -154,11 +180,10 @@ export default function ChampionDetail({ route, navigation}) {
         >
             <Tabs.Tab name="Lore">
                 <Tabs.ScrollView>
-                    <View>
-                        <View style={styles.loreWrap}>
+                        {/* <View style={styles.loreWrap}>
                             <Text style={styles.lore}>{lore}</Text>
-                        </View>
-                    </View>
+                        </View> */}
+                        {loreLoad()}
                 </Tabs.ScrollView>
             </Tabs.Tab>
 
@@ -167,34 +192,41 @@ export default function ChampionDetail({ route, navigation}) {
                     <View style={styles.iconBackground}>
                         <View style={styles.icon}>
                             <TouchableOpacity onPress={() => {setResourceType('p')}}>
-                                <Image source={passiveIcon(passiveId)} style={styles.skillIcon}/>
+                                <Image source={passiveIcon(passiveId)} style={resourceType === "p" ? styles.skillIconFram : styles.skillIcon}/>
                                 <Text style={styles.skillLetter}>Passive</Text>
                             </TouchableOpacity>
 
                             <TouchableOpacity onPress={() => {setResourceType('q')}}>
-                                <Image source={skillIconUrl(qId)} style={styles.skillIcon}/>
+                                <Image source={skillIconUrl(qId)} style={resourceType === "q" ? styles.skillIconFram : styles.skillIcon}/>
                                 <Text style={styles.skillLetter}>Q</Text>
                             </TouchableOpacity>
 
                             <TouchableOpacity onPress={() => {setResourceType('w')}}>
-                                <Image source={skillIconUrl(wId)} style={styles.skillIcon}/>
+                                <Image source={skillIconUrl(wId)} style={resourceType === "w" ? styles.skillIconFram : styles.skillIcon}/>
                                 <Text style={styles.skillLetter}>W</Text>
                             </TouchableOpacity>
 
                             <TouchableOpacity onPress={() => {setResourceType('e')}}>
-                                <Image source={skillIconUrl(eId)} style={styles.skillIcon}/>
+                                <Image source={skillIconUrl(eId)} style={resourceType === "e" ? styles.skillIconFram : styles.skillIcon}/>
                                 <Text style={styles.skillLetter}>E</Text>
                             </TouchableOpacity>
                                 
                             <TouchableOpacity onPress={() => {setResourceType('r')}}>
-                                <Image source={skillIconUrl(rId)} style={styles.skillIcon}/>
+                                <Image source={skillIconUrl(rId)} style={resourceType === "r" ? styles.skillIconFram : styles.skillIcon}/>
                                 <Text style={styles.skillLetter}>R</Text>
                             </TouchableOpacity>
                         </View>
                     </View>
                     <View style={styles.skillWrap}>
                         <Text style={styles.skill}>{skill}</Text>
-                        <Text style={styles.skillTooltip}>{skillTooltip}</Text>
+                        {/* <Text style={styles.skillTooltip}>{skillTooltip}</Text> */}
+                        <WebView
+                            originWhitelist={['*']}
+                            source={{ html: styledTooptil }}
+                            style={{flex: 1}}
+                            scrollEnabled={true}
+                            injectedJavaScript={INJECTEDJAVASCRIPT}
+                        />
                     </View>
                 </Tabs.ScrollView>
             </Tabs.Tab>
@@ -202,7 +234,7 @@ export default function ChampionDetail({ route, navigation}) {
             <Tabs.Tab name="Skins">
                 <Tabs.ScrollView>
                     <ScrollView>
-                        {displaySkins}
+                        {displaySkins()}
                     </ScrollView>
                 </Tabs.ScrollView>
             </Tabs.Tab>
@@ -257,11 +289,12 @@ const styles = StyleSheet.create({
     },
     loreWrap: {
         backgroundColor: 'white',
-        elevation: 3
+        height: height
+        //elevation: 3
     },
       skill: {
         fontSize: 25,
-        marginLeft: 10,
+        marginLeft: 17,
         marginRight: 10,
         marginTop: 10,
         fontWeight: 'bold'
@@ -280,6 +313,12 @@ const styles = StyleSheet.create({
         borderColor: '#000000c0', 
         borderWidth: 2
       },
+      skillIconFram: {
+        width:64, 
+        height:64,
+        borderColor: '#55BA46', 
+        borderWidth: 3
+      },
       skillLetter: {
         alignSelf: 'center',
         fontSize: 15,
@@ -287,8 +326,8 @@ const styles = StyleSheet.create({
       },
       skillWrap: {
         backgroundColor: 'white',
-        elevation: 3,
-        minHeight: height/3
+        minHeight: height/3,
+        flex: 1
       },
       icon: {
         //  width:53, 

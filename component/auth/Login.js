@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { TouchableOpacity, StyleSheet, View, Button, TextInput, Text, Dimensions, Keyboard, TouchableWithoutFeedback} from 'react-native'
+import { TouchableOpacity, StyleSheet, View, Button, TextInput, Text, Dimensions, Keyboard, TouchableWithoutFeedback, Alert} from 'react-native'
 import firebase from 'firebase'
 
 export class Login extends Component {
@@ -21,7 +21,7 @@ export class Login extends Component {
             console.log(result)
         })
         .catch((error) => {
-            console.log(error)
+            this.errorAlert(error)
         })
     }
 
@@ -29,6 +29,21 @@ export class Login extends Component {
         this.onSignIn()
         Keyboard.dismiss()
     }
+
+    errorAlert(error) {
+        Alert.alert(
+            error.toString(),
+            "error"
+            [
+              {
+                text: "Cancel",
+                onPress: () => console.log("Cancel Pressed"),
+                style: "cancel"
+              },
+              { text: "OK", onPress: () => console.log("OK Pressed") }
+            ]
+          );
+      }
 
     render() {
         return (

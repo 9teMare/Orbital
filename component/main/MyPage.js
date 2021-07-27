@@ -52,10 +52,13 @@ function MyPage(props) {
           } 
         })
           .then(response => {
-              if (!response.ok) { 
+              if (response.ok) {
+                return response.json()
+              } else if (response.status === 404) {
                 return invalidUsernameAlert()
+              } else {
+                return otherError()
               }
-              return response.json()    
           })
           .then(response => {
             if (isMounted) {
@@ -89,9 +92,42 @@ function MyPage(props) {
           setLoader(false)
       }
 
+      const otherError = () => {
+        Alert.alert(
+            "Network error",
+            "Please try again"
+            [
+              {
+                text: "Cancel",
+                onPress: () => console.log("Cancel Pressed"),
+                style: "cancel"
+              },
+              { text: "OK", onPress: () => console.log("OK Pressed") }
+            ]
+          );
+          setLoader(false)
+      }
+
       const fetchApiAndDismissKeyborad = async() => {
             await fetchApiCall()
             Keyboard.dismiss()
+      }
+
+      const welcomeSummoner = () => {
+          if (summonerName === "") {
+              return (
+                  <View style={{marginTop: 10}}>
+
+                  </View>
+              )
+          } else {
+              return (
+                  <View>
+                        <Text style={{ fontSize: 20, marginLeft: 20, marginTop: 15, marginBottom: 5}}>Welcome, {summonerName} !</Text>
+                        <Text style={{ fontSize: 15, marginLeft: 20, marginTop: 5, marginBottom: 20}}>Summoner Level: {summonerLvl}</Text>
+                  </View>
+              )
+          }
       }
 
     if (isLoading) {
@@ -171,12 +207,10 @@ function MyPage(props) {
                         style = {{width: 180, height: 30, alignItems:'center', backgroundColor: "black", alignSelf:'center', elevation: 3, marginTop: 10}}>
                         <Text style={{color: "white", marginTop: 5}}>Get user information</Text>
                     </TouchableOpacity>
-                    <Text style={{ marginLeft: 20, marginTop: 10, marginBottom: 5}}>Summoner Name: {summonerName}</Text>
-                    <Text style={{ marginLeft: 20, marginTop: 5, marginBottom: 20}}>Summoner Level: {summonerLvl}</Text>
-
+                    {welcomeSummoner()}
                     <View >
                         <TouchableOpacity style={styles.expandMatchHistory} onPress={() => {navigate("Match History", {selectedRegion, summonerName, accountId, apiKey})}}>
-                            <Text style={{position: 'absolute', marginTop: 10, left: 10}}>More Match History</Text>
+                            <Text style={{position: 'absolute', marginTop: 10, left: 10}}>See Match History</Text>
                             <MaterialCommunityIcons name="arrow-right" size={26} style={{position: 'absolute', marginTop: 5, right: 10}}/>
                         </TouchableOpacity>
                     </View>

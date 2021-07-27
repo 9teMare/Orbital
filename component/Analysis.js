@@ -33,7 +33,6 @@ export default function Analysis({ route }) {
     const champOtherInfo_responded = await fetchChampOtherInfo.json()
 
     for (var i=0; i<5; i++) {
-      console.log(i)
       const blueName = new String
       blueName = blue[i]
       const redName = new String
@@ -101,28 +100,28 @@ export default function Analysis({ route }) {
         options={{
           tabBarIcon: ({ color }) => (
             <Image source={require('../pictures/others/meta-laneIcon.png')}
-              style={{ tintColor: color, height: 40, width: 33.33 }} />
+              style={{ tintColor: color, height: 25, width: 25 }} />
           )
         }} />
       <Tab.Screen name='stats' component={statsScreen} initialParams={{ blue: blue, red: red, ddragon: ddragon, cdn: cdn, otherInfo: OtherInfo}}
         options={{
           tabBarIcon: ({ color }) => (
             <Image source={require('../pictures/others/meta-statsIcon.png')}
-              style={{ tintColor: color, height: 40, width: 33.33 }} />
+              style={{ tintColor: color, height: 25, width: 25 }} />
           )
         }} />
       <Tab.Screen name='dragon' component={dragonScreen} initialParams={{ blue: blue, red: red, ddragon: ddragon, cdn: cdn, otherInfo: OtherInfo}}
         options={{
           tabBarIcon: ({ color }) => (
             <Image source={require('../pictures/others/meta-dragonIcon.png')}
-              style={{ tintColor: color, height: 40, width: 33.33 }} />
+              style={{ tintColor: color, height: 25, width: 25 }} />
           )
         }} />
       <Tab.Screen name='overall' component={overallScreen} initialParams={{ blue: blue, red: red, ddragon: ddragon, cdn: cdn, otherInfo: OtherInfo}}
         options={{
           tabBarIcon: ({ color }) => (
             <Image source={require('../pictures/others/meta-overallIcon.png')}
-              style={{ tintColor: color, height: 40, width: 33.33 }} />
+              style={{ tintColor: color, height: 25, width: 25 }} />
           )
         }} />
       <Tab.Screen name='advice' component={adviceScreen} initialParams={{ blue: blue, red: red, ddragon: ddragon, cdn: cdn, otherInfo: OtherInfo }}
@@ -130,7 +129,7 @@ export default function Analysis({ route }) {
           
           tabBarIcon: ({ color }) => (
             <Image source={require('../pictures/others/meta-adviceIcon.png')}
-              style={{ tintColor: color, height: 40, width: 33.33 }} />
+              style={{ tintColor: color, height: 25, width: 25 }} />
           )
         }} />
     </Tab.Navigator>

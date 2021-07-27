@@ -1,6 +1,6 @@
 
 import React, { useEffect, useState } from 'react'
-import { View, Text, Image, StyleSheet, FlatList, ScrollView, Dimensions } from 'react-native'
+import { View, Text, Image, StyleSheet, FlatList, ScrollView, Dimensions, ActivityIndicator } from 'react-native'
 import { Tooltip } from 'react-native-elements';
 
 const TOP = 0, JUNGLE = 1, MID = 2, ADC = 3, SUPPORT = 4
@@ -373,7 +373,7 @@ export default function stats({ route }) {
             <View style={{ alignItems: "center", marginLeft: 4, marginRight: 4 }}>
                 <Image
                     source={{ uri: "http://ddragon.leagueoflegends.com/cdn/11.15.1/img/spell/" + skill + ".png" }}
-                    style={{ height: 40, width: 40 }}
+                    style={{ height: 40, width: 40, borderColor: 'black', borderWidth: 2 }}
                 />
                 <Text>{keyIndex}</Text>
             </View>
@@ -391,7 +391,12 @@ export default function stats({ route }) {
 
     if (isLoading) {
         return (
-            <Text> Loading...</Text>
+            <View style={{height: width / 3, width: width / 2, backgroundColor: '#b8bab9c0', alignSelf: 'center', marginTop: height / 3, borderRadius: 10}}>
+                <ActivityIndicator size="large" color="grey" style={{alignSelf: 'center', marginTop: 20}}/>
+                <Text style={{fontSize: 20, fontWeight: 'bold', alignSelf: 'center', marginTop: 20, color: 'grey'}}> 
+                    Loading...
+                </Text>
+            </View>
         )
     }
 
@@ -401,10 +406,23 @@ export default function stats({ route }) {
 
                 <View style={{flexDirection:"row"}}>
                     <Text style={{ fontSize: 18, fontWeight: '500', marginLeft: 10, marginTop: 10 }}> Categories (roles) </Text>
-                    <View style={{ height: 20, width: 20, borderRadius: 20, borderColor: "gray", borderWidth: 1, alignSelf: "center", marginTop: 10, marginLeft: 10 }}>
+                    {/* <View style={{ height: 20, width: 20, borderRadius: 20, borderColor: "gray", borderWidth: 1, alignSelf: "center", marginTop: 10, marginLeft: 10 }}>
                         <Tooltip popover={<Text style={{ color: "white" }}>This section shows the roles that each team has. The most ideal team composition should have 1 or 2 champions for each of the roles listed below. If there are too many champions sharing one role, the team will be imbalanced. If there are no champions taking up one role, it will become a weakness for the team.</Text>}
                             width={300} height={170}>
                             <Text style={{ alignSelf: "center", fontWeight: "bold" }}>?</Text>
+                        </Tooltip>
+                    </View> */}
+                    <View style={{ height: 20, width: 20, borderRadius: 20, borderColor: "gray", borderWidth: 1, alignSelf: "center", marginTop: 10, marginLeft: 10 }}>
+                        <Text style={{position: 'absolute', marginLeft: 5.5}}>?</Text>
+                        <Tooltip 
+                            popover={<Text style={{ color: "white", lineHeight: 20 }}>This section shows the roles that each team has. The most ideal team composition should have 1 or 2 champions for each of the roles listed below. If there are too many champions sharing one role, the team will be imbalanced. If there are no champions taking up one role, it will become a weakness for the team.</Text>}
+                            width={280} 
+                            height={190}
+                            backgroundColor={"#232323"}
+                            containerStyle={{marginTop: 35}}
+                            withPointer={false}
+                        >
+                            <Text style={{ alignSelf: "center", fontWeight: "bold" }}></Text>
                         </Tooltip>
                     </View>
                 </View>
@@ -430,9 +448,16 @@ export default function stats({ route }) {
                 <View style={{flexDirection:"row"}}>
                     <Text style={{ fontSize: 18, fontWeight: '500', marginLeft: 10, marginTop: 10 }}>Crowd Controls</Text>
                     <View style={{ height: 20, width: 20, borderRadius: 20, borderColor: "gray", borderWidth: 1, alignSelf: "center", marginTop: 10, marginLeft: 10 }}>
-                        <Tooltip popover={<Text style={{ color: "white" }}>This section picks 2 champions that has the highest CC (crowd control) priority points from each team, and shows the skills that triggers the CCs. These champions could be a good initiator for teamfights. </Text>}
-                            width={280} height={125}>
-                            <Text style={{ alignSelf: "center", fontWeight: "bold" }}>?</Text>
+                        <Text style={{position: 'absolute', marginLeft: 5.5}}>?</Text>
+                        <Tooltip 
+                            popover={<Text style={{ color: "white", lineHeight: 20 }}>This section picks 2 champions that has the highest CC (crowd control) priority points from each team, and shows the skills that triggers the CCs. These champions could be a good initiator for teamfights. </Text>}
+                            width={280} 
+                            height={135}
+                            backgroundColor={"#232323"}
+                            containerStyle={{marginTop: 30}}
+                            withPointer={false}
+                        >
+                            <Text style={{ alignSelf: "center", fontWeight: "bold" }}></Text>
                         </Tooltip>
                     </View>
                 </View>

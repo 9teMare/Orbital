@@ -13,16 +13,21 @@ export default function ItemWiki({navigation}) {
   const [itemName, setItemName] = useState([])
   const [fullItemName, setFullItemName] = useState([])
 
+  const [tempData, setTempData] = useState([])
+
   var idToName = new Object()
   
   for (var i = 0; i < data.length; i ++) {
     idToName[data[i]] = itemName[i]
   }
 
+  const getIdByName = (object, name) => {
+    return Object.keys(object).find(key => object[key] === name);
+  }
 
   useEffect(() => {
     let isMounted = true
-    fetch('http://ddragon.leagueoflegends.com/cdn/11.14.1/data/en_US/item.json')
+    fetch('http://ddragon.leagueoflegends.com/cdn/11.15.1/data/en_US/item.json')
     .then((response) => response.json())
     .then((response) => {
         if (isMounted) {
@@ -34,6 +39,7 @@ export default function ItemWiki({navigation}) {
           setData(itemIdArr)
           setFullItemName(itemNameArr)
           setItemName(itemNameArr)
+          setTempData(itemIdArr)
         }
         return () => { isMounted = false }
     })
@@ -41,13 +47,13 @@ export default function ItemWiki({navigation}) {
   }, [selecteditem])
 
   const Item = ({ item, onPress, weight, color}) => (
-    <TouchableOpacity onPress={() => navigation.navigate("Item Detail", item)}>
+    <TouchableOpacity onPress={() => navigation.navigate("Item Detail", getIdByName(idToName, item))}>
         <Image 
-            source={{uri: 'http://ddragon.leagueoflegends.com/cdn/11.14.1/img/item/' + item + '.png'}}
+            source={{uri: 'http://ddragon.leagueoflegends.com/cdn/11.15.1/img/item/' + getIdByName(idToName, item) + '.png'}}
             style= {[styles.image, color]}
         />
         <Text style={[styles.title, weight]}>
-            {idToName[item]}
+            {item}
         </Text>
     </TouchableOpacity>    
 )
@@ -56,7 +62,7 @@ export default function ItemWiki({navigation}) {
     return (
       <Item 
         item={item}
-        onPress={() => setSelecteditem(item)}
+        //onPress={() => setSelecteditem(item)}
       />
     )
   }
@@ -81,7 +87,7 @@ export default function ItemWiki({navigation}) {
           value={query}
           onChangeText={queryText => handleSearch(queryText)}
           placeholder="Search"
-          style={{ backgroundColor: '#fff', paddingHorizontal: 20, maxWidth: width }}
+          style={{ backgroundColor: '#fff', paddingHorizontal: 100, maxWidth: width }}
         />
       </View>
     );
@@ -92,17 +98,11 @@ export default function ItemWiki({navigation}) {
   // }
 
   const handleSearch = text => {
-  const filteredData = filter(fullData, item => {
-    return contains(item, text);
-  });
-
-  // const filteredArr = []
-
-  // for (var i = 0; i < filteredData.length; i ++) {
-  //   filteredArr[i] = getKeyByValue(idToName, filteredData, i)
-  // }
-  setData(filteredData);
-  setQuery(text);
+    const filteredData = filter(fullItemName, item => {
+      return contains(item, text);
+    });
+    setItemName(filteredData);
+    setQuery(text);
 };
 
   const contains = (items, query) => {
@@ -116,10 +116,10 @@ export default function ItemWiki({navigation}) {
       <View style={{flexDirection: 'row'}}>
         <View style={{justifyContent: 'space-between', alignItems: 'center', width: width}}>
           <FlatList
-            ListHeaderComponent={renderHeader}
+            ListHeaderComponent={renderHeader()}
             numColumns={4}
             horizontal={false}
-            data={data}
+            data={itemName}
             extraData={selecteditem}
             renderItem={renderItem}
             keyExtractor={item => item}
