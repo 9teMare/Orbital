@@ -5,7 +5,7 @@ import { View, Text, StyleSheet, ActivityIndicator, Dimensions } from 'react-nat
 export default function overall({ route }) {
 
     const TOP = 0, JUNGLE = 1, MID = 2, ADC = 3, SUPPORT = 4
-    const { blue, red } = route.params
+    const { blue, red, ddragon, cdn, otherInfo } = route.params
     const [isLoading, setLoader] = useState(true)
 
     const CCpriorityPoints = {
@@ -32,7 +32,8 @@ export default function overall({ route }) {
         var blue_lateGameTotal = 0, red_lateGameTotal = 0
 
         //from CDN
-        var blue_playStyleInfo = [], red_playStyleInfo = []
+        var blue_playStyleInfo = cdn["blue"]
+        var red_playStyleInfo = cdn["red"]
 
         //from ddragon
         var blue_range = [], red_range = []
@@ -48,55 +49,31 @@ export default function overall({ route }) {
         var blue_mobility_total = 0, red_mobility_total = 0, blue_dragonRush = 0, red_dragonRush = 0;
         var blue_waveclear_total = 0, red_waveclear_total = 0, blue_trueDamage = 0, red_trueDamage = 0;
 
-        const champOtherInfo = "https://orbital-riot-api.herokuapp.com/champOtherInfo"
-        const fetchChampOtherInfo = await fetch(champOtherInfo, {
-            "method": "GET"
-        })
-        const champOtherInfo_responded = await fetchChampOtherInfo.json()
-
-        const response = await fetch('http://ddragon.leagueoflegends.com/cdn/11.15.1/data/en_US/champion.json')
-        const responded = await response.json()
-        const data = responded.data
-
         //other info - dragon rush
-        dragonRush.push(champOtherInfo_responded[blue[JUNGLE]]["dragonRushRating"])
-        dragonRush.push(champOtherInfo_responded[red[JUNGLE]]["dragonRushRating"])
+        dragonRush.push(otherInfo["blue"][JUNGLE]["dragonRushRating"])
+        dragonRush.push(otherInfo["red"][JUNGLE]["dragonRushRating"])
 
         //ddragon - AD attack speed
-        adSpeed.push(data[blue[ADC]]["stats"]["attackspeed"])
-        adSpeed.push(data[red[ADC]]["stats"]["attackspeed"])
+        adSpeed.push(ddragon["blue"][ADC]["stats"]["attackspeed"])
+        adSpeed.push(ddragon["red"][ADC]["stats"]["attackspeed"])
 
         for (var i = 0; i < 5; i++) {
-            console.log(i)
-            const blueName = new String
-            blueName = blue[i]
-            const redName = new String
-            redName = red[i]
 
             //from ddragon
-            blue_range.push(data[blueName]["stats"]["attackrange"])
-            red_range.push(data[redName]["stats"]["attackrange"])
+            blue_range.push(ddragon["blue"][i]["stats"]["attackrange"])
+            red_range.push(ddragon["red"][i]["stats"]["attackrange"])
 
-            //from CDN
-            const response_CDN_blue = await fetch('https://cdn.communitydragon.org/11.15.1/champion/' + blueName + '/data')
-            const responded_CDN_blue = await response_CDN_blue.json()
-            const data_CDN_blue = responded_CDN_blue.playstyleInfo
+            //blue_playStyleInfo.push(data_CDN_blue)
+            blue_durability_total += cdn["blue"][i]["durability"]
+            blue_mobility_total += cdn["blue"][i]["mobility"]
 
-            blue_playStyleInfo.push(data_CDN_blue)
-            blue_durability_total += data_CDN_blue["durability"]
-            blue_mobility_total += data_CDN_blue["mobility"]
-
-            const response_CDN_red = await fetch('https://cdn.communitydragon.org/11.15.1/champion/' + redName + '/data')
-            const responded_CDN_red = await response_CDN_red.json()
-            const data_CDN_red = responded_CDN_red.playstyleInfo
-
-            red_playStyleInfo.push(data_CDN_red)
-            red_durability_total += data_CDN_red["durability"]
-            red_mobility_total += data_CDN_red["mobility"]
+            //red_playStyleInfo.push(data_CDN_red)
+            red_durability_total += cdn["red"][i]["durability"]
+            red_mobility_total += cdn["red"][i]["mobility"]
 
             //Other info - CC points
-            const blueCC = champOtherInfo_responded[blueName]["CC"]
-            const redCC = champOtherInfo_responded[redName]["CC"]
+            const blueCC = otherInfo["blue"][i]["CC"]
+            const redCC = otherInfo["red"][i]["CC"]
             const blueCCcount = blueCC["CCtypes"].length
             const redCCcount = redCC["CCtypes"].length
 
@@ -122,15 +99,15 @@ export default function overall({ route }) {
             red_CCpoints.push(CCpoint_red)
 
             //Other info - wave clear
-            blue_waveclear.push(champOtherInfo_responded[blueName]["waveClearRating"])
-            red_waveclear.push(champOtherInfo_responded[redName]["waveClearRating"])
+            blue_waveclear.push(otherInfo["blue"][i]["waveClearRating"])
+            red_waveclear.push(otherInfo["red"][i]["waveClearRating"])
 
-            blue_trueDamage += champOtherInfo_responded[blueName]["trueDamage"]["highestTotal"]
-            red_trueDamage += champOtherInfo_responded[redName]["trueDamage"]["highestTotal"]
-            blue_waveclear_total += champOtherInfo_responded[blueName]["waveClearRating"]
-            red_waveclear_total += champOtherInfo_responded[redName]["waveClearRating"]
-            blue_dragonRush += champOtherInfo_responded[blueName]["dragonRushRating"]
-            red_dragonRush += champOtherInfo_responded[redName]["dragonRushRating"]
+            blue_trueDamage += otherInfo["blue"][i]["trueDamage"]["highestTotal"]
+            red_trueDamage += otherInfo["red"][i]["trueDamage"]["highestTotal"]
+            blue_waveclear_total += otherInfo["blue"][i]["waveClearRating"]
+            red_waveclear_total += otherInfo["red"][i]["waveClearRating"]
+            blue_dragonRush += otherInfo["blue"][i]["dragonRushRating"]
+            red_dragonRush += otherInfo["red"][i]["dragonRushRating"]
         }
 
 
@@ -139,6 +116,7 @@ export default function overall({ route }) {
             + 0.3 * blue_waveclear[TOP] + 0.2 * blue_range[TOP])
         red_earlyGameTotal += 0.3 * red_playStyleInfo[TOP]["damage"] + 0.2 * red_playStyleInfo[TOP]["durability"]
             + 0.3 * red_waveclear[TOP] + 0.2 * red_range[TOP]
+        
 
         //calculate JG
         blue_earlyGameTotal += 0.2 * blue_playStyleInfo[JUNGLE]["mobility"] + 0.3 * blue_waveclear[JUNGLE]
@@ -175,6 +153,8 @@ export default function overall({ route }) {
             + 0.2 * blue_CCpoints[JUNGLE] + 0.3 * (blue_playStyleInfo[ADC]["damage"] + blue_playStyleInfo[SUPPORT]["damage"] + blue_playStyleInfo[JUNGLE]["damage"])
         red_earlyGameTotal += 0.3 * (red_waveclear[ADC] + red_waveclear[SUPPORT]) + 0.1 * (red_CCpoints[ADC] + red_CCpoints[SUPPORT]) + 0.1 * red_playStyleInfo[JUNGLE]["mobility"]
             + 0.2 * red_CCpoints[JUNGLE] + 0.3 * (red_playStyleInfo[ADC]["damage"] + red_playStyleInfo[SUPPORT]["damage"] + red_playStyleInfo[JUNGLE]["damage"])
+        
+        
 
         blue_lateGameTotal = blue_durability_total + blueCC_total + blue_mobility_total + blue_waveclear_total + blue_dragonRush + blue_trueDamage
         red_lateGameTotal = red_durability_total + redCC_total + red_mobility_total + red_waveclear_total + red_dragonRush + red_trueDamage
