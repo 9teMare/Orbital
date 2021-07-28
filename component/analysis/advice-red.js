@@ -207,7 +207,7 @@ export default function adviceRed({ route }) {
     const Item_roleMissing = ({ roleMissing_message }) => {
         return (
             <View style={{ marginBottom: 5, marginTop: 5 }}>
-                <Unorderedlist><Text>{roleMissing_message}</Text></Unorderedlist>
+                <Unorderedlist><Text style={{fontSize: 15, marginBottom: 5, lineHeight: 25}}>{roleMissing_message}</Text></Unorderedlist>
             </View>
         )
     }
@@ -222,7 +222,7 @@ export default function adviceRed({ route }) {
         return arr.map(function (element, i) {
             return (
                 <View key={i} style={{ marginTop: 3, marginBottom: 3 }}>
-                    <Unorderedlist><Text>{element}</Text></Unorderedlist>
+                    <Unorderedlist><Text style={{ fontSize: 15, lineHeight: 25}}>{element}</Text></Unorderedlist>
                 </View>
             )
         })
@@ -258,9 +258,9 @@ export default function adviceRed({ route }) {
 
     return (
         <ScrollView>
-            <View style={{ backgroundColor: "white" }}>
+            <View style={{ backgroundColor: "white", elevation: 3 }}>
                 <View style={{ marginLeft: 20, marginRight: 20, marginBottom: 5 }}>
-                    <Text style={{ fontSize: 18, fontWeight: '500', marginLeft: 10, marginTop: 10 }}>Roles</Text>
+                    <Text style={{ fontSize: 18, fontWeight: 'bold', marginLeft: 10, marginTop: 10 }}>Roles</Text>
                     <View style={{ flexDirection: 'row', justifyContent: "space-evenly", marginTop: 10 }}>
                         <Image
                             source={require('../../pictures/others/Assassin.png')}
@@ -300,7 +300,7 @@ export default function adviceRed({ route }) {
                         />
                     </View>
                     {redRoleMissing.length === 0
-                        ? <Text>The team contains all main roles.</Text>
+                        ? <Text style={{fontSize: 15, marginTop: 5, marginBottom: 5, marginLeft: 10}}>The team contains all main roles.</Text>
                         : <FlatList
                             data={redRoleMissing}
                             renderItem={renderItem_roleMissing}
@@ -312,8 +312,8 @@ export default function adviceRed({ route }) {
             </View>
 
             {/* ally tips */}
-            <View style={{ backgroundColor: "white", marginTop: 5 }}>
-                <Text style={{ fontSize: 18, fontWeight: '500', marginLeft: 24, marginTop: 10 }}>Ally Tips</Text>
+            <View style={{ backgroundColor: "white", marginTop: 5 , elevation: 3}}>
+                <Text style={{ fontSize: 18, fontWeight: 'bold', marginLeft: 24, marginTop: 10  }}>Ally Tips</Text>
                 <View style={{ flexDirection: "row", justifyContent: "space-evenly", marginTop: 10, marginBottom: 5 }}>
                     <TouchableOpacity onPress={() => setSelectedAlly(TOP)}>
                         <Image
@@ -365,8 +365,8 @@ export default function adviceRed({ route }) {
             </View>
 
             {/* enemy tips */}
-            <View style={{ backgroundColor: "white", marginTop: 5 }}>
-                <Text style={{ fontSize: 18, fontWeight: '500', marginLeft: 24, marginTop: 10 }}>Enemy Tips</Text>
+            <View style={{ backgroundColor: "white", marginTop: 5 , elevation: 3}}>
+                <Text style={{ fontSize: 18, fontWeight: 'bold', marginLeft: 24, marginTop: 10 }}>Enemy Tips</Text>
                 <View style={{ flexDirection: "row", justifyContent: "space-evenly", marginTop: 10, marginBottom: 5 }}>
                     <TouchableOpacity onPress={() => setSelectedEmeny(TOP)}>
                         <Image
@@ -418,17 +418,30 @@ export default function adviceRed({ route }) {
             </View>
 
             {/* team initiator (CC top 2)*/}
-            <View style={{ backgroundColor: "white", marginTop: 5 }}>
+            <View style={{ backgroundColor: "white", marginTop: 5, elevation: 3 }}>
 
 
                 <View style={{ flexDirection: "row" }}>
-                    <Text style={{ fontSize: 18, fontWeight: '500', marginLeft: 24, marginTop: 10 }}>Team fight initiator / disengager</Text>
-                    <View style={{ height: 20, width: 20, borderRadius: 20, borderColor: "gray", borderWidth: 1, alignSelf: "center", marginTop: 10, marginLeft: 10 }}>
+                    <Text style={{ fontSize: 18, fontWeight: 'bold', marginLeft: 20, marginTop: 10}}>Team fight initiator / disengager</Text>
+                    {/* <View style={{ height: 20, width: 20, borderRadius: 20, borderColor: "gray", borderWidth: 1, alignSelf: "center", marginTop: 10, marginLeft: 10 }}>
                         <Tooltip popover={<Text style={{ color: "white" }}>These champions have the most amount of CCs in their respective teams. For allies, make use of the CCs to initiate a fight. It is recommended to initiate when the enemies' CC skills are on cooldown (to prevent them from disengaging).</Text>}
                             width={300} height={140}>
                             <Text style={{ alignSelf: "center", fontWeight: "bold" }}>!</Text>
                         </Tooltip>
-                    </View>
+                    </View> */}
+                    <View style={{ height: 20, width: 20, borderRadius: 20, borderColor: "grey", borderWidth: 1, alignSelf: "center", marginLeft: 10, marginTop: 13 }}>
+                        <Text style={{position: 'absolute', marginLeft: 5.5, fontWeight: 'bold', color: 'grey'}}>?</Text>
+                            <Tooltip 
+                                popover={<Text style={{ color: "white", lineHeight: 20 }}>These champions have the most amount of CCs in their respective teams. For allies, make use of the CCs to initiate a fight. It is recommended to initiate when the enemies' CC skills are on cooldown (to prevent them from disengaging).</Text>}
+                                width={280} 
+                                height={132}
+                                backgroundColor={"#232323"}
+                                containerStyle={{marginTop: 25, marginLeft: 30}}
+                                withPointer={false}
+                            >
+                                <Text style={{ alignSelf: "center", fontWeight: "bold" }}></Text>
+                            </Tooltip>
+                        </View>
                 </View>
 
                 <View style={{ marginLeft: 20, marginRight: 20, marginTop: 15 }}>

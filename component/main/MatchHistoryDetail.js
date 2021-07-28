@@ -299,7 +299,7 @@ export default function MatchHistory({ route, navigation}) {
     }
     
     const rankToAnalysis = (queue) => {
-        if (queue === 420) {
+        if (queue === 420 || queue === 440) {
             return (
                 <TouchableOpacity style={{backgroundColor: '#d4d6d5', height: 40, elevation: 2, width: width - 10, alignSelf: 'center', marginTop: 5, marginBottom: 5}} 
                                 onPress={() => navigation.navigate({

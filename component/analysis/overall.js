@@ -195,8 +195,10 @@ export default function overall({ route }) {
 
     return (
         <View style={{ flexDirection: 'column'}}>
-            <View style={{ backgroundColor: "white" }}>
-                <Text style={styles.category}> Win rate by game stage</Text>
+            <View style={{ backgroundColor: "white", elevation: 3 }}>
+                <View style={{backgroundColor: '#ebebeb', width: width, flexDirection:"row", height: 55}}>
+                    <Text style={{fontSize: 18, fontWeight: 'bold', marginLeft: 10, marginTop: 15}}> Win rate by game stage</Text>
+                </View>
                 <View style={{ marginTop: 10 }}>
                     <Text style={{ alignSelf: "center", fontWeight: "400", marginBottom: 5 }}> Early Game </Text>
                     <View style={{ height: 30, marginLeft: 20, marginRight: 20, backgroundColor: "#DC5047", flexDirection: 'row' }}>
@@ -221,8 +223,10 @@ export default function overall({ route }) {
             </View>
 
 
-            <View style={{ backgroundColor: "white", marginTop: 5 }}>
-                <Text style={styles.category}> OVERALL </Text>
+            <View style={{ backgroundColor: "white", marginTop: 3,elevation: 3}}>
+                <View style={{backgroundColor: '#ebebeb', width: width, flexDirection:"row", height: 55}}>
+                    <Text style={{fontSize: 18, fontWeight: 'bold', marginLeft: 10, marginTop: 15}}> OVERALL </Text>
+                </View>
                 <View style={{alignItems:"center", marginTop:15}}>
                     <View style={{ flexDirection: "row" }}>
                         <Text style={{ color: "#55B1CE", fontSize: 30 }}>{overall[0]}</Text>
@@ -232,7 +236,7 @@ export default function overall({ route }) {
                 </View>
 
                 <View style={{alignItems:"center", marginTop:10}}>
-                <View style={{ flexDirection: "row", justifyContent:"space-between"}}>
+                <View style={{ flexDirection: "row", justifyContent:"space-between", marginBottom: 10}}>
                     <Text style={{ color: "#55B1CE", fontSize: 18 }}>{((overall[0] / (overall[0] + overall[1]))* 100).toFixed(2) }%       </Text>
                     <Text style={{ color: "#DC5047", fontSize: 18 }}>       {((overall[1] / (overall[1] + overall[0])) * 100).toFixed(2)}%</Text>
                 </View>

@@ -46,7 +46,7 @@ export default function Composition({navigation, route}) {
         return navigation.navigate("Analysis", {blue: blueTeam, red: redTeam})
     }
 
-    function favoriteNavigate() {
+    function favoritePressed() {
         var i;
         for (i=0; i<5; i++) {
             if (blueTeam[i] === null || redTeam[i] === null) {
@@ -86,17 +86,16 @@ export default function Composition({navigation, route}) {
         )
 
         const saveComposition = () => { 
-            const collection = firebase.firestore().collection("favoriteCompositions").doc(firebase.auth().currentUser.uid)
+            const collection = firebase.firestore().collection("users").doc(firebase.auth().currentUser.uid)
             collection.update({
                 compositions: firebase.firestore.FieldValue.arrayUnion({entireCompo})
-                }
-            )
+            })
         }
         console.log(docLength)
         saveComposition()
         return (Alert.alert(
                     'Added To Favorites',
-                    'Please navigate to Me -> Favorite Compositions to see',
+                    'Please find it inside the Favorites tab at the bottom, which also syncs with your account',
                     [{
                         text: "OK",
                         style:'cancel'
@@ -107,11 +106,11 @@ export default function Composition({navigation, route}) {
     return (
         <View >
             <StatusBar/>
-            <View style={{backgroundColor: 'white', width: width, height: 70, elevation: 2}}>
+            <View style={{backgroundColor: 'white', width: width, height: height/16, elevation: 5}}>
                 <Text style={styles.titleText}> Team Composition Analysis </Text>
             </View>
             <View style={{alignSelf: 'center'}}>
-                <View style={{flexDirection:'row', marginTop: -10}}>
+                <View style={{flexDirection:'row', marginTop: 10}}>
                     <Text style={styles.blueText}> Blue Team </Text>
                     <TouchableOpacity style={styles.tapHereBlue} onPress={() => navigation.navigate("ChampSelect", {blue: blueTeam, red: redTeam, isBlue: true})}>
                         <Text style ={styles.tapHereBlueText}> 
@@ -214,7 +213,7 @@ export default function Composition({navigation, route}) {
 
                 <TouchableOpacity 
                     style={styles.button2}
-                    onPress={() => favoriteNavigate()}
+                    onPress={() => favoritePressed()}
                     activeOpacity={0.7}>
                     <Text style={{fontWeight:'500', fontSize:18, color:'#55BA46', marginTop: 14}}>Add To Favorites</Text>
                 </TouchableOpacity>
@@ -228,7 +227,7 @@ const {width, height} = Dimensions.get("window")
 const styles = StyleSheet.create({
     titleText: {
         fontSize: 20,
-        marginTop: 20,
+        marginTop: 10,
         fontWeight: 'bold',
         color: '#55BA46',
         alignSelf: 'center'

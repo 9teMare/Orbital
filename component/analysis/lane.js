@@ -159,26 +159,25 @@ export default function lane({ route }) {
 
     return (
         <ScrollView>
-            <View style={{ flexDirection: 'column', minHeight: 404 }}>
-                <View style={{ backgroundColor: "white" }}>
-                    <View style={{ flexDirection: "row" }}>
+            <View style={{ flexDirection: 'column', minHeight: 404}}>
+                <View style={{ backgroundColor: "white", elevation: 3}}>
+                    <View style={{backgroundColor: '#ebebeb', width: width, flexDirection:"row", height: 55}}>
                         <Text style={styles.category}>
                             Win rate by position
-                </Text>
-                    <View style={{ height: 20, width: 20, borderRadius: 20, borderColor: "gray", borderWidth: 1, alignSelf: "center", marginTop: 10, marginLeft: 10 }}>
-                        <Text style={{position: 'absolute', marginLeft: 5.5}}>?</Text>
-                        <Tooltip 
-                            popover={<Text style={{ color: "white", lineHeight: 20 }}>This section shows the estimated win rate of each lane in the laning phase (especially in the early game). Tap on the individual sections below to see what factors are taken into consideration.</Text>}
-                            width={280} 
-                            height={125}
-                            backgroundColor={"#232323"}
-                            containerStyle={{marginTop: 35}}
-                            withPointer={false}
-                        >
-                            <Text style={{ alignSelf: "center", fontWeight: "bold" }}></Text>
-                        </Tooltip>
-                    </View>
-
+                        </Text>
+                        <View style={{ height: 20, width: 20, borderRadius: 20, borderColor: "grey", borderWidth: 1, alignSelf: "center", marginLeft: 10 }}>
+                            <Text style={{position: 'absolute', marginLeft: 5.5, fontWeight: 'bold', color: 'grey'}}>?</Text>
+                            <Tooltip 
+                                popover={<Text style={{ color: "white", lineHeight: 20 }}>This section shows the estimated win rate of each lane in the laning phase (especially in the early game). Tap on the individual sections below to see what factors are taken into consideration.</Text>}
+                                width={280} 
+                                height={125}
+                                backgroundColor={"#232323"}
+                                containerStyle={{marginTop: 35}}
+                                withPointer={false}
+                            >
+                                <Text style={{ alignSelf: "center", fontWeight: "bold" }}></Text>
+                            </Tooltip>
+                        </View>
                     </View>
 
                     <TouchableOpacity onPress={() => setTopOpened(!topOpened)}>
@@ -209,11 +208,11 @@ export default function lane({ route }) {
 
                     {topOpened
                         ? <View style={{ marginLeft: 30, marginRight: 30, marginTop: 10, marginBottom: 5 }}>
-                            <Text style={{ fontWeight: "500" }}> Factors: </Text>
-                            <Unorderedlist><Text>Wave clear (split push option) - 30%</Text></Unorderedlist>
-                            <Unorderedlist><Text>Attack range - 20%</Text></Unorderedlist>
-                            <Unorderedlist><Text>Damage - 30%</Text></Unorderedlist>
-                            <Unorderedlist><Text>Sustain - 20%</Text></Unorderedlist>
+                            <Text style={{ fontSize: 16, fontWeight: "bold"}}> Factors: </Text>
+                            <Unorderedlist><Text style={{ fontSize: 15}}>Wave clear (split push option) - 30%</Text></Unorderedlist>
+                            <Unorderedlist><Text style={{ fontSize: 15}}>Attack range - 20%</Text></Unorderedlist>
+                            <Unorderedlist><Text style={{ fontSize: 15}}>Damage - 30%</Text></Unorderedlist>
+                            <Unorderedlist><Text style={{ fontSize: 15}}>Sustain - 20%</Text></Unorderedlist>
                         </View>
                         : <View></View>
                     }
@@ -245,11 +244,11 @@ export default function lane({ route }) {
 
                     {jgOpened
                         ? <View style={{ marginLeft: 30, marginRight: 30, marginTop: 10, marginBottom: 5 }}>
-                            <Text style={{ fontWeight: "500" }}> Factors: </Text>
-                            <Unorderedlist><Text>Mobility - 20%</Text></Unorderedlist>
-                            <Unorderedlist><Text>AOE (for clearing jungle camps) - 30%</Text></Unorderedlist>
-                            <Unorderedlist><Text>Dragon rush - 20%</Text></Unorderedlist>
-                            <Unorderedlist><Text>Crowd control (for ganking) - 30%</Text></Unorderedlist>
+                            <Text style={{fontSize: 16, fontWeight: "bold"}}> Factors: </Text>
+                            <Unorderedlist><Text style={{ fontSize: 15}}>Mobility - 20%</Text></Unorderedlist>
+                            <Unorderedlist><Text style={{ fontSize: 15}}>AOE (for clearing jungle camps) - 30%</Text></Unorderedlist>
+                            <Unorderedlist><Text style={{ fontSize: 15}}>Dragon rush - 20%</Text></Unorderedlist>
+                            <Unorderedlist><Text style={{ fontSize: 15}}>Crowd control (for ganking) - 30%</Text></Unorderedlist>
                         </View>
                         : <View></View>
                     }
@@ -281,11 +280,11 @@ export default function lane({ route }) {
 
                     {midOpened
                         ? <View style={{ marginLeft: 30, marginRight: 30, marginTop: 10, marginBottom: 5 }}>
-                            <Text style={{ fontWeight: "500" }}> Factors: </Text>
-                            <Unorderedlist><Text>Wave clear (split push option) - 40%</Text></Unorderedlist>
-                            <Unorderedlist><Text>Damage - 30%</Text></Unorderedlist>
-                            <Unorderedlist><Text>Attack range - 20%</Text></Unorderedlist>
-                            <Unorderedlist><Text>Sustain - 10%</Text></Unorderedlist>
+                            <Text style={{ fontSize: 16, fontWeight: "bold"}}> Factors: </Text>
+                            <Unorderedlist><Text style={{ fontSize: 15}}>Wave clear (split push option) - 40%</Text></Unorderedlist>
+                            <Unorderedlist><Text style={{ fontSize: 15}}>Damage - 30%</Text></Unorderedlist>
+                            <Unorderedlist><Text style={{ fontSize: 15}}>Attack range - 20%</Text></Unorderedlist>
+                            <Unorderedlist><Text style={{ fontSize: 15}}>Sustain - 10%</Text></Unorderedlist>
                         </View>
                         : <View></View>
                     }
@@ -328,79 +327,80 @@ export default function lane({ route }) {
 
                     {botOpened
                         ? <View style={{ marginLeft: 30, marginRight: 30, marginTop: 5, marginBottom: 10 }}>
-                            <Text style={{ fontWeight: "500" }}> Factors : </Text>
-                            <Unorderedlist><Text>ADC: attack range - 20%</Text></Unorderedlist>
-                            <Unorderedlist><Text>ADC: attack speed - 15%</Text></Unorderedlist>
-                            <Unorderedlist><Text>ADC: damage - 15%</Text></Unorderedlist>
-                            <Unorderedlist><Text>Support: ultility - 15%</Text></Unorderedlist>
-                            <Unorderedlist><Text>Support: durability - 15%</Text></Unorderedlist>
-                            <Unorderedlist><Text>Support: crowd control - 20%</Text></Unorderedlist>
+                            <Text style={{ fontSize: 16, fontWeight: "bold"}}> Factors : </Text>
+                            <Unorderedlist><Text style={{ fontSize: 15}}>ADC: attack range - 20%</Text></Unorderedlist>
+                            <Unorderedlist><Text style={{ fontSize: 15}}>ADC: attack speed - 15%</Text></Unorderedlist>
+                            <Unorderedlist><Text style={{ fontSize: 15}}>ADC: damage - 15%</Text></Unorderedlist>
+                            <Unorderedlist><Text style={{ fontSize: 15}}>Support: ultility - 15%</Text></Unorderedlist>
+                            <Unorderedlist><Text style={{ fontSize: 15}}>Support: durability - 15%</Text></Unorderedlist>
+                            <Unorderedlist><Text style={{ fontSize: 15}}>Support: crowd control - 20%</Text></Unorderedlist>
                         </View>
                         : <View></View>
                     }
 
                 </View>
 
-                <View style={{ backgroundColor: "white", marginTop: 5 }}>
+                <View style={{ backgroundColor: "white"}}>
+                        <View style={{backgroundColor: '#ebebeb', width: width, flexDirection:"row", height: 55}}>
+                            <Text style={styles.category}>
+                                Win rate by jungle rotation
+                            </Text>
+                            <View style={{ height: 20, width: 20, borderRadius: 20, borderColor: "gray", borderWidth: 1, alignSelf: "center", marginLeft: 10}}>
+                                <Text style={{position: 'absolute', marginLeft: 5.5, color: 'grey', fontWeight: 'bold'}}>?</Text>
+                                <Tooltip 
+                                    popover={<Text style={{ color: "white", lineHeight: 20 }}>This section tells the estimated win rate when junglers rotate to each lane of the map. The factors taken into consideration are: Damage(30%), crowd control(30%), jungler's mobility(10%), laner's wave clear ability(30%)</Text>}
+                                    width={280} 
+                                    height={140}
+                                    backgroundColor={"#232323"}
+                                    containerStyle={{marginTop: 30}}
+                                    withPointer={false}
+                                >
+                                    <Text style={{ alignSelf: "center", fontWeight: "bold" }}></Text>
+                                </Tooltip>
+                            </View>
+                        </View>
+                
+                    <View style={{backgroundColor: "white", elevation: 3}}>
+                        <View style={styles.jgRowContainer}>
+                            <Image
+                                source={{ uri: 'http://ddragon.leagueoflegends.com/cdn/11.15.1/img/champion/' + blue[JUNGLE] + '.png' }}
+                                style={styles.blueIcon} />
 
-                    <View style={{ flexDirection: "row" }}>
-                        <Text style={styles.category}>
-                            Win rate by jungle rotation
-                </Text>
-                    <View style={{ height: 20, width: 20, borderRadius: 20, borderColor: "gray", borderWidth: 1, alignSelf: "center", marginTop: 10, marginLeft: 10 }}>
-                        <Text style={{position: 'absolute', marginLeft: 5.5}}>?</Text>
-                        <Tooltip 
-                            popover={<Text style={{ color: "white", lineHeight: 20 }}>This section tells the estimated win rate when junglers rotate to each lane of the map. The factors taken into consideration are: Damage(30%), crowd control(30%), jungler's mobility(10%), laner's wave clear ability(30%)</Text>}
-                            width={280} 
-                            height={140}
-                            backgroundColor={"#232323"}
-                            containerStyle={{marginTop: 30}}
-                            withPointer={false}
-                        >
-                            <Text style={{ alignSelf: "center", fontWeight: "bold" }}></Text>
-                        </Tooltip>
-                    </View>
+                            <Text style={{ fontWeight: '500', fontSize: 35 }}> vs </Text>
 
 
-                    <View style={styles.jgRowContainer}>
-                        <Image
-                            source={{ uri: 'http://ddragon.leagueoflegends.com/cdn/11.15.1/img/champion/' + blue[JUNGLE] + '.png' }}
-                            style={styles.blueIcon} />
-
-                        <Text style={{ fontWeight: '500' }}> vs </Text>
-
-
-                        <Image
-                            source={{ uri: 'http://ddragon.leagueoflegends.com/cdn/11.15.1/img/champion/' + red[JUNGLE] + '.png' }}
-                            style={styles.redIcon} />
-                    </View>
-
-                    <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginStart: 26, marginEnd: 26, marginTop: 10, marginBottom: 10 }}>
-                        <View style={{ flexDirection: "column", alignItems: 'center' }}>
-                            <Text style={styles.jgPositionFont}>JG - TOP</Text>
-                            <Text style={{ color: '#55B1CE', fontWeight: "400", fontSize: 18 }}>{((JGrotation[0]["jgtop"] / (JGrotation[0]["jgtop"] + JGrotation[1]["jgtop"]) * 100)).toFixed(1)}%</Text>
-                            <Text style={{ fontWeight: "300", fontSize: 20 }}> X </Text>
-                            <Text style={{ color: '#DC5047', fontWeight: "400", fontSize: 18 }}>{((JGrotation[1]["jgtop"] / (JGrotation[1]["jgtop"] + JGrotation[0]["jgtop"]) * 100)).toFixed(1)}%</Text>
+                            <Image
+                                source={{ uri: 'http://ddragon.leagueoflegends.com/cdn/11.15.1/img/champion/' + red[JUNGLE] + '.png' }}
+                                style={styles.redIcon} />
                         </View>
 
-                        <View style={{ flexDirection: "column", alignItems: 'center' }}>
-                            <Text style={styles.jgPositionFont}>JG - MID</Text>
-                            <Text style={{ color: '#55B1CE', fontWeight: "400", fontSize: 18 }}>{((JGrotation[0]["jgmid"] / (JGrotation[0]["jgmid"] + JGrotation[1]["jgmid"]) * 100)).toFixed(1)}%</Text>
-                            <Text style={{ fontWeight: "300", fontSize: 20 }}> X </Text>
-                            <Text style={{ color: '#DC5047', fontWeight: "400", fontSize: 18 }}>{((JGrotation[1]["jgmid"] / (JGrotation[1]["jgmid"] + JGrotation[0]["jgmid"]) * 100)).toFixed(1)}%</Text>
-                        </View>
+                        <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginStart: 26, marginEnd: 26, marginTop: 15, marginBottom: 10 }}>
+                            <View style={{ flexDirection: "column", alignItems: 'center' }}>
+                                <Text style={styles.jgPositionFont}>JG - TOP</Text>
+                                <Text style={{ color: '#55B1CE', fontWeight: "400", fontSize: 18 }}>{((JGrotation[0]["jgtop"] / (JGrotation[0]["jgtop"] + JGrotation[1]["jgtop"]) * 100)).toFixed(1)}%</Text>
+                                <Text style={{ fontWeight: "300", fontSize: 20 }}> X </Text>
+                                <Text style={{ color: '#DC5047', fontWeight: "400", fontSize: 18 }}>{((JGrotation[1]["jgtop"] / (JGrotation[1]["jgtop"] + JGrotation[0]["jgtop"]) * 100)).toFixed(1)}%</Text>
+                            </View>
 
-                        <View style={{ flexDirection: "column", alignItems: 'center' }}>
-                            <Text style={styles.jgPositionFont}>JG - BOT</Text>
-                            <Text style={{ color: '#55B1CE', fontWeight: "400", fontSize: 18 }}>{((JGrotation[0]["jgbot"] / (JGrotation[0]["jgbot"] + JGrotation[1]["jgbot"]) * 100)).toFixed(1)}%</Text>
-                            <Text style={{ fontWeight: "300", fontSize: 20 }}> X </Text>
-                            <Text style={{ color: '#DC5047', fontWeight: "400", fontSize: 18 }}>{((JGrotation[1]["jgbot"] / (JGrotation[1]["jgbot"] + JGrotation[0]["jgbot"]) * 100)).toFixed(1)}%</Text>
+                            <View style={{ flexDirection: "column", alignItems: 'center' }}>
+                                <Text style={styles.jgPositionFont}>JG - MID</Text>
+                                <Text style={{ color: '#55B1CE', fontWeight: "400", fontSize: 18 }}>{((JGrotation[0]["jgmid"] / (JGrotation[0]["jgmid"] + JGrotation[1]["jgmid"]) * 100)).toFixed(1)}%</Text>
+                                <Text style={{ fontWeight: "300", fontSize: 20 }}> X </Text>
+                                <Text style={{ color: '#DC5047', fontWeight: "400", fontSize: 18 }}>{((JGrotation[1]["jgmid"] / (JGrotation[1]["jgmid"] + JGrotation[0]["jgmid"]) * 100)).toFixed(1)}%</Text>
+                            </View>
+
+                            <View style={{ flexDirection: "column", alignItems: 'center' }}>
+                                <Text style={styles.jgPositionFont}>JG - BOT</Text>
+                                <Text style={{ color: '#55B1CE', fontWeight: "400", fontSize: 18 }}>{((JGrotation[0]["jgbot"] / (JGrotation[0]["jgbot"] + JGrotation[1]["jgbot"]) * 100)).toFixed(1)}%</Text>
+                                <Text style={{ fontWeight: "300", fontSize: 20 }}> X </Text>
+                                <Text style={{ color: '#DC5047', fontWeight: "400", fontSize: 18 }}>{((JGrotation[1]["jgbot"] / (JGrotation[1]["jgbot"] + JGrotation[0]["jgbot"]) * 100)).toFixed(1)}%</Text>
+                            </View>
                         </View>
                     </View>
+                    
 
                 </View>
 
-            </View>
             </View>
         </ScrollView>
     )
@@ -422,10 +422,10 @@ const styles = StyleSheet.create({
         flexDirection: 'row', justifyContent: 'space-between', marginStart: 24, marginEnd: 24, marginTop: 26
     },
     category: {
-        fontSize: 18, fontWeight: '500', marginLeft: 24, marginTop: 10
+        fontSize: 18, fontWeight: 'bold', marginLeft: 20, marginTop: 15
     },
     jgRowContainer: {
-        flexDirection: 'row', justifyContent: 'space-between', marginStart: 109, marginEnd: 109, marginTop: 20
+        flexDirection: 'row', justifyContent: 'space-evenly', marginTop: 20
     },
     jgPositionFont: {
         fontSize: 20, fontWeight: '500'

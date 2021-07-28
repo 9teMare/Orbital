@@ -186,11 +186,11 @@ export default function lane({ route }) {
     return (
         <ScrollView>
             <View style={{ flexDirection: 'column' }}>
-                <View style={{ backgroundColor: "white" }}>
-                    <View style={{ flexDirection: "row" }}>
-                        <Text style={styles.category}> These dragons might favor... </Text>
-                        <View style={{ height: 20, width: 20, borderRadius: 20, borderColor: "gray", borderWidth: 1, alignSelf: "center", marginTop: 10, marginLeft: 10 }}>
-                            <Text style={{position: 'absolute', marginLeft: 5.5}}>?</Text>
+                <View style={{ backgroundColor: "white", elevation: 3}}>
+                     <View style={{backgroundColor: '#ebebeb', width: width, flexDirection:"row", height: 55}}>
+                        <Text style={{fontSize: 18, fontWeight: 'bold', marginLeft: 10, marginTop: 15}}> These dragons might favor... </Text>
+                        <View style={{ height: 20, width: 20, borderRadius: 20, borderColor: "gray", borderWidth: 1, alignSelf: "center", marginLeft: 10 }}>
+                            <Text style={{position: 'absolute', marginLeft: 5.5, fontWeight: 'bold', color: 'grey'}}>?</Text>
                             <Tooltip 
                                 popover={<Text style={{ color: "white", lineHeight: 20 }}>This section compares the amount of favor different types of dragon will bring to each team. The estimation is based on the type of buffs each dragon has and the properties of champions in the teams. </Text>}
                                 width={280} 
@@ -238,18 +238,11 @@ export default function lane({ route }) {
                     </View>
                 </View>
 
-                <View style={{ backgroundColor: "white", marginTop: 5 }}>
-
-                    <View style={{ flexDirection: "row" }}>
-                        <Text style={styles.category}>Teamfights</Text>
-                        {/* <View style={{ height: 20, width: 20, borderRadius: 20, borderColor: "gray", borderWidth: 1, alignSelf: "center", marginTop: 10, marginLeft: 10 }}>
-                            <Tooltip popover={<Text style={{ color: "white" }}>This section estimates the outcome when 2 teams start a teamfight. Dragon fights are not considered as team fights due to the terrain of the dragon pit (which affects the factors taken into consideration for the team fight) </Text>}
-                                width={280} height={125}>
-                                <Text style={{ alignSelf: "center", fontWeight: "bold" }}>?</Text>
-                            </Tooltip>
-                        </View> */}
-                        <View style={{ height: 20, width: 20, borderRadius: 20, borderColor: "gray", borderWidth: 1, alignSelf: "center", marginTop: 10, marginLeft: 10 }}>
-                            <Text style={{position: 'absolute', marginLeft: 5.5}}>?</Text>
+                <View style={{ backgroundColor: "white", elevation: 3 , marginTop: 3}}>
+                    <View style={{backgroundColor: '#ebebeb', width: width, flexDirection:"row", height: 55}}>
+                        <Text style={{fontSize: 18, fontWeight: 'bold', marginLeft: 10, marginTop: 15}}>Teamfights</Text>
+                        <View style={{ height: 20, width: 20, borderRadius: 20, borderColor: "gray", borderWidth: 1, alignSelf: "center", marginLeft: 10 }}>
+                            <Text style={{position: 'absolute', marginLeft: 5.5, fontWeight: 'bold', color: 'grey'}}>?</Text>
                             <Tooltip 
                                 popover={<Text style={{ color: "white", lineHeight: 20 }}>This section estimates the outcome when 2 teams start a teamfight. Dragon fights are not considered as team fights due to the terrain of the dragon pit (which affects the factors taken into consideration for the team fight) </Text>}
                                 width={280} 
@@ -272,46 +265,41 @@ export default function lane({ route }) {
                             <Text> {(100 - parseFloat(teamFightPer)).toFixed(2)}% </Text>
                         </View>
                         <Text
-                            style={{ alignSelf: "center", textDecorationLine: "underline", color: "green", marginTop: 5 }}
+                            style={{ alignSelf: "center", textDecorationLine: "underline", color: "green", marginTop: 5, marginBottom: 5, fontSize: 15}}
                             onPress={() => setTeamFightDetail(!teamfightDetail)} >
-                            Details</Text>
+                            Details
+                        </Text>
                         {teamfightDetail
                             ? <View></View>
                             : <View style={{ alignItems: "center", marginTop: 5, marginBottom: 5 }}>
-                                <View style={{ flexDirection: "row" }}>
+                                <View style={{ flexDirection: "row", marginTop: 10 }}>
                                     <Text style={{ fontSize: 14, fontWeight: "500" }}>AD/AP damage (40%):</Text>
-                                    <Text style={{ fontSize: 14, fontWeight: "500", color: "blue" }}>{teamFightPoints[0]["ADAP"]}</Text>
-                                    <Text style={{ fontSize: 10, fontWeight: "500" }}> / </Text>
-                                    <Text style={{ fontSize: 14, fontWeight: "500", color: "red" }}>{teamFightPoints[1]["ADAP"]}</Text>
+                                    <Text style={{ fontSize: 14, fontWeight: "500", color: "#55B1CE" }}>{teamFightPoints[0]["ADAP"]}</Text>
+                                    <Text style={{ fontSize: 14, fontWeight: "500"}}> / </Text>
+                                    <Text style={{ fontSize: 14, fontWeight: "500", color: "#DC5047" }}>{teamFightPoints[1]["ADAP"]}</Text>
                                 </View>
-                                <View style={{ flexDirection: "row", marginTop: 5, marginBottom: 5 }}>
+                                <View style={{ flexDirection: "row", marginTop: 10, marginBottom: 5 }}>
                                     <Text style={{ fontSize: 14, fontWeight: "500" }}>Durability (40%):</Text>
-                                    <Text style={{ fontSize: 14, fontWeight: "500", color: "blue" }}>{teamFightPoints[0]["durability"]}</Text>
-                                    <Text style={{ fontSize: 10, fontWeight: "500" }}> / </Text>
-                                    <Text style={{ fontSize: 14, fontWeight: "500", color: "red" }}>{teamFightPoints[1]["durability"]}</Text>
+                                    <Text style={{ fontSize: 14, fontWeight: "500", color: "#55B1CE" }}>{teamFightPoints[0]["durability"]}</Text>
+                                    <Text style={{ fontSize: 14, fontWeight: "500" }}> / </Text>
+                                    <Text style={{ fontSize: 14, fontWeight: "500", color: "#DC5047" }}>{teamFightPoints[1]["durability"]}</Text>
                                 </View>
-                                <View style={{ flexDirection: "row" }}>
+                                <View style={{ flexDirection: "row" , marginTop: 10, marginBottom: 5}}>
                                     <Text style={{ fontSize: 14, fontWeight: "500" }}>CC (20%):</Text>
-                                    <Text style={{ fontSize: 14, fontWeight: "500", color: "blue" }}>{teamFightPoints[0]["CC"]}</Text>
-                                    <Text style={{ fontSize: 10, fontWeight: "500" }}> / </Text>
-                                    <Text style={{ fontSize: 14, fontWeight: "500", color: "red" }}>{teamFightPoints[1]["CC"]}</Text>
+                                    <Text style={{ fontSize: 14, fontWeight: "500", color: "#55B1CE" }}>{teamFightPoints[0]["CC"]}</Text>
+                                    <Text style={{ fontSize: 14, fontWeight: "500" }}> / </Text>
+                                    <Text style={{ fontSize: 14, fontWeight: "500", color: "#DC5047" }}>{teamFightPoints[1]["CC"]}</Text>
                                 </View>
                             </View>
                         }
                     </View>
                 </View>
 
-                <View style={{ backgroundColor: "white", marginTop: 5 }}>
-                    <View>
-                        <Text style={styles.category}>Dragon Fights</Text>
-                        {/* <View style={{ height: 20, width: 20, borderRadius: 20, borderColor: "gray", borderWidth: 1, alignSelf: "center", marginTop: 10, marginLeft: 10 }}>
-                            <Tooltip popover={<Text style={{ color: "white" }}>This section estimates the outcome of dragon fights. This is separated from other team fights due to the terrain of the dragon pit (which affects the factors taken into consideration) </Text>}
-                                width={280} height={125}>
-                                <Text style={{ alignSelf: "center", fontWeight: "bold" }}>?</Text>
-                            </Tooltip>
-                        </View> */}
-                        <View style={{ height: 20, width: 20, borderRadius: 20, borderColor: "gray", borderWidth: 1, alignSelf: "center", marginTop: -20, marginLeft: -50 }}>
-                            <Text style={{position: 'absolute', marginLeft: 5.5}}>?</Text>
+                <View style={{ backgroundColor: "white", elevation: 3, marginTop: 6, marginBottom: 3}}>
+                    <View style={{backgroundColor: '#ebebeb', width: width, flexDirection:"row", height: 55}}>
+                        <Text style={{fontSize: 18, fontWeight: 'bold', marginLeft: 10, marginTop: 13}}>Dragon Fights</Text>
+                        <View style={{ height: 20, width: 20, borderRadius: 20, borderColor: "gray", borderWidth: 1, alignSelf: "center", marginLeft: 10, marginTop: -3 }}>
+                            <Text style={{position: 'absolute', marginLeft: 5.5, fontWeight: 'bold', color: 'grey'}}>?</Text>
                             <Tooltip 
                                 popover={<Text style={{ color: "white", lineHeight: 20 }}>This section estimates the outcome of dragon fights. This is separated from other team fights due to the terrain of the dragon pit (which affects the factors taken into consideration) </Text>}
                                 width={280} 
@@ -335,35 +323,35 @@ export default function lane({ route }) {
                         </View>
 
                         <Text
-                            style={{ alignSelf: "center", textDecorationLine: "underline", color: "green", marginTop: 5 }}
+                            style={{ alignSelf: "center", textDecorationLine: "underline", color: "green", marginTop: 5, marginBottom: 5, fontSize: 15 }}
                             onPress={() => setDragonFightDetail(!dragonfightDetail)} >
                             Details</Text>
                         {dragonfightDetail
                             ? <View></View>
-                            : <View style={{ alignItems: "center", marginTop: 5, marginBottom: 5 }}>
-                                <View style={{ flexDirection: "row" }}>
+                            : <View style={{ alignItems: "center", marginTop: 10}}>
+                                <View style={{ flexDirection: "row", marginTop: 10  }}>
                                     <Text style={{ fontSize: 14, fontWeight: "500" }}>True Damage (25%):</Text>
-                                    <Text style={{ fontSize: 14, fontWeight: "500", color: "blue" }}>{dragonFightPoints[0]["trueDamage"]}</Text>
-                                    <Text style={{ fontSize: 10, fontWeight: "500" }}> / </Text>
-                                    <Text style={{ fontSize: 14, fontWeight: "500", color: "red" }}>{dragonFightPoints[1]["trueDamage"]}</Text>
+                                    <Text style={{ fontSize: 14, fontWeight: "500", color: "#55B1CE" }}>{dragonFightPoints[0]["trueDamage"]}</Text>
+                                    <Text style={{ fontSize: 14, fontWeight: "500" }}> / </Text>
+                                    <Text style={{ fontSize: 14, fontWeight: "500", color: "#DC5047" }}>{dragonFightPoints[1]["trueDamage"]}</Text>
                                 </View>
-                                <View style={{ flexDirection: "row", marginTop: 5, marginBottom: 5 }}>
+                                <View style={{ flexDirection: "row", marginTop: 10 }}>
                                     <Text style={{ fontSize: 14, fontWeight: "500" }}>Mobility (25%):</Text>
-                                    <Text style={{ fontSize: 14, fontWeight: "500", color: "blue" }}>{dragonFightPoints[0]["mobility"]}</Text>
-                                    <Text style={{ fontSize: 10, fontWeight: "500" }}> / </Text>
-                                    <Text style={{ fontSize: 14, fontWeight: "500", color: "red" }}>{dragonFightPoints[1]["mobility"]}</Text>
+                                    <Text style={{ fontSize: 14, fontWeight: "500", color: "#55B1CE" }}>{dragonFightPoints[0]["mobility"]}</Text>
+                                    <Text style={{ fontSize: 14, fontWeight: "500" }}> / </Text>
+                                    <Text style={{ fontSize: 14, fontWeight: "500", color: "#DC5047" }}>{dragonFightPoints[1]["mobility"]}</Text>
                                 </View>
-                                <View style={{ flexDirection: "row" }}>
+                                <View style={{ flexDirection: "row", marginTop: 10  }}>
                                     <Text style={{ fontSize: 14, fontWeight: "500" }}>Wave Clear (25%):</Text>
-                                    <Text style={{ fontSize: 14, fontWeight: "500", color: "blue" }}>{dragonFightPoints[0]["waveClear"]}</Text>
-                                    <Text style={{ fontSize: 10, fontWeight: "500" }}> / </Text>
-                                    <Text style={{ fontSize: 14, fontWeight: "500", color: "red" }}>{dragonFightPoints[1]["waveClear"]}</Text>
+                                    <Text style={{ fontSize: 14, fontWeight: "500", color: "#55B1CE" }}>{dragonFightPoints[0]["waveClear"]}</Text>
+                                    <Text style={{ fontSize: 14, fontWeight: "500" }}> / </Text>
+                                    <Text style={{ fontSize: 14, fontWeight: "500", color: "#DC5047" }}>{dragonFightPoints[1]["waveClear"]}</Text>
                                 </View>
-                                <View style={{ flexDirection: "row" }}>
+                                <View style={{ flexDirection: "row", marginTop: 10, marginBottom: 10  }}>
                                     <Text style={{ fontSize: 14, fontWeight: "500" }}>Dragon Rush (25%):</Text>
-                                    <Text style={{ fontSize: 14, fontWeight: "500", color: "blue" }}>{dragonFightPoints[0]["dragonRush"]}</Text>
-                                    <Text style={{ fontSize: 10, fontWeight: "500" }}> / </Text>
-                                    <Text style={{ fontSize: 14, fontWeight: "500", color: "red" }}>{dragonFightPoints[1]["dragonRush"]}</Text>
+                                    <Text style={{ fontSize: 14, fontWeight: "500", color: "#55B1CE" }}>{dragonFightPoints[0]["dragonRush"]}</Text>
+                                    <Text style={{ fontSize: 14, fontWeight: "500" }}> / </Text>
+                                    <Text style={{ fontSize: 14, fontWeight: "500", color: "#DC5047" }}>{dragonFightPoints[1]["dragonRush"]}</Text>
                                 </View>
                             </View>
                         }

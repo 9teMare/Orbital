@@ -1,6 +1,5 @@
 import React, { useState, useEffect }  from 'react'
 import {View, Text, TouchableOpacity, StyleSheet, Dimensions, FlatList, Image, ActivityIndicator} from 'react-native'
-import { Icon } from 'react-native-elements'
 import  MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
 import firebase from 'firebase'
 
@@ -149,45 +148,45 @@ export default function MatchHistory({ route, navigation}) {
     //     }
     //     return () => { isMounted = false }
     // }
-    const [temp, setTemp] = useState([])
+    // const [temp, setTemp] = useState([])
 
-    const checkWhetherLiked = async(gameId) => {
-        let isMounted = true
-        if (isMounted) {
-            const collection =  firebase.firestore().collection("users").doc(firebase.auth().currentUser.uid)
-            const response = await collection.get()
-            if (!response.exists) {
-            console.log('No such document!');
-            }
-            setTemp(response.data()["favoriteMatches"])
-            for (var i in temp) {
-                if (temp[i] === gameId) {
-                    return true
-                }
-            }
-            return false
-        }
-        return () => { isMounted = false }   
-    }
+    // const checkWhetherLiked = async(gameId) => {
+    //     let isMounted = true
+    //     if (isMounted) {
+    //         const collection =  firebase.firestore().collection("users").doc(firebase.auth().currentUser.uid)
+    //         const response = await collection.get()
+    //         if (!response.exists) {
+    //         console.log('No such document!');
+    //         }
+    //         setTemp(response.data()["favoriteMatches"])
+    //         for (var i in temp) {
+    //             if (temp[i] === gameId) {
+    //                 return true
+    //             }
+    //         }
+    //         return false
+    //     }
+    //     return () => { isMounted = false }   
+    // }
 
     const Item = ({ champion, gameId, queue, liked }) => {
-        const [like, setLike] = useState(liked)
+        // const [like, setLike] = useState(liked)
 
-        const saveMatchIds = (gameId) => {
-            const collection = firebase.firestore().collection("users").doc(firebase.auth().currentUser.uid)
-            collection.update({
-                favoriteMatches: firebase.firestore.FieldValue.arrayUnion(gameId)       
-            })
-            setLike(!liked)
-        }
+        // const saveMatchIds = (gameId) => {
+        //     const collection = firebase.firestore().collection("users").doc(firebase.auth().currentUser.uid)
+        //     collection.update({
+        //         favoriteMatches: firebase.firestore.FieldValue.arrayUnion(gameId)       
+        //     })
+        //     setLike(!liked)
+        // }
     
-        const removeMatchIds = (gameId) => {
-            const collection = firebase.firestore().collection("users").doc(firebase.auth().currentUser.uid)
-            collection.update({
-                favoriteMatches: firebase.firestore.FieldValue.arrayRemove(gameId)
-            })
-            setLike(liked)
-        }
+        // const removeMatchIds = (gameId) => {
+        //     const collection = firebase.firestore().collection("users").doc(firebase.auth().currentUser.uid)
+        //     collection.update({
+        //         favoriteMatches: firebase.firestore.FieldValue.arrayRemove(gameId)
+        //     })
+        //     setLike(liked)
+        // }
 
         // useEffect(() => {
         //     if (checkWhetherLiked(3984909115)) {
@@ -198,14 +197,14 @@ export default function MatchHistory({ route, navigation}) {
 
         return (
             <View>
-                <TouchableOpacity style={{position: 'absolute', height: height/8, width: 40, marginTop: 5, backgroundColor: 'white', elevation: 3}}
+                {/* <TouchableOpacity style={{position: 'absolute', height: height/8, width: 40, marginTop: 5, backgroundColor: 'white', elevation: 3}}
                                     onPress={() => {like ? removeMatchIds(gameId) : saveMatchIds(gameId)}}>
                     <View>
                         {like
                         ?  <MaterialCommunityIcons name="heart" size={26 } style={{position: 'absolute', top: 35, left: 8}}/>
                         :  <MaterialCommunityIcons name="heart-outline" size={26} style={{position: 'absolute', top: 35, left: 8}}/>}
                     </View>
-                </TouchableOpacity>
+                </TouchableOpacity> */}
             
                 <TouchableOpacity style={styles.item} onPress={() => {navigation.navigate("Match Detail", {selectedRegion, gameId, apiKey, data, summonerName, gameMode, queue})}}>
                     <View style={styles.iconAndName}>
@@ -215,9 +214,9 @@ export default function MatchHistory({ route, navigation}) {
                         />
                         <Text style={styles.name}>{data[champion]}</Text>
                     </View>
-                    <Text style={{position: 'absolute', right: 60, top: 35, color: 'grey', fontSize: 20, fontWeight: '200'}}>{gameMode[queue].replace(" games", "")}</Text>
+                    <Text style={{position: 'absolute', right: 75, top: 35, color: 'grey', fontSize: 20, fontWeight: '200'}}>{gameMode[queue].replace(" games", "")}</Text>
                     <View style={{position: 'absolute', right: 10 , top: 33}}>
-                        <Icon name="arrow-right" size={30} color={'grey'}/>
+                        <MaterialCommunityIcons name="chevron-right" size={26} style={{position: 'absolute', marginTop: 3, right: 5}}/>
                     </View>
                 </TouchableOpacity>
             </View>
@@ -288,8 +287,7 @@ const styles = StyleSheet.create({
       height: height / 8,
       marginTop: 5,
       marginBottom: 5,
-      width: width - 40,
-      marginLeft: 40,
+      width: width,
       elevation: 3
     },
     name: {

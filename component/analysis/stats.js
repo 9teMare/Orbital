@@ -402,18 +402,11 @@ export default function stats({ route }) {
 
     return (
         <ScrollView>
-            <View style={{ backgroundColor: "white", marginTop: 5 }}>
-
-                <View style={{flexDirection:"row"}}>
-                    <Text style={{ fontSize: 18, fontWeight: '500', marginLeft: 10, marginTop: 10 }}> Categories (roles) </Text>
-                    {/* <View style={{ height: 20, width: 20, borderRadius: 20, borderColor: "gray", borderWidth: 1, alignSelf: "center", marginTop: 10, marginLeft: 10 }}>
-                        <Tooltip popover={<Text style={{ color: "white" }}>This section shows the roles that each team has. The most ideal team composition should have 1 or 2 champions for each of the roles listed below. If there are too many champions sharing one role, the team will be imbalanced. If there are no champions taking up one role, it will become a weakness for the team.</Text>}
-                            width={300} height={170}>
-                            <Text style={{ alignSelf: "center", fontWeight: "bold" }}>?</Text>
-                        </Tooltip>
-                    </View> */}
-                    <View style={{ height: 20, width: 20, borderRadius: 20, borderColor: "gray", borderWidth: 1, alignSelf: "center", marginTop: 10, marginLeft: 10 }}>
-                        <Text style={{position: 'absolute', marginLeft: 5.5}}>?</Text>
+            <View style={{ backgroundColor: "white", elevation: 3}}>
+                <View style={{backgroundColor: '#ebebeb', width: width, flexDirection:"row", height: 55}}>
+                    <Text style={{ fontSize: 18, fontWeight: 'bold', marginLeft: 10, marginTop: 15 }}> Win Rate By Categories (roles) </Text>
+                    <View style={{ height: 20, width: 20, borderRadius: 20, borderColor: "gray", borderWidth: 1, alignSelf: "center", marginLeft: 10 }}>
+                        <Text style={{position: 'absolute', marginLeft: 5.5, fontWeight: 'bold', color: 'grey'}}>?</Text>
                         <Tooltip 
                             popover={<Text style={{ color: "white", lineHeight: 20 }}>This section shows the roles that each team has. The most ideal team composition should have 1 or 2 champions for each of the roles listed below. If there are too many champions sharing one role, the team will be imbalanced. If there are no champions taking up one role, it will become a weakness for the team.</Text>}
                             width={280} 
@@ -426,29 +419,32 @@ export default function stats({ route }) {
                         </Tooltip>
                     </View>
                 </View>
-                <View
-                    style={{ flexDirection: "row", justifyContent: "space-between", marginLeft: 15, marginRight: 15, marginTop: 10, marginBottom: 15 }}>
-                    <Text style={styles.blueText}> Key Champion(s)</Text>
-                    <Text style={styles.redText}> Key Champion(s)</Text>
+                <View style={{elevation: 3}}>
+                    <View
+                        style={{ flexDirection: "row", justifyContent: "space-between", marginLeft: 15, marginRight: 15, marginTop: 10, marginBottom: 15 }}>
+                        <Text style={styles.blueText}> Key Champion(s)</Text>
+                        <Text style={styles.redText}> Key Champion(s)</Text>
+                    </View>
+                    <View>
+                        {isLoading
+                            ? <Text> Loading... </Text>
+                            : <FlatList
+                                data={tag}
+                                renderItem={renderItem}
+                                keyExtractor={item => item.index}
+                            />
+                        }
+                    </View>
                 </View>
-                <View>
-                    {isLoading
-                        ? <Text> Loading... </Text>
-                        : <FlatList
-                            data={tag}
-                            renderItem={renderItem}
-                            keyExtractor={item => item.index}
-                        />
-                    }
-                </View>
+                
             </View>
 
-            <View style={{ backgroundColor: "white", marginTop: 5 }}>
+            <View style={{ backgroundColor: "white"}}>
 
-                <View style={{flexDirection:"row"}}>
-                    <Text style={{ fontSize: 18, fontWeight: '500', marginLeft: 10, marginTop: 10 }}>Crowd Controls</Text>
-                    <View style={{ height: 20, width: 20, borderRadius: 20, borderColor: "gray", borderWidth: 1, alignSelf: "center", marginTop: 10, marginLeft: 10 }}>
-                        <Text style={{position: 'absolute', marginLeft: 5.5}}>?</Text>
+            <View style={{backgroundColor: '#ebebeb', width: width, flexDirection:"row", height: 55}}>
+                    <Text style={{ fontSize: 18, fontWeight: 'bold', marginLeft: 10, marginTop: 15 }}>Crowd Controls</Text>
+                    <View style={{ height: 20, width: 20, borderRadius: 20, borderColor: "gray", borderWidth: 1, alignSelf: "center", marginLeft: 10 }}>
+                        <Text style={{position: 'absolute', marginLeft: 5.5, fontWeight: 'bold', color: 'grey'}}>?</Text>
                         <Tooltip 
                             popover={<Text style={{ color: "white", lineHeight: 20 }}>This section picks 2 champions that has the highest CC (crowd control) priority points from each team, and shows the skills that triggers the CCs. These champions could be a good initiator for teamfights. </Text>}
                             width={280} 
@@ -462,7 +458,7 @@ export default function stats({ route }) {
                     </View>
                 </View>
 
-                <View style={{ marginLeft: 20, marginRight: 20, marginTop: 10 }}>
+                <View style={{ marginLeft: 20, marginRight: 20, marginTop: 10}}>
                     <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
                         <Image
                             source={{ uri: 'http://ddragon.leagueoflegends.com/cdn/11.15.1/img/champion/' + CC_names_blue[0] + '.png' }}
@@ -545,8 +541,8 @@ const styles = StyleSheet.create({
         fontSize: 18, fontWeight: '500', marginLeft: 24, marginTop: 10
     },
     categoryContainer: {
-        height: 90, justifyContent: "space-between", marginLeft: 10, marginRight: 10, borderBottomColor: '#585858', borderBottomWidth: 1, flexDirection: "row",
-        alignContent: "center"
+        height: 90, justifyContent: "space-between", marginLeft: 10, marginRight: 10, flexDirection: "row",
+        alignContent: "center", borderTopColor: '#585858', borderTopWidth: 0.5
     },
     blueText: {
         fontWeight: "500", color: "#55B1CE", fontSize: 18

@@ -80,7 +80,7 @@ export default function BluePerformance({ route, navigation}) {
     const damageDealt = () => {
         return (
             <View>
-                <CollapsibleView title={<Text style={{color: 'black', fontSize: 18, marginTop: 8, marginBottom: 8}}>Damage</Text>} style={{backgroundColor: 'white', width: width, marginLeft: 0, borderColor: 'white', elevation: 1}}>
+                <CollapsibleView title={<Text style={{color: 'black', fontSize: 18, marginTop: 8, marginBottom: 8}}>Damage Dealt</Text>} style={{backgroundColor: 'white', width: width, marginLeft: 0, borderColor: 'white', elevation: 1}}>
                     <View>
                         <View style={styles.lineView}>
                             <Text style={styles.lineTextLeft}>
