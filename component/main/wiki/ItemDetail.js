@@ -77,7 +77,6 @@ export default function ItemDetail({ route, navigation}) {
 
     const whetherHaveInto = () => {
         if (indexArrInto.length !== 0) {
-            {console.log(into[1])}
             return (
                 <View>
                     <Text style={styles.infoName}>Combine into: </Text>
@@ -153,7 +152,7 @@ const styles = StyleSheet.create({
     },
     fromView: {
         flexDirection: 'row',
-        width: 133,
+        maxWidth: 133,
         flexWrap: 'wrap',
         marginBottom: 10,
         backgroundColor: 'white',
@@ -163,7 +162,7 @@ const styles = StyleSheet.create({
     },
     intoView: {
         flexDirection: 'row',
-        width: 133,
+        maxWidth: 133,
         flexWrap: 'wrap',
         marginBottom: 10,
         backgroundColor: 'white',

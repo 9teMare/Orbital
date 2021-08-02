@@ -90,7 +90,7 @@ export default function ChampionWiki({navigation}) {
           placeholder="Search"
           style={{ backgroundColor: '#fff', paddingHorizontal: 100, maxWidth: width }}
         />
-        <MaterialCommunityIcons name="magnify" size={20} style={{position: 'absolute', marginLeft: 155, marginTop: 15}} color={'#b5b5b5'}/>
+        <MaterialCommunityIcons name="magnify" size={20} style={{ marginLeft: 155, marginTop: 15, position: 'absolute'}} color={'#b5b5b5'}/>
       </View>    
     );
   }

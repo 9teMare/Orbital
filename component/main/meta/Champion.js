@@ -70,8 +70,9 @@ export default function Champion() {
             title={collapsibleTitle(index)} 
             style={{backgroundColor: 'white', width: width, marginLeft: 0, borderColor: 'white', elevation: 1}}
             noArrow={true}
+            key={index}
         >
-            <View key={index} style={styles.championSection}> 
+            <View style={styles.championSection}> 
                 <View style={styles.skillWrap}>
                     {combined[index]}
                 </View>
