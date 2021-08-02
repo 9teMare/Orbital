@@ -2,6 +2,8 @@ import React, { useState, useEffect, version } from 'react'
 import {Text, View, StyleSheet, Image, Dimensions, ActivityIndicator} from 'react-native'
 import { ScrollView } from 'react-native-gesture-handler'
 import WebView from 'react-native-webview'
+import CollapsibleView from "@eliav2/react-native-collapsible-view"
+import  MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
 
 export default function Champion() {
     const patchNote = "https://orbital-riot-api.herokuapp.com/patchNote"
@@ -50,17 +52,31 @@ export default function Champion() {
         championSectionArr[i] = i;
     }
 
-    const championSection = () => championSectionArr.map(index => (
-        <View key={index} style={styles.championSection}>
-            <Image 
-                source={{uri: `http://ddragon.leagueoflegends.com/cdn/11.15.1/img/champion/${name[index]}.png`}}
-                style= {[styles.image]}
-            />
-            <Text style={styles.name}>{name[index]}</Text>
-            <View style={styles.skillWrap}>
-                {combined[index]}
+    const collapsibleTitle = (index) => {
+        return (
+            <View style={{flexWrap: 'wrap', flexDirection: 'row', height: 70}}>
+                <Image 
+                    source={{uri: `http://ddragon.leagueoflegends.com/cdn/11.15.1/img/champion/${name[index]}.png`}}
+                    style= {[styles.image]}
+                />
+                <Text style={styles.name}>{name[index]}</Text>
+                <MaterialCommunityIcons name="chevron-down" size={30} style={{position: 'absolute', marginLeft: 140, marginTop: 20}}/>
             </View>
-        </View>
+        )
+    }
+
+    const championSection = () => championSectionArr.map(index => (
+        <CollapsibleView
+            title={collapsibleTitle(index)} 
+            style={{backgroundColor: 'white', width: width, marginLeft: 0, borderColor: 'white', elevation: 1}}
+            noArrow={true}
+        >
+            <View key={index} style={styles.championSection}> 
+                <View style={styles.skillWrap}>
+                    {combined[index]}
+                </View>
+            </View>
+        </CollapsibleView>  
     ))
 
     useEffect(() => {
@@ -98,35 +114,39 @@ const styles = StyleSheet.create({
     championSection: {
         width: width,
         //alignItems: 'center',
-        backgroundColor:"white", 
+        //backgroundColor:"white", 
         marginBottom: 10,
         minHeight: height/8,
-        elevation: 3
+        //elevation: 3
     },
     image: {
-        position: 'absolute',
         width: width/6, 
         height: width/6, 
-        marginLeft: 20,
-        marginTop: 20,
+        marginLeft: -160,
+        borderRadius: width/6,
+        borderColor: '#232323',
+        borderWidth: 2,
+        marginTop: 5
     },
     name: {
-        fontSize: 25,
+        position: 'absolute',
+        fontSize: 20,
         textAlign: 'left',
-        marginLeft: width/6 + 40,
-        marginTop: 15,
-        fontWeight: 'bold'
+        marginTop: 20,
+        fontWeight: 'bold',
+        marginLeft: -70
     },
     skillWrap: {
         flex: 1,
-        marginLeft: width/6 + 40,
+        marginTop: 10,
         marginBottom: 10
     },
     skill: {
         fontSize: 20,
         marginTop: 10,
         marginBottom: 1,
-        fontWeight: 'bold'
+        fontWeight: 'bold',
+        marginLeft: 10
     },
     description: {
         fontSize: 15,

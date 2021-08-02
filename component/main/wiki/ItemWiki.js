@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import {Text, View, FlatList, TouchableOpacity, Image, Button, TextInput, StyleSheet, Dimensions} from 'react-native'
 import {Header, ListItem, List} from 'react-native-elements'
 import filter from 'lodash.filter';
+import  MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
 
 export default function ItemWiki({navigation}) {
   const [query, setQuery] = useState('');
@@ -89,6 +90,7 @@ export default function ItemWiki({navigation}) {
           placeholder="Search"
           style={{ backgroundColor: '#fff', paddingHorizontal: 100, maxWidth: width }}
         />
+        <MaterialCommunityIcons name="magnify" size={20} style={{position: 'absolute', marginLeft: 155, marginTop: 15}} color={'#b5b5b5'}/>
       </View>
     );
   }

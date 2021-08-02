@@ -199,8 +199,8 @@ export default function MatchHistory({ route, navigation}) {
                         {renderItem(blueTeam[index]["stats"]["item6"])}
                     </View>
                 </View>
-                <View style={{position: 'absolute', right: 2, top: 20}}>
-                    <Icon name="arrow-right" size={30} color={'grey'}/>
+                <View style={{position: 'absolute', right: 2, top: 25}}>
+                    <MaterialCommunityIcons name="chevron-right" size={25}/>
                 </View>
             </TouchableOpacity>
                   
@@ -246,8 +246,8 @@ export default function MatchHistory({ route, navigation}) {
                         {renderItem(redTeam[index]["stats"]["item6"])}
                     </View>
                 </View>
-                <View style={{position: 'absolute', right: 2, top: 20}}>
-                    <Icon name="arrow-right" size={30} color={'grey'}/>
+                <View style={{position: 'absolute', right: 2, top: 25}}>
+                    <MaterialCommunityIcons name="chevron-right" size={25}/>
                 </View>
             </TouchableOpacity>
         </View>
