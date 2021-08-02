@@ -9,10 +9,8 @@ export default function Champion() {
     const patchNote = "https://orbital-riot-api.herokuapp.com/patchNote"
     const nameArr = []
     const [name, setName] = useState([])
-    const skillArr = []
-    const [skill, setSkill] = useState([])
-    const descriptionArr = []
-    const [description, setDescription] = useState([])
+    const overallArr = []
+    const [overall, setOverall] = useState([])
 
     const combinedArr = []
     const [combined, setCombined] = useState([])
@@ -32,7 +30,7 @@ export default function Champion() {
             var v = 0
             for (var i in patchNoteResponded["champions"]) {
                 combinedArr.push([])
-
+                overallArr.push(patchNoteResponded["champions"][i]["overall"])
                 for (var j in patchNoteResponded["champions"][i]["updates"]) {
                     combinedArr[v].push(<Text style={styles.skill} key={j+100}>{patchNoteResponded["champions"][i]["updates"][j]["skill"]}</Text>)
                     // combinedArr[v].push(<Text style={styles.description} key={j}>{response["champions"][i]["updates"][j]["description"]}</Text>)
@@ -41,6 +39,7 @@ export default function Champion() {
                 v += 1
             }
             setCombined(combinedArr)
+            setOverall(overallArr)
             setLoader(false)
         }   
         return () => { isMounted = false }    
@@ -52,6 +51,26 @@ export default function Champion() {
         championSectionArr[i] = i;
     }
 
+    const coloredOverall = (overallChange) => {
+        if (overallChange === "[New]") {
+            return (
+                <Text style={styles.overallNew}>{overallChange}</Text>
+            )
+        } else if (overallChange === "[Nerf]") {
+            return (
+                <Text style={styles.overallNerf}>{overallChange}</Text>
+            )
+        } else if (overallChange === "[Buff]") {
+            return (
+                <Text style={styles.overallBuff}>{overallChange}</Text>
+            )
+        } else {
+            return (
+                <Text style={styles.overallAdjust}>{overallChange}</Text>
+            )
+        }
+    }
+
     const collapsibleTitle = (index) => {
         return (
             <View style={{flexWrap: 'wrap', flexDirection: 'row', height: 70}}>
@@ -60,6 +79,7 @@ export default function Champion() {
                     style= {[styles.image]}
                 />
                 <Text style={styles.name}>{name[index]}</Text>
+                {coloredOverall(overall[index])}
                 <MaterialCommunityIcons name="chevron-down" size={30} style={{position: 'absolute', marginLeft: 140, marginTop: 20}}/>
             </View>
         )
@@ -156,5 +176,29 @@ const styles = StyleSheet.create({
         marginBottom: 10,
         marginLeft: 10,
         marginRight: 10,
-    }
+    },
+    overallNew: {
+        position: 'absolute', 
+        marginLeft: 80,
+        marginTop: 25,
+        color: '#0acaf1'
+    },
+    overallNerf: {
+        position: 'absolute', 
+        marginLeft: 80,
+        marginTop: 25,
+        color: '#ff2346'
+    },
+    overallBuff: {
+        position: 'absolute', 
+        marginLeft: 80,
+        marginTop: 25,
+        color: '#069941'
+    },
+    overallAdjust: {
+        position: 'absolute', 
+        marginLeft: 80,
+        marginTop: 25,
+        color: '#ffc301'
+    },
 })

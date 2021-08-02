@@ -81,17 +81,13 @@ export default function Composition({navigation, route}) {
             entireCompo[i+5] = redTeam[i]
         }
 
-        const docLength = firebase.firestore().collection("favoriteCompositions").get().then(snap => {
-            size = snap.size }
-        )
-
         const saveComposition = () => { 
             const collection = firebase.firestore().collection("users").doc(firebase.auth().currentUser.uid)
             collection.update({
                 compositions: firebase.firestore.FieldValue.arrayUnion({entireCompo})
             })
         }
-        console.log(docLength)
+        
         saveComposition()
         return (Alert.alert(
                     'Added To Favorites',
