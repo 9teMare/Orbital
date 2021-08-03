@@ -63,7 +63,7 @@ export default function MatchHistory({ route, navigation}) {
         const queueResponded = await queueResponse.json()
 
         if (isMounted) {
-            for (var j = 0; j < historyResponded["matches"].length/5; j++) {
+            for (var j = 0; j < historyResponded["matches"].length/10; j++) {
                 historyResponded["matches"][j]["liked"] = false
                 historyArr.push(historyResponded["matches"][j])
                 gameIdArrTemp.push(historyResponded["matches"][j]["gameId"])
@@ -89,6 +89,20 @@ export default function MatchHistory({ route, navigation}) {
         return () => { isMounted = false }    
     } 
 
+    const winLoseColor = (win) => {
+        if (win === 'Win') {
+            return (
+                <View style={{backgroundColor: '#bae8ff', position: 'absolute', height: height / 8, width: 20}}>
+                    <Text style={{marginTop: height / 20, textAlign: 'center', fontSize: 14, color: '#1e73ba', fontWeight: 'bold'}}>W</Text>
+                </View>
+            )
+        }
+        return (
+            <View style={{backgroundColor: '#ffabb1', position: 'absolute', height: height / 8, width: 20}}>
+                <Text style={{marginTop: height / 20, textAlign: 'center', fontSize: 14, color: '#dc0817', fontWeight: 'bold'}}>L</Text>
+            </View>
+        )
+    }
 
     const Item = ({ champion, gameId, queue }) => {
         const [win, setWin] = useState("")
@@ -113,7 +127,7 @@ export default function MatchHistory({ route, navigation}) {
             }
             return () => { isMounted = false }    
         }
-    
+
         return (
             <View>
                 {/* <TouchableOpacity style={{position: 'absolute', height: height/8, width: 40, marginTop: 5, backgroundColor: 'white', elevation: 3}}
@@ -133,13 +147,14 @@ export default function MatchHistory({ route, navigation}) {
                         />
                         <Text style={styles.name}>{data[champion]}</Text>
                     </View>
-                    <Text style={{position: 'absolute', right: 95, top: 35, color: 'grey', fontSize: 20, fontWeight: '200'}}>{gameMode[queue].replace(" games", "")}</Text>
+                    <Text style={{position: 'absolute', right: 75, top: 35, color: 'grey', fontSize: 20, fontWeight: '200'}}>{gameMode[queue].replace(" games", "")}</Text>
                     {useEffect(() => {
                         getWin(gameId)
                     }, [])}
-                    <Text style={{position: 'absolute', right: 30, top: 35, color: 'grey', fontSize: 20, fontWeight: '200'}}>
+                    {/* <Text style={{position: 'absolute', right: 30, top: 35, color: 'grey', fontSize: 20, fontWeight: '200'}}>
                         {win}
-                    </Text>
+                    </Text> */}
+                    {winLoseColor(win)}
                     <View style={{position: 'absolute', right: 10 , top: 33}}>
                         <MaterialCommunityIcons name="chevron-right" size={26} style={{position: 'absolute', marginTop: 3, right: 5}}/>
                     </View>
